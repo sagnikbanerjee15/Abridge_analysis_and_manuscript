@@ -1,0 +1,103 @@
+Organism,Tissue,Layout,Assay Type,Date of publication,Read Length,SRA Accession,SRA Bioproject,Number of reads/pairs,Purpose of analysis,Notes
+Homo sapiens,,PE,RNA-Seq,2/10/21,100+100,SRR13663508,,,,
+Homo sapiens,,PE,RNA-Seq,2/4/19,200+200,SRR7993428,,,,
+Homo sapiens,,PE,RNA-Seq,1/8/21,325+275,SRR12190251,,,,
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712457,,,,normal coronary artery
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712458,,,,normal coronary artery
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712462,,,,normal coronary artery
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712463,,,,intermediate coronary lesion
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712464,,,,intermediate coronary lesion
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712465,,,,intermediate coronary lesion
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712466,,,,intermediate coronary lesion
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712469,,,,intermediate coronary lesion
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712473,,,,acute myocardial infarction
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712474,,,,acute myocardial infarction
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712475,,,,acute myocardial infarction
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712477,,,,acute myocardial infarction
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712478,,,,acute myocardial infarction
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712459,,,,normal coronary artery
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712460,,,,normal coronary artery
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712467,,,,intermediate coronary lesion
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712468,,,,intermediate coronary lesion
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712455,,,,normal coronary artery
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712472,,,,acute myocardial infarction
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712461,,,,normal coronary artery
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712470,,,,intermediate coronary lesion
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712476,,,,acute myocardial infarction
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712471,,,,acute myocardial infarction
+Homo sapiens,,PE,RNA-Seq,2/17/21,150+150,SRR13712456,,,,normal coronary artery
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660755,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660766,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660777,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660788,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660799,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660821,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660833,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660834,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660836,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660866,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660868,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660869,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660872,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660873,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660875,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660876,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660878,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660879,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660880,,,,
+Homo sapiens,,PE,DNA-Seq,2/12/21,100+100,SRR13660881,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521033,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521034,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521035,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521036,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521037,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521038,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521039,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521040,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521041,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521042,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521043,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521044,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521045,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521046,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521047,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521048,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521049,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521050,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521051,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521052,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521053,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521054,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521055,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521056,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521057,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521058,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521059,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521060,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521061,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521062,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521063,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521064,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521065,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521066,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521067,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521068,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521069,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521070,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521071,,,,
+Homo sapiens,,PE,ChIP-Seq,1/26/21,150+150,SRR13521072,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687379,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687380,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687381,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687382,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687383,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687384,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687385,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687386,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687387,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687388,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687389,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687390,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687391,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687392,,,,
+Triticum aestivum,,PE,RNA-Seq,2/11/21,150+150,SRR13687393,,,,
