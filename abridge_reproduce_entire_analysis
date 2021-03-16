@@ -128,6 +128,7 @@ def main():
     cmd += f" --genomeSAindexNbases 12 "
     cmd += f" --genomeDir {options.output_directory}/star_index "
     cmd += f" --genomeFastaFiles {options.genome}"
+    cmd += f" --runMode genomeGenerate " 
     if os.path.exists(f"{options.output_directory}/star_index/genomeParameters.txt")==False:
         os.system(cmd)
         logging.info(f"STAR index generation is complete")
