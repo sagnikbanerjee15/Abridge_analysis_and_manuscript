@@ -18,7 +18,7 @@
 conda activate abridge_analysis_for_manuscript
 
 CPU=72 # Change accordingly
-OUT_DIR = /90daydata/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS
+OUT_DIR="/90daydata/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS"
 
 abridge_reproduce_entire_analysis \
 --metadata /90daydata/maizegdb/sagnik/ABRIDGE/abridge_analysis_for_MS/ListOfNCBI-SRASamplesForExperimentST.csv \
