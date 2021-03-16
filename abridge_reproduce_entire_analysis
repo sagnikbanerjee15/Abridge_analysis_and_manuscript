@@ -44,6 +44,7 @@ def readMetadataFile(options):
     data = {}
     fhr=open(options.metadata,"r")
     for line in fhr:
+        if "Accession" in line:continue
         Organism,Tissue,Layout,Assay_Type,Date_of_publication, Length, Accession,Bioproject,Number_of_reads_or_pairs,Replicate_information, Notes  = line.strip().split(",")
         if Assay_Type not in data:
             data[Assay_Type] = []
