@@ -54,11 +54,12 @@ def mapSamplesToReference(options):
                 cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_1.fastq "+options.input_location+"/"+sra+"_2.fastq "
             if options.metadata[sra]["layout"] == "RNA-Seq":
                 cmd+=" --alignIntronMin 20  "
-                cmd+=" --alignIntronMax 1000000 "
+                cmd+=" --alignIntronMax 100000 "
             else:
                 cmd+=" --alignIntronMin 1 "
                 cmd+=" --alignIntronMax 1 "
             if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_Log.final.out")==False:
+                os.system(cmd)
                 list_of_all_commands.append(cmd)
                 
     # Remove all the useless files and rename the alignment file
@@ -72,7 +73,7 @@ def mapSamplesToReference(options):
             if iteration==0:
                 cmd="mv "
                 cmd+=options.output_directory+"/"+sra+"_"+str(iteration)+"_Aligned.sortedByCoord.out.bam "
-                cmd+=options.output_directory+"/"+sra+".bam "
+                cmd+=options.output_directory+"/"+sra+"_"+options.metadata[sra]["layout"]+".bam "
                 os.system(cmd)
             else:
                 files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_Aligned.sortedByCoord.out.bam")
@@ -148,11 +149,11 @@ def main():
     
     mergePairedEndedSamplesIntoSingleEnded(options)
     
-    mapSamplesToReference(options)
+    #mapSamplesToReference(options)
     
     convertBamToSam(options)
     
-    compileDurationOfExecutionFile(options)
+    #compileDurationOfExecutionFile(options)
 
 
 if __name__ == "__main__":

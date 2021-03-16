@@ -149,7 +149,28 @@ def main():
                               row[5],
                               row[6]  
                 ])+"\n")
+            
+            fhw.write(",".join([row[0],
+                              row[1],
+                              "SE",
+                              row[3],
+                              row[4],
+                              row[5],
+                              row[6]  
+                ])+"\n")
     fhw.close()
+    
+    ##################################################################################################
+    # Map reads with STAR
+    ##################################################################################################
+    cmd  = "align_reads_using_STAR.py "
+    cmd += f" --metadata f{options.output_directory}/metadata_for_alignment.csv "
+    cmd += f" --output_directory {options.output_directory}/star_alignments "
+    cmd += f" --star_genome_index {options.output_directory}/star_index "
+    cmd += f" --input_location {options.output_directory}/raw_data "
+    cmd += f" --cpu {options.cpu} "
+    cmd += f" --num_times 10 "
+    os.system(cmd)
     
 
 if __name__ == "__main__":
