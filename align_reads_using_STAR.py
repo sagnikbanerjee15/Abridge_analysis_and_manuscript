@@ -12,7 +12,7 @@ def parseCommandLineArguments():
     required_named = parser.add_argument_group('Required arguments')
     optional_named = parser.add_argument_group('Optional arguments')
     
-    required_named.add_argument("--metadata","-md",help="Enter the metadata file to generate alignments",required=True)
+    required_named.add_argument("--metadata_filename","-md",help="Enter the metadata file to generate alignments",required=True)
     required_named.add_argument("--output_directory","-o",help="Enter the output directory",required=True)
     required_named.add_argument("--star_genome_index","-i",help="Enter the location of the STAR index",required=True)
     required_named.add_argument("--input_location","-loc",help="Enter the location of the raw fastq files. For this program all fastq files must be located under the same directory",required=True)
@@ -24,7 +24,7 @@ def parseCommandLineArguments():
 
 def readMetadataFile(options):
     options.metadata = {}
-    fhr=open(options.metadata,"r")
+    fhr=open(options.metadata_filename,"r")
     for line_num,line in enumerate(fhr):
         if line_num==0:continue
         Organism,Tissue,Layout,Assay_Type,Date_of_publication,Read_Length,SRA = line.strip().split("\t")[:7]
