@@ -5,6 +5,7 @@ import sys
 import os
 import datetime
 import multiprocessing
+import pprint
 from dateutil.parser import parse
 
 def parseCommandLineArguments():
@@ -31,6 +32,7 @@ def readMetadataFile(options):
         options.metadata[SRA]={"organism":Organism,
                                "layout":Layout,
                                "assay_type":Assay_Type}
+    pprint.pprint(options.metadata)
     fhr.close()
 
 def runCommand(eachpinput):
@@ -56,11 +58,12 @@ def mapSamplesToReference(options):
             cmd+=" --outSAMattributes NH HI AS nM NM MD jM jI XS "
             cmd+=" --outSAMunmapped Within "
             cmd+=" --genomeLoad Remove "
-            cmd+=" --outFileNamePrefix "+options.output_directory+"/"+sra+"_"+str(iteration)+"_"
             if options.metadata[sra]["layout"]=="SE":
                 cmd+=" --readFilesIn "+options.input_location+"/"+sra+".fastq"
+                cmd+=" --outFileNamePrefix "+options.output_directory+"/"+sra+"_"+str(iteration)+"_SE_"
             else:
                 cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_1.fastq "+options.input_location+"/"+sra+"_2.fastq "
+                cmd+=" --outFileNamePrefix "+options.output_directory+"/"+sra+"_"+str(iteration)+"_PE_"
             if options.metadata[sra]["layout"] == "RNA-Seq":
                 cmd+=" --alignIntronMin 20  "
                 cmd+=" --alignIntronMax 100000 "
@@ -89,7 +92,7 @@ def mapSamplesToReference(options):
             
             if iteration==0:
                 cmd="mv "
-                cmd+=options.output_directory+"/"+sra+"_"+str(iteration)+"_Aligned.sortedByCoord.out.bam "
+                cmd+=options.output_directory+"/"+sra+"_"+str(iteration)+"_"+options.metadata[sra]["layout"]+"_Aligned.sortedByCoord.out.bam "
                 cmd+=options.output_directory+"/"+sra+"_"+options.metadata[sra]["layout"]+".bam "
                 os.system(cmd)
             else:
