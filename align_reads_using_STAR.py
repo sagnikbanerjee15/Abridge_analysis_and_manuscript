@@ -24,7 +24,7 @@ def parseCommandLineArguments():
 
 def readMetadataFile(options):
     options.metadata = {}
-    fhr=open(options.md,"r")
+    fhr=open(options.metadata,"r")
     for line_num,line in enumerate(fhr):
         if line_num==0:continue
         Organism,Tissue,Layout,Assay_Type,Date_of_publication,Read_Length,SRA = line.strip().split("\t")[:7]
