@@ -77,6 +77,10 @@ def configureLogger(options):
         os.system(f"rm {options.logfilename}")
     logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S',level=logging.DEBUG, filename=options.logfilename)
 
+def runCommand(eachpinput):
+    cmd,dummy = eachpinput
+    os.system(cmd)
+
 def main():
     commandLineArg=sys.argv
     if len(commandLineArg)==1:
@@ -85,6 +89,7 @@ def main():
     
     configureLogger(options)
     
+    pool = multiprocessing.Pool(processes=int(options.cpu))
     ##################################################################################################
     # Create output directory and subdirectories underneath
     ##################################################################################################
@@ -134,7 +139,7 @@ def main():
         for row in options.metadata_expanded[Assay_Type]:
             pair1_filename = f"{options.output_directory}/raw_data/{row[6]}_1.fastq"
             pair2_filename = f"{options.output_directory}/raw_data/{row[6]}_2.fastq"
-            merged_filename = pair1_filename = f"{options.output_directory}/raw_data/{row[6]}.fastq"
+            merged_filename = f"{options.output_directory}/raw_data/{row[6]}.fastq"
             if os.path.exists(merged_filename)==True:continue
             fhw=open(merged_filename,"w")
             for fhr in [open(pair1_filename,"r") ,open(pair2_filename,"r")]:
@@ -186,6 +191,25 @@ def main():
     cmd += f" --num_times 10 "
     os.system(cmd)
     logging.info(f"Aligning reads with STAR is complete")
+    
+    ##################################################################################################
+    # Compress alignments with Abridge - Single ended
+    ##################################################################################################
+    list_of_commands = []
+    for Assay_Type in options.metadata_expanded:
+        for row in options.metadata_expanded[Assay_Type]:
+            alignment_samfilename = f"{options.output_directory}/star_alignments/{row[6]}_SE.sam"
+            cmd  = f"(/usr/bin/time --verbose abridge "
+            cmd += f" --compress "
+            cmd += f" --cpu {options.cpu}"
+            cmd += f" --genome {options.genome} "
+            cmd += f" --inputsamfilenames {alignment_samfilename} "
+            cmd += f" --outputdir {options.output_directory}/compressed_files"
+            cmd += ")"
+            cmd += f" 1> {options.output_directory}/outputs/{row[6]}_compress.output "
+            cmd += f" 2> {options.output_directory}/outputs/{row[6]}_compress.error "
+            list_of_commands.append([cmd,"dummy"])
+    pool.map(runCommand,list_of_commands)
     
 
 if __name__ == "__main__":

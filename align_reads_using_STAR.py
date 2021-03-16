@@ -129,8 +129,14 @@ def mergePairedEndedSamplesIntoSingleEnded(options):
 
 def convertBamToSam(options):
     for sra in options.metadata:
-        bamfilename = options.output_directory+"/"+sra+".bam"
-        samfilename = options.output_directory+"/"+sra+".sam"
+        bamfilename = options.output_directory+"/"+sra+"_SE.bam"
+        samfilename = options.output_directory+"/"+sra+"_SE.sam"
+        if os.path.exists(samfilename):continue
+        cmd = "samtools view -h -@ "+options.cpu+" "+bamfilename+" > "+samfilename
+        os.system(cmd)
+        
+        bamfilename = options.output_directory+"/"+sra+"_PE.bam"
+        samfilename = options.output_directory+"/"+sra+"_PE.sam"
         if os.path.exists(samfilename):continue
         cmd = "samtools view -h -@ "+options.cpu+" "+bamfilename+" > "+samfilename
         os.system(cmd)
