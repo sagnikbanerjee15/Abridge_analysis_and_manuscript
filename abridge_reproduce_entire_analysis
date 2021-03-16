@@ -154,7 +154,7 @@ def main():
         for row in options.metadata_expanded[Assay_Type]:
             list_of_commands.append([options,row[6]])
     
-    pool.map(runCommand,list_of_commands)
+    pool.map(mergeReadPairs,list_of_commands)
     logging.info(f"Merge complete")
             
     ##################################################################################################
