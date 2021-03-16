@@ -87,13 +87,13 @@ def main():
         print("Please use the --help option to get usage information")
     options=parseCommandLineArguments()
     
+    options.logfilename = options.outputdir+"/progress.log"
     configureLogger(options)
     
     pool = multiprocessing.Pool(processes=int(options.cpu))
     ##################################################################################################
     # Create output directory and subdirectories underneath
     ##################################################################################################
-    options.logfilename = options.outputdir+"/progress.log"
     create_these_directories = [options.output_directory,
                                 f"{options.output_directory}/raw_data",
                                 f"{options.output_directory}/star_alignments",
