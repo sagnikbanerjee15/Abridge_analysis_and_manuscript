@@ -56,7 +56,6 @@ def downloadData(options):
     """
     Downloads the data from NCBI-SRA
     """
-    
     options.sra_list_to_be_downloaded = f"{options.output_directory}/sra_list_to_be_downloaded"
     fhw = open(options.sra_list_to_be_downloaded,"w")
     for Assay_Type in options.metadata_expanded:
@@ -104,6 +103,59 @@ def main():
     # Downloading the raw data from NCBI
     ##################################################################################################
     downloadData(options)
+    
+    ##################################################################################################
+    # Construct STAR index
+    ##################################################################################################
+    cmd  = "STAR "
+    cmd += f" --runthreadN {options.cpu}"
+    cmd += f" --genomeSAindexNbases 12 "
+    cmd += f" --genomeDir {options.output_directory}/star_index "
+    cmd += f" --genomeFastaFiles {options.genome}"
+    if os.path.exists(f"{options.output_directory}/star_index/genomeParameters.txt")==False:
+        os.system(cmd)
+        
+    ##################################################################################################
+    # Merge read pairs to form one file
+    ##################################################################################################
+    for Assay_Type in options.metadata_expanded:
+        for row in options.metadata_expanded[Assay_Type]:
+            pair1_filename = f"{options.output_directory}/raw_data/{row[6]}_1.fastq"
+            pair2_filename = f"{options.output_directory}/raw_data/{row[6]}_2.fastq"
+            merged_filename = pair1_filename = f"{options.output_directory}/raw_data/{row[6]}.fastq"
+            if os.path.exists(merged_filename)==True:continue
+            fhw=open(merged_filename,"w")
+            for fhr in [open(pair1_filename,"r") ,open(pair2_filename,"r")]:
+                for line in fhr:
+                    if line[0]=='@' and '/' in line:
+                        line.replace('/','_')
+                    fhw.write(line)
+            fhw.close()
+            
+    ##################################################################################################
+    # Prepare metadata for alignemnt
+    # A single .csv file will be prepared for both SE and PE samples
+    # Organism,Tissue,Layout,Assay_Type,Date_of_publication,Read_Length,SRA 
+    # Organism,Tissue,Layout,Assay_Type,Date_of_publication, Length, Accession,Bioproject, Number_of_reads_or_pairs,Replicate_information, Notes]
+    ##################################################################################################
+    fhw = open(f"{options.output_directory}/metadata_for_alignment.csv","w")
+    for Assay_Type in options.metadata_expanded:
+        for row in options.metadata_expanded[Assay_Type]:
+            fhw.write(",".join([row[0],
+                              row[1],
+                              row[2],
+                              row[3],
+                              row[4],
+                              row[5],
+                              row[6]  
+                ])+"\n")
+    fhw.close()
+    
 
 if __name__ == "__main__":
     main()
+    
+    
+    
+    
+    
