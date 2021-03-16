@@ -7,7 +7,7 @@
 ##SBATCH --qos=maizegdb
 #SBATCH --partition=medium
 #SBATCH --time=7-00:00:00
-#SBATCH --job-name="DOWNLOAD"
+#SBATCH --job-name="ABRIDGE_ANALYSIS_MS"
 #SBATCH --mail-user=sagnik@iastate.edu
 #SBATCH --mail-type=BEGIN
 #SBATCH --mail-type=END
@@ -15,7 +15,7 @@
 #SBATCH --output=/90daydata/maizegdb/sagnik/ABRIDGE/abridge_analysis_for_MS/raw_data.output
 #SBATCH --error=/90daydata/maizegdb/sagnik/ABRIDGE/abridge_analysis_for_MS/raw_data.error
 
-conda activate abridge
+conda activate abridge_analysis_for_manuscript
 
 OUTPUT_DIR_RAW_DATA="/90daydata/maizegdb/sagnik/ABRIDGE/abridge_analysis_for_MS/raw_data" # Change accordingly
 CPU=72 # Change accordingly
