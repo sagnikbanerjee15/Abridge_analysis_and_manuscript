@@ -86,12 +86,12 @@ def mergeReadPairs(eachinput):
     pair1_filename = f"{options.output_directory}/raw_data/{sra}_1.fastq"
     pair2_filename = f"{options.output_directory}/raw_data/{sra}_2.fastq"
     merged_filename = f"{options.output_directory}/raw_data/{sra}.fastq"
-    if os.path.exists(merged_filename)==True:return
+    #if os.path.exists(merged_filename)==True:return
     fhw=open(merged_filename,"w")
     for fhr in [open(pair1_filename,"r") ,open(pair2_filename,"r")]:
         for line_num,line in enumerate(fhr):
-            if line_num%4 == 0 and line[0]=='@' and '/' in line:
-                line.replace('/','_')
+            if line_num % 4 == 0 and line[0]=='@' and '/' in line:
+                line = line.replace('/','_')
             fhw.write(line)
     fhw.close()
 
