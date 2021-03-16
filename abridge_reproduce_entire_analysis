@@ -34,6 +34,7 @@ def parseCommandLineArguments():
     ##################################################################################################
     parser.add_argument("--metadata_expanded","-metadata_expanded",help=argparse.SUPPRESS)
     parser.add_argument("--sra_list_to_be_downloaded","-sra_list_to_be_downloaded",help=argparse.SUPPRESS)
+    parser.add_argument("--logfilename","-logfilename",help=argparse.SUPPRESS)# Name of the logfile
      
     return parser.parse_args()
 
@@ -70,16 +71,24 @@ def downloadData(options):
     cmd += f" 1> {options.output_directory}/outputs/raw_data_download.output "
     cmd += f" 2> {options.output_directory}/errors/raw_data_download.error "
     os.system(cmd)
-    
+
+def configureLogger(options):
+    if os.path.exists(options.logfilename)==True:
+        os.system(f"rm {options.logfilename}")
+    logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S',level=logging.DEBUG, filename=options.logfilename)
+
 def main():
     commandLineArg=sys.argv
     if len(commandLineArg)==1:
         print("Please use the --help option to get usage information")
     options=parseCommandLineArguments()
     
+    configureLogger(options)
+    
     ##################################################################################################
     # Create output directory and subdirectories underneath
     ##################################################################################################
+    options.logfilename = options.outputdir+"/progress.log"
     create_these_directories = [options.output_directory,
                                 f"{options.output_directory}/raw_data",
                                 f"{options.output_directory}/star_alignments",
@@ -98,11 +107,13 @@ def main():
     # Read in the metadata file
     ##################################################################################################
     readMetadataFile(options)
+    logging.info(f"readMetadataFile() execution is complete")
     
     ##################################################################################################
     # Downloading the raw data from NCBI
     ##################################################################################################
     downloadData(options)
+    logging.info(f"Data download from NCBI is complete")
     
     ##################################################################################################
     # Construct STAR index
@@ -114,6 +125,7 @@ def main():
     cmd += f" --genomeFastaFiles {options.genome}"
     if os.path.exists(f"{options.output_directory}/star_index/genomeParameters.txt")==False:
         os.system(cmd)
+        logging.info(f"STAR index generation is complete")
         
     ##################################################################################################
     # Merge read pairs to form one file
@@ -131,6 +143,7 @@ def main():
                         line.replace('/','_')
                     fhw.write(line)
             fhw.close()
+            logging.info(f"Merge complete for {row[6]}")
             
     ##################################################################################################
     # Prepare metadata for alignemnt
@@ -159,6 +172,7 @@ def main():
                               row[6]  
                 ])+"\n")
     fhw.close()
+    logging.info(f"Metadata preparation for alignment is complete")
     
     ##################################################################################################
     # Map reads with STAR
@@ -171,6 +185,7 @@ def main():
     cmd += f" --cpu {options.cpu} "
     cmd += f" --num_times 10 "
     os.system(cmd)
+    logging.info(f"Aligning reads with STAR is complete")
     
 
 if __name__ == "__main__":

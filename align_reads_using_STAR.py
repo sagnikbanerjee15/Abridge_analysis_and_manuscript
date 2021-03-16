@@ -2,6 +2,7 @@ import argparse
 import sys
 import os
 import datetime
+import multiprocessing
 from dateutil.parser import parse
 
 def parseCommandLineArguments():
@@ -30,7 +31,13 @@ def readMetadataFile(options):
                                "assay_type":Assay_Type}
     fhr.close()
 
+def runCommand(eachpinput):
+    cmd,dummy = eachpinput
+    os.system(cmd)
+
 def mapSamplesToReference(options):
+    
+    pool = multiprocessing.Pool(processes=int(options.cpu))
     os.system("mkdir -p "+options.output_directory)
     list_of_all_commands = []
     for sra in options.metadata:
@@ -49,7 +56,7 @@ def mapSamplesToReference(options):
             cmd+=" --genomeLoad Remove "
             cmd+=" --outFileNamePrefix "+options.output_directory+"/"+sra+"_"+str(iteration)+"_"
             if options.metadata[sra]["layout"]=="SE":
-                cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_0.fastq"
+                cmd+=" --readFilesIn "+options.input_location+"/"+sra+".fastq"
             else:
                 cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_1.fastq "+options.input_location+"/"+sra+"_2.fastq "
             if options.metadata[sra]["layout"] == "RNA-Seq":
@@ -59,10 +66,14 @@ def mapSamplesToReference(options):
                 cmd+=" --alignIntronMin 1 "
                 cmd+=" --alignIntronMax 1 "
             if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_Log.final.out")==False:
-                os.system(cmd)
-                list_of_all_commands.append(cmd)
+                list_of_all_commands.append([cmd,"dummy"])
                 
+    pool.map(runCommand,list_of_all_commands)
+    
+    ##################################################################################################
     # Remove all the useless files and rename the alignment file
+    ##################################################################################################
+    
     files_to_be_removed=[]
     for sra in options.metadata:
         for iteration in range(int(options.num_times)):
@@ -147,9 +158,9 @@ def main():
     
     readMetadataFile(options)
     
-    mergePairedEndedSamplesIntoSingleEnded(options)
+    #mergePairedEndedSamplesIntoSingleEnded(options)
     
-    #mapSamplesToReference(options)
+    mapSamplesToReference(options)
     
     convertBamToSam(options)
     
