@@ -27,7 +27,7 @@ def readMetadataFile(options):
     fhr=open(options.metadata_filename,"r")
     for line_num,line in enumerate(fhr):
         if line_num==0:continue
-        Organism,Tissue,Layout,Assay_Type,Date_of_publication,Read_Length,SRA = line.strip().split("\t")[:7]
+        Organism,Tissue,Layout,Assay_Type,Date_of_publication,Read_Length,SRA = line.strip().split(",")[:7]
         options.metadata[SRA]={"organism":Organism,
                                "layout":Layout,
                                "assay_type":Assay_Type}
