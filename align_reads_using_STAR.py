@@ -24,14 +24,12 @@ def parseCommandLineArguments():
     return parser.parse_args() 
 
 def readMetadataFile(options):
-    options.metadata = {}
+    options.metadata = []
     fhr=open(options.metadata_filename,"r")
     for line_num,line in enumerate(fhr):
         if line_num==0:continue
         Organism,Tissue,Layout,Assay_Type,Date_of_publication,Read_Length,SRA = line.strip().split(",")[:7]
-        options.metadata[SRA]={"organism":Organism,
-                               "layout":Layout,
-                               "assay_type":Assay_Type}
+        options.metadata.append([SRA,Layout,Assay_Type])
     pprint.pprint(options.metadata)
     fhr.close()
 
@@ -44,7 +42,8 @@ def mapSamplesToReference(options):
     pool = multiprocessing.Pool(processes=int(options.cpu))
     os.system("mkdir -p "+options.output_directory)
     list_of_all_commands = []
-    for sra in options.metadata:
+    for row in options.metadata:
+        sra,layout,assay_type = row
         for iteration in range(int(options.num_times)):
             cmd = "STAR "
             cmd+= " --runThreadN 1 " # always run with one CPU
@@ -57,14 +56,14 @@ def mapSamplesToReference(options):
             cmd+=" --outFilterMatchNminOverLread 0.75 "
             cmd+=" --outSAMattributes NH HI AS nM NM MD jM jI XS "
             cmd+=" --outSAMunmapped Within "
-            cmd+=" --genomeLoad Remove "
-            if options.metadata[sra]["layout"]=="SE":
+            #cmd+=" --genomeLoad Remove "
+            if layout=="SE":
                 cmd+=" --readFilesIn "+options.input_location+"/"+sra+".fastq"
                 cmd+=" --outFileNamePrefix "+options.output_directory+"/"+sra+"_"+str(iteration)+"_SE_"
             else:
                 cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_1.fastq "+options.input_location+"/"+sra+"_2.fastq "
                 cmd+=" --outFileNamePrefix "+options.output_directory+"/"+sra+"_"+str(iteration)+"_PE_"
-            if options.metadata[sra]["layout"] == "RNA-Seq":
+            if assay_type == "RNA-Seq":
                 cmd+=" --alignIntronMin 20  "
                 cmd+=" --alignIntronMax 100000 "
             else:
@@ -72,9 +71,7 @@ def mapSamplesToReference(options):
                 cmd+=" --alignIntronMax 1 "
             if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_Log.final.out")==False:
                 list_of_all_commands.append([cmd,"dummy"])
-                print()
                 print(cmd)
-                print()
                 sys.stdout.flush()
                 
     pool.map(runCommand,list_of_all_commands)
