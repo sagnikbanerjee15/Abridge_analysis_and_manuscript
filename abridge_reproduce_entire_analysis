@@ -124,7 +124,7 @@ def main():
     # Construct STAR index
     ##################################################################################################
     cmd  = "STAR "
-    cmd += f" --runthreadN {options.cpu}"
+    cmd += f" --runThreadN {options.cpu}"
     cmd += f" --genomeSAindexNbases 12 "
     cmd += f" --genomeDir {options.output_directory}/star_index "
     cmd += f" --genomeFastaFiles {options.genome}"
