@@ -11,18 +11,6 @@ Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711361,P
 Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711362,PRJNA701911,,HS_atcyp18-2_rep1,Heat_stress
 Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711363,PRJNA701911,,HS_atcyp18-2_rep2,Heat_stress
 Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711364,PRJNA701911,,HS_atcyp18-2_rep3,Heat_stress
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12265344,"	PRJNA647212",,atac_col0_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12265345,"	PRJNA647212",,atac_col0_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12344670,"	PRJNA647212",,atac_bmi1abc_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12344671,"	PRJNA647212",,atac_bmi1abc_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12344672,"	PRJNA647212",,atac_clfswn_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12344673,"	PRJNA647212",,atac_clfswn_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12344674,"	PRJNA647212",,atac_emf1_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12344675,"	PRJNA647212",,atac_emf1_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12344676,"	PRJNA647212",,atac_lhp1_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12344677,"	PRJNA647212",,atac_lhp1_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12344678,"	PRJNA647212",,atac_ring1ab_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12344679,"	PRJNA647212",,atac_ring1ab_seedlings,
 Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077404,PRJNA641461,,reca1why1why3 12d seedling 3,
 Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077405,PRJNA641461,,reca1why1why3 12d seedling 2,
 Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077406,PRJNA641461,,reca1why1why3 12d seedling 1,
