@@ -197,6 +197,8 @@ def main():
     cmd += f" --input_location {options.output_directory}/raw_data "
     cmd += f" --cpu {options.cpu} "
     cmd += f" --num_times 10 "
+    cmd += f" 1> {options.output_directory}/outputs/star_alignment.output "
+    cmd += f" 2> {options.output_directory}/errors/star_alignment.error "
     print(cmd)
     os.system(cmd)
     logging.info(f"Aligning reads with STAR is complete")
@@ -216,7 +218,7 @@ def main():
             cmd += f" --outputdir {options.output_directory}/compressed_files"
             cmd += ")"
             cmd += f" 1> {options.output_directory}/outputs/{row[6]}_compress.output "
-            cmd += f" 2> {options.output_directory}/outputs/{row[6]}_compress.error "
+            cmd += f" 2> {options.output_directory}/errors/{row[6]}_compress.error "
             list_of_commands.append([cmd,"dummy"])
     pool.map(runCommand,list_of_commands)
     
