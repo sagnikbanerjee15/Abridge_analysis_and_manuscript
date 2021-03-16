@@ -197,6 +197,7 @@ def main():
     cmd += f" --input_location {options.output_directory}/raw_data "
     cmd += f" --cpu {options.cpu} "
     cmd += f" --num_times 10 "
+    print(cmd)
     os.system(cmd)
     logging.info(f"Aligning reads with STAR is complete")
     
