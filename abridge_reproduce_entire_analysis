@@ -191,7 +191,7 @@ def main():
     # Map reads with STAR
     ##################################################################################################
     cmd  = "align_reads_using_STAR.py "
-    cmd += f" --metadata f{options.output_directory}/metadata_for_alignment.csv "
+    cmd += f" --metadata {options.output_directory}/metadata_for_alignment.csv "
     cmd += f" --output_directory {options.output_directory}/star_alignments "
     cmd += f" --star_genome_index {options.output_directory}/star_index "
     cmd += f" --input_location {options.output_directory}/raw_data "
