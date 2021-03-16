@@ -87,7 +87,7 @@ def main():
         print("Please use the --help option to get usage information")
     options=parseCommandLineArguments()
     
-    options.logfilename = options.outputdir+"/progress.log"
+    options.logfilename = options.output_directory+"/progress.log"
     configureLogger(options)
     
     pool = multiprocessing.Pool(processes=int(options.cpu))
