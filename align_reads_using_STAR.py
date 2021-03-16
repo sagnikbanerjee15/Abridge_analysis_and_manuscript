@@ -30,7 +30,6 @@ def readMetadataFile(options):
         if line_num==0:continue
         Organism,Tissue,Layout,Assay_Type,Date_of_publication,Read_Length,SRA = line.strip().split(",")[:7]
         options.metadata.append([SRA,Layout,Assay_Type])
-    pprint.pprint(options.metadata)
     fhr.close()
 
 def runCommand(eachpinput):
@@ -71,8 +70,6 @@ def mapSamplesToReference(options):
                 cmd+=" --alignIntronMax 1 "
             if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_Log.final.out")==False:
                 list_of_all_commands.append([cmd,"dummy"])
-                print(cmd)
-                sys.stdout.flush()
                 
     pool.map(runCommand,list_of_all_commands)
     
