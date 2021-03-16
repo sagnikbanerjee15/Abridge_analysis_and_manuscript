@@ -72,6 +72,7 @@ def mapSamplesToReference(options):
                 print()
                 print(cmd)
                 print()
+                sys.stdout.flush()
                 
     pool.map(runCommand,list_of_all_commands)
     
