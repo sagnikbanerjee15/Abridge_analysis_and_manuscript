@@ -104,7 +104,7 @@ def mapSamplesToReference(options):
                 cmd+=options.output_directory+"/"+sra+"_"+layout+".bam "
                 os.system(cmd)
             else:
-                files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_Aligned.sortedByCoord.out.bam")
+                files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Aligned.sortedByCoord.out.bam")
     
     for file in files_to_be_removed:
         os.system("rm "+file)
@@ -115,7 +115,8 @@ def mergePairedEndedSamplesIntoSingleEnded(options):
     """
     Combine the two pairs of reads and rename them
     """
-    for sra in options.metadata:
+    for row in options.metadata:
+        sra,layout,assay_type = row
         if options.metadata[sra]["layout"]=="SE":continue
         output_filename = options.input_location+"/"+sra+"_0.fastq"
         input_filename_1 = options.input_location+"/"+sra+"_1.fastq"
