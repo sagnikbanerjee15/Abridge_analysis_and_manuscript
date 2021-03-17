@@ -109,6 +109,7 @@ def main():
     ##################################################################################################
     # Create output directory and subdirectories underneath
     ##################################################################################################
+    os.system(f"rm -rf {options.output_directory}/abridge_compressed_files")
     create_these_directories = [options.output_directory,
                                 f"{options.output_directory}/raw_data",
                                 f"{options.output_directory}/star_alignments",
@@ -222,6 +223,7 @@ def main():
             for iteration in range(int(options.num_times)):
                 cmd  = f"(/usr/bin/time --verbose abridge "
                 cmd += f" --compress "
+                cmd += f" --quiet "
                 cmd += f" --cpu 1 "
                 cmd += f" --genome {options.genome} "
                 cmd += f" --inputsamfilenames {alignment_samfilename} "
