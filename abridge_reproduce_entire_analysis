@@ -230,10 +230,10 @@ def main():
                 cmd += f" 1> {options.output_directory}/outputs/{sra}_{iteration}_{layout}_compress.output "
                 cmd += f" 2> {options.output_directory}/errors/{sra}_{iteration}_{layout}_compress.error "
                 if os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge") == True: continue
-                os.system(cmd)
-                return
-                #list_of_commands.append([cmd,"dummy"])
-    #pool.map(runCommand,list_of_commands)
+                #os.system(cmd)
+                #return
+                list_of_commands.append([cmd,"dummy"])
+    pool.map(runCommand,list_of_commands)
     
 
 if __name__ == "__main__":
