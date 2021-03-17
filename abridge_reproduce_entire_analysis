@@ -11,6 +11,7 @@ import time
 import multiprocessing
 import random
 import glob
+from _ast import Or
 
 def parseCommandLineArguments():
     parser = argparse.ArgumentParser(prog="abridge_reproduce_entire_analysis",description="Program will regenerate all the files, process them and also construct the graphs for publication. Please note that some of the data represents duration of execution and will not be reproducible. But the trend should hold true",formatter_class=RawTextHelpFormatter)
@@ -228,8 +229,8 @@ def main():
                 cmd += f" --outputdir {options.output_directory}/abridge_compressed_files/{iteration} "
                 cmd += ")"
                 cmd += f" 1> {options.output_directory}/outputs/{sra}_{iteration}_{layout}_compress.output "
-                cmd += f" 2> {options.output_directory}/errors/{sra}_{iteration}_{layout}_compress.error "
-                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge") == True: continue
+                cmd += f" 2> {options.output_directory}/errors/{sra}_{iteration}_{layout}_compress.error " 
+                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge") == True or os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.unmapped") or os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.pass1") or os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.pass2") or os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.pass2.index"): continue
                 os.system(cmd)
                 #return
                 #list_of_commands.append([cmd,"dummy"])
