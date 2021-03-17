@@ -107,7 +107,7 @@ def mapSamplesToReference(options):
                 files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Aligned.sortedByCoord.out.bam")
     
     for file in files_to_be_removed:
-        os.system("rm "+file)
+        os.system("rm -f "+file)
             
             
 
@@ -146,7 +146,8 @@ def mergePairedEndedSamplesIntoSingleEnded(options):
         fhw.close()
 
 def convertBamToSam(options):
-    for sra in options.metadata:
+    for row in options.metadata:
+        sra,layout,assay_type = row
         bamfilename = options.output_directory+"/"+sra+"_SE.bam"
         samfilename = options.output_directory+"/"+sra+"_SE.sam"
         if os.path.exists(samfilename):continue
