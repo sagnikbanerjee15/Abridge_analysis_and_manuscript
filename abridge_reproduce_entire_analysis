@@ -28,6 +28,7 @@ def parseCommandLineArguments():
     # Optional arguments
     ##################################################################################################
     optional_named.add_argument("--cpu","-n",help="Enter the number of CPUs. Please note that all alignments will be conducted using a single CPU. This argument will control how many parallel alignments can be lanuched", default=1)
+    optional_named.add_argument("--num_times","-t",help="Enter the number of times you wish each process to execute. This will be handy in calculating the average time required for compression, decompression, retrieval and other operations", default = 5)
     
     ##################################################################################################
     # Suppressed arguments
@@ -112,8 +113,8 @@ def main():
                                 f"{options.output_directory}/raw_data",
                                 f"{options.output_directory}/star_alignments",
                                 f"{options.output_directory}/star_index",
-                                f"{options.output_directory}/compressed_files",
-                                f"{options.output_directory}/decompressed_files",
+                                f"{options.output_directory}/abridge_compressed_files",
+                                f"{options.output_directory}/deabridge_compressed_files",
                                 f"{options.output_directory}/outputs",
                                 f"{options.output_directory}/errors",
                                 f"{options.output_directory}/final_output_files",
@@ -167,10 +168,10 @@ def main():
     fhw = open(f"{options.output_directory}/metadata_for_alignment.csv","w")
     for Assay_Type in options.metadata_expanded:
         for row in options.metadata_expanded[Assay_Type]:
-            fhw.write(",".join([row[0],
-                              row[1],
-                              row[2],
-                              row[3],
+            fhw.write(",".join([row[0], #organism
+                              row[1], #tissue
+                              row[2], #Layout
+                              row[3], #Assay_type
                               row[4],
                               row[5],
                               row[6]  
@@ -196,7 +197,7 @@ def main():
     cmd += f" --star_genome_index {options.output_directory}/star_index "
     cmd += f" --input_location {options.output_directory}/raw_data "
     cmd += f" --cpu {options.cpu} "
-    cmd += f" --num_times 10 "
+    cmd += f" --num_times {options.num_times} "
     cmd += f" 1> {options.output_directory}/outputs/star_alignment.output "
     cmd += f" 2> {options.output_directory}/errors/star_alignment.error "
     os.system(cmd)
@@ -208,17 +209,22 @@ def main():
     list_of_commands = []
     for Assay_Type in options.metadata_expanded:
         for row in options.metadata_expanded[Assay_Type]:
-            alignment_samfilename = f"{options.output_directory}/star_alignments/{row[6]}_SE.sam"
-            cmd  = f"(/usr/bin/time --verbose abridge "
-            cmd += f" --compress "
-            cmd += f" --cpu 1"
-            cmd += f" --genome {options.genome} "
-            cmd += f" --inputsamfilenames {alignment_samfilename} "
-            cmd += f" --outputdir {options.output_directory}/compressed_files"
-            cmd += ")"
-            cmd += f" 1> {options.output_directory}/outputs/{row[6]}_compress.output "
-            cmd += f" 2> {options.output_directory}/errors/{row[6]}_compress.error "
-            list_of_commands.append([cmd,"dummy"])
+            sra = row[6]
+            layout = row[2]
+            if layout == "PE": continue
+            alignment_samfilename = f"{options.output_directory}/star_alignments/{sra}_{layout}.sam"
+            
+            for iteration in range(int(options.num_times)):
+                cmd  = f"(/usr/bin/time --verbose abridge "
+                cmd += f" --compress "
+                cmd += f" --cpu 1 "
+                cmd += f" --genome {options.genome} "
+                cmd += f" --inputsamfilenames {alignment_samfilename} "
+                cmd += f" --outputdir {options.output_directory}/abridge_compressed_files/{iteration} "
+                cmd += ")"
+                cmd += f" 1> {options.output_directory}/outputs/{sra}_{iteration}_{layout}_compress.output "
+                cmd += f" 2> {options.output_directory}/errors/{sra}_{iteration}_{layout}_compress.error "
+                list_of_commands.append([cmd,"dummy"])
     pool.map(runCommand,list_of_commands)
     
 
