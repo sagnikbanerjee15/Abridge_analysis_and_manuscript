@@ -222,7 +222,6 @@ def main():
             for iteration in range(int(options.num_times)):
                 cmd  = f"(/usr/bin/time --verbose abridge "
                 cmd += f" --compress "
-                cmd += f" --quiet "
                 cmd += f" --cpu 1 "
                 cmd += f" --genome {options.genome} "
                 cmd += f" --inputsamfilenames {alignment_samfilename} "
