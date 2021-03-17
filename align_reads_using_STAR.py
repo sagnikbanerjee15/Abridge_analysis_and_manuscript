@@ -38,6 +38,7 @@ def runCommand(eachpinput):
 
 def mapSamplesToReference(options):
     
+    print(len(options.metadata))
     pool = multiprocessing.Pool(processes=int(options.cpu))
     os.system("mkdir -p "+options.output_directory)
     list_of_all_commands = []
