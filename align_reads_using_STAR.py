@@ -45,7 +45,7 @@ def isEmpty(filename):
     
 def mapSamplesToReference(options):
     
-    print(len(options.metadata))
+    print(len(options.metadqata))
     pool = multiprocessing.Pool(processes=int(options.cpu))
     os.system("mkdir -p "+options.output_directory)
     list_of_all_commands = []
@@ -77,7 +77,7 @@ def mapSamplesToReference(options):
                 cmd+=" --alignIntronMin 1 "
                 cmd+=" --alignIntronMax 1 "
 
-            if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.final.out")==False or isEmpty(f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam")==True: 
+            if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.final.out")==False: 
                 list_of_all_commands.append([cmd,"dummy"])
     
     
@@ -91,7 +91,8 @@ def mapSamplesToReference(options):
     ##################################################################################################
     
     files_to_be_removed=[]
-    for sra in options.metadata:
+    for row in options.metadata:
+        sra,layout,assay_type = row
         for iteration in range(int(options.num_times)):
             files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_Log.out")
             files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_Log.progress.out")
