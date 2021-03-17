@@ -34,7 +34,15 @@ def readMetadataFile(options):
 def runCommand(eachpinput):
     cmd,dummy = eachpinput
     os.system(cmd)
-
+    
+def isEmpty(filename):
+    if os.path.exists(filename) == False:
+        return True
+    else:
+        if os.stat(filename).st_size == 0:
+            return True
+    return False
+    
 def mapSamplesToReference(options):
     
     print(len(options.metadata))
@@ -69,7 +77,7 @@ def mapSamplesToReference(options):
                 cmd+=" --alignIntronMin 1 "
                 cmd+=" --alignIntronMax 1 "
 
-            if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.final.out")==False: 
+            if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.final.out")==False or isEmpty(f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam")==True: 
                 list_of_all_commands.append([cmd,"dummy"])
             
     pool.map(runCommand,list_of_all_commands)
