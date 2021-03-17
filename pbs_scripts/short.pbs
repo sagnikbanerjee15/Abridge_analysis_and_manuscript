@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#SBATCH -n 72
+#SBATCH -N 1
+#SBATCH --mem=300G
+#SBATCH --partition=short
+#SBATCH --time=48:00:00
+#SBATCH --job-name="ABRIDGE_ANALYSIS_MS"
+#SBATCH --mail-user=sagnik@iastate.edu
+#SBATCH --mail-type=BEGIN
+#SBATCH --mail-type=END
+#SBATCH --mail-type=FAIL
+#SBATCH --output=/90daydata/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS.output
+#SBATCH --error=/90daydata/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS.error
+
+conda activate abridge_analysis_for_manuscript
+
+CPU=72 # Change accordingly
+OUT_DIR="/90daydata/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS"
+
+abridge_reproduce_entire_analysis \
+--metadata /90daydata/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/ListOfNCBI-SRASamplesForExperimentST.csv \
+--output_directory "$OUT_DIR" \
+--genome /90daydata/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
+--cpu $CPU \
+--num_times 10 \
+1> "$OUT_DIR".output\
+2> "$OUT_DIR".error
