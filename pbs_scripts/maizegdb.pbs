@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -n 72
+#SBATCH -n 2
 #SBATCH -N 1
 #SBATCH --mem=350G
 #SBATCH --partition=priority-mem768
@@ -17,7 +17,7 @@
 
 conda activate abridge_analysis_for_manuscript
 
-CPU=72 # Change accordingly
+CPU=2 # Change accordingly
 OUT_DIR="/90daydata/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS"
 
 abridge_reproduce_entire_analysis \
