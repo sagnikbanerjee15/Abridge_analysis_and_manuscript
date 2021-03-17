@@ -69,9 +69,9 @@ def mapSamplesToReference(options):
                 cmd+=" --alignIntronMin 1 "
                 cmd+=" --alignIntronMax 1 "
 
-            if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_SE_Log.final.out")==False and os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_PE_Log.final.out")==False:
+            if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.final.out")==False: 
                 list_of_all_commands.append([cmd,"dummy"])
-    
+            
     pool.map(runCommand,list_of_all_commands)
     
     ##################################################################################################
@@ -87,8 +87,8 @@ def mapSamplesToReference(options):
             
             if iteration==0:
                 cmd="mv "
-                cmd+=options.output_directory+"/"+sra+"_"+str(iteration)+"_"+options.metadata[sra]["layout"]+"_Aligned.sortedByCoord.out.bam "
-                cmd+=options.output_directory+"/"+sra+"_"+options.metadata[sra]["layout"]+".bam "
+                cmd+=options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Aligned.sortedByCoord.out.bam "
+                cmd+=options.output_directory+"/"+sra+"_"+layout+".bam "
                 os.system(cmd)
             else:
                 files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_Aligned.sortedByCoord.out.bam")
