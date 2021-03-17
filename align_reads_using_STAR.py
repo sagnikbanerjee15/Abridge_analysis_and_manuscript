@@ -68,9 +68,8 @@ def mapSamplesToReference(options):
             else:
                 cmd+=" --alignIntronMin 1 "
                 cmd+=" --alignIntronMax 1 "
-            
-            print(options.output_directory+"/"+sra+"_"+str(iteration)+"_Log.final.out")
-            if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_Log.final.out")==False:
+
+            if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_SE_Log.final.out")==False and os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_PE_Log.final.out")==False:
                 list_of_all_commands.append([cmd,"dummy"])
             else:
                 print(f"skipped {sra} {iteration}")
