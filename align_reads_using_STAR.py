@@ -79,7 +79,11 @@ def mapSamplesToReference(options):
 
             if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.final.out")==False or isEmpty(f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam")==True: 
                 list_of_all_commands.append([cmd,"dummy"])
-            
+    
+    
+    for cmd in list_of_all_commands:
+        print(cmd)
+        sys.stdout.flush()
     pool.map(runCommand,list_of_all_commands)
     
     ##################################################################################################
