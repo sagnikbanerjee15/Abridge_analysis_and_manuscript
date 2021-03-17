@@ -68,6 +68,8 @@ def mapSamplesToReference(options):
             else:
                 cmd+=" --alignIntronMin 1 "
                 cmd+=" --alignIntronMax 1 "
+            
+            print(options.output_directory+"/"+sra+"_"+str(iteration)+"_Log.final.out")
             if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_Log.final.out")==False:
                 list_of_all_commands.append([cmd,"dummy"])
             else:
