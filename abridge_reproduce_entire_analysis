@@ -166,8 +166,9 @@ def main():
     # Organism,Tissue,Layout,Assay_Type,Date_of_publication, Length, Accession,Bioproject, Number_of_reads_or_pairs,Replicate_information, Notes]
     ##################################################################################################
     fhw = open(f"{options.output_directory}/metadata_for_alignment.csv","w")
-    add_these_back_to_metadata_expanded = []
+    add_these_back_to_metadata_expanded = {}
     for Assay_Type in options.metadata_expanded:
+        add_these_back_to_metadata_expanded[Assay_Type] = []
         for row in options.metadata_expanded[Assay_Type]:
             fhw.write(",".join([row[0], #organism
                               row[1], #tissue
@@ -186,9 +187,10 @@ def main():
                               row[5],
                               row[6]  
                 ])+"\n")
-            add_these_back_to_metadata_expanded.append([row[0],row[1],"SE",row[3],row[4],row[5],row[6]])
+            add_these_back_to_metadata_expanded[Assay_Type].append([row[0],row[1],"SE",row[3],row[4],row[5],row[6]])
     fhw.close()
-    options.metadata_expanded.extend(add_these_back_to_metadata_expanded)
+    for Assay_Type in options.metadata_expanded:
+        options.metadata_expanded[Assay_Type].extend(add_these_back_to_metadata_expanded[Assay_Type])
     logging.info(f"Metadata preparation for alignment is complete")
     
     ##################################################################################################
