@@ -114,7 +114,7 @@ def main():
                                 f"{options.output_directory}/star_alignments",
                                 f"{options.output_directory}/star_index",
                                 f"{options.output_directory}/abridge_compressed_files",
-                                f"{options.output_directory}/deabridge_compressed_files",
+                                f"{options.output_directory}/abridge_decompressed_files",
                                 f"{options.output_directory}/outputs",
                                 f"{options.output_directory}/errors",
                                 f"{options.output_directory}/final_output_files",
