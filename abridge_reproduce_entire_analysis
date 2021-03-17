@@ -211,7 +211,7 @@ def main():
             alignment_samfilename = f"{options.output_directory}/star_alignments/{row[6]}_SE.sam"
             cmd  = f"(/usr/bin/time --verbose abridge "
             cmd += f" --compress "
-            cmd += f" --cpu {options.cpu}"
+            cmd += f" --cpu 1"
             cmd += f" --genome {options.genome} "
             cmd += f" --inputsamfilenames {alignment_samfilename} "
             cmd += f" --outputdir {options.output_directory}/compressed_files"
