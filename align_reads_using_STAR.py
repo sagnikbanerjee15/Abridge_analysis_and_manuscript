@@ -71,11 +71,7 @@ def mapSamplesToReference(options):
 
             if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_SE_Log.final.out")==False and os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_PE_Log.final.out")==False:
                 list_of_all_commands.append([cmd,"dummy"])
-            else:
-                print(f"skipped {sra} {iteration}")
-    for row in list_of_all_commands:
-        print(row[0])
-    return
+    
     pool.map(runCommand,list_of_all_commands)
     
     ##################################################################################################
@@ -175,7 +171,7 @@ def main():
     #mergePairedEndedSamplesIntoSingleEnded(options)
     
     mapSamplesToReference(options)
-    return
+    
     convertBamToSam(options)
     
     #compileDurationOfExecutionFile(options)
