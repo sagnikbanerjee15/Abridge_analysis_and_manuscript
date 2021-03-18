@@ -30,6 +30,7 @@ def parseCommandLineArguments():
     ##################################################################################################
     optional_named.add_argument("--cpu","-n",help="Enter the number of CPUs. Please note that all alignments will be conducted using a single CPU. This argument will control how many parallel alignments can be lanuched", default=1)
     optional_named.add_argument("--num_times","-t",help="Enter the number of times you wish each process to execute. This will be handy in calculating the average time required for compression, decompression, retrieval and other operations", default = 5)
+    optional_named.add_argument("--error_directory","-edir",help="Enter a directory where all error files will be stored. If nothing is specified then error files will be stored in the output directory",default=None)
     
     ##################################################################################################
     # Suppressed arguments
@@ -227,6 +228,9 @@ def main():
                 cmd += f" --genome {options.genome} "
                 cmd += f" --inputsamfilenames {alignment_samfilename} "
                 cmd += f" --outputdir {options.output_directory}/abridge_compressed_files/{iteration} "
+                cmd += f" --error_directory {options.error_directory}/abridge/{iteration} "
+                cmd += f" --keep_intermediate_error_files "
+                cmd += f" --both " # Perform both compression - once using 7z and again using brotli (from MIT)
                 cmd += ")"
                 cmd += f" 1> {options.output_directory}/outputs/{sra}_{iteration}_{layout}_compress.output "
                 cmd += f" 2> {options.output_directory}/errors/{sra}_{iteration}_{layout}_compress.error " 
