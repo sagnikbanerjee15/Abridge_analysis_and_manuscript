@@ -215,13 +215,13 @@ def main():
     ##################################################################################################
     list_of_commands = []
     for Assay_Type in options.metadata_expanded:
-        for row in options.metadata_expanded[Assay_Type]:
-            sra = row[6]
-            layout = row[2]
-            if layout == "PE": continue
-            alignment_samfilename = f"{options.output_directory}/star_alignments/{sra}_{layout}.sam"
+        for iteration in range(int(options.num_times)):
+            for row in options.metadata_expanded[Assay_Type]:
+                sra = row[6]
+                layout = row[2]
+                if layout == "PE": continue
+                alignment_samfilename = f"{options.output_directory}/star_alignments/{sra}_{layout}.sam"
             
-            for iteration in range(int(options.num_times)):
                 cmd  = f"(/usr/bin/time --verbose abridge "
                 cmd += f" --compress "
                 cmd += f" --cpu 1 "
