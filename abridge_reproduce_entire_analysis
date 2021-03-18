@@ -230,7 +230,7 @@ def main():
                 cmd += f" --output_directory {options.output_directory}/abridge_compressed_files/{iteration} "
                 cmd += f" --error_directory {options.error_directory}/abridge/{iteration} "
                 cmd += f" --keep_intermediate_error_files "
-                cmd += f" --both " # Perform both compression - once using 7z and again using brotli (from MIT)
+                cmd += f" --both " # Perform both compression - once using 7z and again using brotli (from Google)
                 cmd += ")"
                 cmd += f" 1> {options.output_directory}/outputs/{sra}_{iteration}_{layout}_compress.output "
                 cmd += f" 2> {options.output_directory}/errors/{sra}_{iteration}_{layout}_compress.error " 
