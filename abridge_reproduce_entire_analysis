@@ -214,8 +214,8 @@ def main():
     # Compress alignments with Abridge - Single ended
     ##################################################################################################
     list_of_commands = []
-    for Assay_Type in options.metadata_expanded:
-        for iteration in range(int(options.num_times)):
+    for iteration in range(int(options.num_times)):
+        for Assay_Type in options.metadata_expanded:
             for row in options.metadata_expanded[Assay_Type]:
                 sra = row[6]
                 layout = row[2]
