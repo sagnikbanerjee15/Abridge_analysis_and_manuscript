@@ -1,0 +1,147 @@
+conda activate abridge_analysis_for_manuscript
+
+CSAM
+====
+
+========
+Compress
+========
+
+(/usr/bin/time --verbose  \
+/90daydata/maizegdb/sagnik/softwares/libCSAM/CompressSAM \
+/90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.sam \
+-q 0 \
+) \
+1> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.csam.compress.output \
+2> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.csam.compress.error 
+
+==========
+Decompress
+==========
+
+(/usr/bin/time --verbose  \
+/90daydata/maizegdb/sagnik/softwares/libCSAM/DecompressSAM \
+/90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.sam.csam \
+) \
+1> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.csam.decompressed.sam \
+2> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.csam.decompress.error 
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+
+SAMCOMP
+=======
+
+========
+Compress
+========
+(/usr/bin/time --verbose  \
+/90daydata/maizegdb/sagnik/softwares/sam_comp-0.10/sam_comp \
+-r /90daydata/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
+/90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.sam \
+) \
+1> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.samcomp \
+2> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.samcomp.compress.error 
+
+
+========
+Decompress
+========
+(/usr/bin/time --verbose  \
+/90daydata/maizegdb/sagnik/softwares/sam_comp-0.10/sam_comp \
+-d \
+-r /90daydata/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
+< /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.samcomp \
+) \
+1> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.samcomp.decompressed.sam \
+2> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.samcomp.decompress.error 
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+
+NGC
+===
+
+========
+Compress
+========
+(/usr/bin/time --verbose  \
+java -jar -Xmx25G /90daydata/maizegdb/sagnik/softwares/ngc-core-0.0.1-standalone.jar compress \
+-best \
+-i /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.bam \
+-o /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.ngc \
+-r /90daydata/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
+-truncateNames \
+-validationStringency SILENT \
+) \
+1> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.ngc.compress.output \
+2> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.ngc.compress.error 
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+
+QUIP
+====
+========
+Compress
+========
+(/usr/bin/time --verbose  \
+/90daydata/maizegdb/sagnik/softwares/quip-1.1.8/src/quip \
+--input=bam \
+-r /90daydata/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa.quip \
+/90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.bam \
+-c \
+) \
+1> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.quip \
+2> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.quip.compress.error 
+
+==========
+Decompress
+==========
+(/usr/bin/time --verbose  \
+/90daydata/maizegdb/sagnik/softwares/quip-1.1.8/src/quip \
+-d \
+--input=quip \
+-r /90daydata/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa.quip \
+/90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.quip \
+-c \
+) \
+1> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.quip.decompressed.sam \
+2> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.quip.decompress.error 
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+
+
+DEEZ
+====
+========
+Compress
+========
+(/usr/bin/time --verbose  \
+/90daydata/maizegdb/sagnik/softwares/deez/deez \
+-r /90daydata/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
+/90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.sam \
+-o /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.deez \
+) \
+1> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.deez.compress.output \
+2> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.deez.compress.error 
+
+==========
+Decompress
+==========
+(/usr/bin/time --verbose  \
+/90daydata/maizegdb/sagnik/softwares/deez/deez \
+-r /90daydata/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
+/90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.deez \
+-o /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.deez.sam \
+) \
+1> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.deez.decompress.output \
+2> /90daydata/maizegdb/sagnik/ABRIDGE/rough/SRR13711353_SE.deez.decompress.error 
+
+
+

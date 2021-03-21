@@ -1,0 +1,15 @@
+conda activate abridge_analysis_for_manuscript
+
+Compress
+========
+
+(/usr/bin/time --verbose  \
+/90daydata/maizegdb/sagnik/softwares/alico/build_dir/SAMStreamer \
+-u \
+-e \
+/90daydata/maizegdb/sagnik/ABRIDGE/rough_alico/SRR13711353_SE.sam \
+/90daydata/maizegdb/sagnik/ABRIDGE/rough_alico/SRR13711353_SE.alico \
+/90daydata/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
+) \
+1> /90daydata/maizegdb/sagnik/ABRIDGE/rough_alico/SRR13711353_SE.compress.output \
+2> /90daydata/maizegdb/sagnik/ABRIDGE/rough_alico/SRR13711353_SE.compress.error 

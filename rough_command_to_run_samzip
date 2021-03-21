@@ -1,0 +1,18 @@
+conda activate abridge_analysis_for_manuscript
+
+Compress
+========
+cd /90daydata/maizegdb/sagnik/softwares/goby3
+
+(/usr/bin/time --verbose  \
+/90daydata/maizegdb/sagnik/softwares/SAMZIP-src-v3/encoder \
+--mode sam-to-compact \
+--input /90daydata/maizegdb/sagnik/ABRIDGE/rough_goby/SRR13711353_SE.bam \
+--output /90daydata/maizegdb/sagnik/ABRIDGE/rough_goby/SRR13711353_SE.goby \
+--preserve-soft-clips \
+--sorted \
+--quality-encoding Illumina \
+--genome /90daydata/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
+) \
+1> /90daydata/maizegdb/sagnik/ABRIDGE/rough_goby/SRR13711353_SE.goby.output \
+2> /90daydata/maizegdb/sagnik/ABRIDGE/rough_goby/SRR13711353_SE.goby.error 
