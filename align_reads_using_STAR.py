@@ -50,9 +50,9 @@ def mapSamplesToReference(options):
     for row in options.metadata:
         sra,layout,assay_type = row
         for iteration in range(int(options.num_times)):
-            cmd = "STAR "
-            cmd+= " --runThreadN 1 " # always run with one CPU
-            cmd+= " --genomeDir "+options.star_genome_index
+            cmd ="STAR "
+            cmd+=" --runThreadN 1 " # always run with one CPU
+            cmd+=" --genomeDir "+options.star_genome_index
             cmd+=" --outSAMtype BAM SortedByCoordinate "
             cmd+=" --outFilterMultimapNmax 10000 " 
             cmd+=" --outFilterMismatchNmax 25  " 
@@ -75,6 +75,8 @@ def mapSamplesToReference(options):
             else:
                 cmd+=" --alignIntronMin 1 "
                 cmd+=" --alignIntronMax 1 "
+            cmd+=f"1> {options.output_directory}/{sra}_{iteration}_{layout}.output "
+            cmd+=f"1> {options.output_directory}/{sra}_{iteration}_{layout}.error "
 
             if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.final.out")==False: 
                 list_of_all_commands.append([cmd,"dummy"])
