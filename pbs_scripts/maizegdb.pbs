@@ -15,7 +15,7 @@
 #SBATCH --output=/project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS.output
 #SBATCH --error=/project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS.error
 
-conda activate abridge_analysis_for_manuscript
+conda activate abridge
 
 CPU=1 # Change accordingly
 OUT_DIR="/project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS"

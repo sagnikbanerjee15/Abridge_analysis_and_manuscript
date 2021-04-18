@@ -56,6 +56,7 @@ def mapSamplesToReference(options):
             cmd+=" --outSAMtype BAM SortedByCoordinate "
             cmd+=" --outFilterMultimapNmax 10000 " 
             cmd+=" --outFilterMismatchNmax 25  " 
+            cmd+=" --outBAMsortingThreadN 1 " # Use a single CPU for sorting
             cmd+=" --limitBAMsortRAM 107374182400" # 100 GB
             cmd+=" --outFilterScoreMinOverLread 0.75 "
             cmd+=" --outFilterMatchNminOverLread 0.75 "
@@ -77,8 +78,8 @@ def mapSamplesToReference(options):
 
             if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.final.out")==False: 
                 list_of_all_commands.append([cmd,"dummy"])
-    
-    pool.map(runCommand,list_of_all_commands)
+            os.system(cmd)
+    #pool.map(runCommand,list_of_all_commands)
     
     ##################################################################################################
     # Remove all the useless files and rename the alignment file
