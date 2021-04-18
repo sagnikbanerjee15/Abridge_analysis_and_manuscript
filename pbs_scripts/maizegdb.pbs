@@ -21,7 +21,7 @@ CPU=1 # Change accordingly
 OUT_DIR="/project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS"
 
 abridge_reproduce_entire_analysis \
---metadata /90daydata/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/ListOfNCBI-SRASamplesForExperimentST.csv \
+--metadata /project/maizegdb/sagnik/Abridge_analysis_for_MS/ListOfNCBI-SRASamplesForExperimentST.csv \
 --output_directory "$OUT_DIR" \
 --genome /project/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
 --cpu $CPU \
