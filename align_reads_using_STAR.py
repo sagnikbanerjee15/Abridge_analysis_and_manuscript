@@ -80,8 +80,8 @@ def mapSamplesToReference(options):
 
             if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.final.out")==False: 
                 list_of_all_commands.append([cmd,"dummy"])
-            os.system(cmd)
-    #pool.map(runCommand,list_of_all_commands)
+            #os.system(cmd)
+    pool.map(runCommand,list_of_all_commands)
     
     ##################################################################################################
     # Remove all the useless files and rename the alignment file
