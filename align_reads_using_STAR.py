@@ -81,19 +81,6 @@ def mapSamplesToReference(options):
             if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.final.out")==False: 
                 list_of_all_commands.append([cmd,"dummy"])
             os.system(cmd)
-    #pool.map(runCommand,list_of_all_commands)
-    
-    ##################################################################################################
-    # Remove all the useless files and rename the alignment file
-    ##################################################################################################
-    
-    files_to_be_removed=[]
-    for row in options.metadata:
-        sra,layout,assay_type = row
-        for iteration in range(int(options.num_times)):
-            files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_Log.out")
-            files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_Log.progress.out")
-            files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_SJ.out.tab")
             
             if iteration==0:
                 if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Aligned.sortedByCoord.out.bam")==False and os.path.exists(options.output_directory+"/"+sra+"_"+layout+".bam")==True:continue
@@ -101,11 +88,16 @@ def mapSamplesToReference(options):
                 cmd+=options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Aligned.sortedByCoord.out.bam "
                 cmd+=options.output_directory+"/"+sra+"_"+layout+".bam "
                 os.system(cmd)
-            else:
-                files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Aligned.sortedByCoord.out.bam")
-    
-    for file in files_to_be_removed:
-        os.system("rm -f "+file)
+                
+            files_to_be_removed=[]
+            files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.out")
+            files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.progress.out")
+            files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_SJ.out.tab")
+            files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Aligned.sortedByCoord.out.bam")
+            
+            for file in files_to_be_removed:
+                os.system("rm -f "+file)
+    #pool.map(runCommand,list_of_all_commands)
             
             
 
