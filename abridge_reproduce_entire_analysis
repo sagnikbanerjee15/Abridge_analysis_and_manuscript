@@ -219,7 +219,6 @@ def main():
             for row in options.metadata_expanded[Assay_Type]:
                 sra = row[6]
                 layout = row[2]
-                if layout == "PE": continue
                 alignment_samfilename = f"{options.output_directory}/star_alignments/{sra}_{layout}.sam"
             
                 cmd  = f"(/usr/bin/time --verbose abridge "
@@ -234,7 +233,7 @@ def main():
                 cmd += ")"
                 cmd += f" 1> {options.output_directory}/outputs/{sra}_{iteration}_{layout}_compress.output "
                 cmd += f" 2> {options.output_directory}/errors/{sra}_{iteration}_{layout}_compress.error " 
-                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge") == True or os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.unmapped") or os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.pass1") or os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.pass2") or os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.pass2.index"): continue
+                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.7z") == True and os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.br") == True : continue
                 os.system(cmd)
                 #return
                 #list_of_commands.append([cmd,"dummy"])
