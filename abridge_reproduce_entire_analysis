@@ -207,7 +207,7 @@ def main():
     cmd += f" --num_times {options.num_times} "
     cmd += f" 1> {options.output_directory}/outputs/star_alignment.output "
     cmd += f" 2> {options.output_directory}/errors/star_alignment.error "
-    os.system(cmd)
+    #os.system(cmd)
     logging.info(f"Aligning reads with STAR is complete")
     
     ##################################################################################################
@@ -233,7 +233,11 @@ def main():
                 cmd += f" 1> {options.output_directory}/outputs/{sra}_{iteration}_{layout}_compress.output "
                 cmd += f" 2> {options.output_directory}/errors/{sra}_{iteration}_{layout}_compress.error " 
                 if os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.7z") == True and os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.br") == True : continue
+                logging.info(f"Running command - {cmd}")
                 os.system(cmd)
+                break
+            break
+        break
                 
     ##################################################################################################
     # Decompress alignments with Abridge
@@ -256,8 +260,12 @@ def main():
                 cmd += ")"
                 cmd += f" 1> {options.output_directory}/outputs/{sra}_{iteration}_{layout}_decompress.output "
                 cmd += f" 2> {options.output_directory}/errors/{sra}_{iteration}_{layout}_decompress.error " 
-                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.7z") == True and os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.br") == True : continue
+                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.decompress.sam") == True : continue
+                logging.info(f"Running command - {cmd}")
                 os.system(cmd)
+                break
+            break
+        break
     
 
 if __name__ == "__main__":
