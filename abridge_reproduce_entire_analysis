@@ -211,9 +211,8 @@ def main():
     logging.info(f"Aligning reads with STAR is complete")
     
     ##################################################################################################
-    # Compress alignments with Abridge - Single ended
+    # Compress alignments with Abridge
     ##################################################################################################
-    list_of_commands = []
     for iteration in range(int(options.num_times)):
         for Assay_Type in options.metadata_expanded:
             for row in options.metadata_expanded[Assay_Type]:
@@ -235,9 +234,30 @@ def main():
                 cmd += f" 2> {options.output_directory}/errors/{sra}_{iteration}_{layout}_compress.error " 
                 if os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.7z") == True and os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.br") == True : continue
                 os.system(cmd)
-                #return
-                #list_of_commands.append([cmd,"dummy"])
-    #pool.map(runCommand,list_of_commands)
+                
+    ##################################################################################################
+    # Decompress alignments with Abridge
+    ##################################################################################################
+    for iteration in range(int(options.num_times)):
+        for Assay_Type in options.metadata_expanded:
+            for row in options.metadata_expanded[Assay_Type]:
+                sra = row[6]
+                layout = row[2]
+                alignment_samfilename = f"{options.output_directory}/star_alignments/{sra}_{layout}.sam"
+            
+                cmd  = f"(/usr/bin/time --verbose abridge "
+                cmd += f" --decompress "
+                cmd += f" --cpu 1 "
+                cmd += f" --genome {options.genome} "
+                cmd += f" --inputabrfilenames {options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.br "
+                cmd += f" --output_directory {options.output_directory}/abridge_decompressed_files/{iteration} "
+                cmd += f" --error_directory {options.error_directory}/abridge/{iteration} "
+                cmd += f" --keep_intermediate_error_files "
+                cmd += ")"
+                cmd += f" 1> {options.output_directory}/outputs/{sra}_{iteration}_{layout}_decompress.output "
+                cmd += f" 2> {options.output_directory}/errors/{sra}_{iteration}_{layout}_decompress.error " 
+                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.7z") == True and os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.br") == True : continue
+                os.system(cmd)
     
 
 if __name__ == "__main__":
