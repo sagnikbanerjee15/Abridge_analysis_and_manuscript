@@ -25,6 +25,6 @@ abridge_reproduce_entire_analysis \
 --genome /project/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
 --cpu $CPU \
 --num_times 5 \
---error_directory /project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS/data_analysis_for_MS/errors \
+--error_directory /project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS/errors \
 1> "$OUT_DIR".output\
 2> "$OUT_DIR".error
