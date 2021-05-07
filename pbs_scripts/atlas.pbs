@@ -15,7 +15,6 @@
 #SBATCH -A maizegdb
 
 conda activate abridge
-module load samtools
 
 CPU=1 # Change accordingly
 OUT_DIR="/project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS"
