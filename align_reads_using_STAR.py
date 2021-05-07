@@ -180,7 +180,7 @@ def main():
     return
     mapSamplesToReference(options)
     
-    convertBamToSam(options)
+    #convertBamToSam(options)
     
     #compileDurationOfExecutionFile(options)
 
