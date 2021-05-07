@@ -11,7 +11,6 @@ import time
 import multiprocessing
 import random
 import glob
-from _ast import Or
 
 def parseCommandLineArguments():
     parser = argparse.ArgumentParser(prog="abridge_reproduce_entire_analysis",description="Program will regenerate all the files, process them and also construct the graphs for publication. Please note that some of the data represents duration of execution and will not be reproducible. But the trend should hold true",formatter_class=RawTextHelpFormatter)
@@ -64,7 +63,8 @@ def downloadData(options):
     fhw = open(options.sra_list_to_be_downloaded,"w")
     for Assay_Type in options.metadata_expanded:
         for row in options.metadata_expanded[Assay_Type]:
-            fhw.write(row[6] + "\n")
+            if os.path.exists(f"{options.output_directory}/raw_data/{row[6]}_1.fastq.gz") == False or os.path.exists(f"{options.output_directory}/raw_data/{row[6]}_2.fastq.gz") == False:
+                fhw.write(row[6] + "\n")
     fhw.close()
     
     cmd  = f"downloadAndDumpFastqFromSRA.py "
