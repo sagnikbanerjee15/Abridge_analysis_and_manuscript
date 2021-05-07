@@ -8,6 +8,7 @@ import multiprocessing
 import pprint
 from dateutil.parser import parse
 
+
 def parseCommandLineArguments():
     parser = argparse.ArgumentParser(prog="abridge",description="Align genomic and transcriptomic reads using STAR")
     required_named = parser.add_argument_group('Required arguments')
@@ -117,6 +118,7 @@ def mergePairedEndedSamplesIntoSingleEnded(options):
         cmd = f"gunzip -c {input_filename_2}.gz > {input_filename_2}"
         os.system(cmd)
         
+        fhw=open(output_filename,"w")
         if os.path.exists(f"{output_filename}.gz") == True :continue
         for fhr in [open(input_filename_1,"r") ,open(input_filename_2,"r")]:
             for line_num,line in enumerate(fhr):
