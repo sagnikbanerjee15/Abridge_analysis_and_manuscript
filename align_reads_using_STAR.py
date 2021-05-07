@@ -107,7 +107,7 @@ def mergePairedEndedSamplesIntoSingleEnded(options):
     """
     for row in options.metadata:
         sra,layout,assay_type = row
-        if options.metadata[sra]["layout"]=="SE":continue
+        if row[1]=="SE":continue
         output_filename = options.input_location+"/"+sra+"_0.fastq"
         input_filename_1 = options.input_location+"/"+sra+"_1.fastq"
         input_filename_2 = options.input_location+"/"+sra+"_2.fastq"
