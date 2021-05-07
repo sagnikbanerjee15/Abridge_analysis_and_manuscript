@@ -207,7 +207,7 @@ def main():
     cmd += f" --num_times {options.num_times} "
     cmd += f" 1> {options.output_directory}/outputs/star_alignment.output "
     cmd += f" 2> {options.output_directory}/errors/star_alignment.error "
-    #os.system(cmd)
+    os.system(cmd)
     logging.info(f"Aligning reads with STAR is complete")
     
     ##################################################################################################

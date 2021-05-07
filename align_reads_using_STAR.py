@@ -64,10 +64,10 @@ def mapSamplesToReference(options):
             cmd+=" --outSAMunmapped Within "
             #cmd+=" --genomeLoad Remove "
             if layout=="SE":
-                cmd+=" --readFilesIn "+options.input_location+"/"+sra+".fastq"
+                cmd+=" --readFilesIn "+options.input_location+"/"+sra+".fastq.gz "
                 cmd+=" --outFileNamePrefix "+options.output_directory+"/"+sra+"_"+str(iteration)+"_SE_"
             else:
-                cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_1.fastq "+options.input_location+"/"+sra+"_2.fastq "
+                cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_1.fastq.gz "+options.input_location+"/"+sra+"_2.fastq.gz "
                 cmd+=" --outFileNamePrefix "+options.output_directory+"/"+sra+"_"+str(iteration)+"_PE_"
             if assay_type == "RNA-Seq":
                 cmd+=" --alignIntronMin 20  "
@@ -80,7 +80,7 @@ def mapSamplesToReference(options):
 
             if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.final.out")==False: 
                 list_of_all_commands.append([cmd,"dummy"])
-            os.system(cmd)
+                os.system(cmd)
             
             if iteration==0:
                 if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Aligned.sortedByCoord.out.bam")==False and os.path.exists(options.output_directory+"/"+sra+"_"+layout+".bam")==True:continue
@@ -111,7 +111,13 @@ def mergePairedEndedSamplesIntoSingleEnded(options):
         output_filename = options.input_location+"/"+sra+"_0.fastq"
         input_filename_1 = options.input_location+"/"+sra+"_1.fastq"
         input_filename_2 = options.input_location+"/"+sra+"_2.fastq"
-        if os.path.exists(output_filename):continue
+        
+        cmd = f"gunzip -c {input_filename_1}.gz"
+        os.system(cmd)
+        cmd = f"gunzip -c {input_filename_2}.gz"
+        os.system(cmd)
+        
+        if os.path.exists(f"{output_filename}.gz"):continue
         counter=1
         fhw=open(output_filename,"w")
         fhr1=open(input_filename_1,"w")
@@ -134,6 +140,12 @@ def mergePairedEndedSamplesIntoSingleEnded(options):
                 fhw.write(fhr2.readline())
         fhr2.close()
         fhw.close()
+        
+        cmd = f"rm {input_filename_1} {input_filename_2}"
+        os.system(cmd)
+        
+        cmd = f"gzip {output_filename}"
+        os.system(cmd)
 
 def convertBamToSam(options):
     for row in options.metadata:
@@ -173,7 +185,7 @@ def main():
     
     readMetadataFile(options)
     
-    #mergePairedEndedSamplesIntoSingleEnded(options)
+    mergePairedEndedSamplesIntoSingleEnded(options)
     
     mapSamplesToReference(options)
     
