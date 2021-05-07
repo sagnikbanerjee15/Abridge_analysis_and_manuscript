@@ -150,7 +150,7 @@ def main():
         os.system(cmd)
         logging.info(f"STAR index generation is complete")
         
-    ##################################################################################################
+    """##################################################################################################
     # Merge read pairs to form one file
     ##################################################################################################
     list_of_commands = []
@@ -160,7 +160,7 @@ def main():
     
     pool.map(mergeReadPairs,list_of_commands)
     logging.info(f"Merge complete")
-            
+    """       
     ##################################################################################################
     # Prepare metadata for alignemnt
     # A single .csv file will be prepared for both SE and PE samples
