@@ -26,5 +26,5 @@ abridge_reproduce_entire_analysis \
 --cpu $CPU \
 --num_times 5 \
 --error_directory /project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS/errors \
-1> "$OUT_DIR".output\
+1> "$OUT_DIR".output \
 2> "$OUT_DIR".error
