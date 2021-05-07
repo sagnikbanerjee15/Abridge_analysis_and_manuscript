@@ -18,7 +18,6 @@ conda activate abridge
 
 CPU=1 # Change accordingly
 OUT_DIR="/project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS"
-ln -s /project/maizegdb/sagnik/softwares/anaconda/bin/python python
 
 abridge_reproduce_entire_analysis \
 --metadata /project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/ListOfNCBI-SRASamplesForExperimentST.csv \

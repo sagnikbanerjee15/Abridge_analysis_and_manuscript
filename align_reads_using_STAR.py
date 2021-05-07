@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /project/maizegdb/sagnik/softwares/anaconda/bin/python
 
 import argparse
 import sys
