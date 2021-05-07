@@ -144,7 +144,7 @@ def mergePairedEndedSamplesIntoSingleEnded(options):
         cmd = f"rm {input_filename_1} {input_filename_2}"
         os.system(cmd)
         
-        cmd = f"gzip {output_filename}"
+        cmd = f"gzip -9 {output_filename}"
         os.system(cmd)
 
 def convertBamToSam(options):
