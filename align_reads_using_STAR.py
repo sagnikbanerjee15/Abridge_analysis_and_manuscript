@@ -122,22 +122,16 @@ def mergePairedEndedSamplesIntoSingleEnded(options):
         fhw=open(output_filename,"w")
         fhr1=open(input_filename_1,"r")
         for line_num,line in enumerate(fhr1):
-            if line_num%4==0:
-                fhw.write("@"+str(counter)+"\n")
-                counter+=1
-                fhw.write(fhr1.readline())
-                fhw.write(fhr1.readline())
-                fhw.write(fhr1.readline())
+            if line_num % 4 == 0 and line[0]=='@' and '/' in line:
+                line = line.replace('/','_')
+            fhw.write(line)
         fhr1.close()
         
         fhr2=open(input_filename_2,"r")
         for line_num,line in enumerate(fhr2):
-            if line_num%4==0:
-                fhw.write("@"+str(counter)+"\n")
-                counter+=1
-                fhw.write(fhr2.readline())
-                fhw.write(fhr2.readline())
-                fhw.write(fhr2.readline())
+            if line_num % 4 == 0 and line[0]=='@' and '/' in line:
+                line = line.replace('/','_')
+            fhw.write(line)
         fhr2.close()
         fhw.close()
         
