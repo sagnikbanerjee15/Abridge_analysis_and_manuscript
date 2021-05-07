@@ -120,7 +120,7 @@ def mergePairedEndedSamplesIntoSingleEnded(options):
         if os.path.exists(f"{output_filename}.gz") == True :continue
         counter=1
         fhw=open(output_filename,"w")
-        fhr1=open(input_filename_1,"w")
+        fhr1=open(input_filename_1,"r")
         for line_num,line in enumerate(fhr1):
             if line_num%4==0:
                 fhw.write("@"+str(counter)+"\n")
@@ -130,7 +130,7 @@ def mergePairedEndedSamplesIntoSingleEnded(options):
                 fhw.write(fhr1.readline())
         fhr1.close()
         
-        fhr2=open(input_filename_2,"w")
+        fhr2=open(input_filename_2,"r")
         for line_num,line in enumerate(fhr1):
             if line_num%4==0:
                 fhw.write("@"+str(counter)+"\n")
