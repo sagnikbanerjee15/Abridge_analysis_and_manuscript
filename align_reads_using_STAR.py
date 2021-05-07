@@ -102,36 +102,35 @@ def mapSamplesToReference(options):
             
             
 
-def mergePairedEndedSamplesIntoSingleEnded(options):
+def mergePairedEndedSamplesIntoSingleEnded(eachinput):
     """
     Combine the two pairs of reads and rename them
     """
-    for row in options.metadata:
-        sra,layout,assay_type = row
-        if row[1]=="SE":continue
-        output_filename = options.input_location+"/"+sra+"_0.fastq"
-        input_filename_1 = options.input_location+"/"+sra+"_1.fastq"
-        input_filename_2 = options.input_location+"/"+sra+"_2.fastq"
-        
-        cmd = f"gunzip -c {input_filename_1}.gz > {input_filename_1}"
-        os.system(cmd)
-        cmd = f"gunzip -c {input_filename_2}.gz > {input_filename_2}"
-        os.system(cmd)
-        
-        fhw=open(output_filename,"w")
-        if os.path.exists(f"{output_filename}.gz") == True :continue
-        for fhr in [open(input_filename_1,"r") ,open(input_filename_2,"r")]:
-            for line_num,line in enumerate(fhr):
-                if line_num % 4 == 0 and line[0]=='@' and '/' in line:
-                    line = line.replace('/','_')
-                fhw.write(line)
-        fhw.close()
-        
-        cmd = f"rm {input_filename_1} {input_filename_2}"
-        os.system(cmd)
-        
-        cmd = f"gzip -9 {output_filename}"
-        os.system(cmd)
+    options, sra = eachinput
+    
+    output_filename = options.input_location+"/"+sra+"_0.fastq"
+    input_filename_1 = options.input_location+"/"+sra+"_1.fastq"
+    input_filename_2 = options.input_location+"/"+sra+"_2.fastq"
+    
+    cmd = f"gunzip -c {input_filename_1}.gz > {input_filename_1}"
+    os.system(cmd)
+    cmd = f"gunzip -c {input_filename_2}.gz > {input_filename_2}"
+    os.system(cmd)
+    
+    fhw=open(output_filename,"w")
+    if os.path.exists(f"{output_filename}.gz") == True :continue
+    for fhr in [open(input_filename_1,"r") ,open(input_filename_2,"r")]:
+        for line_num,line in enumerate(fhr):
+            if line_num % 4 == 0 and line[0]=='@' and '/' in line:
+                line = line.replace('/','_')
+            fhw.write(line)
+    fhw.close()
+    
+    cmd = f"rm {input_filename_1} {input_filename_2}"
+    os.system(cmd)
+    
+    cmd = f"gzip -9 {output_filename}"
+    os.system(cmd)
 
 def convertBamToSam(options):
     for row in options.metadata:
@@ -171,8 +170,14 @@ def main():
     
     readMetadataFile(options)
     
-    mergePairedEndedSamplesIntoSingleEnded(options)
-    
+    pool = multiprocessing.Pool(processes=int(options.cpu))
+    list_of_all_commands=[]
+    for row in options.metadata:
+        sra,layout,assay_type = row
+        if layout=="SE":continue
+        list_of_all_commands.append([options,sra])
+    pool.map(mergePairedEndedSamplesIntoSingleEnded,list_of_all_commands)
+    return
     mapSamplesToReference(options)
     
     convertBamToSam(options)
