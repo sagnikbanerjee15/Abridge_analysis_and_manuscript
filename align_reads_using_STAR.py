@@ -118,21 +118,11 @@ def mergePairedEndedSamplesIntoSingleEnded(options):
         os.system(cmd)
         
         if os.path.exists(f"{output_filename}.gz") == True :continue
-        counter=1
-        fhw=open(output_filename,"w")
-        fhr1=open(input_filename_1,"r")
-        for line_num,line in enumerate(fhr1):
-            if line_num % 4 == 0 and line[0]=='@' and '/' in line:
-                line = line.replace('/','_')
-            fhw.write(line)
-        fhr1.close()
-        
-        fhr2=open(input_filename_2,"r")
-        for line_num,line in enumerate(fhr2):
-            if line_num % 4 == 0 and line[0]=='@' and '/' in line:
-                line = line.replace('/','_')
-            fhw.write(line)
-        fhr2.close()
+        for fhr in [open(input_filename_1,"r") ,open(input_filename_2,"r")]:
+            for line_num,line in enumerate(fhr):
+                if line_num % 4 == 0 and line[0]=='@' and '/' in line:
+                    line = line.replace('/','_')
+                fhw.write(line)
         fhw.close()
         
         cmd = f"rm {input_filename_1} {input_filename_2}"
