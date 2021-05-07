@@ -131,7 +131,7 @@ def mergePairedEndedSamplesIntoSingleEnded(options):
         fhr1.close()
         
         fhr2=open(input_filename_2,"r")
-        for line_num,line in enumerate(fhr1):
+        for line_num,line in enumerate(fhr2):
             if line_num%4==0:
                 fhw.write("@"+str(counter)+"\n")
                 counter+=1
