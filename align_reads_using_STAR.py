@@ -112,12 +112,12 @@ def mergePairedEndedSamplesIntoSingleEnded(options):
         input_filename_1 = options.input_location+"/"+sra+"_1.fastq"
         input_filename_2 = options.input_location+"/"+sra+"_2.fastq"
         
-        cmd = f"gunzip -c {input_filename_1}.gz"
+        cmd = f"gunzip -c {input_filename_1}.gz > {input_filename_1}"
         os.system(cmd)
-        cmd = f"gunzip -c {input_filename_2}.gz"
+        cmd = f"gunzip -c {input_filename_2}.gz > {input_filename_2}"
         os.system(cmd)
         
-        if os.path.exists(f"{output_filename}.gz"):continue
+        if os.path.exists(f"{output_filename}.gz") == True :continue
         counter=1
         fhw=open(output_filename,"w")
         fhr1=open(input_filename_1,"w")
