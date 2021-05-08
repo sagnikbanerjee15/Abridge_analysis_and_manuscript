@@ -66,7 +66,7 @@ def mapSamplesToReference(options):
             cmd+=" --readFilesCommand zcat "
             #cmd+=" --genomeLoad Remove "
             if layout=="SE":
-                cmd+=" --readFilesIn "+options.input_location+"/"+sra+".fastq.gz "
+                cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_0.fastq.gz "
                 cmd+=" --outFileNamePrefix "+options.output_directory+"/"+sra+"_"+str(iteration)+"_SE_"
             else:
                 cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_1.fastq.gz "+options.input_location+"/"+sra+"_2.fastq.gz "
