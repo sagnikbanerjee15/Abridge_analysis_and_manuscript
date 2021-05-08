@@ -50,6 +50,15 @@ def mapSamplesToReference(options):
     list_of_all_commands = []
     for row in options.metadata:
         sra,layout,assay_type = row
+        if layout=="SE":
+            cmd = f"gunzip -c {options.input_location}/{sra}_0.fastq.gz > {options.input_location}/{sra}_0.fastq"
+            os.system(cmd)
+        else:
+            cmd = f"gunzip -c {options.input_location}/{sra}_1.fastq.gz > {options.input_location}/{sra}_1.fastq"
+            os.system(cmd)
+            cmd = f"gunzip -c {options.input_location}/{sra}_2.fastq.gz > {options.input_location}/{sra}_2.fastq"
+            os.system(cmd)
+        
         for iteration in range(int(options.num_times)):
             cmd ="STAR "
             cmd+=" --runThreadN 1 " # always run with one CPU
@@ -63,13 +72,13 @@ def mapSamplesToReference(options):
             cmd+=" --outFilterMatchNminOverLread 0.75 "
             cmd+=" --outSAMattributes NH HI AS nM NM MD jM jI XS "
             cmd+=" --outSAMunmapped Within "
-            cmd+=" --readFilesCommand zcat "
+            #cmd+=" --readFilesCommand zcat "
             #cmd+=" --genomeLoad Remove "
             if layout=="SE":
-                cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_0.fastq.gz "
+                cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_0.fastq "
                 cmd+=" --outFileNamePrefix "+options.output_directory+"/"+sra+"_"+str(iteration)+"_SE_"
             else:
-                cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_1.fastq.gz "+options.input_location+"/"+sra+"_2.fastq.gz "
+                cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_1.fastq "+options.input_location+"/"+sra+"_2.fastq "
                 cmd+=" --outFileNamePrefix "+options.output_directory+"/"+sra+"_"+str(iteration)+"_PE_"
             if assay_type == "RNA-Seq":
                 cmd+=" --alignIntronMin 20  "
@@ -99,6 +108,15 @@ def mapSamplesToReference(options):
             
             for file in files_to_be_removed:
                 os.system("rm -f "+file)
+                
+        if layout=="SE":
+            cmd = f"rm {options.input_location}/{sra}_0.fastq"
+            os.system(cmd)
+        else:
+            cmd = f"rm {options.input_location}/{sra}_1.fastq"
+            os.system(cmd)
+            cmd = f"rm {options.input_location}/{sra}_2.fastq"
+            os.system(cmd)
     #pool.map(runCommand,list_of_all_commands)
             
             
