@@ -63,6 +63,7 @@ def mapSamplesToReference(options):
             cmd+=" --outFilterMatchNminOverLread 0.75 "
             cmd+=" --outSAMattributes NH HI AS nM NM MD jM jI XS "
             cmd+=" --outSAMunmapped Within "
+            cmd+=" --readFilesCommand zcat "
             #cmd+=" --genomeLoad Remove "
             if layout=="SE":
                 cmd+=" --readFilesIn "+options.input_location+"/"+sra+".fastq.gz "
