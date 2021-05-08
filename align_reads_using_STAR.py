@@ -177,7 +177,7 @@ def main():
         if layout=="SE":continue
         list_of_all_commands.append([options,sra])
     pool.map(mergePairedEndedSamplesIntoSingleEnded,list_of_all_commands)
-    return
+    
     mapSamplesToReference(options)
     
     #convertBamToSam(options)

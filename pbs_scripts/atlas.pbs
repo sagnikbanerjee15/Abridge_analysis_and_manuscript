@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -n 25
+#SBATCH -n 1
 #SBATCH -N 1
 #SBATCH --mem=75G
 #SBATCH --partition=atlas
@@ -16,7 +16,7 @@
 
 conda activate abridge
 
-CPU=25 # Change accordingly
+CPU=1 # Change accordingly
 OUT_DIR="/project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS"
 
 abridge_reproduce_entire_analysis \
