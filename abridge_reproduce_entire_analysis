@@ -131,6 +131,7 @@ def main():
     # Create output directory and subdirectories underneath
     ##################################################################################################
     create_these_directories = [options.output_directory,
+                                options.temp_directory,
                                 f"{options.output_directory}/raw_data",
                                 f"{options.output_directory}/star_alignments",
                                 f"{options.output_directory}/star_index",
