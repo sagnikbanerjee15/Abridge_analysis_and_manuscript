@@ -64,8 +64,7 @@ def downloadData(options):
     fhw = open(options.sra_list_to_be_downloaded,"w")
     for Assay_Type in options.metadata_expanded:
         for row in options.metadata_expanded[Assay_Type]:
-            if os.path.exists(f"{options.output_directory}/raw_data/{row[6]}_1.fastq") == False or os.path.exists(f"{options.output_directory}/raw_data/{row[6]}_2.fastq") == False:
-                fhw.write(row[6] + "\n")
+            fhw.write(row[6] + "\n")
     fhw.close()
     
     fhw = open(f"{options.output_directory}/sra_list_to_be_downloaded_temp","w")
