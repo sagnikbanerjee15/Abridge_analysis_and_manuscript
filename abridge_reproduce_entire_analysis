@@ -68,9 +68,18 @@ def downloadData(options):
                 fhw.write(row[6] + "\n")
     fhw.close()
     
+    fhw = open(f"{options.output_directory}/sra_list_to_be_downloaded_temp","w")
+    fhr = open(options.sra_list_to_be_downloaded,"r")
+    for line in fhr:
+        sra = line.strip()
+        if os.path.exists(f"{options.temp_directory}/{sra}_1.fastq") == False or os.path.exists(f"{options.temp_directory}/{sra}_2.fastq") == False:
+            fhw.write(sra+"\n")
+    fhw.close()
+    fhr.close()
+    
     cmd  = f"downloadAndDumpFastqFromSRA.py "
     cmd += f" --cpu {options.cpu} "
-    cmd += f" --sra {options.sra_list_to_be_downloaded} "
+    cmd += f" --sra {options.output_directory}/sra_list_to_be_downloaded_temp "
     cmd += f" --output {options.output_directory}/raw_data "
     cmd += f" 1> {options.output_directory}/outputs/raw_data_download.output "
     cmd += f" 2> {options.output_directory}/errors/raw_data_download.error "
