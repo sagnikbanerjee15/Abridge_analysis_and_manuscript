@@ -21,6 +21,7 @@ def parseCommandLineArguments():
     
     optional_named.add_argument("--cpu","-n",help="Enter the number of CPUs. Please note that all alignments will be conducted using a single CPU. This argument will control how many parallel alignments can be lanuched", default=1)
     optional_named.add_argument("--num_times","-t",help="Enter the number of times to run the alignments to estimate time",default = 5)
+    optional_named.add_argument("--temp_directory","-temp_dir",help="Enter a temporary directory. All files will be dumped in this directory to prevent the output directory to get crowded. Outputs and Error files will not be moved",default = None)
     
     return parser.parse_args() 
 
@@ -50,73 +51,89 @@ def mapSamplesToReference(options):
     list_of_all_commands = []
     for row in options.metadata:
         sra,layout,assay_type = row
-        if layout=="SE":
-            cmd = f"gunzip -c {options.input_location}/{sra}_0.fastq.gz > {options.input_location}/{sra}_0.fastq"
+        
+        if layout == "PE":
+            cmd  = f" cp "
+            cmd += f" {options.temp_directory}/{sra}_1.fastq "
+            cmd += f" {options.input_location}/raw_data "
+            os.system(cmd)
+            
+            cmd  = f" cp "
+            cmd += f" {options.temp_directory}/{sra}_2.fastq "
+            cmd += f" {options.input_location}/raw_data "
             os.system(cmd)
         else:
-            cmd = f"gunzip -c {options.input_location}/{sra}_1.fastq.gz > {options.input_location}/{sra}_1.fastq"
-            os.system(cmd)
-            cmd = f"gunzip -c {options.input_location}/{sra}_2.fastq.gz > {options.input_location}/{sra}_2.fastq"
+            cmd  = f" cp "
+            cmd += f" {options.temp_directory}/{sra}_0.fastq "
+            cmd += f" {options.input_location}/raw_data "
             os.system(cmd)
         
         for iteration in range(int(options.num_times)):
-            cmd ="STAR "
-            cmd+=" --runThreadN 1 " # always run with one CPU
-            cmd+=" --genomeDir "+options.star_genome_index
-            cmd+=" --outSAMtype BAM SortedByCoordinate "
-            cmd+=" --outFilterMultimapNmax 10000 " 
-            cmd+=" --outFilterMismatchNmax 25  " 
-            cmd+=" --outBAMsortingThreadN 1 " # Use a single CPU for sorting
-            cmd+=" --limitBAMsortRAM 107374182400" # 100 GB
-            cmd+=" --outFilterScoreMinOverLread 0.75 "
-            cmd+=" --outFilterMatchNminOverLread 0.75 "
-            cmd+=" --outSAMattributes NH HI AS nM NM MD jM jI XS "
-            cmd+=" --outSAMunmapped Within "
+            cmd  = f"STAR "
+            cmd += f" --runThreadN 1 " # always run with one CPU
+            cmd += f" --genomeDir "+options.star_genome_index
+            cmd += f" --outSAMtype BAM SortedByCoordinate "
+            cmd += f" --outFilterMultimapNmax 10000 " 
+            cmd += f" --outFilterMismatchNmax 25  " 
+            cmd += f" --outBAMsortingThreadN 1 " # Use a single CPU for sorting
+            cmd += f" --limitBAMsortRAM 107374182400" # 100 GB
+            cmd += f" --outFilterScoreMinOverLread 0.75 "
+            cmd += f" --outFilterMatchNminOverLread 0.75 "
+            cmd +=f" --outSAMattributes NH HI AS nM NM MD jM jI XS "
+            cmd += f" --outSAMunmapped Within "
             #cmd+=" --readFilesCommand zcat "
             #cmd+=" --genomeLoad Remove "
             if layout=="SE":
-                cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_0.fastq "
-                cmd+=" --outFileNamePrefix "+options.output_directory+"/"+sra+"_"+str(iteration)+"_SE_"
+                cmd += f" --readFilesIn {options.temp_directory}/{sra}_0.fastq"
+                cmd += f" --outFileNamePrefix {options.output_directory}/{sra}_{iteration}_SE_"
             else:
-                cmd+=" --readFilesIn "+options.input_location+"/"+sra+"_1.fastq "+options.input_location+"/"+sra+"_2.fastq "
-                cmd+=" --outFileNamePrefix "+options.output_directory+"/"+sra+"_"+str(iteration)+"_PE_"
+                cmd += f" --readFilesIn {options.temp_directory}/{sra}_1.fastq {options.temp_directory}/{sra}_2.fastq"
+                cmd += f" --outFileNamePrefix {options.output_directory}/{sra}_{iteration}_PE_"
             if assay_type == "RNA-Seq":
-                cmd+=" --alignIntronMin 20  "
-                cmd+=" --alignIntronMax 100000 "
+                cmd += f" --alignIntronMin 20  "
+                cmd += f" --alignIntronMax 100000 "
             else:
-                cmd+=" --alignIntronMin 1 "
-                cmd+=" --alignIntronMax 1 "
-            cmd+=f"1> {options.output_directory}/{sra}_{iteration}_{layout}.output "
-            cmd+=f"1> {options.output_directory}/{sra}_{iteration}_{layout}.error "
+                cmd += f" --alignIntronMin 1 "
+                cmd += f" --alignIntronMax 1 "
+            cmd += f"1> {options.output_directory}/{sra}_{iteration}_{layout}.output "
+            cmd += f"1> {options.output_directory}/{sra}_{iteration}_{layout}.error "
 
-            if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.final.out")==False: 
+            if os.path.exists(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.final.out")==False: 
                 list_of_all_commands.append([cmd,"dummy"])
                 os.system(cmd)
             
             if iteration==0:
-                if os.path.exists(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Aligned.sortedByCoord.out.bam")==False and os.path.exists(options.output_directory+"/"+sra+"_"+layout+".bam")==True:continue
-                cmd="mv "
-                cmd+=options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Aligned.sortedByCoord.out.bam "
-                cmd+=options.output_directory+"/"+sra+"_"+layout+".bam "
+                if os.path.exists(f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam ")==False and os.path.exists(f"{options.output_directory}/{sra}_{layout}.bam")==True:continue
+                cmd  = f"mv "
+                cmd += f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam "
+                cmd += f"{options.output_directory}/{sra}_{layout}.bam "
+                os.system(cmd)
+                
+                # Convert to sam file
+                cmd  = f" samtools "
+                cmd += f" view -h "
+                cmd += f" {options.output_directory}/{sra}_{layout}.bam "
+                cmd += f" > {options.output_directory}/{sra}_{layout}.sam "
+                os.system(cmd)
+                
+                cmd  = f" mv "
+                cmd += f" {options.output_directory}/{sra}_{layout}.* "
+                cmd += f" {options.temp_directory}/"
                 os.system(cmd)
                 
             files_to_be_removed=[]
-            files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.out")
-            files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Log.progress.out")
-            files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_SJ.out.tab")
-            files_to_be_removed.append(options.output_directory+"/"+sra+"_"+str(iteration)+"_"+layout+"_Aligned.sortedByCoord.out.bam")
+            files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.out")
+            files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.progress.out")
+            files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_SJ.out.tab")
+            files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam")
+            if layout == "SE":
+                files_to_be_removed.append(f"{options.input_location}/raw_data/{sra}_0.fastq")
+            else:
+                files_to_be_removed.append(f"{options.input_location}/raw_data/{sra}_1.fastq")
+                files_to_be_removed.append(f"{options.input_location}/raw_data/{sra}_2.fastq")
             
             for file in files_to_be_removed:
                 os.system("rm -f "+file)
-                
-        if layout=="SE":
-            cmd = f"rm {options.input_location}/{sra}_0.fastq"
-            os.system(cmd)
-        else:
-            cmd = f"rm {options.input_location}/{sra}_1.fastq"
-            os.system(cmd)
-            cmd = f"rm {options.input_location}/{sra}_2.fastq"
-            os.system(cmd)
     #pool.map(runCommand,list_of_all_commands)
             
             
@@ -126,16 +143,11 @@ def mergePairedEndedSamplesIntoSingleEnded(eachinput):
     Combine the two pairs of reads and rename them
     """
     options, sra = eachinput
+    output_filename = f"{options.temp_directory}/{sra}_0.fastq"
+    input_filename_1 = f"{options.temp_directory}/{sra}_1.fastq"
+    input_filename_2 = f"{options.temp_directory}/{sra}_2.fastq"
     
-    output_filename = options.input_location+"/"+sra+"_0.fastq"
-    input_filename_1 = options.input_location+"/"+sra+"_1.fastq"
-    input_filename_2 = options.input_location+"/"+sra+"_2.fastq"
-    
-    if os.path.exists(f"{output_filename}.gz") == True:return
-    cmd = f"gunzip -c {input_filename_1}.gz > {input_filename_1}"
-    os.system(cmd)
-    cmd = f"gunzip -c {input_filename_2}.gz > {input_filename_2}"
-    os.system(cmd)
+    if os.path.exists(f"{output_filename}") == True:return
     
     fhw=open(output_filename,"w")
     for fhr in [open(input_filename_1,"r") ,open(input_filename_2,"r")]:
@@ -145,11 +157,6 @@ def mergePairedEndedSamplesIntoSingleEnded(eachinput):
             fhw.write(line)
     fhw.close()
     
-    cmd = f"rm {input_filename_1} {input_filename_2}"
-    os.system(cmd)
-    
-    cmd = f"gzip -9 {output_filename}"
-    os.system(cmd)
 
 def convertBamToSam(options):
     for row in options.metadata:
@@ -199,7 +206,7 @@ def main():
     
     mapSamplesToReference(options)
     
-    #convertBamToSam(options)
+    convertBamToSam(options)
     
     #compileDurationOfExecutionFile(options)
 

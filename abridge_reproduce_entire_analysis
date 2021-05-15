@@ -64,7 +64,7 @@ def downloadData(options):
     fhw = open(options.sra_list_to_be_downloaded,"w")
     for Assay_Type in options.metadata_expanded:
         for row in options.metadata_expanded[Assay_Type]:
-            if os.path.exists(f"{options.output_directory}/raw_data/{row[6]}_1.fastq.gz") == False or os.path.exists(f"{options.output_directory}/raw_data/{row[6]}_2.fastq.gz") == False:
+            if os.path.exists(f"{options.output_directory}/raw_data/{row[6]}_1.fastq") == False or os.path.exists(f"{options.output_directory}/raw_data/{row[6]}_2.fastq") == False:
                 fhw.write(row[6] + "\n")
     fhw.close()
     
@@ -75,7 +75,15 @@ def downloadData(options):
     cmd += f" 1> {options.output_directory}/outputs/raw_data_download.output "
     cmd += f" 2> {options.output_directory}/errors/raw_data_download.error "
     os.system(cmd)
-
+    
+    # Move all files to the temporary directory
+    fhr = open(options.sra_list_to_be_downloaded,"r")
+    for line in fhr:
+        sra = line.strip()
+        cmd = f"mv {options.output_directory}/raw_data/{sra}* {options.temp_directory}/ "
+        os.system(cmd)
+    fhr.close()
+    
 def configureLogger(options):
     if os.path.exists(options.logfilename)==True:
         os.system(f"rm {options.logfilename}")
@@ -150,18 +158,7 @@ def main():
     if os.path.exists(f"{options.output_directory}/star_index/genomeParameters.txt")==False:
         os.system(cmd)
         logging.info(f"STAR index generation is complete")
-        
-    """##################################################################################################
-    # Merge read pairs to form one file
-    ##################################################################################################
-    list_of_commands = []
-    for Assay_Type in options.metadata_expanded:
-        for row in options.metadata_expanded[Assay_Type]:
-            list_of_commands.append([options,row[6]])
-    
-    pool.map(mergeReadPairs,list_of_commands)
-    logging.info(f"Merge complete")
-    """       
+       
     ##################################################################################################
     # Prepare metadata for alignemnt
     # A single .csv file will be prepared for both SE and PE samples
@@ -206,6 +203,7 @@ def main():
     cmd += f" --input_location {options.output_directory}/raw_data "
     cmd += f" --cpu {options.cpu} "
     cmd += f" --num_times {options.num_times} "
+    cmd += f" --temp_directory {options.temp_directory} "
     cmd += f" 1> {options.output_directory}/outputs/star_alignment.output "
     cmd += f" 2> {options.output_directory}/errors/star_alignment.error "
     os.system(cmd)
