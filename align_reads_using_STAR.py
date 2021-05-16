@@ -212,7 +212,7 @@ def main():
     
     mapSamplesToReference(options)
     
-    convertBamToSam(options)
+    #convertBamToSam(options)
     
     #compileDurationOfExecutionFile(options)
 
