@@ -120,7 +120,7 @@ def mapSamplesToReference(options):
                 cmd += f" {options.output_directory}/{sra}_{layout}.* "
                 cmd += f" {options.temp_directory}/"
                 os.system(cmd)
-                
+            
             files_to_be_removed=[]
             files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.out")
             files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.progress.out")
