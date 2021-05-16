@@ -51,7 +51,7 @@ def mapSamplesToReference(options):
     list_of_all_commands = []
     for row in options.metadata:
         sra,layout,assay_type = row
-        
+        if os.path.exists(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.final.out")==True: continue 
         if layout == "PE":
             cmd  = f" cp "
             cmd += f" {options.temp_directory}/{sra}_1.fastq "
