@@ -124,7 +124,7 @@ def mapSamplesToReference(options):
                 cmd += f" {options.temp_directory}/"
                 os.system(cmd)
             
-            cmd = f"mv {options.output_directory}/{sra}_{iteration}_{layout}_Log.out {options.output_directory}/../outputs/ "
+            cmd = f"mv {options.output_directory}/{sra}_{iteration}_{layout}_Log.final.out {options.output_directory}/../outputs/ "
             os.system(cmd)
             
             files_to_be_removed=[]
