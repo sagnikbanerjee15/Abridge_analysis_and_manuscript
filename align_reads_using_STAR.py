@@ -101,7 +101,7 @@ def mapSamplesToReference(options):
             cmd += f"1> {options.output_directory}/{sra}_{iteration}_{layout}.output "
             cmd += f"1> {options.output_directory}/{sra}_{iteration}_{layout}.error "
 
-            if os.path.exists(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.final.out")==False: 
+            if os.path.exists(f"{options.output_directory}/../outputs/{sra}_{iteration}_{layout}_Log.final.out")==False: 
                 list_of_all_commands.append([cmd,"dummy"])
                 os.system(cmd)
             
