@@ -50,35 +50,36 @@ def mapSamplesToReference(options):
     pool = multiprocessing.Pool(processes=int(options.cpu))
     os.system("mkdir -p "+options.output_directory)
     list_of_all_commands = []
-    for row in options.metadata:
-        sra,layout,assay_type = row
-        flag=0
-        for iteration in range(int(options.num_times)):
-            if os.path.exists(f"{options.output_directory}/{sra}_{layout}.bam")==False or os.path.exists(f"{options.output_directory}/{sra}_{layout}.sam")==False:
-                flag=1
-                break
-        if flag==0:continue 
-        if layout == "PE":
-            cmd  = f" cp "
-            cmd += f" {options.temp_directory}/{sra}_1.fastq "
-            cmd += f" {options.input_location}/ "
-            if os.path.exists(f"{options.input_location}/raw_data/{sra}_1.fastq")==False:
-                os.system(cmd)
+    for iteration in range(int(options.num_times)):
+        for row in options.metadata:
+            sra,layout,assay_type = row
+            flag=0
+            for iteration in range(int(options.num_times)):
+                if os.path.exists(f"{options.output_directory}/{sra}_{layout}_{iteration}.error ")==False:
+                    flag=1
+                    break
+            if flag==0:continue 
+            if layout == "PE":
+                cmd  = f" cp "
+                cmd += f" {options.temp_directory}/{sra}_1.fastq "
+                cmd += f" {options.input_location}/ "
+                if os.path.exists(f"{options.input_location}/raw_data/{sra}_1.fastq")==False:
+                    os.system(cmd)
+                
+                cmd  = f" cp "
+                cmd += f" {options.temp_directory}/{sra}_2.fastq "
+                cmd += f" {options.input_location}/ "
+                if os.path.exists(f"{options.input_location}/raw_data/{sra}_2.fastq")==False:
+                    os.system(cmd)
+            else:
+                cmd  = f" cp "
+                cmd += f" {options.temp_directory}/{sra}_0.fastq "
+                cmd += f" {options.input_location}/ "
+                if os.path.exists(f"{options.input_location}/raw_data/{sra}_0.fastq")==False:
+                    os.system(cmd)
             
-            cmd  = f" cp "
-            cmd += f" {options.temp_directory}/{sra}_2.fastq "
-            cmd += f" {options.input_location}/ "
-            if os.path.exists(f"{options.input_location}/raw_data/{sra}_2.fastq")==False:
-                os.system(cmd)
-        else:
-            cmd  = f" cp "
-            cmd += f" {options.temp_directory}/{sra}_0.fastq "
-            cmd += f" {options.input_location}/ "
-            if os.path.exists(f"{options.input_location}/raw_data/{sra}_0.fastq")==False:
-                os.system(cmd)
+            files_to_be_removed=[]
         
-        files_to_be_removed=[]
-        for iteration in range(int(options.num_times)):
             if assay_type=="RNA-Seq":
                 cmd  = f"(/usr/bin/time --verbose STAR "
                 cmd += f" --runThreadN 1 " # always run with one CPU
