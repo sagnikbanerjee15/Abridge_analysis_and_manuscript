@@ -271,7 +271,7 @@ def main():
     cmd += f" --metadata {options.output_directory}/metadata_for_alignment.csv "
     cmd += f" --output_directory {options.output_directory}/alignments "
     cmd += f" --star_genome_index {options.output_directory}/star_index "
-    cmd += f" --hisat2_index {options.output_directory}/hisat_index "
+    cmd += f" --hisat2_index {options.output_directory}/hisat2_index "
     cmd += f" --input_location {options.output_directory}/raw_data "
     cmd += f" --cpu 1 "
     cmd += f" --num_times {options.num_times} "
