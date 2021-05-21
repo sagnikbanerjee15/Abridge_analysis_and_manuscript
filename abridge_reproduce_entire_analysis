@@ -153,10 +153,10 @@ def main():
     ##################################################################################################
     # Downloading the raw data from NCBI
     ##################################################################################################
-    """
+    
     downloadData(options)
     logging.info(f"Data download from NCBI is complete")
-    """
+    
     ##################################################################################################
     # Construct STAR index
     ##################################################################################################
@@ -221,13 +221,14 @@ def main():
         cmd += f" -ss HS25 "
         cmd += f" -i {options.genome}"
         cmd += f" --paired "
-        cmd += f" -fcov 10 "
+        cmd += f" --fcov 10 "
         cmd += f" --insRate  0.0001 "
         cmd += f" --insRate2 0.0002 "
         cmd += f" --delRate  0.0001 "
         cmd += f" --delRate2 0.0002 "
         cmd += f" --maxIndel 10 "
         cmd += f" --len 150 "
+        cmd += f" --sdev 50 "
         cmd += f" --mflen 500 " # the mean size of DNA/RNA fragments for paired-end simulations
         cmd += f" --noALN " # do not output ALN alignment file
         cmd += f" --out {options.output_directory}/raw_data/sim_data_{iteration} "
