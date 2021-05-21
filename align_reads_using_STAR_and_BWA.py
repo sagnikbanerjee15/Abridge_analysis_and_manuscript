@@ -158,7 +158,7 @@ def mapSamplesToReference(options):
                     cmd += f" -1 {options.input_location}/{sra}_0.fastq "
                 else:
                     cmd += f" -2 {options.input_location}/{sra}_1.fastq {options.input_location}/{sra}_2.fastq "
-                cmd += f" --no-spliced-alignemnt "
+                cmd += f" --no-spliced-alignment "
                 cmd += ") "
                 cmd += f" 1> {options.output_directory}/{sra}_{layout}_{iteration}.output "
                 cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}.error "
@@ -206,10 +206,10 @@ def mapSamplesToReference(options):
             else:
                 files_to_be_removed.append(f"{options.input_location}/{sra}_1.fastq")
                 files_to_be_removed.append(f"{options.input_location}/{sra}_2.fastq")
-            
+            """
             for file in files_to_be_removed:
                 os.system("rm -f "+file)
-            
+            """
             
 
 def mergePairedEndedSamplesIntoSingleEnded(eachinput):
