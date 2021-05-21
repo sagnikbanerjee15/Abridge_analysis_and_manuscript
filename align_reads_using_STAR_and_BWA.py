@@ -54,7 +54,7 @@ def mapSamplesToReference(options):
         sra,layout,assay_type = row
         flag=0
         for iteration in range(int(options.num_times)):
-            if os.path.exists(f"{options.output_directory}/{sra}_{layout}.bam")==False and os.path.exists(f"{options.output_directory}/{sra}_{layout}.sam")==False:
+            if os.path.exists(f"{options.output_directory}/{sra}_{layout}.bam")==False or os.path.exists(f"{options.output_directory}/{sra}_{layout}.sam")==False:
                 flag=1
                 break
         if flag==0:continue 

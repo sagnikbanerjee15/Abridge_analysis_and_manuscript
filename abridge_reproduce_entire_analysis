@@ -278,6 +278,7 @@ def main():
     os.system(cmd)
     logging.info(f"Aligning reads with STAR and BWA is complete")
     
+    return
     ##################################################################################################
     # Compress alignments with Abridge
     ##################################################################################################
