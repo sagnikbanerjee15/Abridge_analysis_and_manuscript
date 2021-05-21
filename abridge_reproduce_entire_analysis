@@ -198,7 +198,7 @@ def main():
         cmd += f" --mflen 500 " # the mean size of DNA/RNA fragments for paired-end simulations
         cmd += f" --noALN " # do not output ALN alignment file
         cmd += f" --out {options.output_directory}/raw_data/sim_data_{iteration}_ "
-        if os.path.exists(f"{options.output_directory}/raw_data/sim_data_{iteration}_1.fastq")==False and os.path.exists(f"{options.output_directory}/raw_data/sim_data_{iteration}_2.fastq")==False:
+        if os.path.exists(f"{options.temp_directory}/sim_data_{iteration}_1.fastq")==False and os.path.exists(f"{options.temp_directory}/sim_data_{iteration}_2.fastq")==False:
             os.system(cmd)
             cmd = f"mv {options.output_directory}/raw_data/sim_data_{iteration}_1.fq {options.output_directory}/raw_data/sim_data_{iteration}_1.fastq"
             os.system(cmd)
@@ -261,7 +261,6 @@ def main():
         options.metadata_expanded[Assay_Type].extend(add_these_back_to_metadata_expanded[Assay_Type])
     logging.info(f"Metadata preparation for alignment is complete")
     
-    return
     ##################################################################################################
     # Map reads with STAR and BWA
     ##################################################################################################
