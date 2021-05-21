@@ -235,7 +235,7 @@ def main():
                               row[6]  
                 ])+"\n")
         add_these_back_to_metadata_expanded["DNA-Seq"].append([row[0],row[1],"SE",row[3],row[4],row[5],row[6]])
-    fhw.close()
+    
     for Assay_Type in options.metadata_expanded:
         add_these_back_to_metadata_expanded[Assay_Type] = []
         for row in options.metadata_expanded[Assay_Type]:
@@ -257,6 +257,8 @@ def main():
                               row[6]  
                 ])+"\n")
             add_these_back_to_metadata_expanded[Assay_Type].append([row[0],row[1],"SE",row[3],row[4],row[5],row[6]])
+    fhw.close()
+    
     for Assay_Type in options.metadata_expanded:
         options.metadata_expanded[Assay_Type].extend(add_these_back_to_metadata_expanded[Assay_Type])
     logging.info(f"Metadata preparation for alignment is complete")
