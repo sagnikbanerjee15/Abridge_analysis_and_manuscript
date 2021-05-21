@@ -82,7 +82,7 @@ def mapSamplesToReference(options):
         
             if assay_type=="RNA-Seq":
                 cmd  = f"(/usr/bin/time --verbose STAR "
-                cmd += f" --runThreadN 1 " # always run with one CPU
+                cmd += f" --runThreadN {options.cpu} " 
                 cmd += f" --genomeDir "+options.star_genome_index
                 cmd += f" --outSAMtype BAM SortedByCoordinate "
                 cmd += f" --outFilterMultimapNmax 10000 " 
@@ -134,23 +134,6 @@ def mapSamplesToReference(options):
                 files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.final.out")
                 
             else:
-                """
-                cmd  = f"(/usr/bin/time --verbose bwa mem "
-                cmd += f" -t 1 " # Number of threads
-                cmd += f" -k 50 " # Minimum seed length 
-                cmd += f" -c 1000 "
-                cmd += f" -o {options.output_directory}/{sra}_{layout}_{iteration}.sam "
-                cmd += f" -v 1 "
-                cmd += f" {options.bwa_genome_index} "
-                if layout=="SE":
-                    cmd += f" {options.input_location}/{sra}_0.fastq "
-                else:
-                    cmd += f" {options.input_location}/{sra}_1.fastq {options.input_location}/{sra}_2.fastq "
-                cmd += f") "
-                cmd += f" 1> {options.output_directory}/{sra}_{layout}_{iteration}.output "
-                cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}.error "
-                os.system(cmd)
-                """
                 cmd  = f"(/usr/bin/time --verbose hisat2 "
                 cmd += f" -x  {options.hisat2_index} "
                 cmd += f" -S {options.output_directory}/{sra}_{layout}_{iteration}.sam "
@@ -159,6 +142,7 @@ def mapSamplesToReference(options):
                 else:
                     cmd += f" -1 {options.input_location}/{sra}_1.fastq -2 {options.input_location}/{sra}_2.fastq "
                 cmd += f" --no-spliced-alignment "
+                cmd += f" -p  {options.cpu}"
                 cmd += ") "
                 cmd += f" 1> {options.output_directory}/{sra}_{layout}_{iteration}.output "
                 cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}.error "
