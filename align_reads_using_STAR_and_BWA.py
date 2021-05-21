@@ -161,6 +161,8 @@ def mapSamplesToReference(options):
                 cmd += f" --no-spliced-alignemnt "
                 cmd += f" 1> {options.output_directory}/{sra}_{layout}_{iteration}.output "
                 cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}.error "
+                print(cmd)
+                sys.out.flush()
                 os.system(cmd)
                 
                 cmd  = f"samtools view "
