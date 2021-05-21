@@ -236,6 +236,26 @@ def main():
                               row[6]  
                 ])+"\n")
             add_these_back_to_metadata_expanded[Assay_Type].append([row[0],row[1],"SE",row[3],row[4],row[5],row[6]])
+    for iteration in range(5):
+        row = ["Arabidopsis thaliana","simulated","PE","DNA-Seq","2021-05-21","151+151",f"sim_data_{iteration}"]
+        fhw.write(",".join([row[0], #organism
+                              row[1], #tissue
+                              row[2], #Layout
+                              row[3], #Assay_type
+                              row[4],
+                              row[5],
+                              row[6]  
+                ])+"\n")
+        add_these_back_to_metadata_expanded[Assay_Type].append([row[0],row[1],"PE",row[3],row[4],row[5],row[6]])
+        fhw.write(",".join([row[0],
+                              row[1],
+                              "SE",
+                              row[3],
+                              row[4],
+                              row[5],
+                              row[6]  
+                ])+"\n")
+        add_these_back_to_metadata_expanded[Assay_Type].append([row[0],row[1],"SE",row[3],row[4],row[5],row[6]])
     fhw.close()
     for Assay_Type in options.metadata_expanded:
         options.metadata_expanded[Assay_Type].extend(add_these_back_to_metadata_expanded[Assay_Type])
