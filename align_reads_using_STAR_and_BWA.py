@@ -87,7 +87,7 @@ def mapSamplesToReference(options):
                 cmd += f" --outSAMtype BAM SortedByCoordinate "
                 cmd += f" --outFilterMultimapNmax 10000 " 
                 cmd += f" --outFilterMismatchNmax 25  " 
-                cmd += f" --outBAMsortingThreadN 1 " # Use a single CPU for sorting
+                cmd += f" --outBAMsortingThreadN {options.cpu} " # Use a single CPU for sorting
                 cmd += f" --limitBAMsortRAM 107374182400" # 100 GB
                 cmd += f" --outFilterScoreMinOverLread 0.75 "
                 cmd += f" --outFilterMatchNminOverLread 0.75 "
@@ -172,7 +172,7 @@ def mapSamplesToReference(options):
                     cmd = f"mv {options.output_directory}/{sra}_{layout}_{iteration}_sorted.bam {options.output_directory}/{sra}_{layout}.bam "
                     os.system(cmd)
                     
-                    cmd = f"samtools view -@ {options.cpu} -h {options.output_directory}/{sra}_{layout}.bam > {options.output_directory}/{sra}_{layout}.sam"
+                    cmd = f"samtools view -h -@ {options.cpu} {options.output_directory}/{sra}_{layout}.bam > {options.output_directory}/{sra}_{layout}.sam"
                     os.system(cmd)
                     
                     cmd  = f" mv "
