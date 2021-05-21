@@ -213,6 +213,27 @@ def main():
     logging.info(f"Metadata preparation for alignment is complete")
     
     ##################################################################################################
+    # Simulate DNA-Seq reads with ART
+    ##################################################################################################
+    for iteration in range(5):
+        cmd  = f" art_illumina "
+        cmd += f" -ss HS25 "
+        cmd += f" -i {options.genome}"
+        cmd += f" --paired "
+        cmd += f" -fcov 10 "
+        cmd += f" --insRate  0.0001 "
+        cmd += f" --insRate2 0.0002 "
+        cmd += f" --delRate  0.0001 "
+        cmd += f" --delRate2 0.0002 "
+        cmd += f" --maxIndel 10 "
+        cmd += f" --len 150 "
+        cmd += f" --mflen 500 " # the mean size of DNA/RNA fragments for paired-end simulations
+        cmd += f" --noALN " # do not output ALN alignment file
+        cmd += f" --out {options.output_directory}/raw_data/sim_data_{iteration} "
+        if os.path.exists(f"{options.output_directory}/raw_data/sim_data_{iteration}")==False:
+            os.system(cmd)
+    return
+    ##################################################################################################
     # Map reads with STAR and BWA
     ##################################################################################################
     cmd  = "align_reads_using_STAR_and_BWA.py "
