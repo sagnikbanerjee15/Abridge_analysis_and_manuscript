@@ -117,7 +117,7 @@ def mapSamplesToReference(options):
                     
                     # Convert to sam file
                     cmd  = f" samtools "
-                    cmd += f" view -h "
+                    cmd += f" view -h -@ {options.cpu} "
                     cmd += f" {options.output_directory}/{sra}_{layout}.bam "
                     cmd += f" > {options.output_directory}/{sra}_{layout}.sam "
                     os.system(cmd)
@@ -150,12 +150,14 @@ def mapSamplesToReference(options):
                 
                 cmd  = f"samtools view "
                 cmd += f" -Sbh "
+                cmd += f" -@ {options.cpu} "
                 cmd += f" {options.output_directory}/{sra}_{layout}_{iteration}.sam "
                 cmd += f" > {options.output_directory}/{sra}_{layout}_{iteration}.bam "
                 cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}_converting_sam_to_bam.error"
                 os.system(cmd)
                 
                 cmd  = f" samtools sort "
+                cmd += f" -@ {options.cpu} "
                 cmd += f" {options.output_directory}/{sra}_{layout}_{iteration}.bam "
                 cmd += f" -o {options.output_directory}/{sra}_{layout}_{iteration}_sorted.bam "
                 cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}_sorting_bam.error "
@@ -170,7 +172,7 @@ def mapSamplesToReference(options):
                     cmd = f"mv {options.output_directory}/{sra}_{layout}_{iteration}_sorted.bam {options.output_directory}/{sra}_{layout}.bam "
                     os.system(cmd)
                     
-                    cmd = f"samtools view -h {options.output_directory}/{sra}_{layout}.bam > {options.output_directory}/{sra}_{layout}.sam"
+                    cmd = f"samtools view -@ {options.cpu} -h {options.output_directory}/{sra}_{layout}.bam > {options.output_directory}/{sra}_{layout}.sam"
                     os.system(cmd)
                     
                     cmd  = f" mv "
