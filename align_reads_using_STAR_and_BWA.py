@@ -155,9 +155,9 @@ def mapSamplesToReference(options):
                 cmd += f" -x  {options.hisat2_index} "
                 cmd += f" -S {options.output_directory}/{sra}_{layout}_{iteration}.sam "
                 if layout=="SE":
-                    cmd += f" -1 {options.input_location}/{sra}_0.fastq "
+                    cmd += f" -U {options.input_location}/{sra}_0.fastq "
                 else:
-                    cmd += f" -2 {options.input_location}/{sra}_1.fastq {options.input_location}/{sra}_2.fastq "
+                    cmd += f" -1 {options.input_location}/{sra}_1.fastq -2 {options.input_location}/{sra}_2.fastq "
                 cmd += f" --no-spliced-alignment "
                 cmd += ") "
                 cmd += f" 1> {options.output_directory}/{sra}_{layout}_{iteration}.output "
