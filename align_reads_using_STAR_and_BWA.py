@@ -206,10 +206,10 @@ def mapSamplesToReference(options):
             else:
                 files_to_be_removed.append(f"{options.input_location}/{sra}_1.fastq")
                 files_to_be_removed.append(f"{options.input_location}/{sra}_2.fastq")
-            """
+            
             for file in files_to_be_removed:
                 os.system("rm -f "+file)
-            """
+            
             
 
 def mergePairedEndedSamplesIntoSingleEnded(eachinput):
