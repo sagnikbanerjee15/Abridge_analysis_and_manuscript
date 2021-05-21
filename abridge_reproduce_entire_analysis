@@ -187,7 +187,7 @@ def main():
         cmd += f" -ss HS25 "
         cmd += f" -i {options.genome}"
         cmd += f" --paired "
-        cmd += f" --fcov 25 "
+        cmd += f" --fcov 50 "
         cmd += f" --insRate  0.0001 "
         cmd += f" --insRate2 0.0002 "
         cmd += f" --delRate  0.0001 "
