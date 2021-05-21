@@ -134,6 +134,7 @@ def mapSamplesToReference(options):
                 files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.final.out")
                 
             else:
+                """
                 cmd  = f"(/usr/bin/time --verbose bwa mem "
                 cmd += f" -t 1 " # Number of threads
                 cmd += f" -k 50 " # Minimum seed length 
@@ -148,6 +149,16 @@ def mapSamplesToReference(options):
                 cmd += f") "
                 cmd += f" 1> {options.output_directory}/{sra}_{layout}_{iteration}.output "
                 cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}.error "
+                os.system(cmd)
+                """
+                cmd  = f"(/usr/bin/time --verbose hisat2 "
+                cmd += f" -x  {options.output_directory}/hisat2_index "
+                cmd += f" -S {options.output_directory}/{sra}_{layout}_{iteration}.sam "
+                if layout=="SE":
+                    cmd += f" -1 {options.input_location}/{sra}_0.fastq "
+                else:
+                    cmd += f" -2 {options.input_location}/{sra}_1.fastq {options.input_location}/{sra}_2.fastq "
+                cmd += f" --no-spliced-alignemnt "
                 os.system(cmd)
                 
                 cmd  = f"samtools view "

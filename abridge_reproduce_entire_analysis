@@ -170,12 +170,13 @@ def main():
         logging.info(f"STAR index generation is complete")
     
     ##################################################################################################
-    # Construct BWA-MEM index
+    # Construct HISAT2 index
     ##################################################################################################
-    cmd  = f"bwa index "
-    cmd += f" -p {options.output_directory}/bwa_index "
+    cmd  = f"hisat2-build "
+    cmd += f" -p {options.cpu} "
     cmd += f" {options.genome} "
-    if os.path.exists(f"{options.output_directory}/bwa_index.bwt")==False:
+    cmd += f" {options.output_directory}/hisat2_index "
+    if os.path.exists(f"{options.output_directory}/hisat2_index")==False:
         os.system(cmd)
        
     ##################################################################################################
