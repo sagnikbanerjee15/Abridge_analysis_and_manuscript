@@ -63,19 +63,19 @@ def mapSamplesToReference(options):
                 cmd  = f" cp "
                 cmd += f" {options.temp_directory}/{sra}_1.fastq "
                 cmd += f" {options.input_location}/ "
-                if os.path.exists(f"{options.input_location}/raw_data/{sra}_1.fastq")==False:
+                if os.path.exists(f"{options.input_location}/{sra}_1.fastq")==False:
                     os.system(cmd)
                 
                 cmd  = f" cp "
                 cmd += f" {options.temp_directory}/{sra}_2.fastq "
                 cmd += f" {options.input_location}/ "
-                if os.path.exists(f"{options.input_location}/raw_data/{sra}_2.fastq")==False:
+                if os.path.exists(f"{options.input_location}/{sra}_2.fastq")==False:
                     os.system(cmd)
             else:
                 cmd  = f" cp "
                 cmd += f" {options.temp_directory}/{sra}_0.fastq "
                 cmd += f" {options.input_location}/ "
-                if os.path.exists(f"{options.input_location}/raw_data/{sra}_0.fastq")==False:
+                if os.path.exists(f"{options.input_location}/{sra}_0.fastq")==False:
                     os.system(cmd)
             
             files_to_be_removed=[]
@@ -159,6 +159,8 @@ def mapSamplesToReference(options):
                 else:
                     cmd += f" -2 {options.input_location}/{sra}_1.fastq {options.input_location}/{sra}_2.fastq "
                 cmd += f" --no-spliced-alignemnt "
+                cmd += f" 1> {options.output_directory}/{sra}_{layout}_{iteration}.output "
+                cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}.error "
                 os.system(cmd)
                 
                 cmd  = f"samtools view "
