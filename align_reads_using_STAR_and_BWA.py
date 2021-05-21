@@ -159,10 +159,9 @@ def mapSamplesToReference(options):
                 else:
                     cmd += f" -2 {options.input_location}/{sra}_1.fastq {options.input_location}/{sra}_2.fastq "
                 cmd += f" --no-spliced-alignemnt "
+                cmd += ") "
                 cmd += f" 1> {options.output_directory}/{sra}_{layout}_{iteration}.output "
                 cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}.error "
-                print(cmd)
-                sys.out.flush()
                 os.system(cmd)
                 
                 cmd  = f"samtools view "
