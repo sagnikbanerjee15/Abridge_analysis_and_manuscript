@@ -17,7 +17,7 @@ def parseCommandLineArguments():
     required_named.add_argument("--metadata_filename","-md",help="Enter the metadata file to generate alignments",required=True)
     required_named.add_argument("--output_directory","-o",help="Enter the output directory",required=True)
     required_named.add_argument("--star_genome_index","-i",help="Enter the location of the STAR index",required=True)
-    required_named.add_argument("--bwa_genome_index","-i",help="Enter the location of the BWA index",required=True)
+    required_named.add_argument("--bwa_genome_index","-b",help="Enter the location of the BWA index",required=True)
     required_named.add_argument("--input_location","-loc",help="Enter the location of the raw fastq files. For this program all fastq files must be located under the same directory",required=True)
     
     optional_named.add_argument("--cpu","-n",help="Enter the number of CPUs. Please note that all alignments will be conducted using a single CPU. This argument will control how many parallel alignments can be lanuched", default=1)
