@@ -17,6 +17,7 @@ def parseCommandLineArguments():
     required_named.add_argument("--metadata_filename","-md",help="Enter the metadata file to generate alignments",required=True)
     required_named.add_argument("--output_directory","-o",help="Enter the output directory",required=True)
     required_named.add_argument("--star_genome_index","-i",help="Enter the location of the STAR index",required=True)
+    required_named.add_argument("--bwa_genome_index","-i",help="Enter the location of the BWA index",required=True)
     required_named.add_argument("--input_location","-loc",help="Enter the location of the raw fastq files. For this program all fastq files must be located under the same directory",required=True)
     
     optional_named.add_argument("--cpu","-n",help="Enter the number of CPUs. Please note that all alignments will be conducted using a single CPU. This argument will control how many parallel alignments can be lanuched", default=1)
@@ -51,7 +52,12 @@ def mapSamplesToReference(options):
     list_of_all_commands = []
     for row in options.metadata:
         sra,layout,assay_type = row
-         
+        flag=0
+        for iteration in range(int(options.num_times)):
+            if os.path.exists(f"{options.output_directory}/{sra}_{layout}.bam")==False and os.path.exists(f"{options.output_directory}/{sra}_{layout}.sam")==False:
+                flag=1
+                break
+        if flag==0:continue 
         if layout == "PE":
             cmd  = f" cp "
             cmd += f" {options.temp_directory}/{sra}_1.fastq "
@@ -71,67 +77,115 @@ def mapSamplesToReference(options):
             if os.path.exists(f"{options.input_location}/raw_data/{sra}_0.fastq")==False:
                 os.system(cmd)
         
+        files_to_be_removed=[]
         for iteration in range(int(options.num_times)):
-            cmd  = f"STAR "
-            cmd += f" --runThreadN 1 " # always run with one CPU
-            cmd += f" --genomeDir "+options.star_genome_index
-            cmd += f" --outSAMtype BAM SortedByCoordinate "
-            cmd += f" --outFilterMultimapNmax 10000 " 
-            cmd += f" --outFilterMismatchNmax 25  " 
-            cmd += f" --outBAMsortingThreadN 1 " # Use a single CPU for sorting
-            cmd += f" --limitBAMsortRAM 107374182400" # 100 GB
-            cmd += f" --outFilterScoreMinOverLread 0.75 "
-            cmd += f" --outFilterMatchNminOverLread 0.75 "
-            cmd += f" --outSAMattributes NH HI AS nM NM MD jM jI XS "
-            cmd += f" --outSAMunmapped Within "
-            #cmd+=" --readFilesCommand zcat "
-            #cmd+=" --genomeLoad Remove "
-            if layout=="SE":
-                cmd += f" --readFilesIn {options.input_location}/{sra}_0.fastq"
-                cmd += f" --outFileNamePrefix {options.output_directory}/{sra}_{iteration}_SE_"
-            else:
-                cmd += f" --readFilesIn {options.input_location}/{sra}_1.fastq {options.input_location}/{sra}_2.fastq"
-                cmd += f" --outFileNamePrefix {options.output_directory}/{sra}_{iteration}_PE_"
-            if assay_type == "RNA-Seq":
+            if assay_type=="RNA-Seq":
+                cmd  = f"(/usr/bin/time --verbose STAR "
+                cmd += f" --runThreadN 1 " # always run with one CPU
+                cmd += f" --genomeDir "+options.star_genome_index
+                cmd += f" --outSAMtype BAM SortedByCoordinate "
+                cmd += f" --outFilterMultimapNmax 10000 " 
+                cmd += f" --outFilterMismatchNmax 25  " 
+                cmd += f" --outBAMsortingThreadN 1 " # Use a single CPU for sorting
+                cmd += f" --limitBAMsortRAM 107374182400" # 100 GB
+                cmd += f" --outFilterScoreMinOverLread 0.75 "
+                cmd += f" --outFilterMatchNminOverLread 0.75 "
+                cmd += f" --outSAMattributes NH HI AS nM NM MD jM jI XS "
+                cmd += f" --outSAMunmapped Within "
+                if layout=="SE":
+                    cmd += f" --readFilesIn {options.input_location}/{sra}_0.fastq"
+                else:
+                    cmd += f" --readFilesIn {options.input_location}/{sra}_1.fastq {options.input_location}/{sra}_2.fastq"
+                cmd += f" --outFileNamePrefix {options.output_directory}/{sra}_{layout}_{iteration}_"
                 cmd += f" --alignIntronMin 20  "
                 cmd += f" --alignIntronMax 100000 "
+                cmd += f") "
+                cmd += f" 1> {options.output_directory}/{sra}_{layout}_{iteration}.output "
+                cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}.error "
+    
+                if os.path.exists(f"{options.temp_directory}/{sra}_{layout}.bam")==False and os.path.exists(f"{options.temp_directory}/{sra}_{layout}.sam")==False: 
+                    list_of_all_commands.append([cmd,"dummy"])
+                    os.system(cmd)
+                
+                if iteration==0:
+                    if os.path.exists(f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam")==False and os.path.exists(f"{options.output_directory}/{sra}_{layout}.bam")==True:continue
+                    cmd  = f"mv "
+                    cmd += f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam "
+                    cmd += f"{options.output_directory}/{sra}_{layout}.bam "
+                    os.system(cmd)
+                    
+                    # Convert to sam file
+                    cmd  = f" samtools "
+                    cmd += f" view -h "
+                    cmd += f" {options.output_directory}/{sra}_{layout}.bam "
+                    cmd += f" > {options.output_directory}/{sra}_{layout}.sam "
+                    os.system(cmd)
+                    
+                    cmd  = f" mv "
+                    cmd += f" {options.output_directory}/{sra}_{layout}.* "
+                    cmd += f" {options.temp_directory}/"
+                    os.system(cmd)
+                
+                files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.out")
+                files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.progress.out")
+                files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_SJ.out.tab")
+                files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam")
+                files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.final.out")
+                
             else:
-                cmd += f" --alignIntronMin 1 "
-                cmd += f" --alignIntronMax 1 "
-            cmd += f"1> {options.output_directory}/{sra}_{iteration}_{layout}.output "
-            cmd += f"1> {options.output_directory}/{sra}_{iteration}_{layout}.error "
-
-            if os.path.exists(f"{options.output_directory}/../outputs/{sra}_{iteration}_{layout}_Log.final.out")==False: 
-                list_of_all_commands.append([cmd,"dummy"])
-                os.system(cmd)
-            
-            if iteration==0:
-                if os.path.exists(f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam ")==False and os.path.exists(f"{options.output_directory}/{sra}_{layout}.bam")==True:continue
-                cmd  = f"mv "
-                cmd += f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam "
-                cmd += f"{options.output_directory}/{sra}_{layout}.bam "
-                os.system(cmd)
-                
-                # Convert to sam file
-                cmd  = f" samtools "
-                cmd += f" view -h "
-                cmd += f" {options.output_directory}/{sra}_{layout}.bam "
-                cmd += f" > {options.output_directory}/{sra}_{layout}.sam "
+                cmd  = f"(/usr/bin/time --verbose bwa mem "
+                cmd += f" -t 1 " # Number of threads
+                cmd += f" -k 50 " # Minimum seed length 
+                cmd += f" -c 1000 "
+                cmd += f" -o {options.output_directory}/{sra}_{layout}_{iteration}.sam "
+                cmd += f" -v 1 "
+                cmd += f" {options.bwa_genome_index} "
+                if layout=="SE":
+                    cmd += f" {options.input_location}/{sra}_0.fastq "
+                else:
+                    cmd += f" {options.input_location}/{sra}_1.fastq {options.input_location}/{sra}_2.fastq "
+                cmd += f") "
+                cmd += f" 1> {options.output_directory}/{sra}_{layout}_{iteration}.output "
+                cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}.error "
                 os.system(cmd)
                 
-                cmd  = f" mv "
-                cmd += f" {options.output_directory}/{sra}_{layout}.* "
-                cmd += f" {options.temp_directory}/"
+                cmd  = f"samtools view "
+                cmd += f" -Sbh "
+                cmd += f" {options.output_directory}/{sra}_{layout}_{iteration}.sam "
+                cmd += f" > {options.output_directory}/{sra}_{layout}_{iteration}.bam "
+                cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}_converting_sam_to_bam.error"
                 os.system(cmd)
+                
+                cmd  = f" samtools sort "
+                cmd += f" {options.output_directory}/{sra}_{layout}_{iteration}.bam "
+                cmd += f" -o {options.output_directory}/{sra}_{layout}_{iteration}_sorted.bam "
+                cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}_sorting_bam.error "
+                os.system(cmd)
+                
+               
+                files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}.sam")
+                files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}.bam")
+                files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}_sorted.bam")
+                
+                if iteration==0:
+                    cmd = f"mv {options.output_directory}/{sra}_{layout}_{iteration}_sorted.bam {options.output_directory}/{sra}_{layout}.bam "
+                    os.system(cmd)
+                    
+                    cmd = f"samtools view -h {options.output_directory}/{sra}_{layout}.bam > {options.output_directory}/{sra}_{layout}.sam"
+                    os.system(cmd)
+                    
+                    cmd  = f" mv "
+                    cmd += f" {options.output_directory}/{sra}_{layout}.* "
+                    cmd += f" {options.temp_directory}/"
+                    os.system(cmd)
             
-            cmd = f"mv {options.output_directory}/{sra}_{iteration}_{layout}_Log.final.out {options.output_directory}/../outputs/ "
+            cmd = f"mv {options.output_directory}/{sra}_{layout}_{iteration}*.error {options.output_directory}/../errors/"
             os.system(cmd)
             
-            files_to_be_removed=[]
-            files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.out")
-            files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.progress.out")
-            files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_SJ.out.tab")
-            files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam")
+            cmd = f"mv {options.output_directory}/{sra}_{layout}_{iteration}*.output {options.output_directory}/../outputs/"
+            os.system(cmd)
+            
+            
             if layout == "SE":
                 files_to_be_removed.append(f"{options.input_location}/raw_data/{sra}_0.fastq")
             else:
@@ -140,7 +194,6 @@ def mapSamplesToReference(options):
             
             for file in files_to_be_removed:
                 os.system("rm -f "+file)
-    #pool.map(runCommand,list_of_all_commands)
             
             
 

@@ -132,7 +132,7 @@ def main():
     create_these_directories = [options.output_directory,
                                 options.temp_directory,
                                 f"{options.output_directory}/raw_data",
-                                f"{options.output_directory}/star_alignments",
+                                f"{options.output_directory}/alignments",
                                 f"{options.output_directory}/star_index",
                                 f"{options.output_directory}/abridge_compressed_files",
                                 f"{options.output_directory}/abridge_decompressed_files",
@@ -168,6 +168,15 @@ def main():
     if os.path.exists(f"{options.output_directory}/star_index/genomeParameters.txt")==False:
         os.system(cmd)
         logging.info(f"STAR index generation is complete")
+    
+    ##################################################################################################
+    # Construct BWA-MEM index
+    ##################################################################################################
+    cmd  = f"bwa index "
+    cmd += f" -p {options.output_directory}/bwa_index "
+    cmd += f" {options.genome} "
+    if os.path.exists(f"{options.output_directory}/bwa_index.bwt")==False:
+        os.system(cmd)
        
     ##################################################################################################
     # Prepare metadata for alignemnt
@@ -206,19 +215,20 @@ def main():
     ##################################################################################################
     # Map reads with STAR
     ##################################################################################################
-    cmd  = "align_reads_using_STAR.py "
+    cmd  = "align_reads_using_STAR_and_BWA.py "
     cmd += f" --metadata {options.output_directory}/metadata_for_alignment.csv "
-    cmd += f" --output_directory {options.output_directory}/star_alignments "
+    cmd += f" --output_directory {options.output_directory}/alignments "
     cmd += f" --star_genome_index {options.output_directory}/star_index "
+    cmd += f" --bwa_genome_index {options.output_directory}/bwa_index "
     cmd += f" --input_location {options.output_directory}/raw_data "
     cmd += f" --cpu {options.cpu} "
     cmd += f" --num_times {options.num_times} "
     cmd += f" --temp_directory {options.temp_directory} "
-    cmd += f" 1> {options.output_directory}/outputs/star_alignment.output "
-    cmd += f" 2> {options.output_directory}/errors/star_alignment.error "
+    cmd += f" 1> {options.output_directory}/outputs/alignment.output "
+    cmd += f" 2> {options.output_directory}/errors/alignment.error "
     os.system(cmd)
-    logging.info(f"Aligning reads with STAR is complete")
-    return
+    logging.info(f"Aligning reads with STAR and BWA is complete")
+    
     ##################################################################################################
     # Compress alignments with Abridge
     ##################################################################################################
@@ -227,7 +237,11 @@ def main():
             for row in options.metadata_expanded[Assay_Type]:
                 sra = row[6]
                 layout = row[2]
+                alignment_samfilename_in_temp = f"{options.temp_directory}/{sra}_{layout}.sam"
+                if os.path.exists(alignment_samfilename_in_temp) == False : continue
                 alignment_samfilename = f"{options.output_directory}/star_alignments/{sra}_{layout}.sam"
+                cmd = f"cp {alignment_samfilename_in_temp} {alignment_samfilename}"
+                os.system(cmd)
             
                 cmd  = f"(/usr/bin/time --verbose abridge "
                 cmd += f" --compress "
@@ -244,9 +258,6 @@ def main():
                 if os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.7z") == True and os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.br") == True : continue
                 logging.info(f"Running command - {cmd}")
                 os.system(cmd)
-                break
-            break
-        break
                 
     ##################################################################################################
     # Decompress alignments with Abridge
@@ -272,9 +283,6 @@ def main():
                 if os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.decompress.sam") == True : continue
                 logging.info(f"Running command - {cmd}")
                 os.system(cmd)
-                break
-            break
-        break
     
 
 if __name__ == "__main__":
