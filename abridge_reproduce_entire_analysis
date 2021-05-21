@@ -213,7 +213,7 @@ def main():
     logging.info(f"Metadata preparation for alignment is complete")
     
     ##################################################################################################
-    # Map reads with STAR
+    # Map reads with STAR and BWA
     ##################################################################################################
     cmd  = "align_reads_using_STAR_and_BWA.py "
     cmd += f" --metadata {options.output_directory}/metadata_for_alignment.csv "
@@ -221,7 +221,7 @@ def main():
     cmd += f" --star_genome_index {options.output_directory}/star_index "
     cmd += f" --bwa_genome_index {options.output_directory}/bwa_index "
     cmd += f" --input_location {options.output_directory}/raw_data "
-    cmd += f" --cpu {options.cpu} "
+    cmd += f" --cpu 1 "
     cmd += f" --num_times {options.num_times} "
     cmd += f" --temp_directory {options.temp_directory} "
     cmd += f" 1> {options.output_directory}/outputs/alignment.output "
