@@ -187,7 +187,7 @@ def main():
         cmd += f" -ss HS25 "
         cmd += f" -i {options.genome}"
         cmd += f" --paired "
-        cmd += f" --fcov 50 "
+        cmd += f" --fcov 100 "
         cmd += f" --insRate  0.0001 "
         cmd += f" --insRate2 0.0002 "
         cmd += f" --delRate  0.0001 "
@@ -204,7 +204,8 @@ def main():
             os.system(cmd)
             cmd = f"mv {options.output_directory}/raw_data/sim_data_{iteration}_2.fq {options.output_directory}/raw_data/sim_data_{iteration}_2.fastq"
             os.system(cmd)
-            
+            cmd = f"mv {options.output_directory}/raw_data/sim_data_{iteration}_*.fastq {options.temp_directory}/"
+            os.system(cmd)
        
     ##################################################################################################
     # Prepare metadata for alignemnt
