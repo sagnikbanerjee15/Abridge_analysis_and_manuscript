@@ -202,10 +202,10 @@ def mapSamplesToReference(options):
             
             
             if layout == "SE":
-                files_to_be_removed.append(f"{options.input_location}/raw_data/{sra}_0.fastq")
+                files_to_be_removed.append(f"{options.input_location}/{sra}_0.fastq")
             else:
-                files_to_be_removed.append(f"{options.input_location}/raw_data/{sra}_1.fastq")
-                files_to_be_removed.append(f"{options.input_location}/raw_data/{sra}_2.fastq")
+                files_to_be_removed.append(f"{options.input_location}/{sra}_1.fastq")
+                files_to_be_removed.append(f"{options.input_location}/{sra}_2.fastq")
             
             for file in files_to_be_removed:
                 os.system("rm -f "+file)
