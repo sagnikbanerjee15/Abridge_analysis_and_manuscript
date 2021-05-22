@@ -109,9 +109,9 @@ def mapSamplesToReference(options):
                     os.system(cmd)
                 
                 if iteration==0:
-                    if os.path.exists(f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam")==False and os.path.exists(f"{options.output_directory}/{sra}_{layout}.bam")==True:continue
+                    if os.path.exists(f"{options.output_directory}/{sra}_{layout}_{iteration}_Aligned.sortedByCoord.out.bam")==False and os.path.exists(f"{options.output_directory}/{sra}_{layout}.bam")==True:continue
                     cmd  = f"mv "
-                    cmd += f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam "
+                    cmd += f"{options.output_directory}/{sra}_{layout}_{iteration}_Aligned.sortedByCoord.out.bam "
                     cmd += f"{options.output_directory}/{sra}_{layout}.bam "
                     os.system(cmd)
                     
@@ -127,11 +127,11 @@ def mapSamplesToReference(options):
                     cmd += f" {options.temp_directory}/"
                     os.system(cmd)
                 
-                files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.out")
-                files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.progress.out")
-                files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_SJ.out.tab")
-                files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Aligned.sortedByCoord.out.bam")
-                files_to_be_removed.append(f"{options.output_directory}/{sra}_{iteration}_{layout}_Log.final.out")
+                files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}_Log.out")
+                files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}_Log.progress.out")
+                files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}_SJ.out.tab")
+                files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}_Aligned.sortedByCoord.out.bam")
+                files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}_Log.final.out")
                 
             else:
                 cmd  = f"(/usr/bin/time --verbose hisat2 "
