@@ -313,7 +313,7 @@ def main():
                 cmd += ")"
                 cmd += f" 1> {options.output_directory}/outputs/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration}.output "
                 cmd += f" 2> {options.output_directory}/errors/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration}.error " 
-                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
+                if os.path.exists(f"{alignment_samfilename_in_temp}/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{alignment_samfilename_in_temp}/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
                 
@@ -339,7 +339,7 @@ def main():
                 cmd += ")"
                 cmd += f" 1> {options.output_directory}/outputs/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration}.output "
                 cmd += f" 2> {options.output_directory}/errors/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration}.error " 
-                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
+                if os.path.exists(f"{alignment_samfilename_in_temp}/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{alignment_samfilename_in_temp}/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd) 
                 
@@ -364,7 +364,7 @@ def main():
                 cmd += ")"
                 cmd += f" 1> {options.output_directory}/outputs/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration}.output "
                 cmd += f" 2> {options.output_directory}/errors/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration}.error " 
-                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
+                if os.path.exists(f"{alignment_samfilename_in_temp}/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{alignment_samfilename_in_temp}/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
                 
@@ -390,7 +390,7 @@ def main():
                 cmd += ")"
                 cmd += f" 1> {options.output_directory}/outputs/compress_ignore_quality_scores_{sra}_{layout}_{iteration}.output "
                 cmd += f" 2> {options.output_directory}/errors/compress_ignore_quality_scores_{sra}_{layout}_{iteration}.error " 
-                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
+                if os.path.exists(f"{alignment_samfilename_in_temp}/compress_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{alignment_samfilename_in_temp}/compress_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
                 
@@ -417,7 +417,7 @@ def main():
                 cmd += ")"
                 cmd += f" 1> {options.output_directory}/outputs/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration}.output "
                 cmd += f" 2> {options.output_directory}/errors/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration}.error " 
-                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
+                if os.path.exists(f"{alignment_samfilename_in_temp}/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{alignment_samfilename_in_temp}/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
                     
@@ -446,7 +446,7 @@ def main():
                 cmd += ")"
                 cmd += f" 1> {options.output_directory}/outputs/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}.output "
                 cmd += f" 2> {options.output_directory}/errors/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}.error " 
-                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
+                if os.path.exists(f"{alignment_samfilename_in_temp}/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{alignment_samfilename_in_temp}/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
                 
