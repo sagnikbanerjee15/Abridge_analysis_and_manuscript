@@ -294,6 +294,7 @@ def main():
                 alignment_samfilename = f"{options.output_directory}/star_alignments/{sra}_{layout}.sam"
                 cmd = f"cp {alignment_samfilename_in_temp} {alignment_samfilename}"
                 os.system(cmd)
+                logging.info(f"Running command - {cmd}")
                 
                 #################################################################################################################
                 # 1. compress_save_all_quality_scores_save_exact_quality_scores
@@ -455,7 +456,7 @@ def main():
                 cmd += f" {alignment_samfilename_in_temp}/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration} "
                 os.system(cmd)
                     
-                os.system(f"rm -p {alignment_samfilename}")
+                os.system(f"rm -f {alignment_samfilename}")
                 
     return        
     ##################################################################################################
