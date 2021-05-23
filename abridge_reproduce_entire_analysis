@@ -291,7 +291,7 @@ def main():
                 layout = row[2]
                 alignment_samfilename_in_temp = f"{options.temp_directory}/{sra}_{layout}.sam"
                 if os.path.exists(alignment_samfilename_in_temp) == False : continue
-                alignment_samfilename = f"{options.output_directory}/star_alignments/{sra}_{layout}.sam"
+                alignment_samfilename = f"{options.output_directory}/alignments/{sra}_{layout}.sam"
                 cmd = f"cp {alignment_samfilename_in_temp} {alignment_samfilename}"
                 os.system(cmd)
                 logging.info(f"Running command - {cmd}")
@@ -467,7 +467,7 @@ def main():
             for row in options.metadata_expanded[Assay_Type]:
                 sra = row[6]
                 layout = row[2]
-                alignment_samfilename = f"{options.output_directory}/star_alignments/{sra}_{layout}.sam"
+                alignment_samfilename = f"{options.output_directory}/alignments/{sra}_{layout}.sam"
             
                 cmd  = f"(/usr/bin/time --verbose abridge "
                 cmd += f" --decompress "
