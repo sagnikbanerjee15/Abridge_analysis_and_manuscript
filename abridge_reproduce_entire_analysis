@@ -316,6 +316,12 @@ def main():
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
                 
+                cmd = f" mkdir -p {alignment_samfilename_in_temp}/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration}"
+                os.system(cmd)
+                cmd  = f"mv {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.* "
+                cmd += f" {alignment_samfilename_in_temp}/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration} "
+                os.system(cmd)
+                
                 #################################################################################################################
                 # 2. compress_save_all_quality_scores_save_approx_quality_scores
                 #################################################################################################################
@@ -335,6 +341,12 @@ def main():
                 if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd) 
+                
+                cmd = f" mkdir -p {alignment_samfilename_in_temp}/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration}"
+                os.system(cmd)
+                cmd  = f"mv {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.* "
+                cmd += f" {alignment_samfilename_in_temp}/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration} "
+                os.system(cmd)
                     
                 #################################################################################################################
                 # 3. compress_save_save_qual_scores_only_for_indels_and_mismatches
@@ -355,6 +367,12 @@ def main():
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
                 
+                cmd = f" mkdir -p {alignment_samfilename_in_temp}/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration}"
+                os.system(cmd)
+                cmd  = f"mv {options.output_directory}/abridge_compressed_files/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.* "
+                cmd += f" {alignment_samfilename_in_temp}/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration} "
+                os.system(cmd)
+                
                 #################################################################################################################
                 # 4. compress_ignore_quality_scores
                 #################################################################################################################
@@ -374,6 +392,12 @@ def main():
                 if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
+                
+                cmd = f" mkdir -p {alignment_samfilename_in_temp}/compress_ignore_quality_scores_{sra}_{layout}_{iteration}"
+                os.system(cmd)
+                cmd  = f"mv {options.output_directory}/abridge_compressed_files/compress_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.* "
+                cmd += f" {alignment_samfilename_in_temp}/compress_ignore_quality_scores_{sra}_{layout}_{iteration} "
+                os.system(cmd)
                     
                 #################################################################################################################
                 # 5. compress_ignore_soft_clippings_ignore_mismatches
@@ -395,6 +419,12 @@ def main():
                 if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
+                    
+                cmd = f" mkdir -p {alignment_samfilename_in_temp}/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration}"
+                os.system(cmd)
+                cmd  = f"mv {options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.* "
+                cmd += f" {alignment_samfilename_in_temp}/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration} "
+                os.system(cmd)
                     
                 
                 #################################################################################################################
@@ -418,6 +448,12 @@ def main():
                 if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
+                
+                cmd = f" mkdir -p {alignment_samfilename_in_temp}/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}"
+                os.system(cmd)
+                cmd  = f"mv {options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.* "
+                cmd += f" {alignment_samfilename_in_temp}/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration} "
+                os.system(cmd)
                     
                 os.system(f"rm -p {alignment_samfilename}")
                 
