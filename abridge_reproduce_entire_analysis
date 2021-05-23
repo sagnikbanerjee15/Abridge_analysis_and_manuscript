@@ -178,7 +178,7 @@ def main():
     cmd += f" {options.output_directory}/hisat2_index "
     if os.path.exists(f"{options.output_directory}/hisat2_index.1.ht2")==False:
         os.system(cmd)
-       
+    """   
     ##################################################################################################
     # Simulate DNA-Seq reads with ART
     ##################################################################################################
@@ -206,7 +206,7 @@ def main():
             os.system(cmd)
             cmd = f"mv {options.output_directory}/raw_data/sim_data_{iteration}_*.fastq {options.temp_directory}/"
             os.system(cmd)
-       
+    """   
     ##################################################################################################
     # Prepare metadata for alignemnt
     # A single .csv file will be prepared for both SE and PE samples
@@ -216,7 +216,7 @@ def main():
     fhw = open(f"{options.output_directory}/metadata_for_alignment.csv","w")
     add_these_back_to_metadata_expanded = {}
     add_these_back_to_metadata_expanded["DNA-Seq"] = []
-    for iteration in range(5):
+    """for iteration in range(5):
         row = ["Arabidopsis thaliana","simulated","PE","DNA-Seq","2021-05-21","151+151",f"sim_data_{iteration}"]
         fhw.write(",".join([row[0], #organism
                               row[1], #tissue
@@ -236,7 +236,7 @@ def main():
                               row[6]  
                 ])+"\n")
         add_these_back_to_metadata_expanded["DNA-Seq"].append([row[0],row[1],"SE",row[3],row[4],row[5],row[6]])
-    
+    """
     for Assay_Type in options.metadata_expanded:
         add_these_back_to_metadata_expanded[Assay_Type] = []
         for row in options.metadata_expanded[Assay_Type]:
@@ -278,10 +278,9 @@ def main():
     cmd += f" --temp_directory {options.temp_directory} "
     cmd += f" 1> {options.output_directory}/outputs/alignment.output "
     cmd += f" 2> {options.output_directory}/errors/alignment.error "
-    os.system(cmd)
+    #os.system(cmd)
     logging.info(f"Aligning reads with STAR and BWA is complete")
-    
-    return
+
     ##################################################################################################
     # Compress alignments with Abridge
     ##################################################################################################
@@ -295,23 +294,134 @@ def main():
                 alignment_samfilename = f"{options.output_directory}/star_alignments/{sra}_{layout}.sam"
                 cmd = f"cp {alignment_samfilename_in_temp} {alignment_samfilename}"
                 os.system(cmd)
-            
+                
+                #################################################################################################################
+                # 1. compress_save_all_quality_scores_save_exact_quality_scores
+                #################################################################################################################
                 cmd  = f"(/usr/bin/time --verbose abridge "
                 cmd += f" --compress "
                 cmd += f" --cpu 1 "
                 cmd += f" --genome {options.genome} "
                 cmd += f" --inputsamfilenames {alignment_samfilename} "
-                cmd += f" --output_directory {options.output_directory}/abridge_compressed_files/{iteration} "
-                cmd += f" --error_directory {options.error_directory}/abridge/{iteration} "
+                cmd += f" --output_directory {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration} "
+                cmd += f" --error_directory {options.error_directory}/abridge/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration} "
                 cmd += f" --keep_intermediate_error_files "
-                cmd += f" --both " # Perform both compression - once using 7z and again using brotli (from Google)
+                cmd += f" --save_all_quality_scores "
+                cmd += f" --save_exact_quality_scores "
+                cmd += f" --both " # Perform both compression - once using zpaq and again using brotli (from Google)
                 cmd += ")"
-                cmd += f" 1> {options.output_directory}/outputs/{sra}_{iteration}_{layout}_compress.output "
-                cmd += f" 2> {options.output_directory}/errors/{sra}_{iteration}_{layout}_compress.error " 
-                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.7z") == True and os.path.exists(f"{options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.br") == True : continue
-                logging.info(f"Running command - {cmd}")
-                os.system(cmd)
+                cmd += f" 1> {options.output_directory}/outputs/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration}.output "
+                cmd += f" 2> {options.output_directory}/errors/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration}.error " 
+                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
+                    logging.info(f"Running command - {cmd}")
+                    os.system(cmd)
                 
+                #################################################################################################################
+                # 2. compress_save_all_quality_scores_save_approx_quality_scores
+                #################################################################################################################
+                cmd  = f"(/usr/bin/time --verbose abridge "
+                cmd += f" --compress "
+                cmd += f" --cpu 1 "
+                cmd += f" --genome {options.genome} "
+                cmd += f" --inputsamfilenames {alignment_samfilename} "
+                cmd += f" --output_directory {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration} "
+                cmd += f" --error_directory {options.error_directory}/abridge/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration} "
+                cmd += f" --keep_intermediate_error_files "
+                cmd += f" --save_all_quality_scores "
+                cmd += f" --both " # Perform both compression - once using zpaq and again using brotli (from Google)
+                cmd += ")"
+                cmd += f" 1> {options.output_directory}/outputs/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration}.output "
+                cmd += f" 2> {options.output_directory}/errors/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration}.error " 
+                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_approx_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
+                    logging.info(f"Running command - {cmd}")
+                    os.system(cmd) 
+                    
+                #################################################################################################################
+                # 3. compress_save_save_qual_scores_only_for_indels_and_mismatches
+                #################################################################################################################
+                cmd  = f"(/usr/bin/time --verbose abridge "
+                cmd += f" --compress "
+                cmd += f" --cpu 1 "
+                cmd += f" --genome {options.genome} "
+                cmd += f" --inputsamfilenames {alignment_samfilename} "
+                cmd += f" --output_directory {options.output_directory}/abridge_compressed_files/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration} "
+                cmd += f" --error_directory {options.error_directory}/abridge/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration} "
+                cmd += f" --keep_intermediate_error_files "
+                cmd += f" --both " # Perform both compression - once using zpaq and again using brotli (from Google)
+                cmd += ")"
+                cmd += f" 1> {options.output_directory}/outputs/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration}.output "
+                cmd += f" 2> {options.output_directory}/errors/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration}.error " 
+                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_save_qual_scores_only_for_indels_and_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
+                    logging.info(f"Running command - {cmd}")
+                    os.system(cmd)
+                
+                #################################################################################################################
+                # 4. compress_ignore_quality_scores
+                #################################################################################################################
+                cmd  = f"(/usr/bin/time --verbose abridge "
+                cmd += f" --compress "
+                cmd += f" --cpu 1 "
+                cmd += f" --genome {options.genome} "
+                cmd += f" --inputsamfilenames {alignment_samfilename} "
+                cmd += f" --output_directory {options.output_directory}/abridge_compressed_files/compress_ignore_quality_scores_{sra}_{layout}_{iteration} "
+                cmd += f" --error_directory {options.error_directory}/abridge/compress_ignore_quality_scores_{sra}_{layout}_{iteration} "
+                cmd += f" --keep_intermediate_error_files "
+                cmd += f" --both " # Perform both compression - once using zpaq and again using brotli (from Google)
+                cmd += f" --ignore_quality_scores "
+                cmd += ")"
+                cmd += f" 1> {options.output_directory}/outputs/compress_ignore_quality_scores_{sra}_{layout}_{iteration}.output "
+                cmd += f" 2> {options.output_directory}/errors/compress_ignore_quality_scores_{sra}_{layout}_{iteration}.error " 
+                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
+                    logging.info(f"Running command - {cmd}")
+                    os.system(cmd)
+                    
+                #################################################################################################################
+                # 5. compress_ignore_soft_clippings_ignore_mismatches
+                #################################################################################################################
+                cmd  = f"(/usr/bin/time --verbose abridge "
+                cmd += f" --compress "
+                cmd += f" --cpu 1 "
+                cmd += f" --genome {options.genome} "
+                cmd += f" --inputsamfilenames {alignment_samfilename} "
+                cmd += f" --output_directory {options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration} "
+                cmd += f" --error_directory {options.error_directory}/abridge/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration} "
+                cmd += f" --keep_intermediate_error_files "
+                cmd += f" --both " # Perform both compression - once using zpaq and again using brotli (from Google)
+                cmd += f" --ignore_soft_clippings "
+                cmd += f" --ignore_mismatches " 
+                cmd += ")"
+                cmd += f" 1> {options.output_directory}/outputs/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration}.output "
+                cmd += f" 2> {options.output_directory}/errors/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration}.error " 
+                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
+                    logging.info(f"Running command - {cmd}")
+                    os.system(cmd)
+                    
+                
+                #################################################################################################################
+                # 6. compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores
+                #################################################################################################################
+                cmd  = f"(/usr/bin/time --verbose abridge "
+                cmd += f" --compress "
+                cmd += f" --cpu 1 "
+                cmd += f" --genome {options.genome} "
+                cmd += f" --inputsamfilenames {alignment_samfilename} "
+                cmd += f" --output_directory {options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration} "
+                cmd += f" --error_directory {options.error_directory}/abridge/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration} "
+                cmd += f" --keep_intermediate_error_files "
+                cmd += f" --both " # Perform both compression - once using zpaq and again using brotli (from Google)
+                cmd += f" --ignore_quality_scores "
+                cmd += f" --ignore_soft_clippings "
+                cmd += f" --ignore_mismatches " 
+                cmd += ")"
+                cmd += f" 1> {options.output_directory}/outputs/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}.output "
+                cmd += f" 2> {options.output_directory}/errors/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}.error " 
+                if os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.7z") == False or os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.br") == False: 
+                    logging.info(f"Running command - {cmd}")
+                    os.system(cmd)
+                    
+                os.system(f"rm -p {alignment_samfilename}")
+                
+    return        
     ##################################################################################################
     # Decompress alignments with Abridge
     ##################################################################################################
