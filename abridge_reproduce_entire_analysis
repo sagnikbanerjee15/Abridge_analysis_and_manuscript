@@ -460,7 +460,7 @@ def main():
                 #################################################################################################################
                 # SAMCOMP
                 #################################################################################################################
-                os.system(f"{options.output_directory}/samcomp_compressed_files")
+                os.system(f"mkdir -p {options.output_directory}/samcomp_compressed_files")
                 
                 cmd  = f"(/usr/bin/time --verbose "
                 cmd += f" /project/maizegdb/sagnik/softwares/sam_comp-0.10/sam_comp "
