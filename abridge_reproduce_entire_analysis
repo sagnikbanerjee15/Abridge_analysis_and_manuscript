@@ -462,7 +462,7 @@ def main():
                 #################################################################################################################
                 os.system(f"{options.output_directory}/samcomp_compressed_files")
                 
-                cmd  = f"(/usr/bin/time --verbose abridge "
+                cmd  = f"(/usr/bin/time --verbose "
                 cmd += f" /project/maizegdb/sagnik/softwares/sam_comp-0.10/sam_comp "
                 cmd += f" -r {options.genome} "
                 cmd += f" < {alignment_samfilename}"
@@ -477,7 +477,7 @@ def main():
                 #################################################################################################################
                 os.system(f"{options.output_directory}/alico_compressed_files")
                 
-                cmd  = f"(/usr/bin/time --verbose abridge "
+                cmd  = f"(/usr/bin/time --verbose  "
                 cmd += f" /project/maizegdb/sagnik/softwares/alico/build_dir/SAMStreamer "
                 cmd += f" -u " # to compress
                 cmd += f" " # No CALQ mode 
@@ -490,7 +490,7 @@ def main():
                 if os.path.exists(f"{options.output_directory}/alico_compressed_files/compress_alico_no_calq_{sra}_{layout}_{iteration}.alico")==False:
                     os.system(cmd)
                     
-                cmd  = f"(/usr/bin/time --verbose abridge "
+                cmd  = f"(/usr/bin/time --verbose  "
                 cmd += f" /project/maizegdb/sagnik/softwares/alico/build_dir/SAMStreamer "
                 cmd += f" -u " # to compress
                 cmd += f" -q " # Yes CALQ mode 
