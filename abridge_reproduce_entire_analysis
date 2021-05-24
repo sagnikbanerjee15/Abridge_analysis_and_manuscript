@@ -295,7 +295,7 @@ def main():
                 cmd = f"cp {alignment_samfilename_in_temp} {alignment_samfilename}"
                 os.system(cmd)
                 logging.info(f"Running command - {cmd}")
-                
+                """
                 #################################################################################################################
                 # 1. compress_save_all_quality_scores_save_exact_quality_scores
                 #################################################################################################################
@@ -455,7 +455,7 @@ def main():
                 cmd  = f"mv {options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge.* "
                 cmd += f" {alignment_samfilename_in_temp}/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_{sra}_{layout}_{iteration} "
                 os.system(cmd)
-                
+                """
                 
                 #################################################################################################################
                 # SAMCOMP
