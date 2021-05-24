@@ -469,9 +469,15 @@ def main():
                 cmd += f")"
                 cmd += f" 1> {options.output_directory}/samcomp_compressed_files/compress_samcomp_{sra}_{layout}_{iteration}.zam "
                 cmd += f" 2> {options.output_directory}/errors/compress_samcomp_{sra}_{layout}_{iteration}.error "
-                if os.path.exists(f"{options.output_directory}/samcomp_compressed_files/compress_samcomp_{sra}_{layout}_{iteration}.zam")==False:
+                #if os.path.exists(f"{options.output_directory}/samcomp_compressed_files/compress_samcomp_{sra}_{layout}_{iteration}.zam")==False:
+                if os.path.exists(f"{options.temp_directory}/compress_samcomp_{sra}_{layout}_{iteration}.zam")==False:
+                    logging.info(f"Running command - {cmd}")
                     os.system(cmd)
-                
+                    cmd=f"mv {options.output_directory}/samcomp_compressed_files/compress_samcomp_{sra}_{layout}_{iteration}.zam {options.temp_directory}/"
+                    os.system(cmd)
+                    
+                    
+                """
                 #################################################################################################################
                 # ALICO
                 #################################################################################################################
@@ -488,6 +494,7 @@ def main():
                 cmd += f" 1> {options.output_directory}/outputs/compress_alico_no_calq_{sra}_{layout}_{iteration}.output "
                 cmd += f" 2> {options.output_directory}/errors/compress_alico_no_calq_{sra}_{layout}_{iteration}.error "
                 if os.path.exists(f"{options.output_directory}/alico_compressed_files/compress_alico_no_calq_{sra}_{layout}_{iteration}.alico")==False:
+                    logging.info(f"Running command - {cmd}")
                     os.system(cmd)
                     
                 cmd  = f"(/usr/bin/time --verbose  "
@@ -501,8 +508,9 @@ def main():
                 cmd += f" 1> {options.output_directory}/outputs/compress_alico_yes_calq_{sra}_{layout}_{iteration}.output "
                 cmd += f" 2> {options.output_directory}/errors/compress_alico_yes_calq_{sra}_{layout}_{iteration}.error "
                 if os.path.exists(f"{options.output_directory}/alico_compressed_files/compress_alico_yes_calq_{sra}_{layout}_{iteration}.alico")==False:
+                    logging.info(f"Running command - {cmd}")
                     os.system(cmd)
-                    
+                """
                 os.system(f"rm -f {alignment_samfilename}")
                 
     return        
