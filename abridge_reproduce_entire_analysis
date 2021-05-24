@@ -554,8 +554,55 @@ def main():
                                 
                                 cmd = f"mv {options.output_directory}/ngc_compressed_files/compress_ngc_compression_{compression}_unmappedreads_{unmapped_reads}_qvalencoding_{qval_encoding}_{sra}_{layout}_{iteration}.ngc {options.temp_directory}/ "
                                 os.system(cmd)
+                                
+                #################################################################################################################
+                # QUIP
+                #################################################################################################################
+                os.system(f"mkdir -p {options.output_directory}/quip_compressed_files")
+                
+                cmd  = f"(/usr/bin/time --verbose "
+                cmd += f" /project/maizegdb/sagnik/softwares/quip/src/quip "
+                cmd += f" --input=sam "
+                cmd += f" --force "
+                cmd += f" --stdout "
+                cmd += f" -r {options.genome} "
+                cmd += f" {alignment_samfilename} "
+                cmd += f" 1> {options.output_directory}/quip_compressed_files/compress_quip_{sra}_{layout}_{iteration}.quip "
+                cmd += f" 2> {options.output_directory}/errors/compress_quip_{sra}_{layout}_{iteration}.error "
+                if os.path.exists(f"{options.temp_directory}/compress_quip_{sra}_{layout}_{iteration}.quip")==False:
+                    logging.info(f"Running command - {cmd}")
+                    os.system(cmd)
+                    
+                    cmd=f"mv {options.output_directory}/quip_compressed_files/compress_quip_{sra}_{layout}_{iteration}.quip {options.temp_directory}/"
+                    os.system(cmd)
                 
                 
+                #################################################################################################################
+                # DEEZ
+                #################################################################################################################
+                os.system(f"mkdir -p {options.output_directory}/deez_compressed_files")
+                
+                for qualvaluestore in ["--noqual",""]:
+                    for lossy in [0,50,99]:
+                        for encodequality in ["1","2"]:
+                            cmd  = f"(/usr/bin/time --verbose "
+                            cmd += f" /project/maizegdb/sagnik/softwares/deez/deez "
+                            cmd += f" -r {options.genome}"
+                            cmd += f" -o {options.output_directory}/quip_compressed_files/compress_deez_qualvaluestore_{qualvaluestore}_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.deez  "
+                            cmd += f" --threads 1 "
+                            cmd += f" --force "
+                            cmd += f" {qualvaluestore} "
+                            cmd += f" --mode {encodequality}"
+                            cmd += f" --lossy {lossy} "
+                            cmd += f" 1> {options.output_directory}/outputs/compress_deez_qualvaluestore_{qualvaluestore}_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.output "
+                            cmd += f" 2> {options.output_directory}/errors/compress_deez_qualvaluestore_{qualvaluestore}_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.error "
+                            if os.path.exists(f"{options.temp_directory}/compress_deez_qualvaluestore_{qualvaluestore}_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.deez")==False:
+                                logging.info(f"Running command - {cmd}")
+                                os.system(cmd)
+                    
+                                cmd=f"mv {options.output_directory}/quip_compressed_files/compress_deez_qualvaluestore_{qualvaluestore}_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.deez {options.temp_directory}/"
+                                os.system(cmd)
+                            
                 """
                 #################################################################################################################
                 # ALICO
