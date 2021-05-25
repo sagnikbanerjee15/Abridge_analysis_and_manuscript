@@ -13,8 +13,9 @@
 #SBATCH --output=/project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS.output
 #SBATCH --error=/project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS.error
 
-conda activate abridge
+conda activate abridge_pypy
 module load samtools
+module load libssh
 
 CPU=1 # Change accordingly
 
