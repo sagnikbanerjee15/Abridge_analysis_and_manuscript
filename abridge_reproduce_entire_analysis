@@ -495,7 +495,7 @@ def main():
                             cmd += f" --force "
                             if qualvaluestore!="":
                                 cmd += f" --{qualvaluestore} "
-                            cmd += f" --mode {encodequality}"
+                            cmd += f" --quality {encodequality}"
                             cmd += f" --lossy {lossy} "
                             cmd += f" {alignment_samfilename} "
                             cmd += f" -o {options.output_directory}/quip_compressed_files/compress_deez_qualvaluestore_{qualvaluestore}_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.deez  "
