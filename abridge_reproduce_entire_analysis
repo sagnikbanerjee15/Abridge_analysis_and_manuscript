@@ -508,7 +508,7 @@ def main():
                 cmd  = f"(/usr/bin/time --verbose "
                 cmd += f" pypy /project/maizegdb/sagnik/softwares/boiler/boiler.py "
                 cmd += f" compress "
-                cmd += f" --frag-len-cutoff 100000 --frag-len-z-cutoff 0.125 "
+                cmd += f" --frag-len-cutoff 1000 --frag-len-z-cutoff 0.125 "
                 cmd += f" {alignment_samfilename} "
                 cmd += f" {options.output_directory}/boiler_compressed_files/compress_boiler_{sra}_{layout}_{iteration}.boiler "
                 cmd += f") "
