@@ -469,6 +469,7 @@ def main():
                 cmd += f" --stdout "
                 cmd += f" -r {options.genome} "
                 cmd += f" {alignment_samfilename} "
+                cmd += f") "
                 cmd += f" 1> {options.output_directory}/quip_compressed_files/compress_quip_{sra}_{layout}_{iteration}.quip "
                 cmd += f" 2> {options.output_directory}/errors/compress_quip_{sra}_{layout}_{iteration}.error "
                 if os.path.exists(f"{options.temp_directory}/compress_quip_{sra}_{layout}_{iteration}.quip")==False:
@@ -497,6 +498,7 @@ def main():
                                 cmd += f" --{qualvaluestore} "
                             cmd += f" --mode {encodequality}"
                             cmd += f" --lossy {lossy} "
+                            cmd += f") "
                             cmd += f" 1> {options.output_directory}/outputs/compress_deez_qualvaluestore_{qualvaluestore}_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.output "
                             cmd += f" 2> {options.output_directory}/errors/compress_deez_qualvaluestore_{qualvaluestore}_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.error "
                             if os.path.exists(f"{options.temp_directory}/compress_deez_qualvaluestore_{qualvaluestore}_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.deez")==False:
@@ -505,7 +507,7 @@ def main():
                     
                                 cmd=f"mv {options.output_directory}/quip_compressed_files/compress_deez_qualvaluestore_{qualvaluestore}_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.deez {options.temp_directory}/"
                                 os.system(cmd)
-                
+                return
                 #################################################################################################################
                 # SAMCOMP
                 #################################################################################################################
