@@ -464,9 +464,10 @@ def main():
                 #################################################################################################################
                 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 
-                
+                """
                 #################################################################################################################
-                # ALICO
+                # ALICO - DECIDED TO NOT EXECUTE GIVING SEGMENTATION FAULTS. NO HELP FROM AUTHORS
+                # GENECOMP - Same type of software developed by the same group of people has the same problems
                 #################################################################################################################
                 os.system(f"{options.output_directory}/alico_compressed_files")
                 
@@ -497,7 +498,7 @@ def main():
                 if os.path.exists(f"{options.output_directory}/alico_compressed_files/compress_alico_yes_calq_{sra}_{layout}_{iteration}.alico")==False:
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
-                
+                """
                 
                 #################################################################################################################
                 # BOILER
@@ -507,9 +508,12 @@ def main():
                 cmd  = f"(/usr/bin/time --verbose "
                 cmd += f" pypy /project/maizegdb/sagnik/softwares/boiler/boiler.py "
                 cmd += f" compress "
+                cmd += f" --frag-len-cutoff 10000000 --frag-len-z-cutoff 0.125 "
                 cmd += f" {alignment_samfilename} "
                 cmd += f" {options.output_directory}/boiler_compressed_files/compress_boiler_{sra}_{layout}_{iteration}.boiler "
                 cmd += f") "
+                cmd += f" 1> {options.output_directory}/outputs/compress_boiler_{sra}_{layout}_{iteration}.output "
+                cmd += f" 2> {options.output_directory}/errors/compress_boiler_{sra}_{layout}_{iteration}.error "
                 if os.path.exists(f"{options.temp_directory}/compress_boiler_{sra}_{layout}_{iteration}.boiler")==False:
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
