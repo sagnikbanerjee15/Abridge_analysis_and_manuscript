@@ -547,7 +547,7 @@ def main():
                             if qval_encoding!="":
                                 cmd += f" -{qval_encoding} "
                             cmd += f" -truncateNames "
-                            cdm += f" -truncateOptionalFields "
+                            cmd += f" -truncateOptionalFields "
                             cmd += f" -r {options.genome} "
                             cmd += f")"
                             cmd += f" 1> {options.output_directory}/outputs/compress_ngc_compression_{compression}_unmappedreads_{unmappedreads}_qvalencoding_{qval_encoding}_{sra}_{layout}_{iteration}.output "
