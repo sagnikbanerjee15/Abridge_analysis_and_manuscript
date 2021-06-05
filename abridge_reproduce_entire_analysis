@@ -180,7 +180,7 @@ def main():
         os.system(cmd)
     """   
     ##################################################################################################
-    # Simulate DNA-Seq reads with ART
+    # Simulate DNA-Assay_type reads with ART
     ##################################################################################################
     for iteration in range(5):
         cmd  = f" art_illumina "
@@ -217,7 +217,7 @@ def main():
     add_these_back_to_metadata_expanded = {}
     add_these_back_to_metadata_expanded["DNA-Seq"] = []
     """for iteration in range(5):
-        row = ["Arabidopsis thaliana","simulated","PE","DNA-Seq","2021-05-21","151+151",f"sim_data_{iteration}"]
+        row = ["Arabidopsis thaliana","simulated","PE","DNA-Assay_type","2021-05-21","151+151",f"sim_data_{iteration}"]
         fhw.write(",".join([row[0], #organism
                               row[1], #tissue
                               row[2], #Layout
@@ -280,7 +280,52 @@ def main():
     cmd += f" 2> {options.output_directory}/errors/alignment.error "
     #os.system(cmd)
     logging.info(f"Aligning reads with STAR and BWA is complete")
+    
+    ##################################################################################################
+    # Merge read libraries to create larger sized datasets
+    ##################################################################################################
+    
+    
+    # Reformat the Data Structure
+    metadata = { "SE": {} , "PE" : {} }
+    for row in options.metadata_expanded:
+        layout = row[2]
+        Assay_type = row[3] # RNA-Assay_type, DNA-Assay_type etc.
+        SRA = row[6]
+        if Assay_type not in metadata[layout]:
+            metadata[layout][Assay_type] = []
+        metadata[layout][Assay_type].append(SRA)
+        
+    # Create new data by merging 2 or more samples together
+    add_these_back_to_metadata_expanded = {}
+    for layout in metadata:
+        for Assay_type in metadata[layout]:
+            add_these_back_to_metadata_expanded[Assay_type] = []
+            i = 1
+            new_merged_SRA = metadata[layout][Assay_type][0]
+            alignment_bamfilename_in_temp = f"{options.temp_directory}/{new_merged_SRA}_{layout}.bam"
+            
+            # Copy the alignment file from temp directory to main directory
+            cmd = f"cp {alignment_samfilename_in_temp} {options.output_directory}/alignments/ "
+            os.system(cmd)
+            
+            alignment_bamfilename_in_main = f"{options.output_directory}/alignments/{new_merged_SRA}_{layout}.bam"
+            while i < len(metadata[layout][Assay_type]):
+                previous_merged_RNA_bamfilename = new_merged_SRA
+                previous_alignment_bamfilename_in_main = f"{options.output_directory}/alignments/{previous_merged_RNA_bamfilename}_{layout}.bam"
+                new_merged_SRA += "-" + metadata[layout][Assay_type][i]
+                new_alignment_bamfilename_in_main = f"{options.output_directory}/alignments/{new_merged_SRA}_{layout}.bam"
+                cmd  = f" samtools merge "
+                cmd += f" -@ {options.cpu} "
+                cmd += f" {new_alignment_bamfilename_in_main} {previous_merged_RNA_bamfilename} "
+                print(cmd)
+                add_these_back_to_metadata_expanded[Assay_type].append(["dummy","dummy",layout,Assay_type,"dummy","dummy",new_merged_SRA]) 
+                i += 1
+                
+    for Assay_Type in options.metadata_expanded:
+        options.metadata_expanded[Assay_Type].extend(add_these_back_to_metadata_expanded[Assay_Type])        
 
+    return
     ##################################################################################################
     # Compress alignments with Abridge
     ##################################################################################################
