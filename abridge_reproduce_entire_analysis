@@ -296,8 +296,9 @@ def main():
             if Assay_type not in metadata[layout]:
                 metadata[layout][Assay_type] = []
             metadata[layout][Assay_type].append(SRA)
+            print(row)
         
-    print(metadata)
+    print("=============================================================================================================================")
     # Create new data by merging 2 or more samples together
     add_these_back_to_metadata_expanded = {}
     for layout in metadata:
