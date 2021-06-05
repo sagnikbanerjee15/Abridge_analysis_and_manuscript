@@ -318,7 +318,7 @@ def main():
                 new_alignment_bamfilename_in_main = f"{options.output_directory}/alignments/{new_merged_SRA}_{layout}.bam"
                 cmd  = f" samtools merge "
                 cmd += f" -@ {options.cpu} "
-                cmd += f" {new_alignment_bamfilename_in_main} {previous_merged_RNA_bamfilename} "
+                cmd += f" {new_alignment_bamfilename_in_main} {previous_alignment_bamfilename_in_main} "
                 print(cmd)
                 add_these_back_to_metadata_expanded[Assay_type].append(["dummy","dummy",layout,Assay_type,"dummy","dummy",new_merged_SRA]) 
                 i += 1
