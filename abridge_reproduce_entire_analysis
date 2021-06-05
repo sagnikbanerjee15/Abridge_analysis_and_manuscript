@@ -333,7 +333,7 @@ def main():
                 cmd  = f"samtools view "
                 cmd += f" -@ {options.cpu} "
                 cmd += f" {new_alignment_bamfilename_in_main} > {new_alignment_samfilename_in_main} "
-                os.system(cmd)
+                #os.system(cmd)
                 
                 #os.system(f"rm {options.output_directory}/alignments/{metadata[layout][Assay_type][i]}_{layout}.bam")
                 add_these_back_to_metadata_expanded[Assay_type].append(["dummy","dummy",layout,Assay_type,"dummy","dummy",new_merged_SRA]) 
