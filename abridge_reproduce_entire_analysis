@@ -288,13 +288,14 @@ def main():
     
     # Reformat the Data Structure
     metadata = { "SE": {} , "PE" : {} }
-    for row in options.metadata_expanded:
-        layout = row[2]
-        Assay_type = row[3] # RNA-Assay_type, DNA-Assay_type etc.
-        SRA = row[6]
-        if Assay_type not in metadata[layout]:
-            metadata[layout][Assay_type] = []
-        metadata[layout][Assay_type].append(SRA)
+    for Assay_Type in options.metadata_expanded:
+        for row in options.metadata_expanded[Assay_Type]:
+            layout = row[2]
+            Assay_type = row[3] # RNA-Assay_type, DNA-Assay_type etc.
+            SRA = row[6]
+            if Assay_type not in metadata[layout]:
+                metadata[layout][Assay_type] = []
+            metadata[layout][Assay_type].append(SRA)
         
     # Create new data by merging 2 or more samples together
     add_these_back_to_metadata_expanded = {}
