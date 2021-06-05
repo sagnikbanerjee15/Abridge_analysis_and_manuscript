@@ -297,6 +297,7 @@ def main():
                 metadata[layout][Assay_type] = []
             metadata[layout][Assay_type].append(SRA)
         
+    print(metadata)
     # Create new data by merging 2 or more samples together
     add_these_back_to_metadata_expanded = {}
     for layout in metadata:
