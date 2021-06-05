@@ -343,7 +343,8 @@ def main():
     for Assay_Type in options.metadata_expanded:
         options.metadata_expanded[Assay_Type].extend(add_these_back_to_metadata_expanded[Assay_Type])        
 
-    pprint.pprint(options.metadata_expanded)
+    for row in options.metadata_expanded:
+        print(row)
     return
     ##################################################################################################
     # Compress alignments with Abridge
