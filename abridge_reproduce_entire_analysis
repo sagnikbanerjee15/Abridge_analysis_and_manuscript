@@ -340,10 +340,7 @@ def main():
     
     #os.system(f"mv {options.output_directory}/alignments/*bam {options.temp_directory}/")
     #os.system(f"mv {options.output_directory}/alignments/*sam {options.temp_directory}/")
-                
-    for Assay_Type in options.metadata_expanded:
-        options.metadata_expanded[Assay_Type].extend(add_these_back_to_metadata_expanded[Assay_Type])        
-
+            
     for Assay_Type in options.metadata_expanded:
         for row in options.metadata_expanded[Assay_Type]:
             print(row)
