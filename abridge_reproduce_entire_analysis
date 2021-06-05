@@ -307,8 +307,8 @@ def main():
             alignment_bamfilename_in_temp = f"{options.temp_directory}/{new_merged_SRA}_{layout}.bam"
             
             # Copy the alignment file from temp directory to main directory
-            cmd = f"cp {alignment_samfilename_in_temp} {options.output_directory}/alignments/ "
-            os.system(cmd)
+            cmd = f"cp {alignment_bamfilename_in_temp} {options.output_directory}/alignments/ "
+            #os.system(cmd)
             
             alignment_bamfilename_in_main = f"{options.output_directory}/alignments/{new_merged_SRA}_{layout}.bam"
             while i < len(metadata[layout][Assay_type]):
