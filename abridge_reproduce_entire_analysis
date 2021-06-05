@@ -304,6 +304,7 @@ def main():
     add_these_back_to_metadata_expanded = {}
     for layout in metadata:
         for Assay_type in metadata[layout]:
+            print(Assay_Type,layout)
             add_these_back_to_metadata_expanded[Assay_type] = []
             i = 1
             new_merged_SRA = metadata[layout][Assay_type][0]
