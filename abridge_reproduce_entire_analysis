@@ -296,17 +296,12 @@ def main():
             if Assay_Type not in metadata[layout]:
                 metadata[layout][Assay_Type] = []
             metadata[layout][Assay_Type].append(SRA)
-            print(row)
-    
-    print(metadata["SE"],metadata["PE"])
-    print("=============================================================================================================================")
+            
     # Create new data by merging 2 or more samples together
     add_these_back_to_metadata_expanded = {}
     for layout in metadata:
         print(metadata[layout].keys())
         for Assay_Type in metadata[layout]:
-            print(Assay_Type,layout)
-            add_these_back_to_metadata_expanded[Assay_Type] = []
             i = 1
             new_merged_SRA = metadata[layout][Assay_Type][0]
             alignment_bamfilename_in_temp = f"{options.temp_directory}/{new_merged_SRA}_{layout}.bam"
@@ -339,7 +334,7 @@ def main():
                 #os.system(cmd)
                 
                 #os.system(f"rm {options.output_directory}/alignments/{metadata[layout][Assay_Type][i]}_{layout}.bam")
-                add_these_back_to_metadata_expanded[Assay_Type].append(["dummy","dummy",layout,Assay_Type,"dummy","dummy",new_merged_SRA]) 
+                options.metadata_expanded[Assay_Type].append(["dummy","dummy",layout,Assay_Type,"dummy","dummy",new_merged_SRA]) 
                 i += 1
             print(layout,Assay_Type,i)
     
