@@ -308,14 +308,14 @@ def main():
             
             # Copy the alignment file from temp directory to main directory
             cmd = f"cp {alignment_bamfilename_in_temp} {options.output_directory}/alignments/ "
-            #os.system(cmd)
+            os.system(cmd)
             
             alignment_bamfilename_in_main = f"{options.output_directory}/alignments/{new_merged_SRA}_{layout}.bam"
             while i < len(metadata[layout][Assay_Type]):
                 alignment_bamfilename_in_temp = f"{options.temp_directory}/{metadata[layout][Assay_Type][i]}_{layout}.bam"
                 
                 cmd = f"cp {alignment_bamfilename_in_temp} {options.output_directory}/alignments/ "
-                #os.system(cmd)
+                os.system(cmd)
             
                 previous_merged_RNA_bamfilename = new_merged_SRA
                 previous_alignment_bamfilename_in_main = f"{options.output_directory}/alignments/{previous_merged_RNA_bamfilename}_{layout}.bam"
@@ -326,24 +326,24 @@ def main():
                 cmd  = f" samtools merge "
                 cmd += f" -@ {options.cpu} "
                 cmd += f" {new_alignment_bamfilename_in_main} {previous_alignment_bamfilename_in_main} {options.output_directory}/alignments/{metadata[layout][Assay_Type][i]}_{layout}.bam "
-                #os.system(cmd)
+                os.system(cmd)
                 
                 cmd  = f"samtools view "
                 cmd += f" -@ {options.cpu} "
                 cmd += f" {new_alignment_bamfilename_in_main} > {new_alignment_samfilename_in_main} "
-                #os.system(cmd)
+                os.system(cmd)
                 
-                #os.system(f"rm {options.output_directory}/alignments/{metadata[layout][Assay_Type][i]}_{layout}.bam")
+                os.system(f"rm {options.output_directory}/alignments/{metadata[layout][Assay_Type][i]}_{layout}.bam")
                 options.metadata_expanded[Assay_Type].append(["dummy","dummy",layout,Assay_Type,"dummy","dummy",new_merged_SRA]) 
                 i += 1
-            print(layout,Assay_Type,i)
     
-    #os.system(f"mv {options.output_directory}/alignments/*bam {options.temp_directory}/")
-    #os.system(f"mv {options.output_directory}/alignments/*sam {options.temp_directory}/")
-            
+    os.system(f"mv {options.output_directory}/alignments/*bam {options.temp_directory}/")
+    os.system(f"mv {options.output_directory}/alignments/*sam {options.temp_directory}/")
+    """        
     for Assay_Type in options.metadata_expanded:
         for row in options.metadata_expanded[Assay_Type]:
             print(row)
+    """
     return
     ##################################################################################################
     # Compress alignments with Abridge
