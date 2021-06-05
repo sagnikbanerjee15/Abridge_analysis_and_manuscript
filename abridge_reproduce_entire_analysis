@@ -321,16 +321,29 @@ def main():
                 previous_alignment_bamfilename_in_main = f"{options.output_directory}/alignments/{previous_merged_RNA_bamfilename}_{layout}.bam"
                 new_merged_SRA += "-" + metadata[layout][Assay_type][i]
                 new_alignment_bamfilename_in_main = f"{options.output_directory}/alignments/{new_merged_SRA}_{layout}.bam"
+                new_alignment_samfilename_in_main = f"{options.output_directory}/alignments/{new_merged_SRA}_{layout}.sam"
+                
                 cmd  = f" samtools merge "
                 cmd += f" -@ {options.cpu} "
                 cmd += f" {new_alignment_bamfilename_in_main} {previous_alignment_bamfilename_in_main} {options.output_directory}/alignments/{metadata[layout][Assay_type][i]}_{layout}.bam "
-                print(cmd)
+                #os.system(cmd)
+                
+                cmd  = f"samtools view "
+                cmd += f" -@ {options.cpu} "
+                cmd += f" {new_alignment_bamfilename_in_main} > {new_alignment_samfilename_in_main} "
+                os.system(cmd)
+                
+                #os.system(f"rm {options.output_directory}/alignments/{metadata[layout][Assay_type][i]}_{layout}.bam")
                 add_these_back_to_metadata_expanded[Assay_type].append(["dummy","dummy",layout,Assay_type,"dummy","dummy",new_merged_SRA]) 
                 i += 1
+    
+    #os.system(f"mv {options.output_directory}/alignments/*bam {options.temp_directory}/")
+    #os.system(f"mv {options.output_directory}/alignments/*sam {options.temp_directory}/")
                 
     for Assay_Type in options.metadata_expanded:
         options.metadata_expanded[Assay_Type].extend(add_these_back_to_metadata_expanded[Assay_Type])        
 
+    pprint.pprint(options.metadata_expanded)
     return
     ##################################################################################################
     # Compress alignments with Abridge
