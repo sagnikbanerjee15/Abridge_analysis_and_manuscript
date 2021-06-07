@@ -300,7 +300,6 @@ def main():
     # Create new data by merging 2 or more samples together
     add_these_back_to_metadata_expanded = {}
     for layout in metadata:
-        print(metadata[layout].keys())
         for Assay_Type in metadata[layout]:
             i = 1
             new_merged_SRA = metadata[layout][Assay_Type][0]
@@ -319,6 +318,7 @@ def main():
             
                 previous_merged_RNA_bamfilename = new_merged_SRA
                 previous_alignment_bamfilename_in_main = f"{options.output_directory}/alignments/{previous_merged_RNA_bamfilename}_{layout}.bam"
+                previous_alignment_samfilename_in_main = f"{options.output_directory}/alignments/{previous_merged_RNA_bamfilename}_{layout}.sam"
                 new_merged_SRA += "-" + metadata[layout][Assay_Type][i]
                 new_alignment_bamfilename_in_main = f"{options.output_directory}/alignments/{new_merged_SRA}_{layout}.bam"
                 new_alignment_samfilename_in_main = f"{options.output_directory}/alignments/{new_merged_SRA}_{layout}.sam"
@@ -327,6 +327,9 @@ def main():
                 cmd += f" -@ {options.cpu} "
                 cmd += f" {new_alignment_bamfilename_in_main} {previous_alignment_bamfilename_in_main} {options.output_directory}/alignments/{metadata[layout][Assay_Type][i]}_{layout}.bam "
                 os.system(cmd)
+                
+                os.system(f"mv {previous_alignment_bamfilename_in_main} {options.temp_directory}/")
+                os.system(f"mv {previous_alignment_samfilename_in_main} {options.temp_directory}/")
                 
                 cmd  = f"samtools view "
                 cmd += f" -@ {options.cpu} "
