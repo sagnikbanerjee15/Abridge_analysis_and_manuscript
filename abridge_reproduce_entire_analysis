@@ -296,7 +296,7 @@ def main():
             if Assay_Type not in metadata[layout]:
                 metadata[layout][Assay_Type] = []
             metadata[layout][Assay_Type].append(SRA)
-            
+    """       
     # Create new data by merging 2 or more samples together
     add_these_back_to_metadata_expanded = {}
     for layout in metadata:
@@ -342,11 +342,18 @@ def main():
     
     os.system(f"mv {options.output_directory}/alignments/*bam {options.temp_directory}/")
     os.system(f"mv {options.output_directory}/alignments/*sam {options.temp_directory}/")
-    """        
-    for Assay_Type in options.metadata_expanded:
-        for row in options.metadata_expanded[Assay_Type]:
-            print(row)
     """
+    for layout in metadata:
+        for Assay_Type in metadata[layout]:
+            i = 1
+            new_merged_SRA = metadata[layout][Assay_Type][0]
+            alignment_bamfilename_in_temp = f"{options.temp_directory}/{new_merged_SRA}_{layout}.bam"
+            alignment_bamfilename_in_main = f"{options.output_directory}/alignments/{new_merged_SRA}_{layout}.bam"
+            while i < len(metadata[layout][Assay_Type]):
+                new_merged_SRA += "-" + metadata[layout][Assay_Type][i]
+                options.metadata_expanded[Assay_Type].append(["dummy","dummy",layout,Assay_Type,"dummy","dummy",new_merged_SRA]) 
+                i += 1
+    
     
     ##################################################################################################
     # Compress alignments with Abridge
