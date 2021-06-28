@@ -622,8 +622,7 @@ def main():
                 # DEEZ
                 #################################################################################################################
                 os.system(f"mkdir -p {options.output_directory}/deez_compressed_files")
-                
-                
+
                 for lossy in [0,50,99]:
                     for encodequality in ["1","2"]:
                         cmd  = f"(/usr/bin/time --verbose "
