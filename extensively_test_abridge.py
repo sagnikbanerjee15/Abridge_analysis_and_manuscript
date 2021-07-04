@@ -82,7 +82,7 @@ for inputfilename in inputsamfile_SE:
                                     cmd += f" 2> {output_directory_name}.error "
                                     compress_commands.append(cmd)
 
-pprint.pprint(compress_commands)
+print("\n".join(compress_commands))
 print(len(compress_commands))
                                     
                                     
