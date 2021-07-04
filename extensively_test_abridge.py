@@ -117,8 +117,8 @@ for inputfilename in inputsamfile_SE:
 #pool.map(runCommand,compress_commands)
 #pool.map(runCommand,decompress_commands)
 
-print("\n".join(decompress_commands))
-                                    
+ 
+print(decompress_commands)                                   
                                     
                                     
                                     
