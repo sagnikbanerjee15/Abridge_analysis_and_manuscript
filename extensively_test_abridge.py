@@ -84,7 +84,8 @@ for paired_type in [inputsamfile_SE,inputsamfile_PE]:
                                     cmd += f") "
                                     cmd += f" 1> {output_directory_name}.output "
                                     cmd += f" 2> {output_directory_name}.error "
-                                    compress_commands.append([cmd,"dummy"])
+                                    if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.abridge")==False:
+                                        compress_commands.append([cmd,"dummy"])
                                     
                                     cmd  = f"(/usr/bin/time --verbose "
                                     cmd += f" abridge "
@@ -113,7 +114,8 @@ for paired_type in [inputsamfile_SE,inputsamfile_PE]:
                                     cmd += f"1> {output_directory_name}.output"
                                     cmd += f"2> {output_directory_name}.error"
                                     
-                                    decompress_commands.append([cmd,"dummy"])
+                                    if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.decompressed.sam") == False:
+                                        decompress_commands.append([cmd,"dummy"])
 
 pool.map(runCommand,compress_commands)
 pool.map(runCommand,decompress_commands)
