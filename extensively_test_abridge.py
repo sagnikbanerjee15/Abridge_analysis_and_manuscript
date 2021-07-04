@@ -115,10 +115,10 @@ for paired_type in [inputsamfile_SE,inputsamfile_PE]:
                                     
                                     decompress_commands.append([cmd,"dummy"])
 
-#pool.map(runCommand,compress_commands)
-#pool.map(runCommand,decompress_commands)
-print(decompress_commands)
-print(len(compress_commands),len(decompress_commands))                                   
+pool.map(runCommand,compress_commands)
+pool.map(runCommand,decompress_commands)
+#print(decompress_commands)
+#print(len(compress_commands),len(decompress_commands))                                   
                                     
                                     
                                     
