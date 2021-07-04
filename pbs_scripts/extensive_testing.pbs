@@ -3,7 +3,7 @@
 #SBATCH -n 72
 #SBATCH -N 1
 #SBATCH --partition=long
-#SBATCH --mem=G
+#SBATCH --mem=150G
 #SBATCH --time=21-00:00:00
 #SBATCH --job-name="AA"
 #SBATCH --mail-user=sagnik@iastate.edu
