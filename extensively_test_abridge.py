@@ -34,25 +34,27 @@ inputsamfile_PE = [f"{ROOT_DIRECTORY}/SRR13711353_PE.sam", # Single ended RNA-Se
 compress_commands = []
 decompress_commands = []
 for inputfilename in inputsamfile_SE:
-    output_directory_name = f"{ROOT_DIRECTORY}/" 
-    inputfilename_without_location = inputfilename.split("/")[-1][:-4]
-    output_directory_name += f"{inputfilename}_"
     for level in ["1", "2", "3"]: # 3 iterations
-        output_directory_name += f"compress_level_{level}_"
         for save_scores in [0,1]: # 2 iterations
-            output_directory_name += f"save_scores_{save_scores}_"
             for ignore_quality_scores in [0,1]: # 2 iterations
-                output_directory_name += f"ignore_quality_scores_{ignore_quality_scores}_"
                 for ignore_soft_clippings in [0,1]: # 2 iterations
-                    output_directory_name += f"ignore_soft_clippings_{ignore_soft_clippings}_"
                     for ignore_mismatches in [0,1]: # 2 iterations
-                        output_directory_name += f"ignore_mismatches_{ignore_mismatches}_"
                         for ignore_unmapped_reads in [0,1]: # 2 iterations
-                            output_directory_name += f"ignore_unmapped_reads_{ignore_unmapped_reads}_"
                             for save_all_quality_scores in [0,1]: # 2 iterations
-                                output_directory_name += f"save_all_quality_scores_{save_all_quality_scores}_"
                                 for save_exact_quality_scores in [0,1]: # 2 iterations
+                                    
+                                    inputfilename_without_location = inputfilename.split("/")[-1][:-4]
+                                    output_directory_name = f"{ROOT_DIRECTORY}/" 
+                                    output_directory_name += f"{inputfilename_without_location}_"
+                                    output_directory_name += f"compress_level_{level}_"
+                                    output_directory_name += f"save_scores_{save_scores}_"
+                                    output_directory_name += f"ignore_quality_scores_{ignore_quality_scores}_"
+                                    output_directory_name += f"ignore_soft_clippings_{ignore_soft_clippings}_"
+                                    output_directory_name += f"ignore_mismatches_{ignore_mismatches}_"
+                                    output_directory_name += f"ignore_unmapped_reads_{ignore_unmapped_reads}_"
+                                    output_directory_name += f"save_all_quality_scores_{save_all_quality_scores}_"
                                     output_directory_name += f"save_exact_quality_scores_{save_exact_quality_scores}"
+                                    
                                     cmd  = f"(/usr/bin/time --verbose "
                                     cmd += f" abridge "
                                     cmd += f" --keep_intermediate_error_files "
