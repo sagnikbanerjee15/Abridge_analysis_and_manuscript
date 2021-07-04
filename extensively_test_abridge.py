@@ -20,7 +20,7 @@ def runCommand(eachpinput):
     cmd,dummy = eachpinput
     os.system(cmd)
 
-CPU = 100
+CPU = 72
 pool = multiprocessing.Pool(processes=int(CPU))
 # Location of samfiles which will be compressed - Note that these are hard coded so it will not work on other machines
 ROOT_DIRECTORY = "/project/maizegdb/sagnik/ABRIDGE/developing_abridge/"
