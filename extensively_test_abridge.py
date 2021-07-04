@@ -33,8 +33,8 @@ inputsamfile_PE = [f"{ROOT_DIRECTORY}/SRR13711353_PE.sam", # Single ended RNA-Se
 # Single ended - x iterations in total
 compress_commands = []
 decompress_commands = []
-output_directory_name = f"{ROOT_DIRECTORY}/"
-for inputfilename in inputsamfile_SE: 
+for inputfilename in inputsamfile_SE:
+    output_directory_name = f"{ROOT_DIRECTORY}/" 
     inputfilename_without_location = inputfilename.split("/")[-1][:-4]
     output_directory_name += f"{inputfilename}_"
     for level in ["1", "2", "3"]: # 3 iterations
