@@ -97,8 +97,8 @@ for level in ["1","2","3"]:
                                         if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.abridge")==False and os.path.exists(f"{TEMP_DIRECTORY}/{output_directory_name_without_location}/{inputfilename_without_location}.abridge") == False:
                                             cmd_mv = f"mv {output_directory_name} {TEMP_DIRECTORY}"
                                             compress_commands.append([cmd,cmd_mv])
-                                        print(f"{output_directory_name}/{inputfilename_without_location}.abridge")
-                                        print(f"{TEMP_DIRECTORY}/{output_directory_name_without_location}/{inputfilename_without_location}.abridge")
+                                        #print(f"{output_directory_name}/{inputfilename_without_location}.abridge")
+                                        #print(f"{TEMP_DIRECTORY}/{output_directory_name_without_location}/{inputfilename_without_location}.abridge")
                                         
                                         cmd  = f"(/usr/bin/time --verbose "
                                         cmd += f" abridge "
@@ -130,7 +130,7 @@ for level in ["1","2","3"]:
                                         if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.decompressed.sam") == False:
                                             decompress_commands.append([cmd,"dummy"])
 
-#pool.map(run2CommandsInSeries,compress_commands)
+pool.map(run2CommandsInSeries,compress_commands)
 #pool.map(runCommand,decompress_commands)
                                    
                                     
