@@ -25,7 +25,7 @@ def run2CommandsInSeries(eachpinput):
     os.system(cmd1)
     os.system(cmd2)
 
-CPU = 72
+CPU = 72*2
 pool = multiprocessing.Pool(processes=int(CPU))
 # Location of samfiles which will be compressed - Note that these are hard coded so it will not work on other machines
 ROOT_DIRECTORY = "/project/maizegdb/sagnik/ABRIDGE/developing_abridge/"
@@ -45,9 +45,9 @@ os.system(f"mkdir -p {TEMP_DIRECTORY}")
 compress_commands = []
 decompress_commands = []
 level = 1
-for level in ["1","2","3"]:
-    for paired_type in [inputsamfile_SE,inputsamfile_PE]:
-        for inputfilename in paired_type:
+for level in ["1","2","3"]: # 3 iterations
+    for paired_type in [inputsamfile_SE,inputsamfile_PE]: # 2 iterations
+        for inputfilename in paired_type: # 2 iterations
             for save_scores in [0,1]: # 2 iterations
                 for ignore_quality_scores in [0,1]: # 2 iterations
                     for ignore_soft_clippings in [0,1]: # 2 iterations
