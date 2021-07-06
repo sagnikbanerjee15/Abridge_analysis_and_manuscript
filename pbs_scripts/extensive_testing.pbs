@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH -n 72
-#SBATCH -N 2
+#SBATCH -N 1
 #SBATCH --partition=short
 #SBATCH --mem=150G
 #SBATCH --time=2-00:00:00
@@ -17,6 +17,6 @@ conda activate abridge_pypy
 module load samtools
 module load libssh
 
-CPU=144 # Change accordingly
+CPU=72 # Change accordingly
 
 python extensively_test_abridge.py
