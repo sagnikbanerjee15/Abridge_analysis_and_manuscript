@@ -39,8 +39,8 @@ inputsamfile_PE = [f"{ROOT_DIRECTORY}/SRR13711353_PE.sam", # Single ended RNA-Se
 
 TEMP_DIRECTORY = "/90daydata/maizegdb/sagnik/ABRIDGE/developing_abridge/"
 os.system(f"rm -rf {ROOT_DIRECTORY}/*compress*")
-#os.system(f"rm -rf {TEMP_DIRECTORY}")
-#os.system(f"mkdir -p {TEMP_DIRECTORY}")
+os.system(f"rm -rf {TEMP_DIRECTORY}")
+os.system(f"mkdir -p {TEMP_DIRECTORY}")
 
 
 # Single ended - x iterations in total
@@ -133,9 +133,8 @@ for level in ["1","2","3"]: # 3 iterations
                                         if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.decompressed.sam") == False:
                                             cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
                                             decompress_commands.append([cmd,cmd_mv])
-
-#pool.map(run2CommandsInSeries,compress_commands)
-pool.map(run2CommandsInSeries,decompress_commands)
+pool.map(run2CommandsInSeries,compress_commands)
+#pool.map(run2CommandsInSeries,decompress_commands)
                                    
                                     
                                     
