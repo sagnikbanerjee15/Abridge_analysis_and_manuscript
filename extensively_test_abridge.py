@@ -133,8 +133,8 @@ for level in ["1","2","3"]: # 3 iterations
                                         if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.decompressed.sam") == False:
                                             cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
                                             decompress_commands.append([cmd,cmd_mv])
-pool.map(run2CommandsInSeries,compress_commands)
-#pool.map(run2CommandsInSeries,decompress_commands)
+#pool.map(run2CommandsInSeries,compress_commands)
+pool.map(run2CommandsInSeries,decompress_commands)
                                    
                                     
                                     
