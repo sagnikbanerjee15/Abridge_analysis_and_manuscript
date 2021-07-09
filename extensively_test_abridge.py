@@ -24,6 +24,12 @@ def run2CommandsInSeries(eachpinput):
     cmd1,cmd2 = eachpinput
     os.system(cmd1)
     os.system(cmd2)
+    
+
+def runMultipleCommandsInSeries(eachpinput):
+    for cmd in eachpinput:
+        os.system(cmd)
+    
 
 CPU = 72
 pool = multiprocessing.Pool(processes=int(CPU))
@@ -131,11 +137,14 @@ for level in ["1","2","3"]: # 3 iterations
                                         cmd += f"2> {output_directory_name}.error"
                                         
                                         if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.decompressed.sam") == False:
+                                            compressed_directory_location = "/project/" + "/".join(output_directory_name.split("/")[1:])
+                                            cmd_cp = f"cp {compressed_directory_location} {ROOT_DIRECTORY}"
                                             cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
-                                            decompress_commands.append([cmd,cmd_mv])
+                                            cmd_rm = f"rm -rf {output_directory_name.replace('decompress','compress')}"
+                                            decompress_commands.append([cmd_cp, cmd,cmd_mv])
                                             os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
 #pool.map(run2CommandsInSeries,compress_commands)
-pool.map(run2CommandsInSeries,decompress_commands)
+pool.map(runMultipleCommandsInSeries,decompress_commands)
                                    
                                     
                                     
