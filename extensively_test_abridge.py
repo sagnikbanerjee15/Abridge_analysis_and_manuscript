@@ -30,8 +30,8 @@ def runMultipleCommandsInSeries(eachpinput):
     for cmd in eachpinput:
         print(cmd)
         sys.stdout.flush()
-        print("="*100)
         #os.system(cmd)
+    print("="*100)
     
 
 CPU = 72
