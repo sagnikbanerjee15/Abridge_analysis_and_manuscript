@@ -28,7 +28,8 @@ def run2CommandsInSeries(eachpinput):
 
 def runMultipleCommandsInSeries(eachpinput):
     for cmd in eachpinput:
-        os.system(cmd)
+        print(cmd)
+        #os.system(cmd)
     
 
 CPU = 72
