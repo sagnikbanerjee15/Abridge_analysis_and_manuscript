@@ -30,7 +30,7 @@ def runMultipleCommandsInSeries(eachpinput):
     for cmd in eachpinput:
         print(cmd)
         sys.stdout.flush()
-        #os.system(cmd)
+        os.system(cmd)
     print("="*100)
     
 
