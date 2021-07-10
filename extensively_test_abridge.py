@@ -140,7 +140,7 @@ for level in ["1","2","3"]: # 3 iterations
                                         cmd += f"2> {output_directory_name}.error"
                                         
                                         if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.decompressed.sam") == False:
-                                            compressed_directory_location = "/project/" + "/".join(output_directory_name.replace('decompress','compress').split("/")[2:])
+                                            compressed_directory_location = "/90daydata/" + "/".join(output_directory_name.replace('decompress','compress').split("/")[2:])
                                             cmd_cp = f"cp {compressed_directory_location} {ROOT_DIRECTORY}"
                                             cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
                                             cmd_rm = f"rm -rf {output_directory_name.replace('decompress','compress')}"
