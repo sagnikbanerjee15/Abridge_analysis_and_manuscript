@@ -29,6 +29,7 @@ def run2CommandsInSeries(eachpinput):
 def runMultipleCommandsInSeries(eachpinput):
     for cmd in eachpinput:
         print(cmd)
+        sys.stdout.flush()
         #os.system(cmd)
     
 
