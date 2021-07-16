@@ -147,7 +147,7 @@ for level in ["1","2","3"]: # 3 iterations
                                             decompress_commands.append([cmd_cp, cmd, cmd_mv, cmd_rm])
                                             os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
 #pool.map(run2CommandsInSeries,compress_commands)
-pool.map(runMultipleCommandsInSeries,decompress_commands)
+#pool.map(runMultipleCommandsInSeries,decompress_commands)
                                    
                                     
                                     
