@@ -122,30 +122,30 @@ for level in ["1","2","3"]: # 3 iterations
                                             if ignore_sequence == 1:
                                                 cmd += " --ignore_sequence "
                                         
-                                        output_directory_name = f"{ROOT_DIRECTORY}/" 
-                                        output_directory_name += f"{inputfilename_without_location}_"
-                                        output_directory_name += f"decompress_level_{level}_"
-                                        output_directory_name += f"save_scores_{save_scores}_"
-                                        output_directory_name += f"ignore_quality_scores_{ignore_quality_scores}_"
-                                        output_directory_name += f"ignore_soft_clippings_{ignore_soft_clippings}_"
-                                        output_directory_name += f"ignore_mismatches_{ignore_mismatches}_"
-                                        output_directory_name += f"ignore_unmapped_reads_{ignore_unmapped_reads}_"
-                                        output_directory_name += f"save_all_quality_scores_{save_all_quality_scores}_"
-                                        output_directory_name += f"save_exact_quality_scores_{save_exact_quality_scores}_"
-                                        output_directory_name += f"ignore_sequence_{ignore_sequence}"
-                                
-                                        cmd += f" --output_directory {output_directory_name} "
-                                        cmd += f") "
-                                        cmd += f" 1>> {output_directory_name}.output"
-                                        cmd += f" 2> {output_directory_name}.error"
-                                        
-                                        if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.decompressed.sam") == False:
-                                            compressed_directory_location = "/90daydata/" + "/".join(output_directory_name.split("_ignore_sequence_")[0].replace('decompress','compress').split("/")[2:])
-                                            cmd_cp = f"cp -r {compressed_directory_location} {ROOT_DIRECTORY}"
-                                            cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
-                                            cmd_rm = f"rm -rf {output_directory_name.split('_ignore_sequence_')[0].replace('decompress','compress')}"
-                                            decompress_commands.append([cmd_cp, cmd, cmd_mv, cmd_rm])
-                                            os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
+                                            output_directory_name = f"{ROOT_DIRECTORY}/" 
+                                            output_directory_name += f"{inputfilename_without_location}_"
+                                            output_directory_name += f"decompress_level_{level}_"
+                                            output_directory_name += f"save_scores_{save_scores}_"
+                                            output_directory_name += f"ignore_quality_scores_{ignore_quality_scores}_"
+                                            output_directory_name += f"ignore_soft_clippings_{ignore_soft_clippings}_"
+                                            output_directory_name += f"ignore_mismatches_{ignore_mismatches}_"
+                                            output_directory_name += f"ignore_unmapped_reads_{ignore_unmapped_reads}_"
+                                            output_directory_name += f"save_all_quality_scores_{save_all_quality_scores}_"
+                                            output_directory_name += f"save_exact_quality_scores_{save_exact_quality_scores}_"
+                                            output_directory_name += f"ignore_sequence_{ignore_sequence}"
+                                    
+                                            cmd += f" --output_directory {output_directory_name} "
+                                            cmd += f") "
+                                            cmd += f" 1>> {output_directory_name}.output"
+                                            cmd += f" 2> {output_directory_name}.error"
+                                            
+                                            if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.decompressed.sam") == False:
+                                                compressed_directory_location = "/90daydata/" + "/".join(output_directory_name.split("_ignore_sequence_")[0].replace('decompress','compress').split("/")[2:])
+                                                cmd_cp = f"cp -r {compressed_directory_location} {ROOT_DIRECTORY}"
+                                                cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
+                                                cmd_rm = f"rm -rf {output_directory_name.split('_ignore_sequence_')[0].replace('decompress','compress')}"
+                                                decompress_commands.append([cmd_cp, cmd, cmd_mv, cmd_rm])
+                                                os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
 #pool.map(run2CommandsInSeries,compress_commands)
 #pool.map(runMultipleCommandsInSeries,decompress_commands)
                                    
