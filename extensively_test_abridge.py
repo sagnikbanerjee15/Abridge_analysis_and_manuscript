@@ -37,7 +37,12 @@ def runMultipleCommandsInSeries(eachpinput):
 CPU = 72
 pool = multiprocessing.Pool(processes=int(CPU))
 # Location of samfiles which will be compressed - Note that these are hard coded so it will not work on other machines
-ROOT_DIRECTORY = "/project/maizegdb/sagnik/ABRIDGE/developing_abridge/"
+if open("/etc/hostname","r").read().strip() == "ceres.scinet.local":
+    ROOT_DIRECTORY = "/project/maizegdb/sagnik/ABRIDGE/developing_abridge/"
+    TEMP_DIRECTORY = "/90daydata/maizegdb/sagnik/ABRIDGE/developing_abridge/"
+elif open("/etc/hostname","r").read().strip() == "Atlas-login-1.HPC.MsState.Edu":
+    ROOT_DIRECTORY = "/project/maizegdb/sagnik/ABRIDGE/developing_abridge/"
+    TEMP_DIRECTORY = "/project/90daydata/maizegdb/sagnik/ABRIDGE/developing_abridge/"
 inputsamfile_SE = [f"{ROOT_DIRECTORY}/SRR13711353_SE.sam", # Single ended RNA-Seq
                    f"{ROOT_DIRECTORY}/SRR12077404_SE.sam" # Single ended DNA-Seq
                    ]
@@ -46,7 +51,7 @@ inputsamfile_PE = [f"{ROOT_DIRECTORY}/SRR13711353_PE.sam", # Single ended RNA-Se
                    f"{ROOT_DIRECTORY}/SRR12077404_PE.sam" # Single ended DNA-Seq
                    ]
 
-TEMP_DIRECTORY = "/90daydata/maizegdb/sagnik/ABRIDGE/developing_abridge/"
+
 os.system(f"rm -rf {ROOT_DIRECTORY}/*compress*")
 os.system(f"rm -rf {TEMP_DIRECTORY}")
 os.system(f"mkdir -p {TEMP_DIRECTORY}")

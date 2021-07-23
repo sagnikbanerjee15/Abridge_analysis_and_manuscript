@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#SBATCH -n 72
+#SBATCH -N 1
+#SBATCH --partition=atlas
+#SBATCH --mem=150G
+#SBATCH --time=2-00:00:00
+#SBATCH --job-name="AA"
+#SBATCH --mail-user=sagnik@iastate.edu
+#SBATCH --mail-type=BEGIN
+#SBATCH --mail-type=END
+#SBATCH --mail-type=FAIL
+#SBATCH --account=maizegdb
+#SBATCH --output=/project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS.output
+#SBATCH --error=/project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS.error
+
+conda activate abridge_pypy
+module load singularity
+module load samtools
+
+CPU=72 # Change accordingly
+
+python extensively_test_abridge.py
