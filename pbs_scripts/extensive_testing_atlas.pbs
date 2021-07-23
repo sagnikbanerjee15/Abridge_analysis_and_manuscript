@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -n 72
+#SBATCH -n 40
 #SBATCH -N 1
 #SBATCH --partition=atlas
 #SBATCH --mem=150G
