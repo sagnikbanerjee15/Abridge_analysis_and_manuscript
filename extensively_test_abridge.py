@@ -47,8 +47,8 @@ inputsamfile_PE = [f"{ROOT_DIRECTORY}/SRR13711353_PE.sam", # Single ended RNA-Se
                    ]
 
 TEMP_DIRECTORY = "/90daydata/maizegdb/sagnik/ABRIDGE/developing_abridge/"
-#os.system(f"rm -rf {ROOT_DIRECTORY}/*compress*")
-#os.system(f"rm -rf {TEMP_DIRECTORY}")
+os.system(f"rm -rf {ROOT_DIRECTORY}/*compress*")
+os.system(f"rm -rf {TEMP_DIRECTORY}")
 os.system(f"mkdir -p {TEMP_DIRECTORY}")
 
 
@@ -146,7 +146,7 @@ for level in ["1","2","3"]: # 3 iterations
                                                 cmd_rm = f"rm -rf {output_directory_name.split('_ignore_sequence_')[0].replace('decompress','compress')}"
                                                 decompress_commands.append([cmd_cp, cmd, cmd_mv, cmd_rm])
                                                 os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
-#pool.map(run2CommandsInSeries,compress_commands)
+pool.map(run2CommandsInSeries,compress_commands)
 pool.map(runMultipleCommandsInSeries,decompress_commands)
                                    
                                     
