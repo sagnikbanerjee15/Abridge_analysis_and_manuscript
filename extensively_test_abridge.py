@@ -116,6 +116,7 @@ for level in ["1","2","3"]: # 3 iterations
                                         if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.abridge")==False and os.path.exists(f"{TEMP_DIRECTORY}/{output_directory_name_without_location}/{inputfilename_without_location}.abridge") == False:
                                             cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
                                             compress_commands.append([cmd,cmd_mv])
+                                            print(cmd)
                                             os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
                                         #print(f"{output_directory_name}/{inputfilename_without_location}.abridge")
                                         #print(f"{TEMP_DIRECTORY}/{output_directory_name_without_location}/{inputfilename_without_location}.abridge")
@@ -154,7 +155,7 @@ for level in ["1","2","3"]: # 3 iterations
                                                 cmd_rm = f"rm -rf {output_directory_name.split('_ignore_sequence_')[0].replace('decompress','compress')}"
                                                 decompress_commands.append([cmd_cp, cmd, cmd_mv, cmd_rm])
                                                 os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
-pool.map(run2CommandsInSeries,compress_commands)
+#pool.map(run2CommandsInSeries,compress_commands)
 #pool.map(runMultipleCommandsInSeries,decompress_commands)
                                    
                                     
