@@ -53,7 +53,7 @@ inputsamfile_PE = [f"{ROOT_DIRECTORY}/SRR13711353_PE.sam", # Single ended RNA-Se
 
 
 os.system(f"rm -rf {ROOT_DIRECTORY}/*compress*")
-os.system(f"rm -rf {TEMP_DIRECTORY}")
+os.system(f"rm -rf {TEMP_DIRECTORY}/*compress*")
 os.system(f"mkdir -p {TEMP_DIRECTORY}")
 
 
