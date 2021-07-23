@@ -40,7 +40,7 @@ pool = multiprocessing.Pool(processes=int(CPU))
 if open("/etc/hostname","r").read().strip() == "ceres.scinet.local":
     ROOT_DIRECTORY = "/project/maizegdb/sagnik/ABRIDGE/developing_abridge/"
     TEMP_DIRECTORY = "/90daydata/maizegdb/sagnik/ABRIDGE/developing_abridge/"
-elif open("/etc/hostname","r").read().strip() == "Atlas-login-1.HPC.MsState.Edu":
+else:
     ROOT_DIRECTORY = "/project/maizegdb/sagnik/ABRIDGE/developing_abridge/"
     TEMP_DIRECTORY = "/project/90daydata/maizegdb/sagnik/ABRIDGE/developing_abridge/"
 inputsamfile_SE = [f"{ROOT_DIRECTORY}/SRR13711353_SE.sam", # Single ended RNA-Seq
