@@ -3,8 +3,8 @@
 #SBATCH -n 80
 #SBATCH -N 1
 ##SBATCH --partition=short
-#SBATCH --partition=priority-mem768 -
-#SBATCH -qos=maizegdb
+#SBATCH --partition=priority-mem768 
+#SBATCH --qos=maizegdb
 #SBATCH --mem=150G
 #SBATCH --time=2-00:00:00
 #SBATCH --job-name="AA"
