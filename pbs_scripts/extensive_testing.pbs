@@ -1,8 +1,10 @@
 #!/bin/bash
 
-#SBATCH -n 72
+#SBATCH -n 80
 #SBATCH -N 1
-#SBATCH --partition=short
+##SBATCH --partition=short
+#SBATCH --partition=priority-mem768 -
+#SBATCH -qos=maizegdb
 #SBATCH --mem=150G
 #SBATCH --time=2-00:00:00
 #SBATCH --job-name="AA"
@@ -16,7 +18,5 @@
 conda activate abridge_pypy
 module load samtools
 module load libssh
-
-CPU=72 # Change accordingly
 
 python extensively_test_abridge.py
