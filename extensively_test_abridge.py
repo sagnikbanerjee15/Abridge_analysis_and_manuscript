@@ -153,7 +153,7 @@ for level in ["1","2","3"]: # 3 iterations
                                             
                                             print(cmd)
 #pool.map(run2CommandsInSeries,compress_commands)
-#pool.map(runMultipleCommandsInSeries,decompress_commands)
+pool.map(runMultipleCommandsInSeries,decompress_commands)
                                    
                                     
                                     
