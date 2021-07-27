@@ -153,7 +153,7 @@ for level in ["1","2","3"]: # 3 iterations
                                                 print("================================================================================")
                                                 print("\n".join([cmd_cp, cmd, cmd_mv, cmd_rm]))
                                                 print("================================================================================")
-                                                sys.out.flush()
+                                                sys.stdout.flush()
                                             
                                             #print(cmd)
 #pool.map(run2CommandsInSeries,compress_commands)
