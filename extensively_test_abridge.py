@@ -34,7 +34,7 @@ def runMultipleCommandsInSeries(eachpinput):
     print("="*100)
     
 
-CPU = 80
+CPU = 120
 pool = multiprocessing.Pool(processes=int(CPU))
 # Location of samfiles which will be compressed - Note that these are hard coded so it will not work on other machines
 if open("/etc/hostname","r").read().strip() == "ceres.scinet.local":
@@ -54,9 +54,9 @@ inputsamfile_PE = [f"{ROOT_DIRECTORY}/SRR13711353_PE.sam", # Single ended RNA-Se
 ROOT_DIRECTORY = "/project/maizegdb/sagnik/ABRIDGE/developing_abridge/"
 TEMP_DIRECTORY = "/90daydata/maizegdb/sagnik/ABRIDGE/developing_abridge/"
 
-os.system(f"rm -rf {ROOT_DIRECTORY}/*compress*")
-os.system(f"rm -rf {TEMP_DIRECTORY}/*compress*")
-os.system(f"mkdir -p {TEMP_DIRECTORY}")
+#os.system(f"rm -rf {ROOT_DIRECTORY}/*compress*")
+#os.system(f"rm -rf {TEMP_DIRECTORY}/*compress*")
+#os.system(f"mkdir -p {TEMP_DIRECTORY}")
 
 
 # Single ended - x iterations in total
@@ -64,6 +64,7 @@ compress_commands = []
 decompress_commands = []
 level = 1
 for level in ["1","2","3"]: # 3 iterations
+    if level!="3":continue
     for paired_type in [inputsamfile_SE,inputsamfile_PE]: # 2 iterations
         for inputfilename in paired_type: # 2 iterations
             for save_scores in [0,1]: # 2 iterations
