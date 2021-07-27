@@ -118,10 +118,6 @@ for level in ["1","2","3"]: # 3 iterations
                                             os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
                                         """
                                         for ignore_sequence in [0,1]: # 2 iterations
-                                            if ignore_sequence == 1:
-                                                cmd += " --ignore_sequence "
-                                        
-                                        
                                             output_directory_name = f"{ROOT_DIRECTORY}/" 
                                             output_directory_name += f"{inputfilename_without_location}_"
                                             output_directory_name += f"decompress_level_{level}_"
@@ -141,6 +137,8 @@ for level in ["1","2","3"]: # 3 iterations
                                             cmd += f" --genome /project/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa "
                                             cmd += f" --inputabrfilenames {output_directory_name}/{inputfilename_without_location}.abridge "
                                             cmd += f" --output_directory {output_directory_name} "
+                                            if ignore_sequence == 1:
+                                                cmd += " --ignore_sequence "
                                             cmd += f") "
                                             cmd += f" 1>> {output_directory_name}.output"
                                             cmd += f" 2> {output_directory_name}.error"
