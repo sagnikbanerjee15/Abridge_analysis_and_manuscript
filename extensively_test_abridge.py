@@ -64,7 +64,6 @@ compress_commands = []
 decompress_commands = []
 level = 1
 for level in ["1","2","3"]: # 3 iterations
-    if level!="3":continue
     for paired_type in [inputsamfile_SE,inputsamfile_PE]: # 2 iterations
         for inputfilename in paired_type: # 2 iterations
             for save_scores in [0,1]: # 2 iterations
@@ -112,8 +111,8 @@ for level in ["1","2","3"]: # 3 iterations
                                         cmd += f") "
                                         cmd += f" 1>> {output_directory_name}.output "
                                         cmd += f" 2> {output_directory_name}.error "
-                                        print(cmd + " & ")
-                                        sys.stdout.flush()
+                                        #print(cmd + " & ")
+                                        #sys.stdout.flush()
                                         output_directory_name_without_location = output_directory_name.split("/")[-1]
                                         if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.abridge")==False and os.path.exists(f"{TEMP_DIRECTORY}/{output_directory_name_without_location}/{inputfilename_without_location}.abridge") == False:
                                             cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
