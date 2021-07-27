@@ -135,7 +135,7 @@ for level in ["1","2","3"]: # 3 iterations
                                             cmd += f" --keep_intermediate_error_files "
                                             cmd += f" --decompress "
                                             cmd += f" --genome /project/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa "
-                                            cmd += f" --inputabrfilenames {output_directory_name}/{inputfilename_without_location}.abridge "
+                                            cmd += f" --inputabrfilenames {output_directory_name.split('_ignore_sequence_')[0].replace('decompress','compress')}/{inputfilename_without_location}.abridge "
                                             cmd += f" --output_directory {output_directory_name} "
                                             if ignore_sequence == 1:
                                                 cmd += " --ignore_sequence "
