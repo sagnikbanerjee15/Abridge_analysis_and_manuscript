@@ -85,7 +85,7 @@ for level in ["1","2","3"]: # 3 iterations
                                         output_directory_name += f"ignore_unmapped_reads_{ignore_unmapped_reads}_"
                                         output_directory_name += f"save_all_quality_scores_{save_all_quality_scores}_"
                                         output_directory_name += f"save_exact_quality_scores_{save_exact_quality_scores}"
-                                        
+                                        """
                                         cmd  = f"(/usr/bin/time --verbose "
                                         cmd += f" abridge "
                                         cmd += f" --keep_intermediate_error_files "
@@ -111,25 +111,16 @@ for level in ["1","2","3"]: # 3 iterations
                                         cmd += f") "
                                         cmd += f" 1>> {output_directory_name}.output "
                                         cmd += f" 2> {output_directory_name}.error "
-                                        #print(cmd + " & ")
-                                        #sys.stdout.flush()
                                         output_directory_name_without_location = output_directory_name.split("/")[-1]
                                         if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.abridge")==False and os.path.exists(f"{TEMP_DIRECTORY}/{output_directory_name_without_location}/{inputfilename_without_location}.abridge") == False:
                                             cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
                                             compress_commands.append([cmd,cmd_mv])
                                             os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
-                                        #print(f"{output_directory_name}/{inputfilename_without_location}.abridge")
-                                        #print(f"{TEMP_DIRECTORY}/{output_directory_name_without_location}/{inputfilename_without_location}.abridge")
-                                        
-                                        cmd  = f"(/usr/bin/time --verbose "
-                                        cmd += f" abridge "
-                                        cmd += f" --keep_intermediate_error_files "
-                                        cmd += f" --decompress "
-                                        cmd += f" --genome /project/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa "
-                                        cmd += f" --inputabrfilenames {output_directory_name}/{inputfilename_without_location}.abridge "
+                                        """
                                         for ignore_sequence in [0,1]: # 2 iterations
                                             if ignore_sequence == 1:
                                                 cmd += " --ignore_sequence "
+                                        
                                         
                                             output_directory_name = f"{ROOT_DIRECTORY}/" 
                                             output_directory_name += f"{inputfilename_without_location}_"
@@ -142,7 +133,13 @@ for level in ["1","2","3"]: # 3 iterations
                                             output_directory_name += f"save_all_quality_scores_{save_all_quality_scores}_"
                                             output_directory_name += f"save_exact_quality_scores_{save_exact_quality_scores}_"
                                             output_directory_name += f"ignore_sequence_{ignore_sequence}"
-                                    
+                                            
+                                            cmd  = f"(/usr/bin/time --verbose "
+                                            cmd += f" abridge "
+                                            cmd += f" --keep_intermediate_error_files "
+                                            cmd += f" --decompress "
+                                            cmd += f" --genome /project/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa "
+                                            cmd += f" --inputabrfilenames {output_directory_name}/{inputfilename_without_location}.abridge "
                                             cmd += f" --output_directory {output_directory_name} "
                                             cmd += f") "
                                             cmd += f" 1>> {output_directory_name}.output"
@@ -155,8 +152,10 @@ for level in ["1","2","3"]: # 3 iterations
                                                 cmd_rm = f"rm -rf {output_directory_name.split('_ignore_sequence_')[0].replace('decompress','compress')}"
                                                 decompress_commands.append([cmd_cp, cmd, cmd_mv, cmd_rm])
                                                 os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
+                                            
+                                            print(cmd)
 #pool.map(run2CommandsInSeries,compress_commands)
-pool.map(runMultipleCommandsInSeries,decompress_commands)
+#pool.map(runMultipleCommandsInSeries,decompress_commands)
                                    
                                     
                                     
