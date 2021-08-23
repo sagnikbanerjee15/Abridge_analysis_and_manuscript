@@ -85,7 +85,7 @@ for level in ["1","2","3"]: # 3 iterations
                                         output_directory_name += f"ignore_unmapped_reads_{ignore_unmapped_reads}_"
                                         output_directory_name += f"save_all_quality_scores_{save_all_quality_scores}_"
                                         output_directory_name += f"save_exact_quality_scores_{save_exact_quality_scores}"
-                                        """
+                                        
                                         cmd  = f"(/usr/bin/time --verbose "
                                         cmd += f" abridge "
                                         cmd += f" --keep_intermediate_error_files "
@@ -116,7 +116,7 @@ for level in ["1","2","3"]: # 3 iterations
                                             cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
                                             compress_commands.append([cmd,cmd_mv])
                                             os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
-                                        """
+                                        
                                         for ignore_sequence in [0,1]: # 2 iterations
                                             output_directory_name = f"{ROOT_DIRECTORY}/" 
                                             output_directory_name += f"{inputfilename_without_location}_"
@@ -156,7 +156,7 @@ for level in ["1","2","3"]: # 3 iterations
                                                 sys.stdout.flush()
                                             
                                             #print(cmd)
-#pool.map(run2CommandsInSeries,compress_commands)
+pool.map(run2CommandsInSeries,compress_commands)
 #pool.map(runMultipleCommandsInSeries,decompress_commands)
                                    
                                     
