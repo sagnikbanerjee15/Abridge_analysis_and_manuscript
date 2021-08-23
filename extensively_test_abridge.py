@@ -34,7 +34,7 @@ def runMultipleCommandsInSeries(eachpinput):
     print("="*100)
     
 
-CPU = 80
+CPU = 120
 pool = multiprocessing.Pool(processes=int(CPU))
 # Location of samfiles which will be compressed - Note that these are hard coded so it will not work on other machines
 if open("/etc/hostname","r").read().strip() == "ceres.scinet.local":
@@ -113,7 +113,7 @@ for level in ["1","2","3"]: # 3 iterations
                                             cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
                                             compress_commands.append([cmd,cmd_mv])
                                             os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
-                                        
+                                        """
                                         for ignore_sequence in [0,1]: # 2 iterations
                                             output_directory_name = f"{ROOT_DIRECTORY}/" 
                                             output_directory_name += f"{inputfilename_without_location}_"
@@ -151,8 +151,8 @@ for level in ["1","2","3"]: # 3 iterations
                                                 print("\n".join([cmd_cp, cmd, cmd_mv, cmd_rm]))
                                                 print("================================================================================")
                                                 sys.stdout.flush()
-                                            
-                                            #print(cmd)
+                                        """   
+                                        
 pool.map(run2CommandsInSeries,compress_commands)
 #pool.map(runMultipleCommandsInSeries,decompress_commands)
                                    
