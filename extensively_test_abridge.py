@@ -37,6 +37,8 @@ def runMultipleCommandsInSeries(eachpinput):
 CPU = 80
 pool = multiprocessing.Pool(processes=int(CPU))
 # Location of samfiles which will be compressed - Note that these are hard coded so it will not work on other machines
+print(open("/etc/hostname","r").read().strip() )
+sys.exit()
 if open("/etc/hostname","r").read().strip() == "ceres.scinet.local":
     ROOT_DIRECTORY = "/project/maizegdb/sagnik/ABRIDGE/developing_abridge/"
     TEMP_DIRECTORY = "/90daydata/maizegdb/sagnik/ABRIDGE/developing_abridge/"
