@@ -80,7 +80,7 @@ def mapSamplesToReference(options):
             
             files_to_be_removed=[]
         
-            if assay_type=="RNA-Seq":
+            if True:
                 cmd  = f"(/usr/bin/time --verbose STAR "
                 cmd += f" --runThreadN {options.cpu} " 
                 cmd += f" --genomeDir "+options.star_genome_index
@@ -98,8 +98,14 @@ def mapSamplesToReference(options):
                 else:
                     cmd += f" --readFilesIn {options.input_location}/{sra}_1.fastq {options.input_location}/{sra}_2.fastq"
                 cmd += f" --outFileNamePrefix {options.output_directory}/{sra}_{layout}_{iteration}_"
-                cmd += f" --alignIntronMin 20  "
-                cmd += f" --alignIntronMax 100000 "
+                if assay_type=="RNA-Seq":
+                    cmd += f" --alignIntronMin 20  "
+                else:
+                    cmd += f" --alignIntronMin 1  "
+                if assay_type=="RNA-Seq":
+                    cmd += f" --alignIntronMax 100000 "
+                else:
+                    cmd += f" --alignIntronMax 1 "
                 cmd += f") "
                 cmd += f" 1> {options.output_directory}/{sra}_{layout}_{iteration}.output "
                 cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}.error "
