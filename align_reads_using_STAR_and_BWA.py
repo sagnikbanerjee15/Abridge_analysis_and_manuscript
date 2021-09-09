@@ -116,6 +116,8 @@ def mapSamplesToReference(options):
             if os.path.exists(f"{options.temp_alignments_directory}/{sra}_{layout}.bam")==False and os.path.exists(f"{options.temp_alignments_directory}/{sra}_{layout}.sam")==False: 
                 list_of_all_commands.append([cmd,"dummy"])
                 os.system(cmd)
+            else:
+                continue
             
             if iteration==0:
                 if os.path.exists(f"{options.output_directory}/{sra}_{layout}_{iteration}_Aligned.sortedByCoord.out.bam")==False and os.path.exists(f"{options.output_directory}/{sra}_{layout}.bam")==True:continue
