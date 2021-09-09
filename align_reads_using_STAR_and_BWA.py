@@ -157,7 +157,6 @@ def mapSamplesToReference(options):
             files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}_Log.final.out")
             files_to_be_removed.append(f"{options.input_location}/{sra}_*.fastq")
             
-            return
             cmd = f"mv {options.output_directory}/{sra}_{layout}_{iteration}*.error {options.output_directory}/../errors/"
             os.system(cmd)
             
