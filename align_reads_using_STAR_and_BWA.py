@@ -135,6 +135,11 @@ def mapSamplesToReference(options):
                 cmd += f" {options.output_directory}/{sra}_{layout}.* "
                 cmd += f" {options.temp_alignments_directory}/"
                 os.system(cmd)
+                
+                cmd  = f"mv "
+                cmd += f" {options.output_directory}/{sra}_{layout}_{iteration}_Log.final.out "
+                cmd += f" {options.temp_alignments_directory}/"
+                os.system(cmd)
             
             files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}_Log.out")
             files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}_Log.progress.out")
