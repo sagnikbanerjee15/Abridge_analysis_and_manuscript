@@ -84,7 +84,6 @@ def mapSamplesToReference(options):
             
             files_to_be_removed=[]
         
-            
             cmd  = f"(/usr/bin/time --verbose STAR "
             cmd += f" --runThreadN {options.cpu} " 
             cmd += f" --genomeDir "+options.star_genome_index

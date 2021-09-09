@@ -222,7 +222,7 @@ def main():
     cmd += f" --temp_directory {options.temp_directory} "
     cmd += f" 1> {options.output_directory}/outputs/alignment.output "
     cmd += f" 2> {options.output_directory}/errors/alignment.error "
-    #os.system(cmd)
+    os.system(cmd)
     logging.info(f"Aligning reads with STAR is complete")
     
     return
