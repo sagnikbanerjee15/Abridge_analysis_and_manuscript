@@ -212,8 +212,8 @@ def mergePairedEndedSamplesIntoSingleEnded(eachinput):
     """
     Combine the two pairs of reads and rename them
     """
-    options.temp_raw_data_directory = f"{options.temp_directory}/raw_data"
     options, sra = eachinput
+    options.temp_raw_data_directory = f"{options.temp_directory}/raw_data"
     output_filename = f"{options.temp_raw_data_directory}/{sra}_0.fastq"
     input_filename_1 = f"{options.temp_raw_data_directory}/{sra}_1.fastq"
     input_filename_2 = f"{options.temp_raw_data_directory}/{sra}_2.fastq"
