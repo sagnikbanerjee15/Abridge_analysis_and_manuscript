@@ -68,7 +68,7 @@ def downloadData(options):
     fhw.close()
     
     temp_raw_data_directory = f"{options.temp_directory}/raw_data"
-    os.system(f"mkdir -p {raw_data_directory}")
+    os.system(f"mkdir -p {temp_raw_data_directory}")
     
     fhw = open(f"{options.output_directory}/sra_list_to_be_downloaded_temp","w")
     fhr = open(options.sra_list_to_be_downloaded,"r")
