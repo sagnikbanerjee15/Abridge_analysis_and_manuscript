@@ -104,11 +104,11 @@ def mapSamplesToReference(options):
             if assay_type=="RNA-Seq":
                 cmd += f" --alignIntronMin 20  "
             else:
-                cmd += f" --alignIntronMin 1  "
+                cmd += f" --alignIntronMin 0  "
             if assay_type=="RNA-Seq":
                 cmd += f" --alignIntronMax 100000 "
             else:
-                cmd += f" --alignIntronMax 1 "
+                cmd += f" --alignIntronMax 0 "
             cmd += f") "
             cmd += f" 1> {options.output_directory}/{sra}_{layout}_{iteration}.output "
             cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}.error "
@@ -148,6 +148,7 @@ def mapSamplesToReference(options):
             files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}_Log.final.out")
             files_to_be_removed.append(f"{options.input_location}/{sra}_*.fastq")
             
+            return
             """    
             else:
                 cmd  = f"(/usr/bin/time --verbose hisat2 "
