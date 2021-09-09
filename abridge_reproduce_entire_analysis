@@ -91,7 +91,7 @@ def downloadData(options):
     fhr = open(options.sra_list_to_be_downloaded,"r")
     for line in fhr:
         sra = line.strip()
-        cmd = f"mv {options.output_directory}/raw_data/{sra}* {temp_raw_data_directory}/ "
+        cmd = f"mv {options.output_directory}/raw_data/{sra}* {temp_raw_data_directory}/ 2> /dev/null"
         os.system(cmd)
     fhr.close()
     
