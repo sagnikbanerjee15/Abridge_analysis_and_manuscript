@@ -26,6 +26,6 @@ abridge_reproduce_entire_analysis \
 --cpu $CPU \
 --num_times 1 \
 --error_directory /project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS/errors \
---temp_directory /90daydata/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS/temp \
+--temp_directory /90daydata/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS/ \
 1> /project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS.output \
 2> /project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS.error

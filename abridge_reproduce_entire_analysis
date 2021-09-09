@@ -67,11 +67,14 @@ def downloadData(options):
             fhw.write(row[6] + "\n")
     fhw.close()
     
+    temp_raw_data_directory = f"{options.temp_directory}/raw_data"
+    os.system(f"mkdir -p {raw_data_directory}")
+    
     fhw = open(f"{options.output_directory}/sra_list_to_be_downloaded_temp","w")
     fhr = open(options.sra_list_to_be_downloaded,"r")
     for line in fhr:
         sra = line.strip()
-        if os.path.exists(f"{options.temp_directory}/{sra}_1.fastq") == False or os.path.exists(f"{options.temp_directory}/{sra}_2.fastq") == False:
+        if os.path.exists(f"{temp_raw_data_directory}/{sra}_1.fastq") == False or os.path.exists(f"{temp_raw_data_directory}/{sra}_2.fastq") == False:
             fhw.write(sra+"\n")
     fhw.close()
     fhr.close()
@@ -88,7 +91,7 @@ def downloadData(options):
     fhr = open(options.sra_list_to_be_downloaded,"r")
     for line in fhr:
         sra = line.strip()
-        cmd = f"mv {options.output_directory}/raw_data/{sra}* {options.temp_directory}/ "
+        cmd = f"mv {options.output_directory}/raw_data/{sra}* {temp_raw_data_directory}/ "
         os.system(cmd)
     fhr.close()
     
@@ -168,45 +171,7 @@ def main():
     if os.path.exists(f"{options.output_directory}/star_index/genomeParameters.txt")==False:
         os.system(cmd)
         logging.info(f"STAR index generation is complete")
-    
-    ##################################################################################################
-    # Construct HISAT2 index
-    ##################################################################################################
-    cmd  = f"hisat2-build "
-    cmd += f" -p {options.cpu} "
-    cmd += f" {options.genome} "
-    cmd += f" {options.output_directory}/hisat2_index "
-    if os.path.exists(f"{options.output_directory}/hisat2_index.1.ht2")==False:
-        os.system(cmd)
-    """   
-    ##################################################################################################
-    # Simulate DNA-Assay_Type reads with ART
-    ##################################################################################################
-    for iteration in range(5):
-        cmd  = f" art_illumina "
-        cmd += f" -ss HS25 "
-        cmd += f" -i {options.genome}"
-        cmd += f" --paired "
-        cmd += f" --fcov 150 "
-        cmd += f" --insRate  0.0001 "
-        cmd += f" --insRate2 0.0002 "
-        cmd += f" --delRate  0.0001 "
-        cmd += f" --delRate2 0.0002 "
-        cmd += f" --maxIndel 10 "
-        cmd += f" --len 150 "
-        cmd += f" --sdev 50 "
-        cmd += f" --mflen 500 " # the mean size of DNA/RNA fragments for paired-end simulations
-        cmd += f" --noALN " # do not output ALN alignment file
-        cmd += f" --out {options.output_directory}/raw_data/sim_data_{iteration}_ "
-        if os.path.exists(f"{options.temp_directory}/sim_data_{iteration}_1.fastq")==False and os.path.exists(f"{options.temp_directory}/sim_data_{iteration}_2.fastq")==False:
-            os.system(cmd)
-            cmd = f"mv {options.output_directory}/raw_data/sim_data_{iteration}_1.fq {options.output_directory}/raw_data/sim_data_{iteration}_1.fastq"
-            os.system(cmd)
-            cmd = f"mv {options.output_directory}/raw_data/sim_data_{iteration}_2.fq {options.output_directory}/raw_data/sim_data_{iteration}_2.fastq"
-            os.system(cmd)
-            cmd = f"mv {options.output_directory}/raw_data/sim_data_{iteration}_*.fastq {options.temp_directory}/"
-            os.system(cmd)
-    """   
+        
     ##################################################################################################
     # Prepare metadata for alignemnt
     # A single .csv file will be prepared for both SE and PE samples
@@ -216,27 +181,6 @@ def main():
     fhw = open(f"{options.output_directory}/metadata_for_alignment.csv","w")
     add_these_back_to_metadata_expanded = {}
     add_these_back_to_metadata_expanded["DNA-Seq"] = []
-    """for iteration in range(5):
-        row = ["Arabidopsis thaliana","simulated","PE","DNA-Assay_Type","2021-05-21","151+151",f"sim_data_{iteration}"]
-        fhw.write(",".join([row[0], #organism
-                              row[1], #tissue
-                              row[2], #Layout
-                              row[3], #Assay_Type
-                              row[4],
-                              row[5],
-                              row[6]  
-                ])+"\n")
-        add_these_back_to_metadata_expanded["DNA-Seq"].append([row[0],row[1],"PE",row[3],row[4],row[5],row[6]])
-        fhw.write(",".join([row[0],
-                              row[1],
-                              "SE",
-                              row[3],
-                              row[4],
-                              row[5],
-                              row[6]  
-                ])+"\n")
-        add_these_back_to_metadata_expanded["DNA-Seq"].append([row[0],row[1],"SE",row[3],row[4],row[5],row[6]])
-    """
     for Assay_Type in options.metadata_expanded:
         add_these_back_to_metadata_expanded[Assay_Type] = []
         for row in options.metadata_expanded[Assay_Type]:
@@ -279,8 +223,9 @@ def main():
     cmd += f" 1> {options.output_directory}/outputs/alignment.output "
     cmd += f" 2> {options.output_directory}/errors/alignment.error "
     #os.system(cmd)
-    logging.info(f"Aligning reads with STAR and BWA is complete")
+    logging.info(f"Aligning reads with STAR is complete")
     
+    return
     ##################################################################################################
     # Merge read libraries to create larger sized datasets
     ##################################################################################################
@@ -296,7 +241,7 @@ def main():
             if Assay_Type not in metadata[layout]:
                 metadata[layout][Assay_Type] = []
             metadata[layout][Assay_Type].append(SRA)
-    """       
+         
     # Create new data by merging 2 or more samples together
     add_these_back_to_metadata_expanded = {}
     for layout in metadata:
@@ -342,7 +287,7 @@ def main():
     
     os.system(f"mv {options.output_directory}/alignments/*bam {options.temp_directory}/")
     os.system(f"mv {options.output_directory}/alignments/*sam {options.temp_directory}/")
-    """
+    
     for layout in metadata:
         for Assay_Type in metadata[layout]:
             i = 1
@@ -573,7 +518,7 @@ def main():
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
                 """
-                """
+                
                 #################################################################################################################
                 # BOILER
                 #################################################################################################################
@@ -594,7 +539,7 @@ def main():
                     
                     cmd=f"mv {options.output_directory}/boiler_compressed_files/compress_boiler_{sra}_{layout}_{iteration}.boiler {options.temp_directory}/"
                     os.system(cmd)
-                """
+                
                 #################################################################################################################
                 # QUIP
                 #################################################################################################################
