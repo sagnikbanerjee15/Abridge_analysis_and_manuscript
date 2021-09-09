@@ -108,7 +108,14 @@ def mapSamplesToReference(options):
             if assay_type=="RNA-Seq":
                 cmd += f" --alignIntronMax 100000 "
             else:
-                cmd += f" --alignIntronMax 0 "
+                cmd += f" --alignIntronMax -1 "
+                
+            if assay_type != "RNA-Seq":
+                cmd += " --scoreGap -100 "
+                cmd += " --scoreGapNoncan -100 "
+                cmd += " --scoreGapGCAG -100 "
+                cmd += " --scoreGapATAC -100 "
+                cmd += " --alignSJoverhangMin 500 "
             cmd += f") "
             cmd += f" 1> {options.output_directory}/{sra}_{layout}_{iteration}.output "
             cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}.error "
@@ -151,54 +158,6 @@ def mapSamplesToReference(options):
             files_to_be_removed.append(f"{options.input_location}/{sra}_*.fastq")
             
             return
-            """    
-            else:
-                cmd  = f"(/usr/bin/time --verbose hisat2 "
-                cmd += f" -x  {options.hisat2_index} "
-                cmd += f" -S {options.output_directory}/{sra}_{layout}_{iteration}.sam "
-                if layout=="SE":
-                    cmd += f" -U {options.input_location}/{sra}_0.fastq "
-                else:
-                    cmd += f" -1 {options.input_location}/{sra}_1.fastq -2 {options.input_location}/{sra}_2.fastq "
-                cmd += f" --no-spliced-alignment "
-                cmd += f" -p  {options.cpu}"
-                cmd += ") "
-                cmd += f" 1> {options.output_directory}/{sra}_{layout}_{iteration}.output "
-                cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}.error "
-                os.system(cmd)
-                
-                cmd  = f"samtools view "
-                cmd += f" -Sbh "
-                cmd += f" -@ {options.cpu} "
-                cmd += f" {options.output_directory}/{sra}_{layout}_{iteration}.sam "
-                cmd += f" > {options.output_directory}/{sra}_{layout}_{iteration}.bam "
-                cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}_converting_sam_to_bam.error"
-                os.system(cmd)
-                
-                cmd  = f" samtools sort "
-                cmd += f" -@ {options.cpu} "
-                cmd += f" {options.output_directory}/{sra}_{layout}_{iteration}.bam "
-                cmd += f" -o {options.output_directory}/{sra}_{layout}_{iteration}_sorted.bam "
-                cmd += f" 2> {options.output_directory}/{sra}_{layout}_{iteration}_sorting_bam.error "
-                os.system(cmd)
-                
-               
-                files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}.sam")
-                files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}.bam")
-                files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}_sorted.bam")
-                
-                if iteration==0:
-                    cmd = f"mv {options.output_directory}/{sra}_{layout}_{iteration}_sorted.bam {options.output_directory}/{sra}_{layout}.bam "
-                    os.system(cmd)
-                    
-                    cmd = f"samtools view -h -@ {options.cpu} {options.output_directory}/{sra}_{layout}.bam > {options.output_directory}/{sra}_{layout}.sam"
-                    os.system(cmd)
-                    
-                    cmd  = f" mv "
-                    cmd += f" {options.output_directory}/{sra}_{layout}.* "
-                    cmd += f" {options.temp_directory}/"
-                    os.system(cmd)
-            """
             cmd = f"mv {options.output_directory}/{sra}_{layout}_{iteration}*.error {options.output_directory}/../errors/"
             os.system(cmd)
             
