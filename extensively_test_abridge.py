@@ -109,6 +109,7 @@ for level in ["1","2","3"]: # 3 iterations
                                         cmd += f" 2> {output_directory_name}.error "
                                         output_directory_name_without_location = output_directory_name.split("/")[-1]
                                         if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.abridge")==False and os.path.exists(f"{TEMP_DIRECTORY}/{output_directory_name_without_location}/{inputfilename_without_location}.abridge") == False:
+                                            os.system(f"rm -rf {TEMP_DIRECTORY}/{output_directory_name_without_location}")
                                             cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
                                             compress_commands.append([cmd,cmd_mv])
                                             os.system(f"echo \"{cmd}\" > {output_directory_name}.output")

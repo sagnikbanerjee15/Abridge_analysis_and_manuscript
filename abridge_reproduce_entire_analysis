@@ -298,7 +298,6 @@ def main():
                 options.metadata_expanded[Assay_Type].append(["dummy","dummy",layout,Assay_Type,"dummy","dummy",new_merged_SRA]) 
                 i += 1
     
-    return
     ##################################################################################################
     # Compress alignments with Abridge
     ##################################################################################################
