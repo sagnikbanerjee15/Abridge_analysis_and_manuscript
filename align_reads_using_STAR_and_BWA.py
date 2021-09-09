@@ -67,19 +67,19 @@ def mapSamplesToReference(options):
                 cmd  = f" cp "
                 cmd += f" {options.temp_raw_data_directory}/{sra}_1.fastq "
                 cmd += f" {options.input_location}/ "
-                if os.path.exists(f"{options.temp_raw_data_directory}/{sra}_1.fastq")==False:
+                if os.path.exists(f"{options.input_location}/{sra}_1.fastq")==False:
                     os.system(cmd)
                 
                 cmd  = f" cp "
                 cmd += f" {options.temp_raw_data_directory}/{sra}_2.fastq "
                 cmd += f" {options.input_location}/ "
-                if os.path.exists(f"{options.temp_raw_data_directory}/{sra}_2.fastq")==False:
+                if os.path.exists(f"{options.input_location}/{sra}_2.fastq")==False:
                     os.system(cmd)
             else:
                 cmd  = f" cp "
                 cmd += f" {options.temp_raw_data_directory}/{sra}_0.fastq "
                 cmd += f" {options.input_location}/ "
-                if os.path.exists(f"{options.temp_raw_data_directory}/{sra}_0.fastq")==False:
+                if os.path.exists(f"{options.input_location}/{sra}_0.fastq")==False:
                     os.system(cmd)
             
             files_to_be_removed=[]
@@ -141,6 +141,7 @@ def mapSamplesToReference(options):
             files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}_SJ.out.tab")
             files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}_Aligned.sortedByCoord.out.bam")
             files_to_be_removed.append(f"{options.output_directory}/{sra}_{layout}_{iteration}_Log.final.out")
+            files_to_be_removed.append(f"{options.input_location}/{sra}_*.fastq")
             
             """    
             else:
