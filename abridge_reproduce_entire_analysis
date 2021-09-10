@@ -255,7 +255,7 @@ def main():
             
             alignment_bamfilename_in_main = f"{options.output_directory}/alignments/{new_merged_SRA}_{layout}.bam"
             while i < len(metadata[layout][Assay_Type]):
-                alignment_bamfilename_in_temp = f"{options.temp_directory}/{metadata[layout][Assay_Type][i]}_{layout}.bam"
+                alignment_bamfilename_in_temp = f"{options.temp_directory}/alignments/{metadata[layout][Assay_Type][i]}_{layout}.bam"
                 
                 cmd = f"cp {alignment_bamfilename_in_temp} {options.output_directory}/alignments/ "
                 os.system(cmd)
