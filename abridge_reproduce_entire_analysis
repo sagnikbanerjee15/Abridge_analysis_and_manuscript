@@ -272,8 +272,8 @@ def main():
                 cmd += f" {new_alignment_bamfilename_in_main} {previous_alignment_bamfilename_in_main} {options.output_directory}/alignments/{metadata[layout][Assay_Type][i]}_{layout}.bam "
                 os.system(cmd)
                 
-                os.system(f"mv {previous_alignment_bamfilename_in_main} {options.temp_directory}/")
-                os.system(f"mv {previous_alignment_samfilename_in_main} {options.temp_directory}/")
+                os.system(f"mv {previous_alignment_bamfilename_in_main} {options.temp_directory}/alignments/")
+                os.system(f"mv {previous_alignment_samfilename_in_main} {options.temp_directory}/alignments/")
                 
                 cmd  = f"samtools view "
                 cmd += f" -@ {options.cpu} "
@@ -284,8 +284,8 @@ def main():
                 options.metadata_expanded[Assay_Type].append(["dummy","dummy",layout,Assay_Type,"dummy","dummy",new_merged_SRA]) 
                 i += 1
     
-    os.system(f"mv {options.output_directory}/alignments/*bam {options.temp_directory}/")
-    os.system(f"mv {options.output_directory}/alignments/*sam {options.temp_directory}/")
+    os.system(f"mv {options.output_directory}/alignments/*bam {options.temp_directory}/alignments/")
+    os.system(f"mv {options.output_directory}/alignments/*sam {options.temp_directory}/alignments/")
     
     for layout in metadata:
         for Assay_Type in metadata[layout]:
