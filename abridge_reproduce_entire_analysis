@@ -247,7 +247,7 @@ def main():
         for Assay_Type in metadata[layout]:
             i = 1
             new_merged_SRA = metadata[layout][Assay_Type][0]
-            alignment_bamfilename_in_temp = f"{options.temp_directory}/{new_merged_SRA}_{layout}.bam"
+            alignment_bamfilename_in_temp = f"{options.temp_directory}/alignments/{new_merged_SRA}_{layout}.bam"
             
             # Copy the alignment file from temp directory to main directory
             cmd = f"cp {alignment_bamfilename_in_temp} {options.output_directory}/alignments/ "
