@@ -60,7 +60,6 @@ compress_commands = []
 decompress_commands = []
 level = 1
 for level in ["1","2","3"]: # 3 iterations
-    #for paired_type in [inputsamfile_SE,inputsamfile_PE]: # 2 iterations
     for paired_type in [inputsamfile_SE]: # 2 iterations
         for inputfilename in paired_type: # 2 iterations
             for save_scores in [0,1]: # 2 iterations
