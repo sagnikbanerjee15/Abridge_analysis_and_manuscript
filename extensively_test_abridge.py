@@ -62,7 +62,7 @@ level = 1
 for level in ["1","2","3"]: # 3 iterations
     for paired_type in [inputsamfile_SE]: # 2 iterations
         for inputfilename in paired_type: # 2 iterations
-            for save_scores in [0,1]: # 2 iterations
+            for ignore_scores in [0,1]: # 2 iterations
                 for ignore_quality_scores in [0,1]: # 2 iterations
                     for ignore_soft_clippings in [0,1]: # 2 iterations
                         for ignore_mismatches in [0,1]: # 2 iterations
@@ -74,14 +74,14 @@ for level in ["1","2","3"]: # 3 iterations
                                         output_directory_name = f"{ROOT_DIRECTORY}/" 
                                         output_directory_name += f"{inputfilename_without_location}_"
                                         output_directory_name += f"compress_level_{level}_"
-                                        output_directory_name += f"save_scores_{save_scores}_"
+                                        output_directory_name += f"ignore_scores_{ignore_scores}_"
                                         output_directory_name += f"ignore_quality_scores_{ignore_quality_scores}_"
                                         output_directory_name += f"ignore_soft_clippings_{ignore_soft_clippings}_"
                                         output_directory_name += f"ignore_mismatches_{ignore_mismatches}_"
                                         output_directory_name += f"ignore_unmapped_reads_{ignore_unmapped_reads}_"
                                         output_directory_name += f"save_all_quality_scores_{save_all_quality_scores}_"
                                         output_directory_name += f"save_exact_quality_scores_{save_exact_quality_scores}"
-                                        """
+                                        
                                         cmd  = f"(/usr/bin/time --verbose "
                                         cmd += f" abridge "
                                         cmd += f" --keep_intermediate_error_files "
@@ -90,8 +90,8 @@ for level in ["1","2","3"]: # 3 iterations
                                         cmd += f" --inputsamfilenames {inputfilename} "
                                         cmd += f" --output_directory {output_directory_name} "
                                         cmd += f" --level {level} "
-                                        if save_scores == 1:
-                                            cmd += f" --save_scores "
+                                        if ignore_scores == 1:
+                                            cmd += f" --ignore_scores "
                                         if ignore_quality_scores == 1:
                                             cmd += f" --ignore_quality_scores "
                                         if ignore_soft_clippings == 1:
@@ -113,14 +113,13 @@ for level in ["1","2","3"]: # 3 iterations
                                             cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
                                             compress_commands.append([cmd,cmd_mv])
                                             os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
-                                        """  
-                                            
                                         
+                                            
                                         for ignore_sequence in [0,1]: # 2 iterations
                                             output_directory_name = f"{ROOT_DIRECTORY}/" 
                                             output_directory_name += f"{inputfilename_without_location}_"
                                             output_directory_name += f"decompress_level_{level}_"
-                                            output_directory_name += f"save_scores_{save_scores}_"
+                                            output_directory_name += f"ignore_scores_{ignore_scores}_"
                                             output_directory_name += f"ignore_quality_scores_{ignore_quality_scores}_"
                                             output_directory_name += f"ignore_soft_clippings_{ignore_soft_clippings}_"
                                             output_directory_name += f"ignore_mismatches_{ignore_mismatches}_"
@@ -155,8 +154,8 @@ for level in ["1","2","3"]: # 3 iterations
                                                 sys.stdout.flush()
                                         
                                         
-#pool.map(run2CommandsInSeries,compress_commands)
-pool.map(runMultipleCommandsInSeries,decompress_commands)
+pool.map(run2CommandsInSeries,compress_commands)
+#pool.map(runMultipleCommandsInSeries,decompress_commands)
                                    
                                     
                                     
