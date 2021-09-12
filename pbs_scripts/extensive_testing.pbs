@@ -6,7 +6,7 @@
 #SBATCH --partition=priority-mem768 
 #SBATCH --qos=maizegdb
 #SBATCH --mem=150G
-#SBATCH --time=21-00:00:00
+#SBATCH --time=2-00:00:00
 #SBATCH --job-name="Abridge_compress"
 #SBATCH --mail-user=sagnik@iastate.edu
 #SBATCH --mail-type=BEGIN
