@@ -62,6 +62,7 @@ decompress_commands = []
 compress_and_decompress_commands = []
 level = 1
 for level in ["1","2","3"]: # 3 iterations
+    if level=="2" or level=="3":continue
     for paired_type in [inputsamfile_SE]: # 2 iterations
         for inputfilename in paired_type: # 2 iterations
             for ignore_scores in [0,1]: # 2 iterations
