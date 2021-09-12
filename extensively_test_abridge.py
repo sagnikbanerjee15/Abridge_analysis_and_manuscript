@@ -143,6 +143,7 @@ for level in ["1","2","3"]: # 3 iterations
                                             cmd += f") "
                                             cmd += f" 1>> {output_directory_name}.output"
                                             cmd += f" 2> {output_directory_name}.error"
+                                            os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
                                             
                                             if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.decompressed.sam") == False:
                                                 compressed_directory_location = "/90daydata/" + "/".join(output_directory_name.split("_ignore_sequence_")[0].replace('decompress','compress').split("/")[2:])
