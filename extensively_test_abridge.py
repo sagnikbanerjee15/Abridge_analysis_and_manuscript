@@ -28,6 +28,7 @@ def run2CommandsInSeries(eachpinput):
 
 def runMultipleCommandsInSeries(eachpinput):
     for cmd in eachpinput:
+        if os.path.exists("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/core*") == True: return
         print(cmd)
         sys.stdout.flush()
         os.system(cmd)
@@ -114,7 +115,7 @@ for level in ["1","2","3"]: # 3 iterations
                                             cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
                                             compress_and_decompress_commands.append(["" for _ in range(6)])
                                             compress_and_decompress_commands[-1][0] = cmd
-                                            compress_and_decompress_commands[-1][5] = cmd_mv
+                                            #compress_and_decompress_commands[-1][5] = cmd_mv
                                             os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
                                         
                                             
@@ -153,10 +154,10 @@ for level in ["1","2","3"]: # 3 iterations
                                                 #decompress_commands.append([cmd_cp, cmd, cmd_mv, cmd_rm])
                                                 if ignore_sequence==0:
                                                     compress_and_decompress_commands[-1][1] = cmd
-                                                    compress_and_decompress_commands[-1][2] = cmd_mv
+                                                    #compress_and_decompress_commands[-1][2] = cmd_mv
                                                 else:
                                                     compress_and_decompress_commands[-1][3] = cmd
-                                                    compress_and_decompress_commands[-1][4] = cmd_mv
+                                                    #compress_and_decompress_commands[-1][4] = cmd_mv
                                                 #os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
                                                 #print("================================================================================")
                                                 #print("\n".join([cmd_cp, cmd, cmd_mv, cmd_rm]))
