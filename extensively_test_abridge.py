@@ -58,6 +58,7 @@ inputsamfile_PE = [f"{ROOT_DIRECTORY}/SRR13711353_PE.sam", # Single ended RNA-Se
 
 compress_commands = []
 decompress_commands = []
+compress_and_decompress_commands = []
 level = 1
 for level in ["1","2","3"]: # 3 iterations
     for paired_type in [inputsamfile_SE]: # 2 iterations
@@ -111,7 +112,9 @@ for level in ["1","2","3"]: # 3 iterations
                                         if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.abridge")==False and os.path.exists(f"{TEMP_DIRECTORY}/{output_directory_name_without_location}/{inputfilename_without_location}.abridge") == False:
                                             os.system(f"rm -rf {TEMP_DIRECTORY}/{output_directory_name_without_location}")
                                             cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
-                                            compress_commands.append([cmd,cmd_mv])
+                                            compress_and_decompress_commands.append(["" for _ in range(6)])
+                                            compress_and_decompress_commands[-1][0] = cmd
+                                            compress_and_decompress_commands[-1][5] = cmd_mv
                                             os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
                                         
                                             
@@ -143,19 +146,26 @@ for level in ["1","2","3"]: # 3 iterations
                                             
                                             if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.decompressed.sam") == False:
                                                 compressed_directory_location = "/90daydata/" + "/".join(output_directory_name.split("_ignore_sequence_")[0].replace('decompress','compress').split("/")[2:])
-                                                cmd_cp = f"cp -r {compressed_directory_location} {ROOT_DIRECTORY}"
+                                                #cmd_cp = f"cp -r {compressed_directory_location} {ROOT_DIRECTORY}"
                                                 cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
                                                 cmd_rm = f"rm -rf {output_directory_name.split('_ignore_sequence_')[0].replace('decompress','compress')}"
-                                                decompress_commands.append([cmd_cp, cmd, cmd_mv, cmd_rm])
-                                                os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
-                                                print("================================================================================")
-                                                print("\n".join([cmd_cp, cmd, cmd_mv, cmd_rm]))
-                                                print("================================================================================")
-                                                sys.stdout.flush()
+                                                #decompress_commands.append([cmd_cp, cmd, cmd_mv, cmd_rm])
+                                                if ignore_sequence==0:
+                                                    compress_and_decompress_commands[-1][1] = cmd
+                                                    compress_and_decompress_commands[-1][2] = cmd_mv
+                                                else:
+                                                    compress_and_decompress_commands[-1][3] = cmd
+                                                    compress_and_decompress_commands[-1][4] = cmd_mv
+                                                #os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
+                                                #print("================================================================================")
+                                                #print("\n".join([cmd_cp, cmd, cmd_mv, cmd_rm]))
+                                                #print("================================================================================")
+                                                #sys.stdout.flush()
                                         
                                         
-pool.map(run2CommandsInSeries,compress_commands)
+#pool.map(run2CommandsInSeries,compress_commands)
 #pool.map(runMultipleCommandsInSeries,decompress_commands)
+pool.map(runMultipleCommandsInSeries,compress_and_decompress_commands)
                                    
                                     
                                     
