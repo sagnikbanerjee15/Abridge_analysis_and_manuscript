@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#SBATCH -n 80
+#SBATCH -n 72
 #SBATCH -N 1
-##SBATCH --partition=long
-#SBATCH --partition=priority-mem768 
+#SBATCH --partition=long
+##SBATCH --partition=priority-mem768 
 #SBATCH --qos=maizegdb
 #SBATCH --mem=150G
 #SBATCH --time=2-00:00:00
