@@ -115,10 +115,10 @@ for level in ["1","2","3"]: # 3 iterations
                                             cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
                                             compress_and_decompress_commands.append(["" for _ in range(6)])
                                             compress_and_decompress_commands[-1][0] = cmd
-                                            #compress_and_decompress_commands[-1][5] = cmd_mv
+                                            compress_and_decompress_commands[-1][5] = cmd_mv
                                             os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
                                         
-                                            
+                                        """    
                                         for ignore_sequence in [0,1]: # 2 iterations
                                             output_directory_name = f"{ROOT_DIRECTORY}/" 
                                             output_directory_name += f"{inputfilename_without_location}_"
@@ -154,19 +154,11 @@ for level in ["1","2","3"]: # 3 iterations
                                                 #decompress_commands.append([cmd_cp, cmd, cmd_mv, cmd_rm])
                                                 if ignore_sequence==0:
                                                     compress_and_decompress_commands[-1][1] = cmd
-                                                    #compress_and_decompress_commands[-1][2] = cmd_mv
+                                                    compress_and_decompress_commands[-1][2] = cmd_mv
                                                 else:
                                                     compress_and_decompress_commands[-1][3] = cmd
-                                                    #compress_and_decompress_commands[-1][4] = cmd_mv
-                                                #os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
-                                                #print("================================================================================")
-                                                #print("\n".join([cmd_cp, cmd, cmd_mv, cmd_rm]))
-                                                #print("================================================================================")
-                                                #sys.stdout.flush()
-                                        
-                                        
-#pool.map(run2CommandsInSeries,compress_commands)
-#pool.map(runMultipleCommandsInSeries,decompress_commands)
+                                                    compress_and_decompress_commands[-1][4] = cmd_mv
+                                        """        
 pool.map(runMultipleCommandsInSeries,compress_and_decompress_commands)
                                    
                                     
