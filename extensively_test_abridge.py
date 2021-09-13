@@ -150,18 +150,19 @@ for level in ["1","2","3"]: # 3 iterations
                                             
                                             if os.path.exists(f"{output_directory_name}/{inputfilename_without_location}.decompressed.sam") == False:
                                                 compressed_directory_location = "/90daydata/" + "/".join(output_directory_name.split("_ignore_sequence_")[0].replace('decompress','compress').split("/")[2:])
-                                                #cmd_cp = f"cp -r {compressed_directory_location} {ROOT_DIRECTORY}"
+                                                cmd_cp = f"cp -r {compressed_directory_location} {ROOT_DIRECTORY}"
                                                 cmd_mv = f"mv {output_directory_name}* {TEMP_DIRECTORY}"
                                                 cmd_rm = f"rm -rf {output_directory_name.split('_ignore_sequence_')[0].replace('decompress','compress')}"
-                                                #decompress_commands.append([cmd_cp, cmd, cmd_mv, cmd_rm])
+                                                decompress_commands.append([cmd_cp, cmd, cmd_mv, cmd_rm])
+                                                """
                                                 if ignore_sequence==0:
                                                     compress_and_decompress_commands[-1][1] = cmd
                                                     compress_and_decompress_commands[-1][2] = cmd_mv
                                                 else:
                                                     compress_and_decompress_commands[-1][3] = cmd
                                                     compress_and_decompress_commands[-1][4] = cmd_mv
-                                            
-pool.map(runMultipleCommandsInSeries,compress_and_decompress_commands)
+                                                """
+pool.map(runMultipleCommandsInSeries,decompress_commands)
                                    
                                     
                                     
