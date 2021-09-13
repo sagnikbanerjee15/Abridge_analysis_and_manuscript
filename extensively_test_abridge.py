@@ -85,7 +85,7 @@ for level in ["1","2","3"]: # 3 iterations
                                         output_directory_name += f"ignore_unmapped_reads_{ignore_unmapped_reads}_"
                                         output_directory_name += f"save_all_quality_scores_{save_all_quality_scores}_"
                                         output_directory_name += f"save_exact_quality_scores_{save_exact_quality_scores}"
-                                        
+                                        """
                                         cmd  = f"(/usr/bin/time --verbose "
                                         cmd += f" abridge "
                                         cmd += f" --keep_intermediate_error_files "
@@ -119,8 +119,8 @@ for level in ["1","2","3"]: # 3 iterations
                                             compress_and_decompress_commands[-1][0] = cmd
                                             compress_and_decompress_commands[-1][5] = cmd_mv
                                             os.system(f"echo \"{cmd}\" > {output_directory_name}.output")
+                                        """
                                         
-                                        """    
                                         for ignore_sequence in [0,1]: # 2 iterations
                                             output_directory_name = f"{ROOT_DIRECTORY}/" 
                                             output_directory_name += f"{inputfilename_without_location}_"
@@ -160,7 +160,7 @@ for level in ["1","2","3"]: # 3 iterations
                                                 else:
                                                     compress_and_decompress_commands[-1][3] = cmd
                                                     compress_and_decompress_commands[-1][4] = cmd_mv
-                                        """        
+                                            
 pool.map(runMultipleCommandsInSeries,compress_and_decompress_commands)
                                    
                                     
