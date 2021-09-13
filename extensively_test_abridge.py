@@ -28,7 +28,7 @@ def run2CommandsInSeries(eachpinput):
 
 def runMultipleCommandsInSeries(eachpinput):
     for cmd in eachpinput:
-        if os.path.exists("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/core*") == True: return
+        #if os.path.exists("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/core*") == True: return
         if cmd=="":continue
         print(cmd)
         sys.stdout.flush()
@@ -65,6 +65,7 @@ level = 1
 for level in ["1","2","3"]: # 3 iterations
     if level=="2" or level=="3":continue
     for paired_type in [inputsamfile_SE,inputsamfile_PE]: # 2 iterations
+        if "PE" in paired_type:continue
         for inputfilename in paired_type: # 2 iterations
             for ignore_scores in [0,1]: # 2 iterations
                 for ignore_quality_scores in [0,1]: # 2 iterations
