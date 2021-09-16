@@ -16,6 +16,7 @@
 conda activate abridge_pypy
 module load samtools
 module load libssh
+module load java
 
 CPU=72 # Change accordingly
 
