@@ -325,6 +325,8 @@ def main():
             for row in options.metadata_expanded[Assay_Type]:
                 sra = row[6]
                 layout = row[2]
+                if sra!="SRR13711353" : continue
+                if layout!="SE":continue
                 alignment_samfilename_in_temp = f"{options.temp_directory}/alignments/{sra}_{layout}.sam"
                 if os.path.exists(alignment_samfilename_in_temp) == False : continue
                 alignment_samfilename = f"{options.output_directory}/alignments/{sra}_{layout}.sam"
