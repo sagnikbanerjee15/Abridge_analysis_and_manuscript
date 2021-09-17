@@ -325,8 +325,6 @@ def main():
             for row in options.metadata_expanded[Assay_Type]:
                 sra = row[6]
                 layout = row[2]
-                if sra!="SRR13711353" : continue
-                if layout!="SE":continue
                 alignment_samfilename_in_temp = f"{options.temp_directory}/alignments/{sra}_{layout}.sam"
                 if os.path.exists(alignment_samfilename_in_temp) == False : continue
                 alignment_samfilename = f"{options.output_directory}/alignments/{sra}_{layout}.sam"
@@ -687,7 +685,7 @@ def main():
                             os.system(cmd)
                             cmd=f"mv {options.output_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam {options.temp_directory}/csam_compressed_files"
                             os.system(cmd)
-                
+                """
                 #################################################################################################################
                 # NGC
                 #################################################################################################################
@@ -720,7 +718,7 @@ def main():
                                 cmd = f"mv {options.output_directory}/ngc_compressed_files/compress_ngc_compression_{compression}_unmappedreads_{unmappedreads}_qvalencoding_{qval_encoding}_{sra}_{layout}_{iteration}.ngc {options.temp_directory}/ngc_compressed_files "
                                 os.system(cmd)
                     
-                    
+                 """   
                 os.system(f"rm -f {alignment_samfilename}")
                 
     return        
