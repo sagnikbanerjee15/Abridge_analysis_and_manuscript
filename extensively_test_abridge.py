@@ -66,6 +66,7 @@ for level in ["1","2","3"]: # 3 iterations
     if level=="2" or level=="3":continue
     for paired_type in [inputsamfile_SE,inputsamfile_PE]: # 2 iterations
         for inputfilename in paired_type: # 2 iterations
+            if "PE" in inputfilename:continue
             for ignore_scores in [0,1]: # 2 iterations
                 for ignore_quality_scores in [0,1]: # 2 iterations
                     for ignore_soft_clippings in [0,1]: # 2 iterations
@@ -162,8 +163,8 @@ for level in ["1","2","3"]: # 3 iterations
                                                     compress_and_decompress_commands[-1][3] = cmd
                                                     compress_and_decompress_commands[-1][4] = cmd_mv
                                                 """
-pool.map(runMultipleCommandsInSeries,compress_and_decompress_commands)
-#pool.map(runMultipleCommandsInSeries,decompress_commands)
+#pool.map(runMultipleCommandsInSeries,compress_and_decompress_commands)
+pool.map(runMultipleCommandsInSeries,decompress_commands)
                                    
                                     
                                     
