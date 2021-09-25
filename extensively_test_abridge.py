@@ -163,7 +163,7 @@ for level in ["1","2","3"]: # 3 iterations
                                                     compress_and_decompress_commands[-1][3] = cmd
                                                     compress_and_decompress_commands[-1][4] = cmd_mv
                                                 """
-#pool.map(runMultipleCommandsInSeries,compress_and_decompress_commands)
+pool.map(runMultipleCommandsInSeries,compress_and_decompress_commands)
 pool.map(runMultipleCommandsInSeries,decompress_commands)
                                    
                                     
