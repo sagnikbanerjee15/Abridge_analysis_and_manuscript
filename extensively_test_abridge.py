@@ -36,7 +36,7 @@ def runMultipleCommandsInSeries(eachpinput):
     print("="*100)
     
 
-CPU = 72
+CPU = 1
 pool = multiprocessing.Pool(processes=int(CPU))
 # Location of samfiles which will be compressed - Note that these are hard coded so it will not work on other machines
 if "ceres" in open("/etc/hostname","r").read().strip():
