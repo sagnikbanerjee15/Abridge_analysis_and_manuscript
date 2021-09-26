@@ -66,6 +66,7 @@ for level in ["1","2","3"]: # 3 iterations
     if level=="2" or level=="3":continue
     for paired_type in [inputsamfile_SE,inputsamfile_PE]: # 2 iterations
         for inputfilename in paired_type: # 2 iterations
+            if "SE" in inputfilename:continue
             for ignore_scores in [0,1]: # 2 iterations
                 for ignore_quality_scores in [0,1]: # 2 iterations
                     for ignore_soft_clippings in [0,1]: # 2 iterations
