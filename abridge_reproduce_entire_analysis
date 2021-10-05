@@ -55,7 +55,14 @@ def readMetadataFile(options):
         data[Assay_Type].append([Organism,Tissue,Layout,Assay_Type,Date_of_publication, Length, Accession,Bioproject, Number_of_reads_or_pairs,Replicate_information, Notes])
     fhr.close()
     options.metadata_expanded = data
+
+def runMultipleCommandsInSeries(eachpinput):
+    for cmd in eachpinput:
+        if cmd=="":continue
+        sys.stdout.flush()
+        os.system(cmd)
     
+   
 def downloadData(options):
     """
     Downloads the data from NCBI-SRA
@@ -317,9 +324,10 @@ def main():
                 options.metadata_expanded[Assay_Type].append(["dummy","dummy",layout,Assay_Type,"dummy","dummy",new_merged_SRA]) 
                 i += 1
     
-    ##################################################################################################
-    # Compress alignments with Abridge
-    ##################################################################################################
+    CPU = 1
+    pool = multiprocessing.Pool(processes=int(CPU))
+    all_commands = []
+    
     for iteration in range(int(options.num_times)):
         for Assay_Type in options.metadata_expanded:
             for row in options.metadata_expanded[Assay_Type]:
@@ -331,6 +339,11 @@ def main():
                 cmd = f"cp {alignment_samfilename_in_temp} {alignment_samfilename}"
                 os.system(cmd)
                 logging.info(f"Running command - {cmd}")
+                
+                
+                ##################################################################################################
+                # Compress alignments with Abridge
+                ##################################################################################################
                 
                 os.system(f"mkdir {options.temp_directory}/abridge_compressed_files")
                 
@@ -354,10 +367,13 @@ def main():
                     cmd += f" 2> {options.output_directory}/errors/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error " 
                     if os.path.exists(f"{alignment_samfilename_in_temp}/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
-                        os.system(cmd)
+                        #os.system(cmd)
+                        all_commands.append([])
+                        all_commands[-1].append(cmd)
                     
-                    cmd = f"mv {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_compressed_files"
-                    os.system(cmd)
+                        cmd = f"mv {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_compressed_files"
+                        #os.system(cmd)
+                        all_commands[-1].append(cmd)
                 
                 #################################################################################################################
                 # 2. compress_save_all_quality_scores_save_approx_quality_scores
@@ -378,10 +394,15 @@ def main():
                     cmd += f" 2> {options.output_directory}/errors/compress_save_all_quality_scores_save_approx_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error " 
                     if os.path.exists(f"{alignment_samfilename_in_temp}/compress_save_all_quality_scores_save_approx_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
-                        os.system(cmd) 
+                        #os.system(cmd) 
+                        
+                        all_commands.append([])
+                        all_commands[-1].append(cmd)
                     
-                    cmd = f"mv {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_approx_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_compressed_files"
-                    os.system(cmd)
+                        cmd = f"mv {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_approx_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_compressed_files"
+                        #os.system(cmd)
+                        
+                        all_commands[-1].append(cmd)
                     
                 #################################################################################################################
                 # 3. compress_save_qual_scores_only_for_indels_and_mismatches
@@ -401,10 +422,15 @@ def main():
                     cmd += f" 2> {options.output_directory}/errors/compress_save_qual_scores_only_for_indels_and_mismatches_level_{level}_{sra}_{layout}_{iteration}.error " 
                     if os.path.exists(f"{alignment_samfilename_in_temp}/compress_save_qual_scores_only_for_indels_and_mismatches_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
-                        os.system(cmd)
+                        #os.system(cmd)
+                        
+                        all_commands.append([])
+                        all_commands[-1].append(cmd)
                     
-                    cmd = f"mv {options.output_directory}/abridge_compressed_files/compress_save_qual_scores_only_for_indels_and_mismatches_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_compressed_files"
-                    os.system(cmd)
+                        cmd = f"mv {options.output_directory}/abridge_compressed_files/compress_save_qual_scores_only_for_indels_and_mismatches_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_compressed_files"
+                        #os.system(cmd)
+                        
+                        all_commands[-1].append(cmd)
                 
                 #################################################################################################################
                 # 4. compress_ignore_quality_scores
@@ -426,9 +452,14 @@ def main():
                     if os.path.exists(f"{alignment_samfilename_in_temp}/compress_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
                         os.system(cmd)
+                        
+                        all_commands.append([])
+                        all_commands[-1].append(cmd)
                     
-                    cmd = f"mv {options.output_directory}/abridge_compressed_files/compress_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_compressed_files"
-                    os.system(cmd)
+                        cmd = f"mv {options.output_directory}/abridge_compressed_files/compress_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_compressed_files"
+                        #os.system(cmd)
+                    
+                        all_commands[-1].append(cmd)
                     
                 #################################################################################################################
                 # 5. compress_ignore_soft_clippings_ignore_mismatches
@@ -450,10 +481,15 @@ def main():
                     cmd += f" 2> {options.output_directory}/errors/compress_ignore_soft_clippings_ignore_mismatches_level_{level}_{sra}_{layout}_{iteration}.error " 
                     if os.path.exists(f"{alignment_samfilename_in_temp}/compress_ignore_soft_clippings_ignore_mismatches_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
-                        os.system(cmd)
+                        #os.system(cmd)
                         
-                    cmd = f"mv {options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_compressed_files"
-                    os.system(cmd)
+                        all_commands.append([])
+                        all_commands[-1].append(cmd)
+                        
+                        cmd = f"mv {options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_compressed_files"
+                        #os.system(cmd)
+                        
+                        all_commands[-1].append(cmd)
                     
                 
                 #################################################################################################################
@@ -477,10 +513,15 @@ def main():
                     cmd += f" 2> {options.output_directory}/errors/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error " 
                     if os.path.exists(f"{alignment_samfilename_in_temp}/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
-                        os.system(cmd)
+                        #os.system(cmd)
+                        
+                        all_commands.append([])
+                        all_commands[-1].append(cmd)
                     
-                    cmd = f"mv {options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_compressed_files"
-                    os.system(cmd)
+                        cmd = f"mv {options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_compressed_files"
+                        #os.system(cmd)
+                        
+                        all_commands[-1].append(cmd)
                 
                 
                 #################################################################################################################
@@ -505,10 +546,15 @@ def main():
                     cmd += f" 2> {options.output_directory}/errors/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_level_{level}_{sra}_{layout}_{iteration}.error " 
                     if os.path.exists(f"{alignment_samfilename_in_temp}/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
-                        os.system(cmd)
+                        #os.system(cmd)
+                        
+                        all_commands.append([])
+                        all_commands[-1].append(cmd)
                     
-                    cmd = f"mv {options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_compressed_files"
-                    os.system(cmd)
+                        cmd = f"mv {options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_compressed_files"
+                        #os.system(cmd)
+                        
+                        all_commands[-1].append(cmd)
                 
                 continue
                 
@@ -749,7 +795,9 @@ def main():
                     
                  """   
                 os.system(f"rm -f {alignment_samfilename}")
-                
+    
+    
+    pool.map(runMultipleCommandsInSeries,all_commands)         
     return        
     ##################################################################################################
     # Decompress alignments with Abridge
