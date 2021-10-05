@@ -799,8 +799,9 @@ def main():
                  """   
                 os.system(f"rm -f {alignment_samfilename}")
     
-    
-    pool.map(runMultipleCommandsInSeries,all_commands)         
+    print(len(all_commands))
+    print([len(each_row) for each_row in all_commands])
+    #pool.map(runMultipleCommandsInSeries,all_commands)         
     return        
     ##################################################################################################
     # Decompress alignments with Abridge
