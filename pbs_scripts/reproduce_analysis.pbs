@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH -n 72
-#SBATCH -N 1
+#SBATCH -N 72
 #SBATCH --partition=long
 #SBATCH --mem=75G
 #SBATCH --time=21-00:00:00
@@ -17,7 +17,7 @@ conda activate abridge_pypy
 module load samtools
 module load libssh
 
-CPU=1 # Change accordingly
+CPU=72 # Change accordingly
 
 abridge_reproduce_entire_analysis \
 --metadata /project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/ListOfNCBI-SRASamplesForExperimentST.csv \
