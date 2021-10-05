@@ -324,7 +324,7 @@ def main():
                 options.metadata_expanded[Assay_Type].append(["dummy","dummy",layout,Assay_Type,"dummy","dummy",new_merged_SRA]) 
                 i += 1
     
-    CPU = 1
+    CPU = 72
     pool = multiprocessing.Pool(processes=int(CPU))
     all_commands = []
     
