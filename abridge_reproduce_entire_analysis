@@ -336,10 +336,11 @@ def main():
                 alignment_samfilename_in_temp = f"{options.temp_directory}/alignments/{sra}_{layout}.sam"
                 if os.path.exists(alignment_samfilename_in_temp) == False : continue
                 alignment_samfilename = f"{options.output_directory}/alignments/{sra}_{layout}.sam"
+                """
                 cmd = f"cp {alignment_samfilename_in_temp} {alignment_samfilename}"
                 os.system(cmd)
                 logging.info(f"Running command - {cmd}")
-                
+                """
                 
                 ##################################################################################################
                 # Compress alignments with Abridge
@@ -365,9 +366,6 @@ def main():
                     cmd += ")"
                     cmd += f" 1> {options.output_directory}/outputs/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}.output "
                     cmd += f" 2> {options.output_directory}/errors/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error " 
-                    print(f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge")
-                    print(os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge"))
-                    sys.stdout.flush()
                     if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
                         #os.system(cmd)
@@ -454,7 +452,7 @@ def main():
                     cmd += f" 2> {options.output_directory}/errors/compress_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error " 
                     if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
-                        os.system(cmd)
+                        #os.system(cmd)
                         
                         all_commands.append([])
                         all_commands[-1].append(cmd)
