@@ -365,10 +365,10 @@ def main():
                     cmd += ")"
                     cmd += f" 1> {options.output_directory}/outputs/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}.output "
                     cmd += f" 2> {options.output_directory}/errors/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error " 
-                    print(f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge")
-                    print(os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge"))
+                    print(f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge")
+                    print(os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge"))
                     sys.stdout.flush()
-                    if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
+                    if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
                         #os.system(cmd)
                         all_commands.append([])
@@ -395,7 +395,7 @@ def main():
                     cmd += ")"
                     cmd += f" 1> {options.output_directory}/outputs/compress_save_all_quality_scores_save_approx_quality_scores_level_{level}_{sra}_{layout}_{iteration}.output "
                     cmd += f" 2> {options.output_directory}/errors/compress_save_all_quality_scores_save_approx_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error " 
-                    if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_approx_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
+                    if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_approx_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
                         #os.system(cmd) 
                         
@@ -423,7 +423,7 @@ def main():
                     cmd += ")"
                     cmd += f" 1> {options.output_directory}/outputs/compress_save_qual_scores_only_for_indels_and_mismatches_level_{level}_{sra}_{layout}_{iteration}.output "
                     cmd += f" 2> {options.output_directory}/errors/compress_save_qual_scores_only_for_indels_and_mismatches_level_{level}_{sra}_{layout}_{iteration}.error " 
-                    if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_save_qual_scores_only_for_indels_and_mismatches_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
+                    if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_save_qual_scores_only_for_indels_and_mismatches_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
                         #os.system(cmd)
                         
@@ -452,7 +452,7 @@ def main():
                     cmd += ")"
                     cmd += f" 1> {options.output_directory}/outputs/compress_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}.output "
                     cmd += f" 2> {options.output_directory}/errors/compress_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error " 
-                    if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
+                    if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
                         os.system(cmd)
                         
@@ -482,7 +482,7 @@ def main():
                     cmd += ")"
                     cmd += f" 1> {options.output_directory}/outputs/compress_ignore_soft_clippings_ignore_mismatches_level_{level}_{sra}_{layout}_{iteration}.output "
                     cmd += f" 2> {options.output_directory}/errors/compress_ignore_soft_clippings_ignore_mismatches_level_{level}_{sra}_{layout}_{iteration}.error " 
-                    if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
+                    if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
                         #os.system(cmd)
                         
@@ -514,7 +514,7 @@ def main():
                     cmd += ")"
                     cmd += f" 1> {options.output_directory}/outputs/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}.output "
                     cmd += f" 2> {options.output_directory}/errors/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error " 
-                    if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
+                    if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
                         #os.system(cmd)
                         
@@ -547,7 +547,7 @@ def main():
                     cmd += ")"
                     cmd += f" 1> {options.output_directory}/outputs/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_level_{level}_{sra}_{layout}_{iteration}.output "
                     cmd += f" 2> {options.output_directory}/errors/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_level_{level}_{sra}_{layout}_{iteration}.error " 
-                    if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
+                    if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
                         #os.system(cmd)
                         
@@ -816,7 +816,7 @@ def main():
                 cmd += f" --decompress "
                 cmd += f" --cpu 1 "
                 cmd += f" --genome {options.genome} "
-                cmd += f" --inputabrfilenames {options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.sam.abridge.br "
+                cmd += f" --inputabrfilenames {options.output_directory}/abridge_compressed_files/{iteration}/{sra}_{layout}.abridge.br "
                 cmd += f" --output_directory {options.output_directory}/abridge_decompressed_files/{iteration} "
                 #cmd += f" --error_directory {options.error_directory}/abridge/{iteration} "
                 cmd += f" --keep_intermediate_error_files "
