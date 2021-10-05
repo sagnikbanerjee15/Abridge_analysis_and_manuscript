@@ -365,6 +365,9 @@ def main():
                     cmd += ")"
                     cmd += f" 1> {options.output_directory}/outputs/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}.output "
                     cmd += f" 2> {options.output_directory}/errors/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error " 
+                    print(f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge")
+                    print(os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge"))
+                    sys.stdout.flush()
                     if os.path.exists(f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam.abridge") == False: 
                         logging.info(f"Running command - {cmd}")
                         #os.system(cmd)
