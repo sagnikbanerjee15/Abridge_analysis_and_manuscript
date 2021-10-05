@@ -799,7 +799,7 @@ def main():
     
     print(len(all_commands))
     print([len(each_row) for each_row in all_commands])
-    #pool.map(runMultipleCommandsInSeries,all_commands)         
+    pool.map(runMultipleCommandsInSeries,all_commands)         
     return        
     ##################################################################################################
     # Decompress alignments with Abridge
