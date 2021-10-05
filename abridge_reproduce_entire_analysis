@@ -797,7 +797,7 @@ def main():
                                 os.system(cmd)
                     
                  """   
-                os.system(f"rm -f {alignment_samfilename}")
+                #os.system(f"rm -f {alignment_samfilename}")
     
     print(len(all_commands))
     print([len(each_row) for each_row in all_commands])
