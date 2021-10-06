@@ -799,7 +799,7 @@ def main():
     
     print(len(all_commands))
     print([len(each_row) for each_row in all_commands])
-    sys.out.flush()
+    sys.stdout.flush()
     pool.map(runMultipleCommandsInSeries,all_commands)         
     return        
     ##################################################################################################
