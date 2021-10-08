@@ -352,6 +352,7 @@ def main():
                 # 1. compress_save_all_quality_scores_save_exact_quality_scores
                 #################################################################################################################
                 for level in [1,2,3]:
+                    if level == 1 or level == 2 : continue
                     cmd  = f"(/usr/bin/time --verbose abridge "
                     cmd += f" --compress "
                     cmd += f" --keep_intermediate_error_files "
@@ -381,6 +382,7 @@ def main():
                 # 2. compress_save_all_quality_scores_save_approx_quality_scores
                 #################################################################################################################
                 for level in [1,2,3]:
+                    if level == 1 or level == 2 : continue
                     cmd  = f"(/usr/bin/time --verbose abridge "
                     cmd += f" --compress "
                     cmd += f" --cpu 1 "
@@ -411,6 +413,7 @@ def main():
                 # 3. compress_save_qual_scores_only_for_indels_and_mismatches
                 #################################################################################################################
                 for level in [1,2,3]:
+                    if level == 1 or level == 2 : continue
                     cmd  = f"(/usr/bin/time --verbose abridge "
                     cmd += f" --compress "
                     cmd += f" --cpu 1 "
@@ -440,6 +443,7 @@ def main():
                 # 4. compress_ignore_quality_scores
                 #################################################################################################################
                 for level in [1,2,3]:
+                    if level == 1 or level == 2 : continue
                     cmd  = f"(/usr/bin/time --verbose abridge "
                     cmd += f" --compress "
                     cmd += f" --cpu 1 "
@@ -470,6 +474,7 @@ def main():
                 # 5. compress_ignore_soft_clippings_ignore_mismatches
                 #################################################################################################################
                 for level in [1,2,3]:
+                    if level == 1 or level == 2 : continue
                     cmd  = f"(/usr/bin/time --verbose abridge "
                     cmd += f" --compress "
                     cmd += f" --cpu 1 "
@@ -502,6 +507,7 @@ def main():
                 # 6. compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores
                 #################################################################################################################
                 for level in [1,2,3]:
+                    if level == 1 or level == 2 : continue
                     cmd  = f"(/usr/bin/time --verbose abridge "
                     cmd += f" --compress "
                     cmd += f" --cpu 1 "
@@ -535,6 +541,7 @@ def main():
                 # 7. compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads
                 #################################################################################################################
                 for level in [1,2,3]:
+                    if level == 1 or level == 2 : continue
                     cmd  = f"(/usr/bin/time --verbose abridge "
                     cmd += f" --compress "
                     cmd += f" --cpu 1 "
