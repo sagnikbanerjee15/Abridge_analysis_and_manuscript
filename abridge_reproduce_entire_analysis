@@ -352,7 +352,6 @@ def main():
                 # 1. compress_save_all_quality_scores_save_exact_quality_scores
                 #################################################################################################################
                 for level in [1,2,3]:
-                    if level == 1 or level == 2 : continue
                     cmd  = f"(/usr/bin/time --verbose abridge "
                     cmd += f" --compress "
                     cmd += f" --keep_intermediate_error_files "
