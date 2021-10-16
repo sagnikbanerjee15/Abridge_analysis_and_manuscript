@@ -358,7 +358,7 @@ def main():
                     cmd += f" --keep_intermediate_error_files "
                     cmd += f" --genome {options.genome} "
                     cmd += f" --inputsamfilenames {alignment_samfilename} "
-                    cmd += f" --cpu 1 "
+                    cmd += f" --cpu {CPU} "
                     cmd += f" --output_directory {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration} "
                     cmd += f" --save_all_quality_scores "
                     cmd += f" --save_exact_quality_scores "
