@@ -1005,7 +1005,7 @@ def main():
                 cmd += f") "
                 cmd += f" 1> {options.output_directory}/quip_decompressed_files/compress_quip_{sra}_{layout}_{iteration}.decompressed.sam "
                 cmd += f" 2> {options.output_directory}/errors/decompress_quip_{sra}_{layout}_{iteration}.error "
-                if os.path.exists(f"{options.temp_directory}/quip_decompressed_files/decompress_quip_{sra}_{layout}_{iteration}.sam")==False and os.path.exists(f"{options.output_directory}/quip_decompressed_files/compress_quip_{sra}_{layout}_{iteration}.decompressed.sam") == False:
+                if os.path.exists(f"{options.temp_directory}/quip_decompressed_files/decompress_quip_{sra}_{layout}_{iteration}.decompressed.sam")==False and os.path.exists(f"{options.output_directory}/quip_decompressed_files/compress_quip_{sra}_{layout}_{iteration}.decompressed.sam") == False:
                     logging.info(f"Running command - {cmd}")
                     os.system(f"cp {options.temp_directory}/quip_compressed_files/compress_quip_{sra}_{layout}_{iteration}.quip {options.output_directory}/quip_compressed_files/")
                     os.system(cmd)
