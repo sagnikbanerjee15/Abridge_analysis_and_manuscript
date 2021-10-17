@@ -1017,8 +1017,124 @@ def main():
                     os.system(cmd)
                     
                     os.system(f"rm -rf {options.output_directory}/quip_compressed_files/compress_quip_{sra}_{layout}_{iteration}.quip")
-    
+                    
+                #################################################################################################################
+                # DEEZ
+                #################################################################################################################
+                os.system(f"mkdir -p {options.output_directory}/deez_decompressed_files")
+                os.system(f"mkdir -p {options.temp_directory}/deez_decompressed_files")
 
+                for lossy in [0,50,99]:
+                    for encodequality in ["1","2"]:
+                        cmd  = f"(/usr/bin/time --verbose "
+                        cmd += f" /project/maizegdb/sagnik/softwares/deez/deez "
+                        cmd += f" -r {options.genome}"
+                        cmd += f" --threads 1 "
+                        cmd += f" --force "
+                        cmd += f" --quality {encodequality}"
+                        cmd += f" --lossy {lossy} "
+                        cmd += f" {options.output_directory}/deez_compressed_files/compress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.deez "
+                        cmd += f" -o {options.output_directory}/deez_decompressed_files/decompress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.decompressed.sam  "
+                        cmd += f") "
+                        cmd += f" 1> {options.output_directory}/outputs/decompress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.output "
+                        cmd += f" 2> {options.output_directory}/errors/decompress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.error "
+                        if os.path.exists(f"{options.temp_directory}/deez_decompressed_files/compress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.decompressed.sam")==False and os.path.exists(f"{options.output_directory}/deez_decompressed_files/decompress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.decompressed.sam") == False:
+                            logging.info(f"Running command - {cmd}")
+                            os.system(f"cp -r {options.temp_directory}/deez_decompressed_files/compress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.deez {options.output_directory}/deez_compressed_files/compress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.deez")
+                            
+                            os.system(cmd)
+                
+                            cmd=f"mv {options.output_directory}/deez_decompressed_files/compress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.decompressed.sam {options.temp_directory}/deez_decompressed_files"
+                            os.system(cmd)
+                            
+                            os.system(f"rm {options.output_directory}/deez_decompressed_files/compress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.decompressed.sam")
+    
+                #################################################################################################################
+                # SAMCOMP
+                #################################################################################################################
+                os.system(f"mkdir -p {options.output_directory}/samcomp_decompressed_files")
+                os.system(f"mkdir -p {options.temp_directory}/samcomp_decompressed_files")
+                
+                cmd  = f"(/usr/bin/time --verbose "
+                cmd += f" /project/maizegdb/sagnik/softwares/sam_comp-0.10/sam_comp "
+                cmd += f" -d "
+                cmd += f" -r {options.genome} "
+                cmd += f" < {options.output_directory}/samcomp_compressed_files/compress_samcomp_{sra}_{layout}_{iteration}.zam"
+                cmd += f")"
+                cmd += f" 1> {options.output_directory}/samcomp_decompressed_files/decompress_samcomp_{sra}_{layout}_{iteration}.decompressed.sam "
+                cmd += f" 2> {options.output_directory}/errors/decompress_samcomp_{sra}_{layout}_{iteration}.error "
+                if os.path.exists(f"{options.temp_directory}/samcomp_decompressed_files/decompress_samcomp_{sra}_{layout}_{iteration}.decompressed.sam")==False and os.path.exists(f"{options.output_directory}/samcomp_decompressed_files/decompress_samcomp_{sra}_{layout}_{iteration}.decompressed.sam") == False:
+                    logging.info(f"Running command - {cmd}")
+                    os.system(f"cp {options.temp_directory}/samcomp_compressed_files/compress_samcomp_{sra}_{layout}_{iteration}.zam {options.output_directory}/samcomp_compressed_files/")
+                    
+                    os.system(cmd)
+                    cmd=f"mv {options.output_directory}/samcomp_decompressed_files/decompress_samcomp_{sra}_{layout}_{iteration}.decompressed.sam  {options.temp_directory}/samcomp_decompressed_files"
+                    os.system(cmd)
+                    
+                    os.system(f"rm {options.output_directory}/samcomp_compressed_files/compress_samcomp_{sra}_{layout}_{iteration}.zam")
+                    
+                
+                #################################################################################################################
+                # GENOZIP
+                #################################################################################################################
+                os.system(f"mkdir -p {options.output_directory}/genozip_decompressed_files")
+                os.system(f"mkdir -p {options.temp_directory}/genozip_decompressed_files")
+                
+                for compression in ["best","fast"]:
+                    for optimize in ["","optimize"]:
+                        
+                        cmd  = f"(/usr/bin/time --verbose "
+                        cmd += f" genounzip "
+                        cmd += f" --sam "
+                        cmd += f" --force"
+                        cmd += f" -o {options.output_directory}/genozip_decompressed_files/decompress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.decompressed.sam "
+                        cmd += f" -@ 1" # Single threaded
+                        cmd += f" --reference /project/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna.toplevel.ref.genozip " # Reference fasta
+                        cmd += f" {options.output_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip"
+                        cmd += f")"
+                        cmd += f" 1> {options.output_directory}/outputs/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.output "
+                        cmd += f" 2> {options.output_directory}/errors/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.error "
+                        if os.path.exists(f"{options.temp_directory}/genozip_decompressed_files/decompress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.decompressed.sam")==False and os.path.exists(f"{options.output_directory}/genozip_decompressed_files/decompress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.decompressed.sam") == False:
+                            logging.info(f"Running command - {cmd}")
+                            
+                            os.system(f"cp {options.temp_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip {options.output_directory}/genozip_compressed_files/")
+                            
+                            os.system(cmd)
+                            
+                            cmd=f"mv {options.output_directory}/genozip_decompressed_files/decompress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.decompressed.sam {options.temp_directory}/genozip_decompressed_files"
+                            os.system(cmd)
+                            
+                            os.system(f"rm {options.output_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip")
+                            
+                """
+                #################################################################################################################
+                # CSAM
+                #################################################################################################################
+                os.system(f"mkdir -p {options.output_directory}/csam_decompressed_files")
+                os.system(f"mkdir -p {options.temp_directory}/csam_decompressed_files")
+                
+                for q in [0,1,2]:
+                    for m in [0,1,2]:
+                        cmd  = f"(/usr/bin/time --verbose "
+                        cmd += f"  /project/maizegdb/sagnik/softwares/libCSAM/DecompressSAM  "
+                        cmd += f" {alignment_samfilename} "
+                        cmd += f")"
+                        cmd += f" 1> {options.output_directory}/outputs/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.output "
+                        cmd += f" 2> {options.output_directory}/errors/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.error "
+                        
+                        if os.path.exists(f"{options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam")==False:
+                            logging.info(f"Running command - {cmd}")
+                            
+                            os.system(f"cp {options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam {options.output_directory}/csam_compressed_files/")
+                            os.system(cmd)
+                            
+                            # Rename the compressed file
+                            cmd=f"mv {alignment_samfilename}.csam {options.output_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam "
+                            os.system(cmd)
+                            cmd=f"mv {options.output_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam {options.temp_directory}/csam_compressed_files"
+                            os.system(cmd)
+                """
+                
 if __name__ == "__main__":
     main()
     
