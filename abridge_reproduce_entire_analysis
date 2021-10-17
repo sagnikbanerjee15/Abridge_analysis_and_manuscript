@@ -1015,6 +1015,8 @@ def main():
                     
                     os.system(f"rm -rf {options.output_directory}/quip_compressed_files/compress_quip_{sra}_{layout}_{iteration}.quip")
                 """   
+                
+                """
                 #################################################################################################################
                 # DEEZ
                 #################################################################################################################
@@ -1069,7 +1071,7 @@ def main():
                     os.system(cmd)
                     
                     os.system(f"rm {options.output_directory}/samcomp_compressed_files/compress_samcomp_{sra}_{layout}_{iteration}.zam")
-                 """   
+                 
                 
                 
                 """
