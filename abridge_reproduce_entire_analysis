@@ -1005,15 +1005,12 @@ def main():
                 cmd += f") "
                 cmd += f" 1> {options.output_directory}/quip_decompressed_files/compress_quip_{sra}_{layout}_{iteration}.sam "
                 cmd += f" 2> {options.output_directory}/errors/decompress_quip_{sra}_{layout}_{iteration}.error "
-                if os.path.exists(f"{options.temp_directory}/quip_decompressed_files/decompress_quip_{sra}_{layout}_{iteration}.sam")==False:
+                if os.path.exists(f"{options.temp_directory}/quip_decompressed_files/decompress_quip_{sra}_{layout}_{iteration}.sam")==False and os.path.exists(f"{options.output_directory}/quip_decompressed_files/compress_quip_{sra}_{layout}_{iteration}.decompressed.sam") == False:
                     logging.info(f"Running command - {cmd}")
-                    os.system(f"cp -r {options.temp_directory}/quip_compressed_files/compress_quip_{sra}_{layout}_{iteration}.quip {options.output_directory}/quip_compressed_files/")
-                    os.system(cmd)
-                
-                    cmd=f"mv {options.output_directory}/quip_compressed_files/compress_quip_{sra}_{layout}_{iteration}.quip {options.temp_directory}/quip_compressed_files/"
+                    os.system(f"cp {options.temp_directory}/quip_compressed_files/compress_quip_{sra}_{layout}_{iteration}.quip {options.output_directory}/quip_compressed_files/")
                     os.system(cmd)
                     
-                    cmd=f"mv {options.output_directory}/quip_decompressed_files/decompress_quip_{sra}_{layout}_{iteration}.sam {options.temp_directory}/quip_decompressed_files/"
+                    cmd=f"mv {options.output_directory}/quip_decompressed_files/decompress_quip_{sra}_{layout}_{iteration}.decompressed.sam {options.temp_directory}/quip_decompressed_files/"
                     os.system(cmd)
                     
                     os.system(f"rm -rf {options.output_directory}/quip_compressed_files/compress_quip_{sra}_{layout}_{iteration}.quip")
