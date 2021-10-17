@@ -777,6 +777,7 @@ def main():
     ##################################################################################################
     # Decompress alignments with Abridge
     ##################################################################################################
+    return
     CPU=1
     for iteration in range(int(options.num_times)):
         for Assay_Type in options.metadata_expanded:
