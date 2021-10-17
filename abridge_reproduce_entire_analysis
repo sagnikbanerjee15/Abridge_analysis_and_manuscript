@@ -988,7 +988,7 @@ def main():
                         
                         os.system(f"rm -rf {options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_level_{level}_{sra}_{layout}_{iteration}")
                         
-                
+                """
                 #################################################################################################################
                 # QUIP
                 #################################################################################################################
@@ -1014,7 +1014,7 @@ def main():
                     os.system(cmd)
                     
                     os.system(f"rm -rf {options.output_directory}/quip_compressed_files/compress_quip_{sra}_{layout}_{iteration}.quip")
-                    
+                """   
                 #################################################################################################################
                 # DEEZ
                 #################################################################################################################
