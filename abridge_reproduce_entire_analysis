@@ -135,7 +135,7 @@ def main():
     options.logfilename = options.output_directory+"/progress.log"
     configureLogger(options)
     
-    pool = multiprocessing.Pool(processes=int(options.cpu))
+    #pool = multiprocessing.Pool(processes=int(options.cpu))
     ##################################################################################################
     # Create output directory and subdirectories underneath
     ##################################################################################################
