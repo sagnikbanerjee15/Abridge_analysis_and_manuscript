@@ -988,7 +988,7 @@ def main():
                         
                         os.system(f"rm -rf {options.output_directory}/abridge_compressed_files/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_level_{level}_{sra}_{layout}_{iteration}")
                         
-                """
+                
                 #################################################################################################################
                 # QUIP
                 #################################################################################################################
@@ -1014,9 +1014,9 @@ def main():
                     os.system(cmd)
                     
                     os.system(f"rm -rf {options.output_directory}/quip_compressed_files/compress_quip_{sra}_{layout}_{iteration}.quip")
-                """   
+                   
                 
-                """
+                
                 #################################################################################################################
                 # DEEZ
                 #################################################################################################################
@@ -1047,7 +1047,7 @@ def main():
                             os.system(cmd)
                             
                             os.system(f"rm {options.output_directory}/deez_decompressed_files/compress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.decompressed.sam")
-                """
+                
                 #################################################################################################################
                 # SAMCOMP
                 #################################################################################################################
@@ -1074,7 +1074,7 @@ def main():
                  
                 
                 
-                """
+                
                 #################################################################################################################
                 # GENOZIP
                 #################################################################################################################
@@ -1107,7 +1107,7 @@ def main():
                             
                             os.system(f"rm {options.output_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip")
                             
-                """
+                
                 
                 """
                 #################################################################################################################
