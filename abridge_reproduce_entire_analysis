@@ -1037,7 +1037,7 @@ def main():
                         cmd += f" 2> {options.output_directory}/errors/decompress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.error "
                         if os.path.exists(f"{options.temp_directory}/deez_decompressed_files/compress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.decompressed.sam")==False and os.path.exists(f"{options.output_directory}/deez_decompressed_files/decompress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.decompressed.sam") == False:
                             logging.info(f"Running command - {cmd}")
-                            os.system(f"cp -r {options.temp_directory}/deez_decompressed_files/compress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.deez {options.output_directory}/deez_compressed_files/")
+                            os.system(f"cp -r {options.temp_directory}/deez_compressed_files/compress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.deez {options.output_directory}/deez_compressed_files/")
                             
                             os.system(cmd)
                 
