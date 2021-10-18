@@ -214,7 +214,7 @@ def main():
     for Assay_Type in options.metadata_expanded:
         options.metadata_expanded[Assay_Type].extend(add_these_back_to_metadata_expanded[Assay_Type])
     logging.info(f"Metadata preparation for alignment is complete")
-    
+    """
     ##################################################################################################
     # Map reads with STAR and BWA
     ##################################################################################################
@@ -231,7 +231,7 @@ def main():
     cmd += f" 2> {options.output_directory}/errors/alignment.error "
     os.system(cmd)
     logging.info(f"Aligning reads with STAR is complete")
-    
+    """
     ##################################################################################################
     # Merge read libraries to create larger sized datasets
     ##################################################################################################
