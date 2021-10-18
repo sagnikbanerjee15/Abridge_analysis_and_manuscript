@@ -337,6 +337,13 @@ def main():
                 alignment_samfilename_in_temp = f"{options.temp_directory}/alignments/{sra}_{layout}.sam"
                 if os.path.exists(alignment_samfilename_in_temp) == False : continue
                 alignment_samfilename = f"{options.output_directory}/alignments/{sra}_{layout}.sam"
+                alignment_bamfilename = f"{options.output_directory}/alignments/{sra}_{layout}.bam"
+                alignment_cramfilename = f"{options.output_directory}/alignments/{sra}_{layout}.cram"
+                
+                if os.path.exists(alignment_cramfilename) == False:
+                    cmd = f" samtools view -@ 70 -C -T {options.genome} -o {alignment_cramfilename} {alignment_bamfilename} "
+                    os.system(cmd)
+                
                 """
                 cmd = f"cp {alignment_samfilename_in_temp} {alignment_samfilename}"
                 os.system(cmd)
