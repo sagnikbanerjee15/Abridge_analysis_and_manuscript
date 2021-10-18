@@ -328,7 +328,7 @@ def main():
     #pool = multiprocessing.Pool(processes=int(1))
     all_commands = []
     
-    
+    """
     for iteration in range(int(options.num_times)):
         for Assay_Type in options.metadata_expanded:
             for row in options.metadata_expanded[Assay_Type]:
@@ -343,7 +343,7 @@ def main():
                 if os.path.exists(alignment_cramfilename) == False:
                     cmd = f" samtools view -@ 70 -C -T {options.genome} -o {alignment_cramfilename} {alignment_bamfilename} "
                     os.system(cmd)
-    return
+    """
     
     for iteration in range(int(options.num_times)):
         for Assay_Type in options.metadata_expanded:
