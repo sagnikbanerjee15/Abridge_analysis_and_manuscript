@@ -19,7 +19,7 @@ conda activate abridge_pypy
 module load samtools
 module load libssh
 
-CPU=72 # Change accordingly
+CPU=1 # Change accordingly
 
 
 
