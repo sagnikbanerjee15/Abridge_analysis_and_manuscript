@@ -357,7 +357,7 @@ def main():
                 alignment_bamfilename = f"{options.output_directory}/alignments/{sra}_{layout}.bam"
                 alignment_cramfilename = f"{options.output_directory}/alignments/{sra}_{layout}.cram"
                 
-                
+                print(f"Processing {sra} {layout}")
                 """
                 cmd = f"cp {alignment_samfilename_in_temp} {alignment_samfilename}"
                 os.system(cmd)
