@@ -328,6 +328,7 @@ def main():
     #pool = multiprocessing.Pool(processes=int(1))
     all_commands = []
     
+    
     for iteration in range(int(options.num_times)):
         for Assay_Type in options.metadata_expanded:
             for row in options.metadata_expanded[Assay_Type]:
@@ -343,6 +344,20 @@ def main():
                 if os.path.exists(alignment_cramfilename) == False:
                     cmd = f" samtools view -@ 70 -C -T {options.genome} -o {alignment_cramfilename} {alignment_bamfilename} "
                     os.system(cmd)
+    return
+    
+    for iteration in range(int(options.num_times)):
+        for Assay_Type in options.metadata_expanded:
+            for row in options.metadata_expanded[Assay_Type]:
+                sra = row[6]
+                layout = row[2]
+                if "SRR13711353" not in sra and "SRR12077404" not in sra:continue
+                alignment_samfilename_in_temp = f"{options.temp_directory}/alignments/{sra}_{layout}.sam"
+                if os.path.exists(alignment_samfilename_in_temp) == False : continue
+                alignment_samfilename = f"{options.output_directory}/alignments/{sra}_{layout}.sam"
+                alignment_bamfilename = f"{options.output_directory}/alignments/{sra}_{layout}.bam"
+                alignment_cramfilename = f"{options.output_directory}/alignments/{sra}_{layout}.cram"
+                
                 
                 """
                 cmd = f"cp {alignment_samfilename_in_temp} {alignment_samfilename}"
