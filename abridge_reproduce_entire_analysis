@@ -350,7 +350,8 @@ def main():
             for row in options.metadata_expanded[Assay_Type]:
                 sra = row[6]
                 layout = row[2]
-                print(f"Before continue tellProcessing {sra} {layout} { \"SRR13711353\" not in sra and \"SRR12077404\" not in sra}")
+                print(f"Before continue tellProcessing {sra} {layout}", end = " ")
+                print("SRR13711353" not in sra and "SRR12077404" not in sra)
                 if "SRR13711353" not in sra and "SRR12077404" not in sra:continue
                 alignment_samfilename_in_temp = f"{options.temp_directory}/alignments/{sra}_{layout}.sam"
                 if os.path.exists(alignment_samfilename_in_temp) == False : continue
