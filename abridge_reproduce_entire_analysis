@@ -1046,7 +1046,7 @@ def main():
                             cmd=f"mv {options.output_directory}/deez_decompressed_files/decompress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.decompressed.sam {options.temp_directory}/deez_decompressed_files"
                             os.system(cmd)
                             
-                            os.system(f"rm {options.output_directory}/deez_decompressed_files/compress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.decompressed.sam")
+                            os.system(f"rm {options.output_directory}/deez_compressed_files/compress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.deez")
                 
                 #################################################################################################################
                 # SAMCOMP
