@@ -1147,7 +1147,6 @@ def main():
                             logging.info(f"Running command - {cmd}")
                             
                             os.system(f"cp {options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam {options.output_directory}/csam_compressed_files/")
-                            time.sleep(45)
                             os.system(cmd)
                             
                             # Rename the compressed file
