@@ -1112,8 +1112,8 @@ def main():
                         cmd += f" --reference /project/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna.toplevel.ref.genozip " # Reference fasta
                         cmd += f" {options.output_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip"
                         cmd += f")"
-                        cmd += f" 1> {options.output_directory}/outputs/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.output "
-                        cmd += f" 2> {options.output_directory}/errors/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.error "
+                        cmd += f" 1> {options.output_directory}/outputs/decompress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.output "
+                        cmd += f" 2> {options.output_directory}/errors/decompress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.error "
                         if os.path.exists(f"{options.temp_directory}/genozip_decompressed_files/decompress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.decompressed.sam")==False and os.path.exists(f"{options.output_directory}/genozip_decompressed_files/decompress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.decompressed.sam") == False:
                             logging.info(f"Running command - {cmd}")
                             
