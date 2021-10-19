@@ -1153,7 +1153,7 @@ def main():
                             cmd=f"mv {options.output_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam.sam {options.temp_directory}/csam_decompressed_files/decompress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.decompressed.sam "
                             os.system(cmd)
                             
-                            os.system(f"rm {options.output_directory}/csam_compressed_files/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam")
+                            os.system(f"rm {options.output_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam")
             
                 
 if __name__ == "__main__":
