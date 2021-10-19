@@ -1143,7 +1143,7 @@ def main():
                         cmd += f" 1> {options.output_directory}/outputs/decompress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.output "
                         cmd += f" 2> {options.output_directory}/errors/decompress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.error "
                         
-                        if os.path.exists(f"{options.output_directory}/csam_compressed_files/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam")==False and os.path.exists(f"{options.temp_directory}/csam_decompressed_files/decompress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.decompressed.sam") == False:
+                        if os.path.exists(f"{options.output_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam")==False and os.path.exists(f"{options.temp_directory}/csam_decompressed_files/decompress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.decompressed.sam") == False:
                             logging.info(f"Running command - {cmd}")
                             
                             os.system(f"cp {options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam {options.output_directory}/csam_compressed_files/")
