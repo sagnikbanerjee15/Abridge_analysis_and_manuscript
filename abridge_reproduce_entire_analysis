@@ -1128,7 +1128,6 @@ def main():
                             
                 
                 
-                """
                 #################################################################################################################
                 # CSAM
                 #################################################################################################################
@@ -1139,23 +1138,23 @@ def main():
                     for m in [0,1,2]:
                         cmd  = f"(/usr/bin/time --verbose "
                         cmd += f"  /project/maizegdb/sagnik/softwares/libCSAM/DecompressSAM  "
-                        cmd += f" {alignment_samfilename} "
+                        cmd += f" {options.output_directory}/csam_compressed_files/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam "
                         cmd += f")"
                         cmd += f" 1> {options.output_directory}/outputs/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.output "
                         cmd += f" 2> {options.output_directory}/errors/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.error "
                         
-                        if os.path.exists(f"{options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam")==False:
+                        if os.path.exists(f"{options.output_directory}/csam_compressed_files/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam")==False and os.path.exists(f"{options.temp_directory}/csam_decompressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.decompressed.sam") == False:
                             logging.info(f"Running command - {cmd}")
                             
                             os.system(f"cp {options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam {options.output_directory}/csam_compressed_files/")
                             os.system(cmd)
                             
                             # Rename the compressed file
-                            cmd=f"mv {alignment_samfilename}.csam {options.output_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam "
+                            cmd=f"mv {options.output_directory}/csam_compressed_files/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam.sam {options.temp_directory}/csam_decompressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.decompressed.sam "
                             os.system(cmd)
-                            cmd=f"mv {options.output_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam {options.temp_directory}/csam_compressed_files"
-                            os.system(cmd)
-                """
+                            
+                            os.system(f"rm {options.output_directory}/csam_compressed_files/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam")
+            
                 
 if __name__ == "__main__":
     main()
