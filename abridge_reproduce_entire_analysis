@@ -341,7 +341,11 @@ def main():
                 alignment_cramfilename = f"{options.output_directory}/alignments/{sra}_{layout}.cram"
                 
                 if os.path.exists(alignment_cramfilename) == False:
-                    cmd = f" samtools view -@ 70 -C -T {options.genome} -o {alignment_cramfilename} {alignment_bamfilename} "
+                    cmd  = f"(/usr/bin/time --verbose "
+                    cmd += f" samtools view -@ 1 -O CRAM,version=3.1 -T {options.genome} -o {alignment_cramfilename} {alignment_bamfilename} "
+                    cmd += f")"
+                    cmd += f"1> {options.output_directory}/outputs/compress_cram_{sra}_{layout}_{iteration}.output "
+                    cmd += f"2> {options.output_directory}/errors/compress_cram_{sra}_{layout}_{iteration}.error "
                     os.system(cmd)
     """
     
@@ -725,7 +729,7 @@ def main():
                         cmd += f")"
                         cmd += f" 1> {options.output_directory}/outputs/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.output "
                         cmd += f" 2> {options.output_directory}/errors/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.error "
-                        if os.path.exists(f"{options.temp_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip")==False:
+                        if os.path.exists(f"{options.temp_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip")==False and os.path.exists(f"{options.output_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip")==False:
                             logging.info(f"Running command - {cmd}")
                             os.system(cmd)
                             cmd=f"mv {options.output_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip {options.temp_directory}/genozip_compressed_files"
@@ -748,7 +752,7 @@ def main():
                         cmd += f" 1> {options.output_directory}/outputs/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.output "
                         cmd += f" 2> {options.output_directory}/errors/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.error "
                         
-                        if os.path.exists(f"{options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam")==False:
+                        if os.path.exists(f"{options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam")==False and os.path.exists(f"{alignment_samfilename}.csam") == False:
                             logging.info(f"Running command - {cmd}")
                             os.system(cmd)
                             
@@ -757,6 +761,8 @@ def main():
                             os.system(cmd)
                             cmd=f"mv {options.output_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam {options.temp_directory}/csam_compressed_files"
                             os.system(cmd)
+                            
+                            
                 """
                 #################################################################################################################
                 # NGC
@@ -1092,7 +1098,7 @@ def main():
                     os.system(f"rm {options.output_directory}/samcomp_compressed_files/compress_samcomp_{sra}_{layout}_{iteration}.zam")
                  
                 
-                
+            
                 
                 #################################################################################################################
                 # GENOZIP
@@ -1125,7 +1131,7 @@ def main():
                             os.system(cmd)
                             
                             os.system(f"rm {options.output_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip")
-                            
+            
                 
                 
                 #################################################################################################################
@@ -1143,7 +1149,7 @@ def main():
                         cmd += f" 1> {options.output_directory}/outputs/decompress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.output "
                         cmd += f" 2> {options.output_directory}/errors/decompress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.error "
                         
-                        if os.path.exists(f"{options.output_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam")==False and os.path.exists(f"{options.temp_directory}/csam_decompressed_files/decompress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.decompressed.sam") == False:
+                        if os.path.exists(f"{options.output_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam.sam")==False and os.path.exists(f"{options.temp_directory}/csam_decompressed_files/decompress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.decompressed.sam") == False:
                             logging.info(f"Running command - {cmd}")
                             
                             os.system(f"cp {options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam {options.output_directory}/csam_compressed_files/")
@@ -1154,7 +1160,103 @@ def main():
                             os.system(cmd)
                             
                             os.system(f"rm {options.output_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam")
-            
+    
+    
+    #################################################################################################################
+    # Coverage generation
+    #################################################################################################################
+    CPU=1
+    for iteration in range(int(options.num_times)):
+        for Assay_Type in options.metadata_expanded:
+            for row in options.metadata_expanded[Assay_Type]:
+                sra = row[6]
+                layout = row[2]
+                if "SRR13711353" not in sra and "SRR12077404" not in sra:continue
+                
+                #################################################################################################################
+                # ABRIDGE
+                #################################################################################################################
+                os.system(f"mkdir {options.temp_directory}/abridge_generate_overlapping_coverage")
+                os.system(f"mkdir {options.output_directory}/abridge_generate_overlapping_coverage")
+                
+                #################################################################################################################
+                # 1. compress_save_all_quality_scores_save_exact_quality_scores
+                #################################################################################################################
+                for level in [2]:
+                    cmd  = f"(/usr/bin/time --verbose abridge "
+                    cmd += f" --generate_overlapping_coverage "
+                    cmd += f" --keep_intermediate_error_files "
+                    cmd += f" --genome {options.genome} "
+                    cmd += f" --inputabrfilenames {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge "
+                    cmd += f" --cpu {CPU} "
+                    cmd += f" --output_directory {options.output_directory}/generate_overlapping_coverage/generate_overlapping_coverage_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration} "
+                    cmd += ")"
+                    cmd += f" 1> {options.output_directory}/outputs/generate_overlapping_coverage_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}.output "
+                    cmd += f" 2> {options.output_directory}/errors/generate_overlapping_coverage_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error " 
+                    if os.path.exists(f"{options.temp_directory}/abridge_random_access/random_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.decompressed.sam") == False and os.path.exists(f"{options.output_directory}/abridge_decompressed_files/decompress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}") == False and os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}") == False: 
+                        logging.info(f"Running command - {cmd}")
+                        
+                        os.system(f"cp -r {options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.output_directory}/abridge_compressed_files/")
+                        os.system(cmd)
+
+                        cmd = f"mv {options.output_directory}/generate_overlapping_coverage/generate_overlapping_coverage_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/generate_overlapping_coverage"
+                        os.system(cmd)
+                        
+                        os.system(f"rm -rf {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}")
+                        sys.exit()
+    
+    
+    
+    
+    #################################################################################################################
+    # Random access
+    #################################################################################################################
+    CPU=1
+    for iteration in range(int(options.num_times)):
+        for Assay_Type in options.metadata_expanded:
+            for row in options.metadata_expanded[Assay_Type]:
+                sra = row[6]
+                layout = row[2]
+                if "SRR13711353" not in sra and "SRR12077404" not in sra:continue
+                
+                #################################################################################################################
+                # ABRIDGE
+                #################################################################################################################
+                os.system(f"mkdir {options.temp_directory}/abridge_random_access")
+                os.system(f"mkdir {options.output_directory}/abridge_random_access")
+                
+                #################################################################################################################
+                # 1. compress_save_all_quality_scores_save_exact_quality_scores
+                #################################################################################################################
+                for level in [2]:
+                    cmd  = f"(/usr/bin/time --verbose abridge "
+                    cmd += f" --random "
+                    cmd += f" --keep_intermediate_error_files "
+                    cmd += f" --genome {options.genome} "
+                    cmd += f" --inputabrfilenames {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge "
+                    cmd += f" --cpu {CPU} "
+                    cmd += f" -p 5:1000-100000"
+                    cmd += f" --output_directory {options.output_directory}/abridge_random_access/random_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration} "
+                    cmd += ")"
+                    cmd += f" 1> {options.output_directory}/outputs/random_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}.output "
+                    cmd += f" 2> {options.output_directory}/errors/random_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error " 
+                    if os.path.exists(f"{options.temp_directory}/abridge_random_access/random_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.decompressed.sam") == False and os.path.exists(f"{options.output_directory}/abridge_decompressed_files/decompress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}") == False and os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}") == False: 
+                        logging.info(f"Running command - {cmd}")
+                        
+                        os.system(f"cp -r {options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.output_directory}/abridge_compressed_files/")
+                        os.system(cmd)
+
+                        cmd = f"mv {options.output_directory}/abridge_random_access/random_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/abridge_random_access"
+                        os.system(cmd)
+                        
+                        os.system(f"rm -rf {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}")
+                        sys.exit()
+                        
+    
+    #################################################################################################################
+    # Create csv file containing all information about the runs
+    ################################################################################################################# 
+    
                 
 if __name__ == "__main__":
     main()

@@ -4,9 +4,10 @@
 #SBATCH -N 1
 #SBATCH --partition=long
 ##SBATCH --partition=priority-mem768 
-#SBATCH --mem=350G
+#SBATCH --mem=5G
 #SBATCH --qos=maizegdb
 #SBATCH --time=7-00:00:00
+##SBATCH --array=0-50 #specify how many times you want a job to run, we have a total of 7 array spaces
 #SBATCH --job-name="ABRIDGE_ANALYSIS_MS"
 #SBATCH --mail-user=sagnik@iastate.edu
 #SBATCH --mail-type=BEGIN
@@ -19,11 +20,11 @@ conda activate abridge_pypy
 module load samtools
 module load libssh
 
+sleep $((RANDOM%30+1))
+echo "My SLURM_ARRAY_TASK_ID: " $SLURM_ARRAY_TASK_ID
 CPU=1 # Change accordingly
 
-
-
-nohup abridge_reproduce_entire_analysis \
+abridge_reproduce_entire_analysis \
 --metadata /project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/ListOfNCBI-SRASamplesForExperimentST.csv \
 --output_directory /project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS \
 --genome /project/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa \
@@ -32,7 +33,5 @@ nohup abridge_reproduce_entire_analysis \
 --error_directory /project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS/errors \
 --temp_directory /90daydata/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS/ \
 1> /project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS.output \
-2> /project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS.error &
-
-sleep 60
+2> /project/maizegdb/sagnik/ABRIDGE/data_analysis_for_MS.error 
 
