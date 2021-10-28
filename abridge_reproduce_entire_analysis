@@ -1238,10 +1238,10 @@ def main():
                         logging.info(f"Running command - {cmd}")
                         
                         os.system(f"cp -r {options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.output_directory}/abridge_compressed_files/")
+                        print(cmd)
                         os.system(cmd)
 
                         cmd = f"mv {options.output_directory}/generate_overlapping_coverage/generate_overlapping_coverage_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/generate_overlapping_coverage"
-                        print(cmd)
                         os.system(cmd)
                         
                         os.system(f"rm -rf {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}")
