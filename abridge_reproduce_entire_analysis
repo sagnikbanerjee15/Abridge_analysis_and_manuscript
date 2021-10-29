@@ -1238,7 +1238,7 @@ def main():
                         cmd += f" --regions 5:1000-100000 "
                         cmd += f" -o {options.output_directory}/genozip_decompressed_files/random_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.random.sam "
                         cmd += f" -@ 1" # Single threaded
-                        cmd += f" --reference /project/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna.toplevel.ref.genozip " # Reference fasta
+                        cmd += f" -e /project/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna.toplevel.ref.genozip " # Reference fasta
                         cmd += f" {options.output_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip"
                         cmd += f")"
                         cmd += f" 1> {options.output_directory}/outputs/random_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.output "
@@ -1254,6 +1254,7 @@ def main():
                             os.system(cmd)
                             
                             os.system(f"rm {options.output_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip")
+                            sys.exit()
                         
     """
     #################################################################################################################
