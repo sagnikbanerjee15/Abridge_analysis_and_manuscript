@@ -125,6 +125,14 @@ def mergeReadPairs(eachinput):
                 line = line.replace('/','_')
             fhw.write(line)
     fhw.close()
+    
+def levelToCompressor(level):
+    if level == 1:
+        return "br"
+    elif level == 2:
+        return "7z"
+    elif level == 3:
+        return "7paq"
 
 def main():
     commandLineArg=sys.argv
@@ -1355,8 +1363,54 @@ def main():
                 layout = row[2]
                 if "SRR13711353" not in sra and "SRR12077404" not in sra:continue
                 
+                #################################################################################################################
+                # Compress
+                #################################################################################################################
                 
+                types_of_compression = ["compress_save_all_quality_scores_save_exact_quality_scores",
+                                        "compress_save_all_quality_scores_save_approx_quality_scores",
+                                        "compress_ignore_quality_scores",
+                                        "compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores",
+                                        "compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads"]
+                
+                for type_of_compression in types_of_compression:
+                    for level in [1,2,3]:
+                        errorfilename =  f"{options.output_directory}/errors/{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}.error"
+                        compressed_filename = f"{options.temp_directory}/abridge_compressed_files/{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge"
+                        s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
+                
+                abridge_compress_save_all_quality_scores_save_exact_quality_scores_br_errorfile   = f"{options.output_directory}/errors/compress_save_all_quality_scores_save_exact_quality_scores_level_1_{sra}_{layout}_{iteration}.error"
+                abridge_compress_save_all_quality_scores_save_exact_quality_scores_7z_errorfile   = f"{options.output_directory}/errors/compress_save_all_quality_scores_save_exact_quality_scores_level_2_{sra}_{layout}_{iteration}.error"
+                abridge_compress_save_all_quality_scores_save_exact_quality_scores_zpaq_errorfile = f"{options.output_directory}/errors/compress_save_all_quality_scores_save_exact_quality_scores_level_3_{sra}_{layout}_{iteration}.error"
     
+                abridge_compress_save_all_quality_scores_save_approx_quality_scores_7z_errorfile = f"{options.output_directory}/errors/compress_save_all_quality_scores_save_approx_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error"
+                
+                abridge_compress_ignore_quality_scores_7z_errorfile = f"{options.output_directory}/errors/compress_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error"
+                
+                abridge_compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_7z_errorfile = f"{options.output_directory}/errors/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error"
+                
+                abridge_compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_7z_errorfile = f"{options.output_directory}/errors/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_level_{level}_{sra}_{layout}_{iteration}.error"
+                
+                
+                #################################################################################################################
+                # Decompress
+                #################################################################################################################
+                abridge_decompress_save_all_quality_scores_save_exact_quality_scores_br_errorfile   = f"{options.output_directory}/errors/decompress_save_all_quality_scores_save_exact_quality_scores_level_1_{sra}_{layout}_{iteration}.error"
+                abridge_decompress_save_all_quality_scores_save_exact_quality_scores_7z_errorfile   = f"{options.output_directory}/errors/decompress_save_all_quality_scores_save_exact_quality_scores_level_2_{sra}_{layout}_{iteration}.error"
+                abridge_decompress_save_all_quality_scores_save_exact_quality_scores_zpaq_errorfile = f"{options.output_directory}/errors/decompress_save_all_quality_scores_save_exact_quality_scores_level_3_{sra}_{layout}_{iteration}.error"
+    
+                abridge_decompress_save_all_quality_scores_save_approx_quality_scores_7z_errorfile = f"{options.output_directory}/errors/decompress_save_all_quality_scores_save_approx_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error"
+                
+                abridge_decompress_ignore_quality_scores_7z_errorfile = f"{options.output_directory}/errors/decompress_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error"
+                
+                abridge_decompress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_7z_errorfile = f"{options.output_directory}/errors/decompress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error"
+                
+                abridge_decompress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_7z_errorfile = f"{options.output_directory}/errors/decompress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_level_{level}_{sra}_{layout}_{iteration}.error"
+                
+                
+                #################################################################################################################
+                # Random
+                #################################################################################################################
                 
 if __name__ == "__main__":
     main()
