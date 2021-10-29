@@ -1228,6 +1228,7 @@ def main():
                     cmd += f" --generate_overlapping_coverage "
                     cmd += f" --keep_intermediate_error_files "
                     cmd += f" --genome {options.genome} "
+                    cmd += f" -d "
                     cmd += f" --inputabrfilenames {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge "
                     cmd += f" --cpu {CPU} "
                     cmd += f" --output_directory {options.output_directory}/generate_overlapping_coverage/generate_overlapping_coverage_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration} "
