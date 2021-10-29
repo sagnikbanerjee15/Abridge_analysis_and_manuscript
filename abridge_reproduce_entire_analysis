@@ -1391,7 +1391,7 @@ def main():
                 for type_of_compression in types_of_compression:
                     for level in [1,2,3]:
                         errorfilename =  f"{options.output_directory}/errors/compress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}.error"
-                        compressed_filename = f"{options.temp_directory}/abridge_compressed_files/{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge"
+                        compressed_filename = f"{options.temp_directory}/abridge_compressed_files/compress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge"
                         s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
                         
                         m,t = getMemoryUsageAndDuration(errorfilename)
