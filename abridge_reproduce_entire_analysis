@@ -1399,7 +1399,9 @@ def main():
                         if f"{sra}_{layout}" not in list(all_data_pd.index):
                             all_data_pd.loc[f"{sra}_{layout}"] = [None for _ in range(len(columns))] 
                         
-                        #all_data_pd.at[f"", ""]
+                        all_data_pd.at[f"{sra}_{layout}", f"s_{type_of_compression}_level_{levelToCompressor(level)}"] = s
+                        all_data_pd.at[f"{sra}_{layout}", f"m_{type_of_compression}_level_{levelToCompressor(level)}"] = m
+                        all_data_pd.at[f"{sra}_{layout}", f"t_{type_of_compression}_level_{levelToCompressor(level)}"] = t
                         
                 print(all_data_pd.shape)
                 print(all_data_pd)
