@@ -1378,6 +1378,7 @@ def main():
                         errorfilename =  f"{options.output_directory}/errors/{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}.error"
                         compressed_filename = f"{options.temp_directory}/abridge_compressed_files/{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge"
                         s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
+                        print(compressed_filename, s)
                 
                 abridge_compress_save_all_quality_scores_save_exact_quality_scores_br_errorfile   = f"{options.output_directory}/errors/compress_save_all_quality_scores_save_exact_quality_scores_level_1_{sra}_{layout}_{iteration}.error"
                 abridge_compress_save_all_quality_scores_save_exact_quality_scores_7z_errorfile   = f"{options.output_directory}/errors/compress_save_all_quality_scores_save_exact_quality_scores_level_2_{sra}_{layout}_{iteration}.error"
