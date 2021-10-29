@@ -1396,7 +1396,11 @@ def main():
                         
                         m,t = getMemoryUsageAndDuration(errorfilename)
                         #print(compressed_filename, s, m, t)
-                        all_data_pd.loc[all_data_pd.shape[0]] = [None for _ in range(len(all_data_pd.columns))] 
+                        if sra not in list(all_data_pd.index):
+                            all_data_pd[sra] = [None for _ in range(len(all_data_pd.columns))] 
+                        
+                        #all_data_pd.at[f"", ""]
+                        
                 print(all_data_pd.shape)
                 #################################################################################################################
                 # Decompress
