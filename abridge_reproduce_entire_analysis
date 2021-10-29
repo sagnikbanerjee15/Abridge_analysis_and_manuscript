@@ -1347,7 +1347,6 @@ def main():
     # Create one mega table containing all information
     #################################################################################################################
     columns = [line.split(",")[0] for line in open("column_info.csv","r").read().split("\n")[:-1]][1:]
-    print(columns)
     pd.DataFrame(columns = columns)
     for iteration in range(int(options.num_times)):
         for Assay_Type in options.metadata_expanded:
@@ -1355,7 +1354,7 @@ def main():
                 sra = row[6]
                 layout = row[2]
                 if "SRR13711353" not in sra and "SRR12077404" not in sra:continue
-    
+                
                 
     
                 
