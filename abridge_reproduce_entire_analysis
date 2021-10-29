@@ -1246,7 +1246,7 @@ def main():
                         os.system(cmd)
                         
                         os.system(f"rm -rf {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}")
-                        sys.exit()
+                        #sys.exit()
     
     
     
