@@ -1235,11 +1235,12 @@ def main():
                     cmd += ")"
                     cmd += f" 1> {options.output_directory}/outputs/abridge_generate_overlapping_coverage_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}.output "
                     cmd += f" 2> {options.output_directory}/errors/abridge_generate_overlapping_coverage_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error " 
-                    if os.path.exists(f"{options.temp_directory}/abridge_random_access/random_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.decompressed.sam") == False and os.path.exists(f"{options.output_directory}/abridge_decompressed_files/decompress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}") == False and os.path.exists(f"{options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}") == False: 
+                    if os.path.exists(f"{options.output_directory}/outputs/abridge_generate_overlapping_coverage_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}.output") == False: 
                         logging.info(f"Running command - {cmd}")
                         
                         os.system(f"cp -r {options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.output_directory}/abridge_compressed_files/")
                         print(cmd)
+                        sys.stdout.flush()
                         os.system(cmd)
 
                         cmd = f"mv {options.output_directory}/generate_overlapping_coverage/generate_overlapping_coverage_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration} {options.temp_directory}/generate_overlapping_coverage"
