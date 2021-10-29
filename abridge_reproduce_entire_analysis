@@ -1370,7 +1370,7 @@ def main():
     # Create one mega table containing all information
     #################################################################################################################
     columns = [line.split(",")[0] for line in open("column_info.csv","r").read().split("\n")[:-1]][1:]
-    pd.DataFrame(columns = columns)
+    all_data_pd = pd.DataFrame(columns = columns)
     for iteration in range(int(options.num_times)):
         for Assay_Type in options.metadata_expanded:
             for row in options.metadata_expanded[Assay_Type]:
@@ -1396,19 +1396,7 @@ def main():
                         
                         m,t = getMemoryUsageAndDuration(errorfilename)
                         print(compressed_filename, s, m, t)
-                
-                abridge_compress_save_all_quality_scores_save_exact_quality_scores_br_errorfile   = f"{options.output_directory}/errors/compress_save_all_quality_scores_save_exact_quality_scores_level_1_{sra}_{layout}_{iteration}.error"
-                abridge_compress_save_all_quality_scores_save_exact_quality_scores_7z_errorfile   = f"{options.output_directory}/errors/compress_save_all_quality_scores_save_exact_quality_scores_level_2_{sra}_{layout}_{iteration}.error"
-                abridge_compress_save_all_quality_scores_save_exact_quality_scores_zpaq_errorfile = f"{options.output_directory}/errors/compress_save_all_quality_scores_save_exact_quality_scores_level_3_{sra}_{layout}_{iteration}.error"
-    
-                abridge_compress_save_all_quality_scores_save_approx_quality_scores_7z_errorfile = f"{options.output_directory}/errors/compress_save_all_quality_scores_save_approx_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error"
-                
-                abridge_compress_ignore_quality_scores_7z_errorfile = f"{options.output_directory}/errors/compress_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error"
-                
-                abridge_compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_7z_errorfile = f"{options.output_directory}/errors/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error"
-                
-                abridge_compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_7z_errorfile = f"{options.output_directory}/errors/compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_level_{level}_{sra}_{layout}_{iteration}.error"
-                
+                        all_data_pd.loc[all_data_pd.shape[0]] = [None for _ in range(len(all_data_pd.columns))] 
                 
                 #################################################################################################################
                 # Decompress
