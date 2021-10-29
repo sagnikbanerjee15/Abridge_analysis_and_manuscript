@@ -1,5 +1,4 @@
 Column names,Description
-,
 sample_id,Name of the Sample
 rna_dna,Denotes whether the sample is from an RNA-Seq expt or DNA-Seq expt
 single_paired,SE/PE
