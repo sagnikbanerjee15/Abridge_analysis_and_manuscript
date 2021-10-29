@@ -1371,6 +1371,7 @@ def main():
     #################################################################################################################
     columns = [line.split(",")[0] for line in open("column_info.csv","r").read().split("\n")[:-1]][1:]
     all_data_pd = pd.DataFrame(columns = columns)
+    all_data_dict = {}
     for iteration in range(int(options.num_times)):
         for Assay_Type in options.metadata_expanded:
             for row in options.metadata_expanded[Assay_Type]:
@@ -1398,14 +1399,20 @@ def main():
                         #print(compressed_filename, s, m, t)
                         if f"{sra}_{layout}" not in list(all_data_pd.index):
                             all_data_pd.loc[f"{sra}_{layout}"] = [None for _ in range(len(columns))] 
+                        if f"{sra}_{layout}" not in all_data_dict:
+                            all_data_dict[f"{sra}_{layout}"] = {col:None for col in columns}
+                            
                         
-                        print(f"s_compress_abridge_{type_of_compression}_{levelToCompressor(level)}")
+                        """print(f"s_compress_abridge_{type_of_compression}_{levelToCompressor(level)}")
                         all_data_pd.at[f"{sra}_{layout}", f"s_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = s
                         all_data_pd.at[f"{sra}_{layout}", f"m_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = m
                         all_data_pd.at[f"{sra}_{layout}", f"t_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = t
-                        
-                        print(all_data_pd.shape)
-                print(all_data_pd)
+                        """
+                        all_data_dict[f"{sra}_{layout}"][f"s_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = s
+                        all_data_dict[f"{sra}_{layout}"][f"m_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = m
+                        all_data_dict[f"{sra}_{layout}"][f"t_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = t
+                        #print(all_data_pd.shape)
+                print(pd.DataFrame(all_data_dict))
                 #################################################################################################################
                 # Decompress
                 #################################################################################################################
