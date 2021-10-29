@@ -132,7 +132,7 @@ def levelToCompressor(level):
     elif level == 2:
         return "7z"
     elif level == 3:
-        return "7paq"
+        return "zpaq"
     
 def getMemoryUsageAndDuration(errorfilename):
     fhr = open(errorfilename,"r")
