@@ -329,7 +329,7 @@ def main():
     #pool = multiprocessing.Pool(processes=int(1))
     all_commands = []
     
-    """
+    
     for iteration in range(int(options.num_times)):
         for Assay_Type in options.metadata_expanded:
             for row in options.metadata_expanded[Assay_Type]:
@@ -357,7 +357,7 @@ def main():
                     cmd += f"2> {options.output_directory}/errors/compress_bam_{sra}_{layout}_{iteration}.error "
                     os.system(cmd)
     return
-    """
+    
     for iteration in range(int(options.num_times)):
         for Assay_Type in options.metadata_expanded:
             for row in options.metadata_expanded[Assay_Type]:
