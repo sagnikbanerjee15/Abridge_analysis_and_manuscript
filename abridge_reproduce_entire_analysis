@@ -1395,9 +1395,9 @@ def main():
                         s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
                         
                         m,t = getMemoryUsageAndDuration(errorfilename)
-                        print(compressed_filename, s, m, t)
+                        #print(compressed_filename, s, m, t)
                         all_data_pd.loc[all_data_pd.shape[0]] = [None for _ in range(len(all_data_pd.columns))] 
-                
+                print(all_data_pd.shape)
                 #################################################################################################################
                 # Decompress
                 #################################################################################################################
