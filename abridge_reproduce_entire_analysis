@@ -1235,7 +1235,7 @@ def main():
                         cmd += f" genocat "
                         cmd += f" --sam "
                         cmd += f" --force"
-                        cmd += f" --regions 5:1000-100000 "
+                        cmd += f" -r5:1000-100000 "
                         cmd += f" -o {options.output_directory}/genozip_decompressed_files/random_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.random.sam "
                         cmd += f" -@ 1" # Single threaded
                         cmd += f" -e /project/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna.toplevel.ref.genozip " # Reference fasta
