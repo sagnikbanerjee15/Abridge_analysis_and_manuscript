@@ -1382,15 +1382,15 @@ def main():
                 # Compress
                 #################################################################################################################
                 
-                types_of_compression = ["compress_save_all_quality_scores_save_exact_quality_scores",
-                                        "compress_save_all_quality_scores_save_approx_quality_scores",
-                                        "compress_ignore_quality_scores",
-                                        "compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores",
-                                        "compress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads"]
+                types_of_compression = ["save_all_quality_scores_save_exact_quality_scores",
+                                        "save_all_quality_scores_save_approx_quality_scores",
+                                        "ignore_quality_scores",
+                                        "ignore_soft_clippings_ignore_mismatches_ignore_quality_scores",
+                                        "ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads"]
                 
                 for type_of_compression in types_of_compression:
                     for level in [1,2,3]:
-                        errorfilename =  f"{options.output_directory}/errors/{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}.error"
+                        errorfilename =  f"{options.output_directory}/errors/compress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}.error"
                         compressed_filename = f"{options.temp_directory}/abridge_compressed_files/{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge"
                         s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
                         
@@ -1399,10 +1399,10 @@ def main():
                         if f"{sra}_{layout}" not in list(all_data_pd.index):
                             all_data_pd.loc[f"{sra}_{layout}"] = [None for _ in range(len(columns))] 
                         
-                        print(f"s_{type_of_compression.split('_')[0]}_abridge_{'_'.join(type_of_compression('_')[1:])}_{levelToCompressor(level)}")
-                        all_data_pd.at[f"{sra}_{layout}", f"s_{type_of_compression}_{levelToCompressor(level)}"] = s
-                        all_data_pd.at[f"{sra}_{layout}", f"m_{type_of_compression}_{levelToCompressor(level)}"] = m
-                        all_data_pd.at[f"{sra}_{layout}", f"t_{type_of_compression}_{levelToCompressor(level)}"] = t
+                        
+                        all_data_pd.at[f"{sra}_{layout}", f"s_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = s
+                        all_data_pd.at[f"{sra}_{layout}", f"m_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = m
+                        all_data_pd.at[f"{sra}_{layout}", f"t_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = t
                         
                 print(all_data_pd.shape)
                 print(all_data_pd)
