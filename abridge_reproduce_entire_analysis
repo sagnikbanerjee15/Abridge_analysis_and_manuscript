@@ -1243,7 +1243,7 @@ def main():
                         cmd += f")"
                         cmd += f" 1> {options.output_directory}/outputs/random_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.output "
                         cmd += f" 2> {options.output_directory}/errors/random_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.error "
-                        if os.path.exists(f"{options.temp_directory}/genozip_decompressed_files/decompress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.random.sam")==False and os.path.exists(f"{options.output_directory}/genozip_decompressed_files/decompress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.random.sam") == False:
+                        if os.path.exists(f"{options.temp_directory}/genozip_decompressed_files/random_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.random.sam")==False and os.path.exists(f"{options.output_directory}/genozip_decompressed_files/random_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.random.sam") == False:
                             logging.info(f"Running command - {cmd}")
                             
                             os.system(f"cp {options.temp_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip {options.output_directory}/genozip_compressed_files/")
