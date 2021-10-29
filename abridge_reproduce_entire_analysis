@@ -1397,7 +1397,7 @@ def main():
                         m,t = getMemoryUsageAndDuration(errorfilename)
                         #print(compressed_filename, s, m, t)
                         if sra not in list(all_data_pd.index):
-                            all_data_pd[sra] = [None for _ in range(len(all_data_pd.columns))] 
+                            all_data_pd[sra] = [None for _ in range(len(columns))] 
                         
                         #all_data_pd.at[f"", ""]
                         
