@@ -328,7 +328,7 @@ def main():
     #pool = multiprocessing.Pool(processes=int(1))
     all_commands = []
     
-    """
+    
     for iteration in range(int(options.num_times)):
         for Assay_Type in options.metadata_expanded:
             for row in options.metadata_expanded[Assay_Type]:
@@ -342,12 +342,12 @@ def main():
                 
                 if os.path.exists(alignment_cramfilename) == False:
                     cmd  = f"(/usr/bin/time --verbose "
-                    cmd += f" samtools view -@ 1 -O CRAM,version=3.1 -T {options.genome} -o {alignment_cramfilename} {alignment_bamfilename} "
+                    cmd += f" samtools view -@ 1 -O CRAM,version=3.1 -T {options.genome} -o {alignment_cramfilename} {alignment_samfilename} "
                     cmd += f")"
                     cmd += f"1> {options.output_directory}/outputs/compress_cram_{sra}_{layout}_{iteration}.output "
                     cmd += f"2> {options.output_directory}/errors/compress_cram_{sra}_{layout}_{iteration}.error "
                     os.system(cmd)
-    """
+    return
     
     for iteration in range(int(options.num_times)):
         for Assay_Type in options.metadata_expanded:
@@ -1338,6 +1338,7 @@ def main():
     #################################################################################################################
     # Create csv file containing all information about the runs
     ################################################################################################################# 
+    
     
                 
 if __name__ == "__main__":
