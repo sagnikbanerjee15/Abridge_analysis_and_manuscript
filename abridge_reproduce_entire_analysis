@@ -1201,8 +1201,61 @@ def main():
                         os.system(cmd)
                         
                         os.system(f"rm -rf {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}")
+                """
+                #################################################################################################################
+                # CSAM
+                #################################################################################################################
+                for q in [0]:
+                    for m in [0]:
+                        cmd  = f"(/usr/bin/time --verbose "
+                        cmd += f"  /project/maizegdb/sagnik/softwares/libCSAM/GetIntervalSAM  "
+                        cmd += f" {options.output_directory}/csam_compressed_files/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam "
+                        cmd += f" -q {q} " # Lossless
+                        cmd += f" -m {m} " # ASCII mode
+                        cmd += f")"
+                        cmd += f" 1> {options.output_directory}/outputs/random_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.output "
+                        cmd += f" 2> {options.output_directory}/errors/random_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.error "
                         
-    
+                        if os.path.exists(f"{options.output_directory}/outputs/random_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.output")==False:
+                            logging.info(f"Running command - {cmd}")
+                            os.system(f"cp {options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam {options.output_directory}/csam_compressed_files/")
+                            
+                            os.system(cmd)
+                            
+                            os.system(f"rm {options.output_directory}/csam_compressed_files/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam ")
+                """           
+                            
+                #################################################################################################################
+                # GENOZIP
+                #################################################################################################################
+                for compression in ["best"]:
+                    for optimize in [""]:
+                        
+                        cmd  = f"(/usr/bin/time --verbose "
+                        cmd += f" genocat "
+                        cmd += f" --sam "
+                        cmd += f" --force"
+                        cmd += f" --regions 5:1000-100000 "
+                        cmd += f" -o {options.output_directory}/genozip_decompressed_files/random_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.random.sam "
+                        cmd += f" -@ 1" # Single threaded
+                        cmd += f" --reference /project/maizegdb/sagnik/data/ARATH/genome/Arabidopsis_thaliana.TAIR10.dna.toplevel.ref.genozip " # Reference fasta
+                        cmd += f" {options.output_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip"
+                        cmd += f")"
+                        cmd += f" 1> {options.output_directory}/outputs/random_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.output "
+                        cmd += f" 2> {options.output_directory}/errors/random_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.error "
+                        if os.path.exists(f"{options.temp_directory}/genozip_decompressed_files/decompress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.random.sam")==False and os.path.exists(f"{options.output_directory}/genozip_decompressed_files/decompress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.random.sam") == False:
+                            logging.info(f"Running command - {cmd}")
+                            
+                            os.system(f"cp {options.temp_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip {options.output_directory}/genozip_compressed_files/")
+                            
+                            os.system(cmd)
+                            
+                            cmd=f"mv {options.output_directory}/genozip_decompressed_files/random_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.random.sam {options.temp_directory}/genozip_decompressed_files"
+                            os.system(cmd)
+                            
+                            os.system(f"rm {options.output_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip")
+                        
+    """
     #################################################################################################################
     # Coverage generation
     #################################################################################################################
@@ -1249,7 +1302,7 @@ def main():
                         os.system(f"rm -rf {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}")
                         #sys.exit()
     
-    
+    """
     
     
     
