@@ -1254,7 +1254,6 @@ def main():
                             os.system(cmd)
                             
                             os.system(f"rm {options.output_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip")
-                            sys.exit()
                         
     """
     #################################################################################################################
