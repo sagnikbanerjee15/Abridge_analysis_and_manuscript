@@ -1486,17 +1486,17 @@ def main():
                 #################################################################################################################
                 
                 for q in [0,1,2]:
-                    for m in [0,1,2]:
+                    for mode in [0,1,2]:
                         
-                        compressed_filename = f"{options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam"
-                        errorfilename = f"{options.output_directory}/errors/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.error"
+                        compressed_filename = f"{options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{mode}_{sra}_{layout}_{iteration}.csam"
+                        errorfilename = f"{options.output_directory}/errors/compress_csam_q_{q}_m_{mode}_{sra}_{layout}_{iteration}.error"
                         
                         s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
                         m,t = getMemoryUsageAndDuration(errorfilename) 
                         
-                        all_data_dict[f"{sra}_{layout}"][f"s_compress_csam_q_{q}_m_{m}"] = s
-                        all_data_dict[f"{sra}_{layout}"][f"m_compress_csam_q_{q}_m_{m}"] = m
-                        all_data_dict[f"{sra}_{layout}"][f"t_compress_csam_q_{q}_m_{m}"] = t
+                        all_data_dict[f"{sra}_{layout}"][f"s_compress_csam_q_{q}_m_{mode}"] = s
+                        all_data_dict[f"{sra}_{layout}"][f"m_compress_csam_q_{q}_m_{mode}"] = m
+                        all_data_dict[f"{sra}_{layout}"][f"t_compress_csam_q_{q}_m_{mode}"] = t
                         
                 
                 #################################################################################################################
