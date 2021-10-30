@@ -1452,6 +1452,19 @@ def main():
                         all_data_dict[f"{sra}_{layout}"][f"t_compress_deez_lossy_{lossy}_mode_{encodequality}"] = t
                 
                 #################################################################################################################
+                # Samcomp
+                #################################################################################################################
+                compressed_filename = f"{options.output_directory}/samcomp_compressed_files/compress_samcomp_{sra}_{layout}_{iteration}.zam"
+                errorfilename = f"{options.output_directory}/errors/compress_samcomp_{sra}_{layout}_{iteration}.error"
+                
+                s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
+                m,t = getMemoryUsageAndDuration(errorfilename) 
+                        
+                all_data_dict[f"{sra}_{layout}"][f"s_compress_samcomp"] = s
+                all_data_dict[f"{sra}_{layout}"][f"m_compress_samcomp"] = m
+                all_data_dict[f"{sra}_{layout}"][f"t_compress_samcomp"] = t
+                
+                #################################################################################################################
                 # Decompress
                 #################################################################################################################
                 
@@ -1479,7 +1492,16 @@ def main():
 
                         all_data_dict[f"{sra}_{layout}"][f"m_decompress_deez_lossy_{lossy}_mode_{encodequality}"] = m
                         all_data_dict[f"{sra}_{layout}"][f"t_decompress_deez_lossy_{lossy}_mode_{encodequality}"] = t
-                
+
+                #################################################################################################################
+                # Samcomp
+                #################################################################################################################
+                errorfilename = f"{options.output_directory}/errors/decompress_samcomp_{sra}_{layout}_{iteration}.error"
+
+                m,t = getMemoryUsageAndDuration(errorfilename) 
+    
+                all_data_dict[f"{sra}_{layout}"][f"m_decompress_samcomp"] = m
+                all_data_dict[f"{sra}_{layout}"][f"t_decompress_samcomp"] = t
                 
                 #################################################################################################################
                 # Random
@@ -1503,7 +1525,9 @@ def main():
                 all_data_dict[f"{sra}_{layout}"][f"m_deez_random_access"] = m
                 all_data_dict[f"{sra}_{layout}"][f"t_deez_random_access"] = t
                 
-                
+                #################################################################################################################
+                # Samcomp
+                #################################################################################################################
     print(pd.DataFrame.from_dict(all_data_dict,orient='index'))
                 
 if __name__ == "__main__":
