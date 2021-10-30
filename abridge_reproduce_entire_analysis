@@ -1412,7 +1412,7 @@ def main():
     #################################################################################################################
     # Create one mega table containing all information
     #################################################################################################################
-    columns = [line.split(",")[0] for line in open("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/column_info.csv","r").read().split("\n")[:-1]][1:]
+    columns = [line.split(",")[0].strip() for line in open("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/column_info.csv","r").read().split("\n")[:-1]][1:]
     all_data_pd = pd.DataFrame(columns = columns)
     all_data_dict = {}
     for iteration in range(int(options.num_times)):
