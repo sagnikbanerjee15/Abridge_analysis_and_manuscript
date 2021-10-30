@@ -140,9 +140,9 @@ def getMemoryUsageAndDuration(errorfilename):
         if "Elapsed" in line:
             duration = line.strip().split("time (h:mm:ss or m:ss):")[-1].strip()
             if duration.count(":") == 1:
-                duration = int(duration.split(":")[0])*60 + int(float(duration.split(":")[1]))
+                duration = int(duration.split(":")[0])*60 + int(float(duration.split(":")[1])+0.5)
             elif duration.count(":") == 2:
-                duration = int(duration.split(":")[0])*60*60 + int(duration.split(":")[1])*60 + int(float(duration.split(":")[2]))
+                duration = int(duration.split(":")[0])*60*60 + int(duration.split(":")[1])*60 + int(float(duration.split(":")[2])+0.5)
         if "Maximum resident set size" in line:
             m = line.strip().split(":")[-1].strip()
     fhr.close()
