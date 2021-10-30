@@ -1385,15 +1385,15 @@ def main():
                 sra = row[6]
                 layout = row[2]
                 if "SRR13711353" not in sra and "SRR12077404" not in sra:continue
+                if f"{sra}_{layout}" not in all_data_dict:
+                    all_data_dict[f"{sra}_{layout}"] = {col:None for col in columns}
+                
                 all_data_dict[f"{sra}_{layout}"]["sample_id"] = sra
                 all_data_dict[f"{sra}_{layout}"]["layout"] = layout
                 alignment_samfilename_in_temp = f"{options.temp_directory}/alignments/{sra}_{layout}.sam"
                 alignment_samfilename = f"{options.output_directory}/alignments/{sra}_{layout}.sam"
                 alignment_bamfilename = f"{options.output_directory}/alignments/{sra}_{layout}.bam"
                 alignment_cramfilename = f"{options.output_directory}/alignments/{sra}_{layout}.cram"
-                
-                if f"{sra}_{layout}" not in all_data_dict:
-                    all_data_dict[f"{sra}_{layout}"] = {col:None for col in columns}
                 
                 all_data_dict[f"{sra}_{layout}"]["num_reads"] = calculateNumberOfReads(alignment_samfilename)
 
