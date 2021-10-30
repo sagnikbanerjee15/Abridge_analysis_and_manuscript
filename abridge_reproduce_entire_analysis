@@ -1413,6 +1413,10 @@ def main():
                 # Compress
                 #################################################################################################################
                 
+                #################################################################################################################
+                # Abridge
+                #################################################################################################################
+                
                 types_of_compression = ["save_all_quality_scores_save_exact_quality_scores",
                                         "save_all_quality_scores_save_approx_quality_scores",
                                         "ignore_quality_scores",
@@ -1451,6 +1455,10 @@ def main():
                 # Decompress
                 #################################################################################################################
                 
+                #################################################################################################################
+                # Abridge
+                #################################################################################################################
+                
                 for type_of_compression in types_of_compression:
                     for level in [1,2,3]:
                         errorfilename =  f"{options.output_directory}/errors/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}.error"
@@ -1476,6 +1484,26 @@ def main():
                 #################################################################################################################
                 # Random
                 #################################################################################################################
+                
+                #################################################################################################################
+                # Abridge
+                #################################################################################################################
+                errorfilename = f"{options.output_directory}/errors/abridge_random_save_all_quality_scores_save_exact_quality_scores_level_2_{sra}_{layout}_{iteration}.error"
+                m,t = getMemoryUsageAndDuration(errorfilename) 
+                        
+                all_data_dict[f"{sra}_{layout}"][f"m_abridge_random_access"] = m
+                all_data_dict[f"{sra}_{layout}"][f"t_abridge_random_access"] = t
+                
+                #################################################################################################################
+                # Deez
+                #################################################################################################################
+                errorfilename = f"{options.output_directory}/errors/random_deez_lossypercent_0_mode_1_{sra}_{layout}_{iteration}.error"
+                m,t = getMemoryUsageAndDuration(errorfilename) 
+                        
+                all_data_dict[f"{sra}_{layout}"][f"m_deez_random_access"] = m
+                all_data_dict[f"{sra}_{layout}"][f"t_deez_random_access"] = t
+                
+                
     print(pd.DataFrame.from_dict(all_data_dict,orient='index'))
                 
 if __name__ == "__main__":
