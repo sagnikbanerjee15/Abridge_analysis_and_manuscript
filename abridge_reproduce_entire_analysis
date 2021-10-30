@@ -1466,7 +1466,8 @@ def main():
                     for encodequality in ["1","2"]:
 
                         errorfilename = f"{options.output_directory}/errors/decompress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.error"
-
+                        print(errorfilename)
+                        sys.stdout.flush()
                         m,t = getMemoryUsageAndDuration(errorfilename) 
                         
 
