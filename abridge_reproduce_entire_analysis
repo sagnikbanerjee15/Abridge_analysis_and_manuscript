@@ -1232,7 +1232,7 @@ def main():
                         os.system(cmd)
                         
                         os.system(f"rm -rf {options.output_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_{level}_{sra}_{layout}_{iteration}")
-                """
+                
                 #################################################################################################################
                 # CSAM
                 #################################################################################################################
@@ -1240,21 +1240,18 @@ def main():
                     for m in [0]:
                         cmd  = f"(/usr/bin/time --verbose "
                         cmd += f"  /project/maizegdb/sagnik/softwares/libCSAM/GetIntervalSAM  "
-                        cmd += f" {options.output_directory}/csam_compressed_files/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam "
-                        cmd += f" -q {q} " # Lossless
-                        cmd += f" -m {m} " # ASCII mode
+                        cmd += f" {options.temp_directory}/csam_compressed_files/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam "
+                        cmd += f" 5 1000 100000" # Lossless
                         cmd += f")"
                         cmd += f" 1> {options.output_directory}/outputs/random_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.output "
                         cmd += f" 2> {options.output_directory}/errors/random_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.error "
                         
                         if os.path.exists(f"{options.output_directory}/outputs/random_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.output")==False:
                             logging.info(f"Running command - {cmd}")
-                            os.system(f"cp {options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam {options.output_directory}/csam_compressed_files/")
-                            
                             os.system(cmd)
                             
-                            os.system(f"rm {options.output_directory}/csam_compressed_files/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam ")
-                """           
+                            
+                       
                             
                 #################################################################################################################
                 # GENOZIP
@@ -1378,6 +1375,8 @@ def main():
                 sra = row[6]
                 layout = row[2]
                 if "SRR13711353" not in sra and "SRR12077404" not in sra:continue
+                all_data_dict[f"{sra}_{layout}"]["sample_id"] = sra
+                all_data_dict[f"{sra}_{layout}"]["single_paired"] = layout
                 
                 #################################################################################################################
                 # Compress
@@ -1402,6 +1401,8 @@ def main():
                         all_data_dict[f"{sra}_{layout}"][f"s_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = s
                         all_data_dict[f"{sra}_{layout}"][f"m_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = m
                         all_data_dict[f"{sra}_{layout}"][f"t_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = t
+                        
+                        
                         
                         
                         #print(all_data_pd.shape)
