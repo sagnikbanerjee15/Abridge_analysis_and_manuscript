@@ -1454,7 +1454,7 @@ def main():
                 #################################################################################################################
                 # Samcomp
                 #################################################################################################################
-                compressed_filename = f"{options.output_directory}/samcomp_compressed_files/compress_samcomp_{sra}_{layout}_{iteration}.zam"
+                compressed_filename = f"{options.temp_directory}/samcomp_compressed_files/compress_samcomp_{sra}_{layout}_{iteration}.zam"
                 errorfilename = f"{options.output_directory}/errors/compress_samcomp_{sra}_{layout}_{iteration}.error"
                 
                 s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
@@ -1463,6 +1463,25 @@ def main():
                 all_data_dict[f"{sra}_{layout}"][f"s_compress_samcomp"] = s
                 all_data_dict[f"{sra}_{layout}"][f"m_compress_samcomp"] = m
                 all_data_dict[f"{sra}_{layout}"][f"t_compress_samcomp"] = t
+                
+                #################################################################################################################
+                # Genozip
+                #################################################################################################################
+                
+                for compression in ["best","fast"]:
+                    for optimize in ["","optimize"]:
+                        
+                        compressed_filename = f"{options.temp_directory}/genozip_compressed_files/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.genozip"
+                        errorfilename = f"{options.output_directory}/errors/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.error"
+                        
+                        s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
+                        m,t = getMemoryUsageAndDuration(errorfilename) 
+                                
+                        all_data_dict[f"{sra}_{layout}"][f"s_compress_genozip_optimize_{optimize}_compression_{compression}"] = s
+                        all_data_dict[f"{sra}_{layout}"][f"m_compress_genozip_optimize_{optimize}_compression_{compression}"] = m
+                        all_data_dict[f"{sra}_{layout}"][f"t_compress_genozip_optimize_{optimize}_compression_{compression}"] = t
+                        
+                
                 
                 #################################################################################################################
                 # Decompress
@@ -1504,6 +1523,20 @@ def main():
                 all_data_dict[f"{sra}_{layout}"][f"t_decompress_samcomp"] = t
                 
                 #################################################################################################################
+                # Genozip
+                #################################################################################################################
+                
+                for compression in ["best","fast"]:
+                    for optimize in ["","optimize"]:
+                        errorfilename = f"{options.output_directory}/errors/compress_genozip_optimize_{optimize}_compression_{compression}_{sra}_{layout}_{iteration}.error"
+                        
+                        m,t = getMemoryUsageAndDuration(errorfilename) 
+                        all_data_dict[f"{sra}_{layout}"][f"m_decompress_genozip_optimize_{optimize}_compression_{compression}"] = m
+                        all_data_dict[f"{sra}_{layout}"][f"t_decompress_genozip_optimize_{optimize}_compression_{compression}"] = t
+                
+                
+                
+                #################################################################################################################
                 # Random
                 #################################################################################################################
                 
@@ -1528,6 +1561,19 @@ def main():
                 #################################################################################################################
                 # Samcomp
                 #################################################################################################################
+                
+                #################################################################################################################
+                # Genozip
+                #################################################################################################################
+                
+                for compression in ["best","fast"]:
+                    for optimize in ["","optimize"]:
+                        errorfilename = f"{options.output_directory}/errors/random_genozip_optimize__compression_best_{sra}_{layout}_{iteration}.error"
+                        
+                        m,t = getMemoryUsageAndDuration(errorfilename) 
+                        all_data_dict[f"{sra}_{layout}"][f"t_genozip_random_access"] = m
+                        all_data_dict[f"{sra}_{layout}"][f"t_genozip_random_access"] = t
+                
     print(pd.DataFrame.from_dict(all_data_dict,orient='index'))
                 
 if __name__ == "__main__":
