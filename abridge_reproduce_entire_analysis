@@ -1394,7 +1394,7 @@ def main():
                 alignment_samfilename = f"{options.output_directory}/alignments/{sra}_{layout}.sam"
                 alignment_bamfilename = f"{options.output_directory}/alignments/{sra}_{layout}.bam"
                 alignment_cramfilename = f"{options.output_directory}/alignments/{sra}_{layout}.cram"
-                
+                    
                 all_data_dict[f"{sra}_{layout}"]["num_reads"] = calculateNumberOfReads(alignment_samfilename)
 
                 all_data_dict[f"{sra}_{layout}"]["s_sam"] = os.path.getsize(alignment_samfilename) >> 20 # Bytes to MB
@@ -1440,7 +1440,7 @@ def main():
                 for type_of_compression in types_of_compression:
                     for level in [1,2,3]:
                         errorfilename =  f"{options.output_directory}/errors/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}.error"
-                        compressed_filename = f"{options.temp_directory}/abridge_compressed_files/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge"
+                        compressed_filename = f"{options.temp_directory}/abridge_decompressed_files/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge"
                         s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
                         m,t = getMemoryUsageAndDuration(errorfilename) 
                             
