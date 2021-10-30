@@ -1555,15 +1555,15 @@ def main():
                 #################################################################################################################
                 
                 for q in [0,1,2]:
-                    for m in [0,1,2]:
+                    for mode in [0,1,2]:
                         
-                        errorfilename = f"{options.output_directory}/errors/decompress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.error"
+                        errorfilename = f"{options.output_directory}/errors/decompress_csam_q_{q}_m_{mode}_{sra}_{layout}_{iteration}.error"
                         
                         m,t = getMemoryUsageAndDuration(errorfilename) 
                         
-                        all_data_dict[f"{sra}_{layout}"][f"s_decompress_csam_q_{q}_m_{m}"] = s
-                        all_data_dict[f"{sra}_{layout}"][f"m_decompress_csam_q_{q}_m_{m}"] = m
-                        all_data_dict[f"{sra}_{layout}"][f"t_decompress_csam_q_{q}_m_{m}"] = t
+                        all_data_dict[f"{sra}_{layout}"][f"s_decompress_csam_q_{q}_m_{mode}"] = s
+                        all_data_dict[f"{sra}_{layout}"][f"m_decompress_csam_q_{q}_m_{mode}"] = m
+                        all_data_dict[f"{sra}_{layout}"][f"t_decompress_csam_q_{q}_m_{mode}"] = t
                 
                 #################################################################################################################
                 # Random
