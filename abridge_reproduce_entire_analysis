@@ -1481,7 +1481,23 @@ def main():
                         all_data_dict[f"{sra}_{layout}"][f"m_compress_genozip_optimize_{optimize}_compression_{compression}"] = m
                         all_data_dict[f"{sra}_{layout}"][f"t_compress_genozip_optimize_{optimize}_compression_{compression}"] = t
                         
+                #################################################################################################################
+                # CSAM
+                #################################################################################################################
                 
+                for q in [0,1,2]:
+                    for m in [0,1,2]:
+                        
+                        compressed_filename = f"{options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam"
+                        errorfilename = f"{options.output_directory}/errors/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.error"
+                        
+                        s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
+                        m,t = getMemoryUsageAndDuration(errorfilename) 
+                        
+                        all_data_dict[f"{sra}_{layout}"][f"s_compress_csam_q_{q}_m_{m}"] = s
+                        all_data_dict[f"{sra}_{layout}"][f"m_compress_csam_q_{q}_m_{m}"] = m
+                        all_data_dict[f"{sra}_{layout}"][f"t_compress_csam_q_{q}_m_{m}"] = t
+                        
                 
                 #################################################################################################################
                 # Decompress
@@ -1534,7 +1550,20 @@ def main():
                         all_data_dict[f"{sra}_{layout}"][f"m_decompress_genozip_optimize_{optimize}_compression_{compression}"] = m
                         all_data_dict[f"{sra}_{layout}"][f"t_decompress_genozip_optimize_{optimize}_compression_{compression}"] = t
                 
+                #################################################################################################################
+                # CSAM
+                #################################################################################################################
                 
+                for q in [0,1,2]:
+                    for m in [0,1,2]:
+                        
+                        errorfilename = f"{options.output_directory}/errors/decompress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.error"
+                        
+                        m,t = getMemoryUsageAndDuration(errorfilename) 
+                        
+                        all_data_dict[f"{sra}_{layout}"][f"s_decompress_csam_q_{q}_m_{m}"] = s
+                        all_data_dict[f"{sra}_{layout}"][f"m_decompress_csam_q_{q}_m_{m}"] = m
+                        all_data_dict[f"{sra}_{layout}"][f"t_decompress_csam_q_{q}_m_{m}"] = t
                 
                 #################################################################################################################
                 # Random
@@ -1566,13 +1595,22 @@ def main():
                 # Genozip
                 #################################################################################################################
                 
-                for compression in ["best","fast"]:
-                    for optimize in ["","optimize"]:
-                        errorfilename = f"{options.output_directory}/errors/random_genozip_optimize__compression_best_{sra}_{layout}_{iteration}.error"
+                
+                errorfilename = f"{options.output_directory}/errors/random_genozip_optimize__compression_best_{sra}_{layout}_{iteration}.error"
+                m,t = getMemoryUsageAndDuration(errorfilename) 
+                
+                all_data_dict[f"{sra}_{layout}"][f"m_genozip_random_access"] = m
+                all_data_dict[f"{sra}_{layout}"][f"t_genozip_random_access"] = t
                         
-                        m,t = getMemoryUsageAndDuration(errorfilename) 
-                        all_data_dict[f"{sra}_{layout}"][f"t_genozip_random_access"] = m
-                        all_data_dict[f"{sra}_{layout}"][f"t_genozip_random_access"] = t
+                #################################################################################################################
+                # CSAM
+                #################################################################################################################
+                
+                errorfilename = f"{options.output_directory}/errors/random_csam_q_0_m_0_{sra}_{layout}_{iteration}.error"   
+                m,t = getMemoryUsageAndDuration(errorfilename) 
+                        
+                all_data_dict[f"{sra}_{layout}"][f"m_csam_random_access"] = m
+                all_data_dict[f"{sra}_{layout}"][f"t_csam_random_access"] = t
                 
     print(pd.DataFrame.from_dict(all_data_dict,orient='index'))
                 
