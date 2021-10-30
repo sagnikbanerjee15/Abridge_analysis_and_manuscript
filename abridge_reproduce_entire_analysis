@@ -1250,7 +1250,7 @@ def main():
                     for m in [0]:
                         cmd  = f"(/usr/bin/time --verbose "
                         cmd += f"  /project/maizegdb/sagnik/softwares/libCSAM/GetIntervalSAM  "
-                        cmd += f" {options.temp_directory}/csam_compressed_files/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam "
+                        cmd += f" {options.temp_directory}/csam_compressed_files/compress_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.csam "
                         cmd += f" 5 1000 100000" # Lossless
                         cmd += f")"
                         cmd += f" 1> {options.output_directory}/outputs/random_csam_q_{q}_m_{m}_{sra}_{layout}_{iteration}.output "
@@ -1466,8 +1466,6 @@ def main():
                     for encodequality in ["1","2"]:
 
                         errorfilename = f"{options.output_directory}/errors/decompress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.error"
-                        print(errorfilename)
-                        sys.stdout.flush()
                         m,t = getMemoryUsageAndDuration(errorfilename) 
                         
 
