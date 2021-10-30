@@ -149,6 +149,16 @@ def getMemoryUsageAndDuration(errorfilename):
     
     return m, duration 
 
+def calculateNumberOfReads(samfilename):
+    total_reads = 0
+    fhr=open(samfilename,"r")
+    for line in fhr:
+        if line[0]!="@" and "HI:i:1" in line:
+            total_reads+=1
+    fhr.close()
+    
+    return total_reads
+
 def main():
     commandLineArg=sys.argv
     if len(commandLineArg)==1:
@@ -1366,7 +1376,7 @@ def main():
     #################################################################################################################
     # Create one mega table containing all information
     #################################################################################################################
-    columns = [line.split(",")[0] for line in open("column_info.csv","r").read().split("\n")[:-1]][1:]
+    columns = [line.split(",")[0] for line in open("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/column_info.csv","r").read().split("\n")[:-1]][1:]
     all_data_pd = pd.DataFrame(columns = columns)
     all_data_dict = {}
     for iteration in range(int(options.num_times)):
@@ -1376,7 +1386,25 @@ def main():
                 layout = row[2]
                 if "SRR13711353" not in sra and "SRR12077404" not in sra:continue
                 all_data_dict[f"{sra}_{layout}"]["sample_id"] = sra
-                all_data_dict[f"{sra}_{layout}"]["single_paired"] = layout
+                all_data_dict[f"{sra}_{layout}"]["layout"] = layout
+                alignment_samfilename_in_temp = f"{options.temp_directory}/alignments/{sra}_{layout}.sam"
+                alignment_samfilename = f"{options.output_directory}/alignments/{sra}_{layout}.sam"
+                alignment_bamfilename = f"{options.output_directory}/alignments/{sra}_{layout}.bam"
+                alignment_cramfilename = f"{options.output_directory}/alignments/{sra}_{layout}.cram"
+                
+                all_data_dict[f"{sra}_{layout}"]["num_reads"] = calculateNumberOfReads(alignment_samfilename)
+
+                all_data_dict[f"{sra}_{layout}"]["s_sam"] = os.path.getsize(alignment_samfilename) >> 20 # Bytes to MB
+                all_data_dict[f"{sra}_{layout}"]["s_bam"] = os.path.getsize(alignment_bamfilename) >> 20 # Bytes to MB
+                all_data_dict[f"{sra}_{layout}"]["s_cram"] = os.path.getsize(alignment_cramfilename) >> 20 # Bytes to MB
+                
+                m,t = getMemoryUsageAndDuration(f"{options.output_directory}/errors/compress_bam_{sra}_{layout}_{iteration}.error")
+                all_data_dict[f"{sra}_{layout}"]["m_bam"] = m
+                all_data_dict[f"{sra}_{layout}"]["t_bam"] = t
+                
+                m,t = getMemoryUsageAndDuration(f"{options.output_directory}/errors/compress_cram_{sra}_{layout}_{iteration}.error")
+                all_data_dict[f"{sra}_{layout}"]["m_cram"] = m
+                all_data_dict[f"{sra}_{layout}"]["t_cram"] = t
                 
                 #################################################################################################################
                 # Compress
@@ -1403,29 +1431,31 @@ def main():
                         all_data_dict[f"{sra}_{layout}"][f"t_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = t
                         
                         
-                        
-                        
                         #print(all_data_pd.shape)
-                print(pd.DataFrame.from_dict(all_data_dict,orient='index'))
+                
                 #################################################################################################################
                 # Decompress
                 #################################################################################################################
-                abridge_decompress_save_all_quality_scores_save_exact_quality_scores_br_errorfile   = f"{options.output_directory}/errors/decompress_save_all_quality_scores_save_exact_quality_scores_level_1_{sra}_{layout}_{iteration}.error"
-                abridge_decompress_save_all_quality_scores_save_exact_quality_scores_7z_errorfile   = f"{options.output_directory}/errors/decompress_save_all_quality_scores_save_exact_quality_scores_level_2_{sra}_{layout}_{iteration}.error"
-                abridge_decompress_save_all_quality_scores_save_exact_quality_scores_zpaq_errorfile = f"{options.output_directory}/errors/decompress_save_all_quality_scores_save_exact_quality_scores_level_3_{sra}_{layout}_{iteration}.error"
-    
-                abridge_decompress_save_all_quality_scores_save_approx_quality_scores_7z_errorfile = f"{options.output_directory}/errors/decompress_save_all_quality_scores_save_approx_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error"
                 
-                abridge_decompress_ignore_quality_scores_7z_errorfile = f"{options.output_directory}/errors/decompress_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error"
-                
-                abridge_decompress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_7z_errorfile = f"{options.output_directory}/errors/decompress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_level_{level}_{sra}_{layout}_{iteration}.error"
-                
-                abridge_decompress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_7z_errorfile = f"{options.output_directory}/errors/decompress_ignore_soft_clippings_ignore_mismatches_ignore_quality_scores_ignore_unmapped_reads_level_{level}_{sra}_{layout}_{iteration}.error"
+                for type_of_compression in types_of_compression:
+                    for level in [1,2,3]:
+                        errorfilename =  f"{options.output_directory}/errors/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}.error"
+                        compressed_filename = f"{options.temp_directory}/abridge_compressed_files/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge"
+                        s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
+                        m,t = getMemoryUsageAndDuration(errorfilename) 
+                        
+                        if f"{sra}_{layout}" not in all_data_dict:
+                            all_data_dict[f"{sra}_{layout}"] = {col:None for col in columns}
+                            
+                        all_data_dict[f"{sra}_{layout}"][f"s_decompress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = s
+                        all_data_dict[f"{sra}_{layout}"][f"m_decompress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = m
+                        all_data_dict[f"{sra}_{layout}"][f"t_decompress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = t
                 
                 
                 #################################################################################################################
                 # Random
                 #################################################################################################################
+    print(pd.DataFrame.from_dict(all_data_dict,orient='index'))
                 
 if __name__ == "__main__":
     main()
