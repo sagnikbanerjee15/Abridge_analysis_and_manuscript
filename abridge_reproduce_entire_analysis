@@ -1230,6 +1230,7 @@ def main():
                 cmd += f" 2> {options.output_directory}/errors/random_bam_{sra}_{layout}.error "
                 
                 if os.path.exists(f"{options.output_directory}/outputs/random_bam_{sra}_{layout}.output")==False:
+                    os.system(f"samtools index {alignment_bamfilename}")
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
                     
