@@ -1395,7 +1395,7 @@ def main():
                 alignment_bamfilename = f"{options.output_directory}/alignments/{sra}_{layout}.bam"
                 alignment_cramfilename = f"{options.output_directory}/alignments/{sra}_{layout}.cram"
                     
-                all_data_dict[f"{sra}_{layout}"]["num_reads"] = calculateNumberOfReads(alignment_samfilename)
+                #all_data_dict[f"{sra}_{layout}"]["num_reads"] = calculateNumberOfReads(alignment_samfilename)
 
                 all_data_dict[f"{sra}_{layout}"]["s_sam"] = os.path.getsize(alignment_samfilename) >> 20 # Bytes to MB
                 all_data_dict[f"{sra}_{layout}"]["s_bam"] = os.path.getsize(alignment_bamfilename) >> 20 # Bytes to MB
