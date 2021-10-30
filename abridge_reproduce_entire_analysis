@@ -1432,6 +1432,20 @@ def main():
                         
                         
                         #print(all_data_pd.shape)
+                        
+                #################################################################################################################
+                # Deez
+                #################################################################################################################
+                for lossy in [0,50,99]:
+                    for encodequality in ["1","2"]:
+                        compressed_filename = f"{options.temp_directory}/deez_compressed_files/compress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.deez"
+                        errorfilename = f"{options.output_directory}/errors/compress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.error"
+                        s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
+                        m,t = getMemoryUsageAndDuration(errorfilename) 
+                        
+                        all_data_dict[f"{sra}_{layout}"][f"s_compress_deez_lossy_{lossy}_mode_{encodequality}"] = s
+                        all_data_dict[f"{sra}_{layout}"][f"m_compress_deez_lossy_{lossy}_mode_{encodequality}"] = m
+                        all_data_dict[f"{sra}_{layout}"][f"t_compress_deez_lossy_{lossy}_mode_{encodequality}"] = t
                 
                 #################################################################################################################
                 # Decompress
@@ -1444,6 +1458,20 @@ def main():
                         
                         all_data_dict[f"{sra}_{layout}"][f"m_decompress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = m
                         all_data_dict[f"{sra}_{layout}"][f"t_decompress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = t
+                        
+                #################################################################################################################
+                # Deez
+                #################################################################################################################
+                for lossy in [0,50,99]:
+                    for encodequality in ["1","2"]:
+
+                        errorfilename = f"{options.output_directory}/errors/decompress_deez_lossypercent_{lossy}_mode_{encodequality}_{sra}_{layout}_{iteration}.error"
+
+                        m,t = getMemoryUsageAndDuration(errorfilename) 
+                        
+
+                        all_data_dict[f"{sra}_{layout}"][f"m_decompress_deez_lossy_{lossy}_mode_{encodequality}"] = m
+                        all_data_dict[f"{sra}_{layout}"][f"t_decompress_deez_lossy_{lossy}_mode_{encodequality}"] = t
                 
                 
                 #################################################################################################################
