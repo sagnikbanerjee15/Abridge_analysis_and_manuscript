@@ -1392,6 +1392,9 @@ def main():
                 alignment_bamfilename = f"{options.output_directory}/alignments/{sra}_{layout}.bam"
                 alignment_cramfilename = f"{options.output_directory}/alignments/{sra}_{layout}.cram"
                 
+                if f"{sra}_{layout}" not in all_data_dict:
+                    all_data_dict[f"{sra}_{layout}"] = {col:None for col in columns}
+                
                 all_data_dict[f"{sra}_{layout}"]["num_reads"] = calculateNumberOfReads(alignment_samfilename)
 
                 all_data_dict[f"{sra}_{layout}"]["s_sam"] = os.path.getsize(alignment_samfilename) >> 20 # Bytes to MB
@@ -1422,9 +1425,6 @@ def main():
                         compressed_filename = f"{options.temp_directory}/abridge_compressed_files/compress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge"
                         s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
                         m,t = getMemoryUsageAndDuration(errorfilename) 
-                        
-                        if f"{sra}_{layout}" not in all_data_dict:
-                            all_data_dict[f"{sra}_{layout}"] = {col:None for col in columns}
                             
                         all_data_dict[f"{sra}_{layout}"][f"s_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = s
                         all_data_dict[f"{sra}_{layout}"][f"m_compress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = m
@@ -1443,9 +1443,6 @@ def main():
                         compressed_filename = f"{options.temp_directory}/abridge_compressed_files/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge"
                         s = os.path.getsize(compressed_filename) >> 20 # Bytes to MB
                         m,t = getMemoryUsageAndDuration(errorfilename) 
-                        
-                        if f"{sra}_{layout}" not in all_data_dict:
-                            all_data_dict[f"{sra}_{layout}"] = {col:None for col in columns}
                             
                         all_data_dict[f"{sra}_{layout}"][f"s_decompress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = s
                         all_data_dict[f"{sra}_{layout}"][f"m_decompress_abridge_{type_of_compression}_{levelToCompressor(level)}"] = m
