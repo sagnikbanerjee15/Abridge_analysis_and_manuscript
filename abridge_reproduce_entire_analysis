@@ -1223,26 +1223,26 @@ def main():
                 
                 cmd  = f"(/usr/bin/time --verbose "
                 cmd += f"  samtools view -@ 1  "
-                cmd += f" alignment_bamfilename "
+                cmd += f" {alignment_bamfilename} "
                 cmd += f" 5:1000-100000" # Lossless
                 cmd += f")"
-                cmd += f" 1> {options.output_directory}/outputs/random_bam.output "
-                cmd += f" 2> {options.output_directory}/errors/random_bam.error "
+                cmd += f" 1> {options.output_directory}/outputs/random_bam_{sra}_{layout}.output "
+                cmd += f" 2> {options.output_directory}/errors/random_bam_{sra}_{layout}.error "
                 
-                if os.path.exists(f"{options.output_directory}/outputs/random_bam.output")==False:
+                if os.path.exists(f"{options.output_directory}/outputs/random_bam_{sra}_{layout}.output")==False:
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
                     
                 cmd  = f"(/usr/bin/time --verbose "
                 cmd += f"  samtools view -@ 1  "
-                cmd += f" alignment_cramfilename "
+                cmd += f" {alignment_cramfilename} "
                 cmd += f" -T {options.genome} "
                 cmd += f" 5:1000-100000" # Lossless
                 cmd += f")"
-                cmd += f" 1> {options.output_directory}/outputs/random_cram.output "
-                cmd += f" 2> {options.output_directory}/errors/random_cram.error "
+                cmd += f" 1> {options.output_directory}/outputs/random_cram_{sra}_{layout}.output "
+                cmd += f" 2> {options.output_directory}/errors/random_cram_{sra}_{layout}.error "
                 
-                if os.path.exists(f"{options.output_directory}/outputs/random_cram.output")==False:
+                if os.path.exists(f"{options.output_directory}/outputs/random_cram_{sra}_{layout}.output")==False:
                     logging.info(f"Running command - {cmd}")
                     os.system(cmd)
                 
