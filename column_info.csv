@@ -10,6 +10,8 @@ t_bam,Time to convert SAM to BAM
 t_cram,Time to convert SAM to CRAM
 m_bam,Memory consumed to convert SAM to BAM
 m_cram,Memory consumed to convert SAM to CRAM
+t_decompress_cram,
+m_decompress_cram,
 s_compress_abridge_save_all_quality_scores_save_exact_quality_scores_br,
 s_compress_abridge_save_all_quality_scores_save_exact_quality_scores_7z,
 s_compress_abridge_save_all_quality_scores_save_exact_quality_scores_zpaq,

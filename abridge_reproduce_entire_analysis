@@ -389,6 +389,14 @@ def main():
                     cmd += f"1> {options.output_directory}/outputs/compress_bam_{sra}_{layout}_{iteration}.output "
                     cmd += f"2> {options.output_directory}/errors/compress_bam_{sra}_{layout}_{iteration}.error "
                     os.system(cmd)
+                if os.path.exists(f"{options.output_directory}/outputs/decompress_cram_{sra}_{layout}_{iteration}.output") == False:
+                    cmd  = f"(/usr/bin/time --verbose "
+                    cmd += f" samtools view -h -@ 1 -T {options.genome} {alignment_cramfilename} {alignment_samfilename}.temp "
+                    cmd += f")"
+                    cmd += f"1> {options.output_directory}/outputs/decompress_cram_{sra}_{layout}_{iteration}.output "
+                    cmd += f"2> {options.output_directory}/errors/decompress_cram_{sra}_{layout}_{iteration}.error "
+                    os.system(cmd)   
+                
     
     for iteration in range(int(options.num_times)):
         for Assay_Type in options.metadata_expanded:
@@ -1432,7 +1440,7 @@ def main():
                 alignment_bamfilename = f"{options.output_directory}/alignments/{sra}_{layout}.bam"
                 alignment_cramfilename = f"{options.output_directory}/alignments/{sra}_{layout}.cram"
                     
-                all_data_dict[f"{sra}_{layout}"]["num_reads"] = calculateNumberOfReads(alignment_samfilename)
+                #all_data_dict[f"{sra}_{layout}"]["num_reads"] = calculateNumberOfReads(alignment_samfilename)
 
                 all_data_dict[f"{sra}_{layout}"]["s_sam"] = os.path.getsize(alignment_samfilename) >> 20 # Bytes to MB
                 all_data_dict[f"{sra}_{layout}"]["s_bam"] = os.path.getsize(alignment_bamfilename) >> 20 # Bytes to MB
@@ -1454,6 +1462,9 @@ def main():
                 all_data_dict[f"{sra}_{layout}"]["m_cram_random_access"] = m
                 all_data_dict[f"{sra}_{layout}"]["t_cram_random_access"] = t
                 
+                m,t = getMemoryUsageAndDuration(f"{options.output_directory}/errors/decompress_cram_{sra}_{layout}_{iteration}.error")
+                all_data_dict[f"{sra}_{layout}"]["m_decompress_cram"] = m
+                all_data_dict[f"{sra}_{layout}"]["t_decompress_cram"] = t
                 #################################################################################################################
                 # Compress
                 #################################################################################################################
@@ -1656,7 +1667,7 @@ def main():
                 all_data_dict[f"{sra}_{layout}"][f"t_csam_random_access"] = t
                 
     print(pd.DataFrame.from_dict(all_data_dict))
-    pd.DataFrame.from_dict(all_data_dict).to_csv("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/all_info.csv")
+    pd.DataFrame.from_dict(all_data_dict.T).to_csv("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/all_info.csv")
                 
 if __name__ == "__main__":
     main()
