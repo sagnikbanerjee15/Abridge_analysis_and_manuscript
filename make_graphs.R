@@ -29,7 +29,7 @@ library(nortest)
 data("ToothGrowth")
 
 
-axis_label_font_size=10
+axis_label_font_size=12
 axis_text_font_size=9
 legend_text_size=8
 all_info_filename = "/Users/sagnik/work/ABRIDGE/Abridge_analysis_for_MS/all_info_prev.csv"
@@ -275,7 +275,7 @@ ggsave(paste0("/Users/sagnik/work/ABRIDGE/Manuscript/Figures/CompressionRatioCom
 all_info_RNA_Seq_SE <- all_info[all_info$rna_dna == "RNA-Seq" & all_info$layout == "SE", ]
 all_info_RNA_Seq_SE$num_reads <- as.numeric(all_info_RNA_Seq_SE$num_reads)
 order(all_info_RNA_Seq_SE$num_reads)
-all_info_RNA_Seq_SE <- cbind(all_info_RNA_Seq_SE[, c("num_reads", "t_cram", "t_decompress_deez_lossy_0_mode_1",
+all_info_RNA_Seq_SE <- cbind(all_info_RNA_Seq_SE[, c("num_reads", "t_decompress_cram", "t_decompress_deez_lossy_0_mode_1",
                                                      "t_decompress_samcomp",
                                                      "t_decompress_genozip_optimize__compression_best",
                                                      "t_decompress_csam_q_0_m_0")],
