@@ -391,11 +391,12 @@ def main():
                     os.system(cmd)
                 if os.path.exists(f"{options.output_directory}/outputs/decompress_cram_{sra}_{layout}_{iteration}.output") == False:
                     cmd  = f"(/usr/bin/time --verbose "
-                    cmd += f" samtools view -h -@ 1 -T {options.genome} {alignment_cramfilename} {alignment_samfilename}.temp "
+                    cmd += f" samtools view -h -@ 1 -T {options.genome} {alignment_cramfilename} > {alignment_samfilename}.temp "
                     cmd += f")"
                     cmd += f"1> {options.output_directory}/outputs/decompress_cram_{sra}_{layout}_{iteration}.output "
                     cmd += f"2> {options.output_directory}/errors/decompress_cram_{sra}_{layout}_{iteration}.error "
-                    os.system(cmd)   
+                    os.system(cmd)
+                    os.system(f"rm {alignment_samfilename}.temp ")   
                 
     
     for iteration in range(int(options.num_times)):
@@ -1667,7 +1668,7 @@ def main():
                 all_data_dict[f"{sra}_{layout}"][f"t_csam_random_access"] = t
                 
     print(pd.DataFrame.from_dict(all_data_dict))
-    pd.DataFrame.from_dict(all_data_dict.T).to_csv("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/all_info.csv")
+    pd.DataFrame.from_dict(all_data_dict).to_csv("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/all_info.csv")
                 
 if __name__ == "__main__":
     main()
