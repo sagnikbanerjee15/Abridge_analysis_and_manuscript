@@ -1684,6 +1684,31 @@ def main():
                 all_data_dict[f"{sra}_{layout}"][f"m_csam_random_access"] = m
                 all_data_dict[f"{sra}_{layout}"][f"t_csam_random_access"] = t
                 
+                #################################################################################################################
+                # Index 
+                #################################################################################################################
+                
+                # Abridge
+                errorfilename = f"{options.temp_directory}/abridge_compressed_files/abridge_random_save_all_quality_scores_save_exact_quality_scores_level_2_{sra}_{layout}_{iteration}/{sra}_{layout}.sam__index.error"
+                m,t = getMemoryUsageAndDuration(errorfilename) 
+                        
+                all_data_dict[f"{sra}_{layout}"][f"m_abridge_index_access"] = m
+                all_data_dict[f"{sra}_{layout}"][f"t_abridge_index_access"] = t
+                
+                # BAM
+                errorfilename = f"{options.output_directory}/errors/index_bam_{sra}_{layout}_{iteration}.error"
+                m,t = getMemoryUsageAndDuration(errorfilename) 
+                        
+                all_data_dict[f"{sra}_{layout}"][f"m_bam_index_access"] = m
+                all_data_dict[f"{sra}_{layout}"][f"t_bam_index_access"] = t
+                
+                # CRAM
+                errorfilename = f"{options.output_directory}/errors/index_cram_{sra}_{layout}_{iteration}.error"
+                m,t = getMemoryUsageAndDuration(errorfilename) 
+                        
+                all_data_dict[f"{sra}_{layout}"][f"m_cram_index_access"] = m
+                all_data_dict[f"{sra}_{layout}"][f"t_cram_index_access"] = t
+                
     print(pd.DataFrame.from_dict(all_data_dict))
     pd.DataFrame.from_dict(all_data_dict).to_csv("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/all_info.csv")
                 
