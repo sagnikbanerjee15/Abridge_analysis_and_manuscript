@@ -147,7 +147,7 @@ def getMemoryUsageAndDuration(errorfilename):
             m = line.strip().split(":")[-1].strip()
     fhr.close()
     
-    return m, duration 
+    return round(m/(1024**2),2), duration 
 
 def calculateNumberOfReads(samfilename):
     total_reads = 0
@@ -381,6 +381,22 @@ def main():
                     cmd += f"1> {options.output_directory}/outputs/compress_cram_{sra}_{layout}_{iteration}.output "
                     cmd += f"2> {options.output_directory}/errors/compress_cram_{sra}_{layout}_{iteration}.error "
                     os.system(cmd)
+                    
+                if os.path.exists(f"{alignment_cramfilename}.crai") == False:
+                    cmd  = f"(/usr/bin/time --verbose "
+                    cmd += f" samtools index -@ 1 {alignment_cramfilename} "
+                    cmd += f")"
+                    cmd += f"1> {options.output_directory}/outputs/index_cram_{sra}_{layout}_{iteration}.output "
+                    cmd += f"2> {options.output_directory}/errors/index_cram_{sra}_{layout}_{iteration}.error "
+                    os.system(cmd)
+                    
+                if os.path.exists(f"{alignment_bamfilename}.bai") == False:
+                    cmd  = f"(/usr/bin/time --verbose "
+                    cmd += f" samtools index -@ 1 {alignment_bamfilename} "
+                    cmd += f")"
+                    cmd += f"1> {options.output_directory}/outputs/index_bam_{sra}_{layout}_{iteration}.output "
+                    cmd += f"2> {options.output_directory}/errors/index_bam_{sra}_{layout}_{iteration}.error "
+                    os.system(cmd)
                 
                 if os.path.exists(alignment_bamfilename) == False:
                     cmd  = f"(/usr/bin/time --verbose "
@@ -389,6 +405,7 @@ def main():
                     cmd += f"1> {options.output_directory}/outputs/compress_bam_{sra}_{layout}_{iteration}.output "
                     cmd += f"2> {options.output_directory}/errors/compress_bam_{sra}_{layout}_{iteration}.error "
                     os.system(cmd)
+                
                 if os.path.exists(f"{options.output_directory}/outputs/decompress_cram_{sra}_{layout}_{iteration}.output") == False:
                     cmd  = f"(/usr/bin/time --verbose "
                     cmd += f" samtools view -h -@ 1 -T {options.genome} {alignment_cramfilename} > {alignment_samfilename}.temp "
