@@ -1689,7 +1689,7 @@ def main():
                 #################################################################################################################
                 
                 # Abridge
-                errorfilename = f"{options.temp_directory}/abridge_compressed_files/abridge_compress_save_all_quality_scores_save_exact_quality_scores_level_2_{sra}_{layout}_{iteration}/{sra}_{layout}.sam__index.error"
+                errorfilename = f"{options.temp_directory}/abridge_compressed_files/compress_save_all_quality_scores_save_exact_quality_scores_level_2_{sra}_{layout}_{iteration}/{sra}_{layout}.sam__index.error"
                 m,t = getMemoryUsageAndDuration(errorfilename) 
                         
                 all_data_dict[f"{sra}_{layout}"][f"m_abridge_index_access"] = m
