@@ -1473,11 +1473,11 @@ def main():
                 all_data_dict[f"{sra}_{layout}"]["m_cram"] = m
                 all_data_dict[f"{sra}_{layout}"]["t_cram"] = t
                 
-                m,t = getMemoryUsageAndDuration(f"{options.output_directory}/errors/random_bam.error")
+                m,t = getMemoryUsageAndDuration(f"{options.output_directory}/errors/random_bam_{sra}_{layout}.error")
                 all_data_dict[f"{sra}_{layout}"]["m_bam_random_access"] = m
                 all_data_dict[f"{sra}_{layout}"]["t_bam_random_access"] = t
                 
-                m,t = getMemoryUsageAndDuration(f"{options.output_directory}/errors/random_cram.error")
+                m,t = getMemoryUsageAndDuration(f"{options.output_directory}/errors/random_cram_{sra}_{layout}.error")
                 all_data_dict[f"{sra}_{layout}"]["m_cram_random_access"] = m
                 all_data_dict[f"{sra}_{layout}"]["t_cram_random_access"] = t
                 
