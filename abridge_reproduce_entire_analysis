@@ -1527,8 +1527,8 @@ def main():
                                     if len(line) == 1:
                                         icigar = line[0]
                                     elif len(line) == 2:
-                                        if "brdg" in line:
-                                            icigar, _read_names = line[0],line[1] 
+                                        if "brdg" in line[1]:
+                                            icigar, _read_names = line[0], line[1] 
                                         else:
                                             positions, icigar = line[0],line[1] 
                                     elif len(line) == 3:
