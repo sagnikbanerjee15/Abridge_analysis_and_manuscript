@@ -1438,6 +1438,8 @@ def main():
     #################################################################################################################
     # Create one mega table containing all information
     #################################################################################################################
+    fhw = open("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/for_pie_chart.csv","w")
+    fhw.write("type","layout","field","size\n")
     columns = [line.split(",")[0].strip() for line in open("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/column_info.csv","r").read().split("\n")[:-1]][1:]
     all_data_pd = pd.DataFrame(columns = columns)
     all_data_dict = {}
@@ -1530,9 +1532,11 @@ def main():
                                         if "brdg" in line[1]:
                                             icigar, _read_names = line[0], line[1] 
                                         else:
-                                            positions, icigar = line[0],line[1] 
+                                            positions += len(line[0])
+                                            icigar = line[1] 
                                     elif len(line) == 3:
-                                        positions, icigar, _read_names = line[0],line[1] , line[2] 
+                                        positions += len(line[0])
+                                        icigar, _read_names = line[1] , line[2] 
                                 
                                 elif layout == "PE":    
                                     line = line.split("\t")
@@ -1607,6 +1611,10 @@ def main():
     
                         print(f"{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}",mapped_read_seq, mapped_quality_scores, positions, flag, index, read_names, other, unampped_read_seq, unmapped_quality_scores, tags)
                         sys.stdout.flush()
+                        values = [mapped_read_seq, mapped_quality_scores, positions, flag, index, read_names, other, unampped_read_seq, unmapped_quality_scores, tags]
+                        headers = ["mapped_read_seq", "mapped_quality_scores", "positions", "flag", "index", "read_names", "other", "unampped_read_seq", "unmapped_quality_scores", "tags"]
+                        for i in range(len(headers)):
+                            fhw.write(f"Parameter_setting_{types_of_compression.index(type_of_compression)+1},{layout},{headers[i]},{values[i]}\n")
                 
                 for type_of_compression in types_of_compression:
                     for level in [1,2,3]:
