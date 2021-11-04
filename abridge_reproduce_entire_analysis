@@ -1542,7 +1542,7 @@ def main():
                                         tags += len(MAPQ) + len(AS)
                                     
                                     # Extract the NH tag
-                                    i = len(icigar)
+                                    i = len(icigar) - 1
                                     while icigar[i].isnumeric():
                                         tags += 1
                                         i-=1
