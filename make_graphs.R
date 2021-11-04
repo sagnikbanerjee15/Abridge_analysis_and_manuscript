@@ -764,7 +764,7 @@ axis_text_font_size=9
 legend_text_size=8
 for_pie_chart_filename = "/Users/sagnik/work/ABRIDGE/Abridge_analysis_for_MS/for_pie_chart.csv"
 for_pie_chart_data <- as.data.frame(read.csv(for_pie_chart_filename,sep=",", header = TRUE, stringsAsFactors=FALSE))
-
+for_pie_chart_data$size <- for_pie_chart_data$size*100
 
 for (assay_type in c("RNA-Seq","DNA-Seq"))
 {
@@ -776,10 +776,11 @@ for (assay_type in c("RNA-Seq","DNA-Seq"))
                                    for_pie_chart_data$type == paste0("Parameter_setting_",i) &
                                    for_pie_chart_data$assay_type == assay_type,]    
       ggplot(data, aes(x = "", y=size, fill = field)) +
-        geom_bar(stat="identity", width=1, color="white") +
-        coord_polar("y", start=0) +
-        geom_text(aes(label = field),
+        geom_bar(stat="identity", width=1, color="black") +
+        coord_polar(theta = "y", start=0) +
+        geom_text(aes(label = scales::percent(size, accuracy = .1), fontface = "bold",x=1.7),
                   position = position_stack(vjust = 0.5)) +
+        theme_void()+
         theme(legend.position = "bottom", 
               legend.title = element_blank(), 
               legend.text = element_text(size=legend_text_size,color="black"),
@@ -788,9 +789,9 @@ for (assay_type in c("RNA-Seq","DNA-Seq"))
               axis.title.x = element_text( size=axis_label_font_size, colour = "black" , face = "bold"),
               axis.text.x = element_text(size=axis_text_font_size, colour = "black"),
               axis.text.y = element_text(size=axis_text_font_size, colour = "black", margin = margin(t = 0, r = 0, b = 0, l = 0)),
-              axis.line = element_line(colour = "black"),
-              panel.border = element_rect(colour = "black", fill=NA, size=2)
+              #panel.border = element_rect(colour = "black", fill=NA, size=2)
         )+
+        labs(x="",y="")+
         scale_fill_igv()
     }
   }

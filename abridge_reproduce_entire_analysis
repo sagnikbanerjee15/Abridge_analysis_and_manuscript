@@ -1615,7 +1615,7 @@ def main():
                         percentage = [round(val/sum(values),2) for val in values]
                         headers = ["mapped_read_seq", "mapped_quality_scores", "positions", "flag", "index", "read_names", "other", "unampped_read_seq", "unmapped_quality_scores", "tags"]
                         for i in range(len(headers)):
-                            fhw.write(f"Parameter_setting_{types_of_compression.index(type_of_compression)+1},{Assay_Type},{layout},{headers[i]},{percentage[i]}\n")
+                            fhw.write(f"Parameter_setting_{types_of_compression.index(type_of_compression)+1},{Assay_Type},{layout},{headers[i]},{values[i]}\n")
                 
                 for type_of_compression in types_of_compression:
                     for level in [1,2,3]:
