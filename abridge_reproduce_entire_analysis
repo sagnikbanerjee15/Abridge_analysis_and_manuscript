@@ -1551,13 +1551,28 @@ def main():
                                             mapped_read_seq += 1
                                         elif icigar[i]>='A' and icigar[i]<='Z':
                                             flag += 1
-                                        else:
+                                        elif icigar[i] in ['!' , '"' , '#' , '$' , '%' ,  '&' , '\'' , '(' , ')' , '*']:
                                             mapped_read_seq += 1
+                                        else:
+                                            mapped_quality_scores += 1
                                         i-=1
                                     
-                                     
-                            
+                                
                             other += 1 # Adding for newline
+                            
+                        if save_all_quality_scores == True and save_exact_quality_scores==True:
+                            fhr = open(f"{options.output_directory}/abridge_decompressed_files/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam_qual","r")
+                            for line in fhr:
+                                other+=1
+                                mapped_quality_scores += len(line.strip())
+                            fhr.close()
+                            
+                        if save_all_quality_scores == True and save_exact_quality_scores==False:
+                            fhr = open(f"{options.output_directory}/abridge_decompressed_files/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam_qual_rle","r")
+                            for line in fhr:
+                                other+=1
+                                mapped_quality_scores += len(line.strip())
+                            fhr.close()
     
                         print(f"{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}",mapped_read_seq, mapped_quality_scores, positions, flag, index, read_names, other, unampped_read_seq, unampped_quality_scores, tags)
                 
