@@ -1582,6 +1582,11 @@ def main():
                                 line = fhr.readline()
                                 unmapped_quality_scores += len(line.strip())
                             fhr.close()
+                            
+                        fhr = open(f"{options.output_directory}/abridge_decompressed_files/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.sam__index","r")
+                        for line in fhr:
+                            other += 1
+                            index += len(line.strip())
     
                         print(f"{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}",mapped_read_seq, mapped_quality_scores, positions, flag, index, read_names, other, unampped_read_seq, unmapped_quality_scores, tags)
                         sys.stdout.flush()
