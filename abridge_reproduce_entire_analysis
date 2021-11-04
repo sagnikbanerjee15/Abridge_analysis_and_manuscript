@@ -1503,7 +1503,7 @@ def main():
                     for level in [2]:
                         if "-" in sra:continue
                         compressed_filename = f"{options.temp_directory}/abridge_compressed_files/compress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge"
-                        os.system(f"rm -f {options.output_directory}/abridge_decompressed_files/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}")
+                        os.system(f"rm -rf {options.output_directory}/abridge_decompressed_files/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}")
                         cmd  = f" 7za e  "
                         cmd += f" {options.output_directory}/abridge_compressed_files/compress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge "
                         cmd += f" -y "
