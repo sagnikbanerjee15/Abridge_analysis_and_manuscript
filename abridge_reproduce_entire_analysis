@@ -1439,7 +1439,7 @@ def main():
     # Create one mega table containing all information
     #################################################################################################################
     fhw = open("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/for_pie_chart.csv","w")
-    fhw.write("type","layout","field","size\n")
+    fhw.write("type,layout,field,size\n")
     columns = [line.split(",")[0].strip() for line in open("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/column_info.csv","r").read().split("\n")[:-1]][1:]
     all_data_pd = pd.DataFrame(columns = columns)
     all_data_dict = {}
