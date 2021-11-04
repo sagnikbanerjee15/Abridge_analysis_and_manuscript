@@ -1506,7 +1506,7 @@ def main():
                         os.system(f"rm -f {options.output_directory}/abridge_decompressed_files/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}")
                         cmd  = f" 7za e  "
                         cmd += f" {options.output_directory}/abridge_compressed_files/compress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}.abridge "
-                        cmd += f" -y --mmt=40 "
+                        cmd += f" -y "
                         cmd += f" -o{options.output_directory}/abridge_decompressed_files/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration} "  
                         if os.path.exists(f"{options.output_directory}/abridge_decompressed_files/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}") == False:
                             os.system(f"mkdir -p {options.output_directory}/abridge_decompressed_files/decompress_{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}") 
