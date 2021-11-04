@@ -1533,6 +1533,7 @@ def main():
                                             positions, icigar = line[0],line[1] 
                                     elif len(line) == 3:
                                         positions, icigar, _read_names = line[0],line[1] , line[2] 
+                                
                                 elif layout == "PE":    
                                     line = line.split("\t")
                                     if len(line) == 2:
@@ -1541,30 +1542,30 @@ def main():
                                         positions += len(line[0])
                                         icigar, _read_names = line[1], line[2]
                                     
-                                    read_names += len(_read_names) - _read_names.count(",")
-                                    mapped_read_seq += len(icigar.split("-")[1]) # number of repetetions of the same read
+                                read_names += len(_read_names) - _read_names.count(",")
+                                mapped_read_seq += len(icigar.split("-")[1]) # number of repetetions of the same read
+                                
+                                icigar = icigar.split("-")[0]
+                                if "~" in icigar:
+                                    icigar, MAPQ, AS = icigar.split("~")
+                                    tags += len(MAPQ) + len(AS)
+                                
+                                # Extract the NH tag
+                                i = len(icigar) - 1
+                                while icigar[i].isnumeric():
+                                    tags += 1
+                                    i-=1
                                     
-                                    icigar = icigar.split("-")[0]
-                                    if "~" in icigar:
-                                        icigar, MAPQ, AS = icigar.split("~")
-                                        tags += len(MAPQ) + len(AS)
-                                    
-                                    # Extract the NH tag
-                                    i = len(icigar) - 1
-                                    while icigar[i].isnumeric():
-                                        tags += 1
-                                        i-=1
-                                        
-                                    while i>=0:
-                                        if icigar[i]>='a' and icigar[i]<='z':
-                                            mapped_read_seq += 1
-                                        elif icigar[i]>='A' and icigar[i]<='Z':
-                                            flag += 1
-                                        elif icigar[i] in ['!' , '"' , '#' , '$' , '%' ,  '&' , '\'' , '(' , ')' , '*']:
-                                            mapped_read_seq += 1
-                                        else:
-                                            mapped_quality_scores += 1
-                                        i-=1
+                                while i>=0:
+                                    if icigar[i]>='a' and icigar[i]<='z':
+                                        mapped_read_seq += 1
+                                    elif icigar[i]>='A' and icigar[i]<='Z':
+                                        flag += 1
+                                    elif icigar[i] in ['!' , '"' , '#' , '$' , '%' ,  '&' , '\'' , '(' , ')' , '*']:
+                                        mapped_read_seq += 1
+                                    else:
+                                        mapped_quality_scores += 1
+                                    i-=1
                                     
                                 
                             other += 1 # Adding for newline
