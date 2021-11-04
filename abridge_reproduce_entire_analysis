@@ -1549,6 +1549,7 @@ def main():
                                     icigar = icigar.split("-")[0]
                                 except IndexError:
                                     print(icigar)
+                                    sys.stdout.flush()
                                     sys.exit(1)
                                 if "~" in icigar:
                                     icigar, MAPQ, AS = icigar.split("~")
