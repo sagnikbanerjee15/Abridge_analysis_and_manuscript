@@ -1546,7 +1546,7 @@ def main():
                                 try:
                                     mapped_read_seq += len(icigar.split("-")[1]) # number of repetetions of the same read
                                 except IndexError:
-                                    print(icigar)
+                                    print(icigar, line)
                                     sys.stdout.flush()
                                     sys.exit(1)
                                 
