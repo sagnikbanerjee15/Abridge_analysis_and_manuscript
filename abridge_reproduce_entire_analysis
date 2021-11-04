@@ -140,7 +140,6 @@ def getMemoryUsageAndDuration(errorfilename):
         if "Elapsed" in line:
             duration = line.strip().split("time (h:mm:ss or m:ss):")[-1].strip()
             if duration.count(":") == 1:
-                print(errorfilename,duration.split(":")[1], int(float(duration.split(":")[1])+0.5))
                 duration = int(duration.split(":")[0])*60 + int(float(duration.split(":")[1])+0.5)
             elif duration.count(":") == 2:
                 duration = int(duration.split(":")[0])*60*60 + int(duration.split(":")[1])*60 + int(float(duration.split(":")[2])+0.5)
@@ -1560,7 +1559,7 @@ def main():
                             
                             other += 1 # Adding for newline
     
-                        print(f"{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}",tags, other, mapped_read_seq, mapped_quality_scores, index, positions, flag, index, read_names, unampped_read_seq, unampped_quality_scores)
+                        print(f"{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}",mapped_read_seq, mapped_quality_scores, positions, flag, index, read_names, other, unampped_read_seq, unampped_quality_scores, tags)
                 
                 for type_of_compression in types_of_compression:
                     for level in [1,2,3]:
@@ -1773,8 +1772,7 @@ def main():
                         
                 all_data_dict[f"{sra}_{layout}"][f"m_cram_index_access"] = m
                 all_data_dict[f"{sra}_{layout}"][f"t_cram_index_access"] = t
-                
-    print(pd.DataFrame.from_dict(all_data_dict))
+            
     pd.DataFrame.from_dict(all_data_dict).to_csv("/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_for_MS/all_info.csv")
                 
 if __name__ == "__main__":
