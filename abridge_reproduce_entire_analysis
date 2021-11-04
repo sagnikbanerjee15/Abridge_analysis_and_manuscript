@@ -1543,14 +1543,16 @@ def main():
                                         icigar, _read_names = line[1], line[2]
                                     
                                 read_names += len(_read_names) - _read_names.count(",")
-                                mapped_read_seq += len(icigar.split("-")[1]) # number of repetetions of the same read
-                                
                                 try:
-                                    icigar = icigar.split("-")[0]
+                                    mapped_read_seq += len(icigar.split("-")[1]) # number of repetetions of the same read
                                 except IndexError:
                                     print(icigar)
                                     sys.stdout.flush()
                                     sys.exit(1)
+                                
+                                
+                                icigar = icigar.split("-")[0]
+                                
                                 if "~" in icigar:
                                     icigar, MAPQ, AS = icigar.split("~")
                                     tags += len(MAPQ) + len(AS)
