@@ -1528,12 +1528,12 @@ def main():
                                     
                                     line = line.split("\t")
                                     if len(line) == 2:
-                                        icigar, read_names = line[0], line[1]
+                                        icigar, _read_names = line[0], line[1]
                                     elif len(line)==3:
                                         positions += len(line[0])
-                                        icigar, read_names = line[1], line[2]
+                                        icigar, _read_names = line[1], line[2]
                                     
-                                    read_names += len(read_names) - read_names.count(",")
+                                    read_names += len(_read_names) - _read_names.count(",")
                                     mapped_read_seq += len(icigar.split("-")[1]) # number of repetetions of the same read
                                     
                                     icigar = icigar.split("-")[0]
