@@ -1517,14 +1517,23 @@ def main():
                             if line[0]=="@":
                                 other = len(line)
                             else:
+                                other += line.count("\t")
+                                other += line.count(",")
+                                other += line.count("~")
+                                other += line.count("-")
+                                
                                 if layout == "SE":
-                                    pass
-                                elif layout == "PE":
-                                    other += line.count("\t")
-                                    other += line.count(",")
-                                    other += line.count("~")
-                                    other += line.count("-")
-                                    
+                                    line = line.split("\t")
+                                    if len(line) == 1:
+                                        icigar = line[0]
+                                    elif len(line) == 2:
+                                        if "brdg" in line:
+                                            icigar, _read_names = line[0],line[1] 
+                                        else:
+                                            positions, icigar = line[0],line[1] 
+                                    elif len(line) == 3:
+                                        positions, icigar, _read_names = line[0],line[1] , line[2] 
+                                elif layout == "PE":    
                                     line = line.split("\t")
                                     if len(line) == 2:
                                         icigar, _read_names = line[0], line[1]
