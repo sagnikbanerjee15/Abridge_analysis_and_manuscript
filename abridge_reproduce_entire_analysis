@@ -1575,7 +1575,7 @@ def main():
                             fhr.close()
     
                         print(f"{type_of_compression}_level_{level}_{sra}_{layout}_{iteration}/{sra}_{layout}",mapped_read_seq, mapped_quality_scores, positions, flag, index, read_names, other, unampped_read_seq, unampped_quality_scores, tags)
-                        sys.out.flush()
+                        sys.stdout.flush()
                 
                 for type_of_compression in types_of_compression:
                     for level in [1,2,3]:
