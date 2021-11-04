@@ -759,3 +759,18 @@ ggsave(paste0("/Users/sagnik/work/ABRIDGE/Manuscript/Figures/CompressionTime_SF.
 
 
 
+axis_label_font_size=12
+axis_text_font_size=9
+legend_text_size=8
+for_pie_chart_filename = "/Users/sagnik/work/ABRIDGE/Abridge_analysis_for_MS/for_pie_chart.csv"
+for_pie_chart_data <- as.data.frame(read.csv(for_pie_chart_filename,sep=",", header = TRUE, stringsAsFactors=FALSE))
+
+
+for(layout in c("SE","PE"))
+{
+  for(i in seq(1,5))
+  {
+    data <- for_pie_chart_data[for_pie_chart_data$layout==layout & for_pie_chart_data$type==paste0("Parameter_setting_",i),]    
+    
+  }
+}
