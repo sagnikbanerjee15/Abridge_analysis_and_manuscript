@@ -770,29 +770,41 @@ for (assay_type in c("RNA-Seq","DNA-Seq"))
 {
   for(layout in c("SE","PE"))
   {
+    plots <- list()
     for(i in seq(1,5))
     {
       data <- for_pie_chart_data[for_pie_chart_data$layout == layout & 
                                    for_pie_chart_data$type == paste0("Parameter_setting_",i) &
                                    for_pie_chart_data$assay_type == assay_type,]    
-      ggplot(data, aes(x = "", y=size, fill = field)) +
+      plots[[i]] <- ggplot(data, aes(x = "", y=size, fill = field)) +
         geom_bar(stat="identity", width=1, color="black") +
         coord_polar(theta = "y", start=0) +
-        geom_text(aes(label = scales::percent(size, accuracy = .1), fontface = "bold",x=1.7),
+        geom_text(aes(label = size, fontface = "bold",x=1.55),
                   position = position_stack(vjust = 0.5)) +
         theme_void()+
-        theme(legend.position = "bottom", 
-              legend.title = element_blank(), 
-              legend.text = element_text(size=legend_text_size,color="black"),
-              legend.box.background = element_rect(colour = "black", size = 1), 
-              axis.title.y = element_text(size=axis_label_font_size, colour = "black", face = "bold"),
-              axis.title.x = element_text( size=axis_label_font_size, colour = "black" , face = "bold"),
-              axis.text.x = element_text(size=axis_text_font_size, colour = "black"),
-              axis.text.y = element_text(size=axis_text_font_size, colour = "black", margin = margin(t = 0, r = 0, b = 0, l = 0)),
-              #panel.border = element_rect(colour = "black", fill=NA, size=2)
+
+        theme(
+              panel.border = element_rect(colour = "black", fill=NA, size=2),
+              plot.title = element_text(hjust = 0.5)
         )+
         labs(x="",y="")+
         scale_fill_igv()
     }
+    ggarrange(plots[[1]]+theme(plot.margin=unit(margin_for_no_space, "cm")),
+              plots[[2]]+theme(plot.margin=unit(margin_for_no_space, "cm")),
+              plots[[3]]+theme(plot.margin=unit(margin_for_no_space, "cm")),
+              plots[[4]]+theme(plot.margin=unit(margin_for_no_space, "cm")),
+              plots[[5]]+theme(plot.margin=unit(margin_for_no_space, "cm")),
+              labels = c("(A)","(B)","(C)","(D)","(E)"),
+              ncol = 5, nrow = 1,
+              common.legend = TRUE, 
+              legend="right")
+    
+    ggsave(paste0("/Users/sagnik/work/ABRIDGE/Manuscript/Figures/",assay_type,"_",layout,".pdf"),
+           plot = last_plot(), 
+           dpi = 1000,
+           height = 4,
+           width = 20)
   }
 }
+
