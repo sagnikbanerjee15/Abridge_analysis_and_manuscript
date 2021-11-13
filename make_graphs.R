@@ -86,7 +86,7 @@ p_a<-ggplot(data = all_info_RNA_Seq_SE, aes( x = factor(num_reads) , fill = vari
         axis.line = element_line(colour = "black"),
         panel.border = element_rect(colour = "black", fill=NA, size=2)
   )+
-  labs(title="RNA-Seq Single Paired",x="Number of reads (in Millions)", y = "Size (in MB)") + 
+  labs(title="RNA-Seq Single Ended",x="Number of reads (in Millions)", y = "Size (in MB)") + 
   scale_fill_igv()
 
 
@@ -252,7 +252,7 @@ ggarrange(p_a+theme(plot.margin=unit(margin_for_no_space, "cm")),
           common.legend = TRUE,
           legend="bottom")
 
-ggsave(paste0("/Users/sagnik/work/ABRIDGE/Manuscript/Figures/CompressionRatioComparisonMF.pdf"),
+ggsave(paste0("/Users/sagnik/work/ABRIDGE/Manuscript/Figures/abridge_CompressionRatioComparisonMF.pdf"),
        plot = last_plot(), 
        dpi = 1000,
        height = 7,
@@ -473,7 +473,7 @@ ggarrange(p_a+theme(plot.margin=unit(margin_for_no_space, "cm")),
           common.legend = TRUE,
           legend="bottom")
 
-ggsave(paste0("/Users/sagnik/work/ABRIDGE/Manuscript/Figures/DecompressionTime_SF.pdf"),
+ggsave(paste0("/Users/sagnik/work/ABRIDGE/Manuscript/Figures/abridge_DecompressionTime_SF.pdf"),
        plot = last_plot(), 
        dpi = 1000,
        height = 7,
@@ -723,7 +723,7 @@ ggarrange(p_a+theme(plot.margin=unit(margin_for_no_space, "cm")),
           common.legend = TRUE,
           legend="bottom")
 
-ggsave(paste0("/Users/sagnik/work/ABRIDGE/Manuscript/Figures/CompressionTime_SF.pdf"),
+ggsave(paste0("/Users/sagnik/work/ABRIDGE/Manuscript/Figures/abridge_CompressionTime_SF.pdf"),
        plot = last_plot(), 
        dpi = 1000,
        height = 7,
@@ -733,6 +733,214 @@ ggsave(paste0("/Users/sagnik/work/ABRIDGE/Manuscript/Figures/CompressionTime_SF.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+########################################################################################################################################################################
+# random time
+########################################################################################################################################################################
+all_info_RNA_Seq_SE <- all_info[all_info$rna_dna == "RNA-Seq" & all_info$layout == "SE", ]
+all_info_RNA_Seq_SE$num_reads <- as.numeric(all_info_RNA_Seq_SE$num_reads)
+order(all_info_RNA_Seq_SE$num_reads)
+all_info_RNA_Seq_SE <- all_info_RNA_Seq_SE[, c("num_reads", "t_cram_random_access", "t_abridge_random_access",
+                                                     "t_csam_random_access",
+                                                     "t_genozip_random_access",
+                                                     "t_deez_random_access")]
+
+setnames(all_info_RNA_Seq_SE, "t_csam_random_access", "CSAM")
+setnames(all_info_RNA_Seq_SE, "t_cram_random_access", "CRAM")
+setnames(all_info_RNA_Seq_SE, "t_abridge_random_access", "ABRIDGE")
+setnames(all_info_RNA_Seq_SE, "t_deez_random_access", "DEEZ")
+setnames(all_info_RNA_Seq_SE, "t_genozip_random_access", "GENOZIP")
+
+
+all_info_RNA_Seq_SE <- data.frame(lapply(all_info_RNA_Seq_SE,as.numeric))
+all_info_RNA_Seq_SE <- melt(data = all_info_RNA_Seq_SE, id.vars = 'num_reads' )
+all_info_RNA_Seq_SE$variable<-factor(all_info_RNA_Seq_SE$variable,levels = c("CRAM", "CSAM",  "ABRIDGE","GENOZIP","DEEZ"))
+
+p_a<-ggplot(data = all_info_RNA_Seq_SE, aes( x = factor(num_reads) , fill = variable , y = value, na.rm = F)) + 
+  geom_bar(position="dodge", stat="identity", color="black")+
+  geom_text(aes(label=value), position = position_dodge(width=0.9), hjust = -0.3, vjust = 0.5, size=4, fontface="bold", angle = 90) +
+  scale_x_discrete(labels  =  as.factor(all_info_RNA_Seq_SE$num_reads)) +
+  scale_y_continuous(limits=c(min(all_info_RNA_Seq_SE$value)-1,max(all_info_RNA_Seq_SE$value)+1500),oob = rescale_none) +
+  geom_vline(xintercept = 1.5, linetype="dashed", color = "black")+
+  geom_vline(xintercept = 2.5, linetype="dashed", color = "black")+
+  geom_vline(xintercept = 3.5, linetype="dashed", color = "black")+
+  geom_vline(xintercept = 4.5, linetype="dashed", color = "black")+
+  theme(legend.position = "bottom", 
+        legend.title = element_blank(), 
+        legend.text = element_text(size=legend_text_size,color="black"),
+        legend.box.background = element_rect(colour = "black", size = 1), 
+        axis.title.y = element_text(size=axis_label_font_size, colour = "black", face = "bold"),
+        axis.title.x = element_text( size=axis_label_font_size, colour = "black" , face = "bold"),
+        axis.text.x = element_text(size=axis_text_font_size, colour = "black"),
+        axis.text.y = element_text(size=axis_text_font_size, colour = "black", margin = margin(t = 0, r = 0, b = 0, l = 0)),
+        axis.line = element_line(colour = "black"),
+        panel.border = element_rect(colour = "black", fill=NA, size=2)
+  )+
+  labs(title="RNA-Seq Single Ended",x="Number of reads (in Millions)", y = "Time (in seconds)") + 
+  scale_fill_igv()
+
+
+all_info_RNA_Seq_PE <- all_info[all_info$rna_dna == "RNA-Seq" & all_info$layout == "PE", ]
+all_info_RNA_Seq_PE$num_reads <- as.numeric(all_info_RNA_Seq_PE$num_reads)
+order(all_info_RNA_Seq_PE$num_reads)
+all_info_RNA_Seq_PE <- all_info_RNA_Seq_PE[, c("num_reads", "t_cram_random_access", "t_abridge_random_access",
+                                               "t_csam_random_access",
+                                               "t_genozip_random_access",
+                                               "t_deez_random_access")]
+
+setnames(all_info_RNA_Seq_PE, "t_csam_random_access", "CSAM")
+setnames(all_info_RNA_Seq_PE, "t_cram_random_access", "CRAM")
+setnames(all_info_RNA_Seq_PE, "t_abridge_random_access", "ABRIDGE")
+setnames(all_info_RNA_Seq_PE, "t_deez_random_access", "DEEZ")
+setnames(all_info_RNA_Seq_PE, "t_genozip_random_access", "GENOZIP")
+
+
+all_info_RNA_Seq_PE <- data.frame(lapply(all_info_RNA_Seq_PE,as.numeric))
+all_info_RNA_Seq_PE <- melt(data = all_info_RNA_Seq_PE, id.vars = 'num_reads' )
+all_info_RNA_Seq_PE$variable<-factor(all_info_RNA_Seq_PE$variable,levels = c("CRAM", "CSAM",  "ABRIDGE","GENOZIP","DEEZ"))
+
+p_b<-ggplot(data = all_info_RNA_Seq_PE, aes( x = factor(num_reads) , fill = variable , y = value, na.rm = F)) + 
+  geom_bar(position="dodge", stat="identity", color="black")+
+  geom_text(aes(label=value), position = position_dodge(width=0.9), hjust = -0.3, vjust = 0.5, size=4, fontface="bold", angle = 90) +
+  scale_x_discrete(labels  =  as.factor(all_info_RNA_Seq_PE$num_reads)) +
+  scale_y_continuous(limits=c(min(all_info_RNA_Seq_PE$value)-1,max(all_info_RNA_Seq_PE$value)+1500),oob = rescale_none) +
+  geom_vline(xintercept = 1.5, linetype="dashed", color = "black")+
+  geom_vline(xintercept = 2.5, linetype="dashed", color = "black")+
+  geom_vline(xintercept = 3.5, linetype="dashed", color = "black")+
+  geom_vline(xintercept = 4.5, linetype="dashed", color = "black")+
+  theme(legend.position = "bottom", 
+        legend.title = element_blank(), 
+        legend.text = element_text(size=legend_text_size,color="black"),
+        legend.box.background = element_rect(colour = "black", size = 1), 
+        axis.title.y = element_text(size=axis_label_font_size, colour = "black", face = "bold"),
+        axis.title.x = element_text( size=axis_label_font_size, colour = "black" , face = "bold"),
+        axis.text.x = element_text(size=axis_text_font_size, colour = "black"),
+        axis.text.y = element_text(size=axis_text_font_size, colour = "black", margin = margin(t = 0, r = 0, b = 0, l = 0)),
+        axis.line = element_line(colour = "black"),
+        panel.border = element_rect(colour = "black", fill=NA, size=2)
+  )+
+  labs(title="RNA-Seq Paired Ended",x="Number of reads (in Millions)", y = "Time (in seconds)") + 
+  scale_fill_igv()
+
+p_b
+all_info_DNA_Seq_SE <- all_info[all_info$rna_dna == "DNA-Seq" & all_info$layout == "SE", ]
+all_info_DNA_Seq_SE$num_reads <- as.numeric(all_info_DNA_Seq_SE$num_reads)
+order(all_info_DNA_Seq_SE$num_reads)
+all_info_DNA_Seq_SE <- all_info_DNA_Seq_SE[, c("num_reads", "t_cram_random_access", "t_abridge_random_access",
+                                               "t_csam_random_access",
+                                               "t_genozip_random_access",
+                                               "t_deez_random_access")]
+
+setnames(all_info_DNA_Seq_SE, "t_csam_random_access", "CSAM")
+setnames(all_info_DNA_Seq_SE, "t_cram_random_access", "CRAM")
+setnames(all_info_DNA_Seq_SE, "t_abridge_random_access", "ABRIDGE")
+setnames(all_info_DNA_Seq_SE, "t_deez_random_access", "DEEZ")
+setnames(all_info_DNA_Seq_SE, "t_genozip_random_access", "GENOZIP")
+
+
+all_info_DNA_Seq_SE <- data.frame(lapply(all_info_DNA_Seq_SE,as.numeric))
+all_info_DNA_Seq_SE <- melt(data = all_info_DNA_Seq_SE, id.vars = 'num_reads' )
+all_info_DNA_Seq_SE$variable<-factor(all_info_DNA_Seq_SE$variable,levels = c("CRAM", "CSAM",  "ABRIDGE","GENOZIP","DEEZ"))
+
+p_c<-ggplot(data = all_info_DNA_Seq_SE, aes( x = factor(num_reads) , fill = variable , y = value, na.rm = F)) + 
+  geom_bar(position="dodge", stat="identity", color="black")+
+  geom_text(aes(label=value), position = position_dodge(width=0.9), hjust = -0.3, vjust = 0.5, size=4, fontface="bold", angle = 90) +
+  scale_x_discrete(labels  =  as.factor(all_info_DNA_Seq_SE$num_reads)) +
+  scale_y_continuous(limits=c(min(all_info_DNA_Seq_SE$value)-1,max(all_info_DNA_Seq_SE$value)+4000),oob = rescale_none) +
+  geom_vline(xintercept = 1.5, linetype="dashed", color = "black")+
+  geom_vline(xintercept = 2.5, linetype="dashed", color = "black")+
+  geom_vline(xintercept = 3.5, linetype="dashed", color = "black")+
+  geom_vline(xintercept = 4.5, linetype="dashed", color = "black")+
+  theme(legend.position = "bottom", 
+        legend.title = element_blank(), 
+        legend.text = element_text(size=legend_text_size,color="black"),
+        legend.box.background = element_rect(colour = "black", size = 1), 
+        axis.title.y = element_text(size=axis_label_font_size, colour = "black", face = "bold"),
+        axis.title.x = element_text( size=axis_label_font_size, colour = "black" , face = "bold"),
+        axis.text.x = element_text(size=axis_text_font_size, colour = "black"),
+        axis.text.y = element_text(size=axis_text_font_size, colour = "black", margin = margin(t = 0, r = 0, b = 0, l = 0)),
+        axis.line = element_line(colour = "black"),
+        panel.border = element_rect(colour = "black", fill=NA, size=2)
+  )+
+  labs(title="DNA-Seq Single Ended",x="Number of reads (in Millions)", y = "Time (in seconds)") + 
+  scale_fill_igv()
+
+
+all_info_DNA_Seq_PE <- all_info[all_info$rna_dna == "DNA-Seq" & all_info$layout == "PE", ]
+all_info_DNA_Seq_PE$num_reads <- as.numeric(all_info_DNA_Seq_PE$num_reads)
+order(all_info_DNA_Seq_PE$num_reads)
+all_info_DNA_Seq_PE <- all_info_DNA_Seq_PE[, c("num_reads", "t_cram_random_access", "t_abridge_random_access",
+                                               "t_csam_random_access",
+                                               "t_genozip_random_access",
+                                               "t_deez_random_access")]
+
+setnames(all_info_DNA_Seq_PE, "t_csam_random_access", "CSAM")
+setnames(all_info_DNA_Seq_PE, "t_cram_random_access", "CRAM")
+setnames(all_info_DNA_Seq_PE, "t_abridge_random_access", "ABRIDGE")
+setnames(all_info_DNA_Seq_PE, "t_deez_random_access", "DEEZ")
+setnames(all_info_DNA_Seq_PE, "t_genozip_random_access", "GENOZIP")
+
+
+all_info_DNA_Seq_PE <- data.frame(lapply(all_info_DNA_Seq_PE,as.numeric))
+all_info_DNA_Seq_PE <- melt(data = all_info_DNA_Seq_PE, id.vars = 'num_reads' )
+all_info_DNA_Seq_PE$variable<-factor(all_info_DNA_Seq_PE$variable,levels = c("CRAM", "CSAM",  "ABRIDGE","GENOZIP","DEEZ"))
+
+p_d<-ggplot(data = all_info_DNA_Seq_PE, aes( x = factor(num_reads) , fill = variable , y = value, na.rm = F)) + 
+  geom_bar(position="dodge", stat="identity", color="black")+
+  geom_text(aes(label=value), position = position_dodge(width=0.9), hjust = -0.3, vjust = 0.5, size=4, fontface="bold", angle = 90) +
+  scale_x_discrete(labels  =  as.factor(all_info_DNA_Seq_PE$num_reads)) +
+  scale_y_continuous(limits=c(min(all_info_DNA_Seq_PE$value)-1,max(all_info_DNA_Seq_PE$value)+4000),oob = rescale_none) +
+  geom_vline(xintercept = 1.5, linetype="dashed", color = "black")+
+  geom_vline(xintercept = 2.5, linetype="dashed", color = "black")+
+  geom_vline(xintercept = 3.5, linetype="dashed", color = "black")+
+  geom_vline(xintercept = 4.5, linetype="dashed", color = "black")+
+  theme(legend.position = "bottom", 
+        legend.title = element_blank(), 
+        legend.text = element_text(size=legend_text_size,color="black"),
+        legend.box.background = element_rect(colour = "black", size = 1), 
+        axis.title.y = element_text(size=axis_label_font_size, colour = "black", face = "bold"),
+        axis.title.x = element_text( size=axis_label_font_size, colour = "black" , face = "bold"),
+        axis.text.x = element_text(size=axis_text_font_size, colour = "black"),
+        axis.text.y = element_text(size=axis_text_font_size, colour = "black", margin = margin(t = 0, r = 0, b = 0, l = 0)),
+        axis.line = element_line(colour = "black"),
+        panel.border = element_rect(colour = "black", fill=NA, size=2)
+  )+
+  labs(title="DNA-Seq Paired Ended",x="Number of reads (in Millions)", y = "Time (in seconds)") + 
+  scale_fill_igv()
+
+########################################################################################################################################################################
+
+
+margin_for_no_space<-c(0.2,0.5,0,0)
+ggarrange(p_a+theme(plot.margin=unit(margin_for_no_space, "cm")),
+          p_b+theme(plot.margin=unit(margin_for_no_space, "cm")),
+          p_c+theme(plot.margin=unit(margin_for_no_space, "cm")),
+          p_d+theme(plot.margin=unit(margin_for_no_space, "cm")),
+          labels = c("(A)","(B)","(C)","(D)"),
+          ncol = 2, nrow = 2,
+          common.legend = TRUE,
+          legend="bottom")
+
+ggsave(paste0("/Users/sagnik/work/ABRIDGE/Manuscript/Figures/abridge_randomTime_SF.pdf"),
+       plot = last_plot(), 
+       dpi = 1000,
+       height = 7,
+       width = 15)
 
 
 

@@ -1,201 +1,201 @@
 type,assay_type,layout,field,size
-Parameter_setting_1,RNA-Seq,PE,mapped_read_seq,0.01
-Parameter_setting_1,RNA-Seq,PE,mapped_quality_scores,0.63
-Parameter_setting_1,RNA-Seq,PE,positions,0
-Parameter_setting_1,RNA-Seq,PE,flag,0
-Parameter_setting_1,RNA-Seq,PE,index,0
-Parameter_setting_1,RNA-Seq,PE,read_names,0.03
-Parameter_setting_1,RNA-Seq,PE,other,0.01
-Parameter_setting_1,RNA-Seq,PE,unampped_read_seq,0.16
-Parameter_setting_1,RNA-Seq,PE,unmapped_quality_scores,0.16
-Parameter_setting_1,RNA-Seq,PE,tags,0
-Parameter_setting_2,RNA-Seq,PE,mapped_read_seq,0.02
-Parameter_setting_2,RNA-Seq,PE,mapped_quality_scores,0.06
-Parameter_setting_2,RNA-Seq,PE,positions,0
-Parameter_setting_2,RNA-Seq,PE,flag,0
-Parameter_setting_2,RNA-Seq,PE,index,0
-Parameter_setting_2,RNA-Seq,PE,read_names,0.08
-Parameter_setting_2,RNA-Seq,PE,other,0.02
-Parameter_setting_2,RNA-Seq,PE,unampped_read_seq,0.41
-Parameter_setting_2,RNA-Seq,PE,unmapped_quality_scores,0.41
-Parameter_setting_2,RNA-Seq,PE,tags,0.01
-Parameter_setting_3,RNA-Seq,PE,mapped_read_seq,0.02
-Parameter_setting_3,RNA-Seq,PE,mapped_quality_scores,0.01
-Parameter_setting_3,RNA-Seq,PE,positions,0
-Parameter_setting_3,RNA-Seq,PE,flag,0
-Parameter_setting_3,RNA-Seq,PE,index,0
-Parameter_setting_3,RNA-Seq,PE,read_names,0.08
-Parameter_setting_3,RNA-Seq,PE,other,0.02
-Parameter_setting_3,RNA-Seq,PE,unampped_read_seq,0.43
-Parameter_setting_3,RNA-Seq,PE,unmapped_quality_scores,0.43
-Parameter_setting_3,RNA-Seq,PE,tags,0.01
-Parameter_setting_4,RNA-Seq,PE,mapped_read_seq,0.01
-Parameter_setting_4,RNA-Seq,PE,mapped_quality_scores,0.01
-Parameter_setting_4,RNA-Seq,PE,positions,0
-Parameter_setting_4,RNA-Seq,PE,flag,0
-Parameter_setting_4,RNA-Seq,PE,index,0
-Parameter_setting_4,RNA-Seq,PE,read_names,0.08
-Parameter_setting_4,RNA-Seq,PE,other,0.02
-Parameter_setting_4,RNA-Seq,PE,unampped_read_seq,0.43
-Parameter_setting_4,RNA-Seq,PE,unmapped_quality_scores,0.43
-Parameter_setting_4,RNA-Seq,PE,tags,0.01
-Parameter_setting_5,RNA-Seq,PE,mapped_read_seq,0.07
-Parameter_setting_5,RNA-Seq,PE,mapped_quality_scores,0.07
-Parameter_setting_5,RNA-Seq,PE,positions,0.01
-Parameter_setting_5,RNA-Seq,PE,flag,0.03
-Parameter_setting_5,RNA-Seq,PE,index,0.01
-Parameter_setting_5,RNA-Seq,PE,read_names,0.64
-Parameter_setting_5,RNA-Seq,PE,other,0.08
-Parameter_setting_5,RNA-Seq,PE,unampped_read_seq,0
-Parameter_setting_5,RNA-Seq,PE,unmapped_quality_scores,0
-Parameter_setting_5,RNA-Seq,PE,tags,0.1
-Parameter_setting_1,RNA-Seq,SE,mapped_read_seq,0.01
-Parameter_setting_1,RNA-Seq,SE,mapped_quality_scores,0.82
-Parameter_setting_1,RNA-Seq,SE,positions,0
-Parameter_setting_1,RNA-Seq,SE,flag,0
-Parameter_setting_1,RNA-Seq,SE,index,0
-Parameter_setting_1,RNA-Seq,SE,read_names,0.03
-Parameter_setting_1,RNA-Seq,SE,other,0.01
-Parameter_setting_1,RNA-Seq,SE,unampped_read_seq,0.06
-Parameter_setting_1,RNA-Seq,SE,unmapped_quality_scores,0.06
-Parameter_setting_1,RNA-Seq,SE,tags,0.01
-Parameter_setting_2,RNA-Seq,SE,mapped_read_seq,0.05
-Parameter_setting_2,RNA-Seq,SE,mapped_quality_scores,0.14
-Parameter_setting_2,RNA-Seq,SE,positions,0
-Parameter_setting_2,RNA-Seq,SE,flag,0.01
-Parameter_setting_2,RNA-Seq,SE,index,0
-Parameter_setting_2,RNA-Seq,SE,read_names,0.14
-Parameter_setting_2,RNA-Seq,SE,other,0.02
-Parameter_setting_2,RNA-Seq,SE,unampped_read_seq,0.3
-Parameter_setting_2,RNA-Seq,SE,unmapped_quality_scores,0.3
-Parameter_setting_2,RNA-Seq,SE,tags,0.03
-Parameter_setting_3,RNA-Seq,SE,mapped_read_seq,0.05
-Parameter_setting_3,RNA-Seq,SE,mapped_quality_scores,0.03
-Parameter_setting_3,RNA-Seq,SE,positions,0
-Parameter_setting_3,RNA-Seq,SE,flag,0.01
-Parameter_setting_3,RNA-Seq,SE,index,0
-Parameter_setting_3,RNA-Seq,SE,read_names,0.16
-Parameter_setting_3,RNA-Seq,SE,other,0.02
-Parameter_setting_3,RNA-Seq,SE,unampped_read_seq,0.35
-Parameter_setting_3,RNA-Seq,SE,unmapped_quality_scores,0.35
-Parameter_setting_3,RNA-Seq,SE,tags,0.03
-Parameter_setting_4,RNA-Seq,SE,mapped_read_seq,0.02
-Parameter_setting_4,RNA-Seq,SE,mapped_quality_scores,0.02
-Parameter_setting_4,RNA-Seq,SE,positions,0
-Parameter_setting_4,RNA-Seq,SE,flag,0.01
-Parameter_setting_4,RNA-Seq,SE,index,0
-Parameter_setting_4,RNA-Seq,SE,read_names,0.16
-Parameter_setting_4,RNA-Seq,SE,other,0.02
-Parameter_setting_4,RNA-Seq,SE,unampped_read_seq,0.36
-Parameter_setting_4,RNA-Seq,SE,unmapped_quality_scores,0.36
-Parameter_setting_4,RNA-Seq,SE,tags,0.03
-Parameter_setting_5,RNA-Seq,SE,mapped_read_seq,0.08
-Parameter_setting_5,RNA-Seq,SE,mapped_quality_scores,0.09
-Parameter_setting_5,RNA-Seq,SE,positions,0.02
-Parameter_setting_5,RNA-Seq,SE,flag,0.03
-Parameter_setting_5,RNA-Seq,SE,index,0
-Parameter_setting_5,RNA-Seq,SE,read_names,0.61
-Parameter_setting_5,RNA-Seq,SE,other,0.04
-Parameter_setting_5,RNA-Seq,SE,unampped_read_seq,0
-Parameter_setting_5,RNA-Seq,SE,unmapped_quality_scores,0
-Parameter_setting_5,RNA-Seq,SE,tags,0.13
-Parameter_setting_1,DNA-Seq,PE,mapped_read_seq,0.01
-Parameter_setting_1,DNA-Seq,PE,mapped_quality_scores,0.87
-Parameter_setting_1,DNA-Seq,PE,positions,0
-Parameter_setting_1,DNA-Seq,PE,flag,0
-Parameter_setting_1,DNA-Seq,PE,index,0
-Parameter_setting_1,DNA-Seq,PE,read_names,0.04
-Parameter_setting_1,DNA-Seq,PE,other,0.01
-Parameter_setting_1,DNA-Seq,PE,unampped_read_seq,0.03
-Parameter_setting_1,DNA-Seq,PE,unmapped_quality_scores,0.03
-Parameter_setting_1,DNA-Seq,PE,tags,0.01
-Parameter_setting_2,DNA-Seq,PE,mapped_read_seq,0.05
-Parameter_setting_2,DNA-Seq,PE,mapped_quality_scores,0.18
-Parameter_setting_2,DNA-Seq,PE,positions,0.01
-Parameter_setting_2,DNA-Seq,PE,flag,0.02
-Parameter_setting_2,DNA-Seq,PE,index,0
-Parameter_setting_2,DNA-Seq,PE,read_names,0.29
-Parameter_setting_2,DNA-Seq,PE,other,0.02
-Parameter_setting_2,DNA-Seq,PE,unampped_read_seq,0.17
-Parameter_setting_2,DNA-Seq,PE,unmapped_quality_scores,0.17
-Parameter_setting_2,DNA-Seq,PE,tags,0.09
-Parameter_setting_3,DNA-Seq,PE,mapped_read_seq,0.06
-Parameter_setting_3,DNA-Seq,PE,mapped_quality_scores,0.05
-Parameter_setting_3,DNA-Seq,PE,positions,0.01
-Parameter_setting_3,DNA-Seq,PE,flag,0.02
-Parameter_setting_3,DNA-Seq,PE,index,0
-Parameter_setting_3,DNA-Seq,PE,read_names,0.33
-Parameter_setting_3,DNA-Seq,PE,other,0.02
-Parameter_setting_3,DNA-Seq,PE,unampped_read_seq,0.2
-Parameter_setting_3,DNA-Seq,PE,unmapped_quality_scores,0.2
-Parameter_setting_3,DNA-Seq,PE,tags,0.1
-Parameter_setting_4,DNA-Seq,PE,mapped_read_seq,0.04
-Parameter_setting_4,DNA-Seq,PE,mapped_quality_scores,0.05
-Parameter_setting_4,DNA-Seq,PE,positions,0.01
-Parameter_setting_4,DNA-Seq,PE,flag,0.02
-Parameter_setting_4,DNA-Seq,PE,index,0
-Parameter_setting_4,DNA-Seq,PE,read_names,0.34
-Parameter_setting_4,DNA-Seq,PE,other,0.02
-Parameter_setting_4,DNA-Seq,PE,unampped_read_seq,0.21
-Parameter_setting_4,DNA-Seq,PE,unmapped_quality_scores,0.21
-Parameter_setting_4,DNA-Seq,PE,tags,0.1
-Parameter_setting_5,DNA-Seq,PE,mapped_read_seq,0.08
-Parameter_setting_5,DNA-Seq,PE,mapped_quality_scores,0.08
-Parameter_setting_5,DNA-Seq,PE,positions,0.03
-Parameter_setting_5,DNA-Seq,PE,flag,0.03
-Parameter_setting_5,DNA-Seq,PE,index,0
-Parameter_setting_5,DNA-Seq,PE,read_names,0.58
-Parameter_setting_5,DNA-Seq,PE,other,0.03
-Parameter_setting_5,DNA-Seq,PE,unampped_read_seq,0
-Parameter_setting_5,DNA-Seq,PE,unmapped_quality_scores,0
-Parameter_setting_5,DNA-Seq,PE,tags,0.18
-Parameter_setting_1,DNA-Seq,SE,mapped_read_seq,0.01
-Parameter_setting_1,DNA-Seq,SE,mapped_quality_scores,0.86
-Parameter_setting_1,DNA-Seq,SE,positions,0
-Parameter_setting_1,DNA-Seq,SE,flag,0
-Parameter_setting_1,DNA-Seq,SE,index,0
-Parameter_setting_1,DNA-Seq,SE,read_names,0.08
-Parameter_setting_1,DNA-Seq,SE,other,0.01
-Parameter_setting_1,DNA-Seq,SE,unampped_read_seq,0.01
-Parameter_setting_1,DNA-Seq,SE,unmapped_quality_scores,0.01
-Parameter_setting_1,DNA-Seq,SE,tags,0.01
-Parameter_setting_2,DNA-Seq,SE,mapped_read_seq,0.04
-Parameter_setting_2,DNA-Seq,SE,mapped_quality_scores,0.1
-Parameter_setting_2,DNA-Seq,SE,positions,0.01
-Parameter_setting_2,DNA-Seq,SE,flag,0.02
-Parameter_setting_2,DNA-Seq,SE,index,0
-Parameter_setting_2,DNA-Seq,SE,read_names,0.54
-Parameter_setting_2,DNA-Seq,SE,other,0.01
-Parameter_setting_2,DNA-Seq,SE,unampped_read_seq,0.1
-Parameter_setting_2,DNA-Seq,SE,unmapped_quality_scores,0.1
-Parameter_setting_2,DNA-Seq,SE,tags,0.09
-Parameter_setting_3,DNA-Seq,SE,mapped_read_seq,0.04
-Parameter_setting_3,DNA-Seq,SE,mapped_quality_scores,0.05
-Parameter_setting_3,DNA-Seq,SE,positions,0.01
-Parameter_setting_3,DNA-Seq,SE,flag,0.02
-Parameter_setting_3,DNA-Seq,SE,index,0
-Parameter_setting_3,DNA-Seq,SE,read_names,0.57
-Parameter_setting_3,DNA-Seq,SE,other,0.01
-Parameter_setting_3,DNA-Seq,SE,unampped_read_seq,0.1
-Parameter_setting_3,DNA-Seq,SE,unmapped_quality_scores,0.1
-Parameter_setting_3,DNA-Seq,SE,tags,0.09
-Parameter_setting_4,DNA-Seq,SE,mapped_read_seq,0.03
-Parameter_setting_4,DNA-Seq,SE,mapped_quality_scores,0.04
-Parameter_setting_4,DNA-Seq,SE,positions,0.01
-Parameter_setting_4,DNA-Seq,SE,flag,0.01
-Parameter_setting_4,DNA-Seq,SE,index,0
-Parameter_setting_4,DNA-Seq,SE,read_names,0.59
-Parameter_setting_4,DNA-Seq,SE,other,0.01
-Parameter_setting_4,DNA-Seq,SE,unampped_read_seq,0.1
-Parameter_setting_4,DNA-Seq,SE,unmapped_quality_scores,0.1
-Parameter_setting_4,DNA-Seq,SE,tags,0.09
-Parameter_setting_5,DNA-Seq,SE,mapped_read_seq,0.04
-Parameter_setting_5,DNA-Seq,SE,mapped_quality_scores,0.05
-Parameter_setting_5,DNA-Seq,SE,positions,0.02
-Parameter_setting_5,DNA-Seq,SE,flag,0.02
-Parameter_setting_5,DNA-Seq,SE,index,0
-Parameter_setting_5,DNA-Seq,SE,read_names,0.74
-Parameter_setting_5,DNA-Seq,SE,other,0.01
-Parameter_setting_5,DNA-Seq,SE,unampped_read_seq,0
-Parameter_setting_5,DNA-Seq,SE,unmapped_quality_scores,0
-Parameter_setting_5,DNA-Seq,SE,tags,0.12
+Parameter_setting_1,RNA-Seq,PE,Mapped Read Sequence,31195699
+Parameter_setting_1,RNA-Seq,PE,Quality Scores of Mapped Reads,3012765817
+Parameter_setting_1,RNA-Seq,PE,Position Information,3272513
+Parameter_setting_1,RNA-Seq,PE,SAM Format Flag,7328208
+Parameter_setting_1,RNA-Seq,PE,ABRIDGE Index,1584210
+Parameter_setting_1,RNA-Seq,PE,Read Names of Mapped Reads,140271067
+Parameter_setting_1,RNA-Seq,PE,Other,54014727
+Parameter_setting_1,RNA-Seq,PE,Unmapped Read Sequence,752154254
+Parameter_setting_1,RNA-Seq,PE,Quality Scores of Unmapped Reads,752154254
+Parameter_setting_1,RNA-Seq,PE,Tags,21965354
+Parameter_setting_2,RNA-Seq,PE,Mapped Read Sequence,31195699
+Parameter_setting_2,RNA-Seq,PE,Quality Scores of Mapped Reads,109839534
+Parameter_setting_2,RNA-Seq,PE,Position Information,3272513
+Parameter_setting_2,RNA-Seq,PE,SAM Format Flag,7328208
+Parameter_setting_2,RNA-Seq,PE,ABRIDGE Index,1589582
+Parameter_setting_2,RNA-Seq,PE,Read Names of Mapped Reads,140271067
+Parameter_setting_2,RNA-Seq,PE,Other,34174990
+Parameter_setting_2,RNA-Seq,PE,Unmapped Read Sequence,752154254
+Parameter_setting_2,RNA-Seq,PE,Quality Scores of Unmapped Reads,752154254
+Parameter_setting_2,RNA-Seq,PE,Tags,21965354
+Parameter_setting_3,RNA-Seq,PE,Mapped Read Sequence,31195699
+Parameter_setting_3,RNA-Seq,PE,Quality Scores of Mapped Reads,16942729
+Parameter_setting_3,RNA-Seq,PE,Position Information,3272513
+Parameter_setting_3,RNA-Seq,PE,SAM Format Flag,7328208
+Parameter_setting_3,RNA-Seq,PE,ABRIDGE Index,1138045
+Parameter_setting_3,RNA-Seq,PE,Read Names of Mapped Reads,140271067
+Parameter_setting_3,RNA-Seq,PE,Other,34174839
+Parameter_setting_3,RNA-Seq,PE,Unmapped Read Sequence,752154254
+Parameter_setting_3,RNA-Seq,PE,Quality Scores of Unmapped Reads,752154254
+Parameter_setting_3,RNA-Seq,PE,Tags,21965354
+Parameter_setting_4,RNA-Seq,PE,Mapped Read Sequence,14997097
+Parameter_setting_4,RNA-Seq,PE,Quality Scores of Mapped Reads,14930918
+Parameter_setting_4,RNA-Seq,PE,Position Information,3272513
+Parameter_setting_4,RNA-Seq,PE,SAM Format Flag,5859746
+Parameter_setting_4,RNA-Seq,PE,ABRIDGE Index,1128991
+Parameter_setting_4,RNA-Seq,PE,Read Names of Mapped Reads,140271067
+Parameter_setting_4,RNA-Seq,PE,Other,28157447
+Parameter_setting_4,RNA-Seq,PE,Unmapped Read Sequence,752154254
+Parameter_setting_4,RNA-Seq,PE,Quality Scores of Unmapped Reads,752154254
+Parameter_setting_4,RNA-Seq,PE,Tags,21965354
+Parameter_setting_5,RNA-Seq,PE,Mapped Read Sequence,14997097
+Parameter_setting_5,RNA-Seq,PE,Quality Scores of Mapped Reads,14930918
+Parameter_setting_5,RNA-Seq,PE,Position Information,3272513
+Parameter_setting_5,RNA-Seq,PE,SAM Format Flag,5859746
+Parameter_setting_5,RNA-Seq,PE,ABRIDGE Index,1128991
+Parameter_setting_5,RNA-Seq,PE,Read Names of Mapped Reads,140271067
+Parameter_setting_5,RNA-Seq,PE,Other,18195139
+Parameter_setting_5,RNA-Seq,PE,Unmapped Read Sequence,0
+Parameter_setting_5,RNA-Seq,PE,Quality Scores of Unmapped Reads,0
+Parameter_setting_5,RNA-Seq,PE,Tags,21965354
+Parameter_setting_1,RNA-Seq,SE,Mapped Read Sequence,41042915
+Parameter_setting_1,RNA-Seq,SE,Quality Scores of Mapped Reads,3535481153
+Parameter_setting_1,RNA-Seq,SE,Position Information,3498756
+Parameter_setting_1,RNA-Seq,SE,SAM Format Flag,8253510
+Parameter_setting_1,RNA-Seq,SE,ABRIDGE Index,109688
+Parameter_setting_1,RNA-Seq,SE,Read Names of Mapped Reads,117192539
+Parameter_setting_1,RNA-Seq,SE,Other,41171228
+Parameter_setting_1,RNA-Seq,SE,Unmapped Read Sequence,259135932
+Parameter_setting_1,RNA-Seq,SE,Quality Scores of Unmapped Reads,259135932
+Parameter_setting_1,RNA-Seq,SE,Tags,24891276
+Parameter_setting_2,RNA-Seq,SE,Mapped Read Sequence,41042915
+Parameter_setting_2,RNA-Seq,SE,Quality Scores of Mapped Reads,119779589
+Parameter_setting_2,RNA-Seq,SE,Position Information,3498756
+Parameter_setting_2,RNA-Seq,SE,SAM Format Flag,8253510
+Parameter_setting_2,RNA-Seq,SE,ABRIDGE Index,109720
+Parameter_setting_2,RNA-Seq,SE,Read Names of Mapped Reads,117207359
+Parameter_setting_2,RNA-Seq,SE,Other,17884204
+Parameter_setting_2,RNA-Seq,SE,Unmapped Read Sequence,259135932
+Parameter_setting_2,RNA-Seq,SE,Quality Scores of Unmapped Reads,259135932
+Parameter_setting_2,RNA-Seq,SE,Tags,24891276
+Parameter_setting_3,RNA-Seq,SE,Mapped Read Sequence,41042915
+Parameter_setting_3,RNA-Seq,SE,Quality Scores of Mapped Reads,19117728
+Parameter_setting_3,RNA-Seq,SE,Position Information,3498756
+Parameter_setting_3,RNA-Seq,SE,SAM Format Flag,8253510
+Parameter_setting_3,RNA-Seq,SE,ABRIDGE Index,78333
+Parameter_setting_3,RNA-Seq,SE,Read Names of Mapped Reads,117207359
+Parameter_setting_3,RNA-Seq,SE,Other,17884053
+Parameter_setting_3,RNA-Seq,SE,Unmapped Read Sequence,259135932
+Parameter_setting_3,RNA-Seq,SE,Quality Scores of Unmapped Reads,259135932
+Parameter_setting_3,RNA-Seq,SE,Tags,24891276
+Parameter_setting_4,RNA-Seq,SE,Mapped Read Sequence,16398770
+Parameter_setting_4,RNA-Seq,SE,Quality Scores of Mapped Reads,16914204
+Parameter_setting_4,RNA-Seq,SE,Position Information,3498756
+Parameter_setting_4,RNA-Seq,SE,SAM Format Flag,6627888
+Parameter_setting_4,RNA-Seq,SE,ABRIDGE Index,76775
+Parameter_setting_4,RNA-Seq,SE,Read Names of Mapped Reads,117207359
+Parameter_setting_4,RNA-Seq,SE,Other,10926907
+Parameter_setting_4,RNA-Seq,SE,Unmapped Read Sequence,259135932
+Parameter_setting_4,RNA-Seq,SE,Quality Scores of Unmapped Reads,259135932
+Parameter_setting_4,RNA-Seq,SE,Tags,24891276
+Parameter_setting_5,RNA-Seq,SE,Mapped Read Sequence,16398770
+Parameter_setting_5,RNA-Seq,SE,Quality Scores of Mapped Reads,16914204
+Parameter_setting_5,RNA-Seq,SE,Position Information,3498756
+Parameter_setting_5,RNA-Seq,SE,SAM Format Flag,6627888
+Parameter_setting_5,RNA-Seq,SE,ABRIDGE Index,76775
+Parameter_setting_5,RNA-Seq,SE,Read Names of Mapped Reads,117207359
+Parameter_setting_5,RNA-Seq,SE,Other,7494643
+Parameter_setting_5,RNA-Seq,SE,Unmapped Read Sequence,0
+Parameter_setting_5,RNA-Seq,SE,Quality Scores of Unmapped Reads,0
+Parameter_setting_5,RNA-Seq,SE,Tags,24891276
+Parameter_setting_1,DNA-Seq,PE,Mapped Read Sequence,79147949
+Parameter_setting_1,DNA-Seq,PE,Quality Scores of Mapped Reads,9177007837
+Parameter_setting_1,DNA-Seq,PE,Position Information,20040691
+Parameter_setting_1,DNA-Seq,PE,SAM Format Flag,26273709
+Parameter_setting_1,DNA-Seq,PE,ABRIDGE Index,38535
+Parameter_setting_1,DNA-Seq,PE,Read Names of Mapped Reads,458280393
+Parameter_setting_1,DNA-Seq,PE,Other,93885805
+Parameter_setting_1,DNA-Seq,PE,Unmapped Read Sequence,277922438
+Parameter_setting_1,DNA-Seq,PE,Quality Scores of Unmapped Reads,277922438
+Parameter_setting_1,DNA-Seq,PE,Tags,140510225
+Parameter_setting_2,DNA-Seq,PE,Mapped Read Sequence,79147949
+Parameter_setting_2,DNA-Seq,PE,Quality Scores of Mapped Reads,279128848
+Parameter_setting_2,DNA-Seq,PE,Position Information,20040691
+Parameter_setting_2,DNA-Seq,PE,SAM Format Flag,26273709
+Parameter_setting_2,DNA-Seq,PE,ABRIDGE Index,38539
+Parameter_setting_2,DNA-Seq,PE,Read Names of Mapped Reads,458280393
+Parameter_setting_2,DNA-Seq,PE,Other,33032395
+Parameter_setting_2,DNA-Seq,PE,Unmapped Read Sequence,277922438
+Parameter_setting_2,DNA-Seq,PE,Quality Scores of Unmapped Reads,277922438
+Parameter_setting_2,DNA-Seq,PE,Tags,140510225
+Parameter_setting_3,DNA-Seq,PE,Mapped Read Sequence,79147949
+Parameter_setting_3,DNA-Seq,PE,Quality Scores of Mapped Reads,69375557
+Parameter_setting_3,DNA-Seq,PE,Position Information,20040691
+Parameter_setting_3,DNA-Seq,PE,SAM Format Flag,26273709
+Parameter_setting_3,DNA-Seq,PE,ABRIDGE Index,27182
+Parameter_setting_3,DNA-Seq,PE,Read Names of Mapped Reads,458280393
+Parameter_setting_3,DNA-Seq,PE,Other,33032245
+Parameter_setting_3,DNA-Seq,PE,Unmapped Read Sequence,277922438
+Parameter_setting_3,DNA-Seq,PE,Quality Scores of Unmapped Reads,277922438
+Parameter_setting_3,DNA-Seq,PE,Tags,140510225
+Parameter_setting_4,DNA-Seq,PE,Mapped Read Sequence,59454970
+Parameter_setting_4,DNA-Seq,PE,Quality Scores of Mapped Reads,61421548
+Parameter_setting_4,DNA-Seq,PE,Position Information,20040691
+Parameter_setting_4,DNA-Seq,PE,SAM Format Flag,20524003
+Parameter_setting_4,DNA-Seq,PE,ABRIDGE Index,27022
+Parameter_setting_4,DNA-Seq,PE,Read Names of Mapped Reads,458280393
+Parameter_setting_4,DNA-Seq,PE,Other,28863581
+Parameter_setting_4,DNA-Seq,PE,Unmapped Read Sequence,277922438
+Parameter_setting_4,DNA-Seq,PE,Quality Scores of Unmapped Reads,277922438
+Parameter_setting_4,DNA-Seq,PE,Tags,140510225
+Parameter_setting_5,DNA-Seq,PE,Mapped Read Sequence,59454970
+Parameter_setting_5,DNA-Seq,PE,Quality Scores of Mapped Reads,61421548
+Parameter_setting_5,DNA-Seq,PE,Position Information,20040691
+Parameter_setting_5,DNA-Seq,PE,SAM Format Flag,20524003
+Parameter_setting_5,DNA-Seq,PE,ABRIDGE Index,27022
+Parameter_setting_5,DNA-Seq,PE,Read Names of Mapped Reads,458280393
+Parameter_setting_5,DNA-Seq,PE,Other,25150829
+Parameter_setting_5,DNA-Seq,PE,Unmapped Read Sequence,0
+Parameter_setting_5,DNA-Seq,PE,Quality Scores of Unmapped Reads,0
+Parameter_setting_5,DNA-Seq,PE,Tags,140510225
+Parameter_setting_1,DNA-Seq,SE,Mapped Read Sequence,65100245
+Parameter_setting_1,DNA-Seq,SE,Quality Scores of Mapped Reads,9115497900
+Parameter_setting_1,DNA-Seq,SE,Position Information,20093249
+Parameter_setting_1,DNA-Seq,SE,SAM Format Flag,26560005
+Parameter_setting_1,DNA-Seq,SE,ABRIDGE Index,37465
+Parameter_setting_1,DNA-Seq,SE,Read Names of Mapped Reads,878620829
+Parameter_setting_1,DNA-Seq,SE,Other,80804269
+Parameter_setting_1,DNA-Seq,SE,Unmapped Read Sequence,155463298
+Parameter_setting_1,DNA-Seq,SE,Quality Scores of Unmapped Reads,155463298
+Parameter_setting_1,DNA-Seq,SE,Tags,142077447
+Parameter_setting_2,DNA-Seq,SE,Mapped Read Sequence,65100245
+Parameter_setting_2,DNA-Seq,SE,Quality Scores of Mapped Reads,170185538
+Parameter_setting_2,DNA-Seq,SE,Position Information,20093249
+Parameter_setting_2,DNA-Seq,SE,SAM Format Flag,26560005
+Parameter_setting_2,DNA-Seq,SE,ABRIDGE Index,37471
+Parameter_setting_2,DNA-Seq,SE,Read Names of Mapped Reads,878623124
+Parameter_setting_2,DNA-Seq,SE,Other,20375331
+Parameter_setting_2,DNA-Seq,SE,Unmapped Read Sequence,155463298
+Parameter_setting_2,DNA-Seq,SE,Quality Scores of Unmapped Reads,155463298
+Parameter_setting_2,DNA-Seq,SE,Tags,142077447
+Parameter_setting_3,DNA-Seq,SE,Mapped Read Sequence,65100245
+Parameter_setting_3,DNA-Seq,SE,Quality Scores of Mapped Reads,70449435
+Parameter_setting_3,DNA-Seq,SE,Position Information,20093249
+Parameter_setting_3,DNA-Seq,SE,SAM Format Flag,26560005
+Parameter_setting_3,DNA-Seq,SE,ABRIDGE Index,26364
+Parameter_setting_3,DNA-Seq,SE,Read Names of Mapped Reads,878623124
+Parameter_setting_3,DNA-Seq,SE,Other,20375181
+Parameter_setting_3,DNA-Seq,SE,Unmapped Read Sequence,155463298
+Parameter_setting_3,DNA-Seq,SE,Quality Scores of Unmapped Reads,155463298
+Parameter_setting_3,DNA-Seq,SE,Tags,142077447
+Parameter_setting_4,DNA-Seq,SE,Mapped Read Sequence,47854237
+Parameter_setting_4,DNA-Seq,SE,Quality Scores of Mapped Reads,62440126
+Parameter_setting_4,DNA-Seq,SE,Position Information,20093249
+Parameter_setting_4,DNA-Seq,SE,SAM Format Flag,20857947
+Parameter_setting_4,DNA-Seq,SE,ABRIDGE Index,26359
+Parameter_setting_4,DNA-Seq,SE,Read Names of Mapped Reads,878623124
+Parameter_setting_4,DNA-Seq,SE,Other,16380819
+Parameter_setting_4,DNA-Seq,SE,Unmapped Read Sequence,155463298
+Parameter_setting_4,DNA-Seq,SE,Quality Scores of Unmapped Reads,155463298
+Parameter_setting_4,DNA-Seq,SE,Tags,142077447
+Parameter_setting_5,DNA-Seq,SE,Mapped Read Sequence,47854237
+Parameter_setting_5,DNA-Seq,SE,Quality Scores of Mapped Reads,62440126
+Parameter_setting_5,DNA-Seq,SE,Position Information,20093249
+Parameter_setting_5,DNA-Seq,SE,SAM Format Flag,20857947
+Parameter_setting_5,DNA-Seq,SE,ABRIDGE Index,26359
+Parameter_setting_5,DNA-Seq,SE,Read Names of Mapped Reads,878623124
+Parameter_setting_5,DNA-Seq,SE,Other,14304121
+Parameter_setting_5,DNA-Seq,SE,Unmapped Read Sequence,0
+Parameter_setting_5,DNA-Seq,SE,Quality Scores of Unmapped Reads,0
+Parameter_setting_5,DNA-Seq,SE,Tags,142077447
