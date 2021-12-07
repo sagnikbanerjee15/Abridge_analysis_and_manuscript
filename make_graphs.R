@@ -89,7 +89,6 @@ p_a<-ggplot(data = all_info_RNA_Seq_SE, aes( x = factor(num_reads) , fill = vari
   labs(title="RNA-Seq Single Ended",x="Number of reads (in Millions)", y = "Size (in MB)") + 
   scale_fill_igv()
 
-
 #####################################################################################################
 all_info_RNA_Seq_PE <- all_info[all_info$rna_dna == "RNA-Seq" & all_info$layout == "PE", ]
 all_info_RNA_Seq_PE$num_reads <- as.numeric(all_info_RNA_Seq_PE$num_reads)
@@ -136,7 +135,6 @@ p_b<-ggplot(data = all_info_RNA_Seq_PE, aes( x = factor(num_reads) , fill = vari
   )+
   labs(title="RNA-Seq Paired Ended",x="Number of reads (in Millions)", y = "Size (in MB)") + 
   scale_fill_igv()
-
 
 #####################################################################################################
 
@@ -191,7 +189,6 @@ p_c<-ggplot(data = all_info_DNA_Seq_SE, aes( x = factor(num_reads) , fill = vari
   labs(title="DNA-Seq Single Ended",x="Number of reads (in Millions)", y = "Size (in MB)") + 
   scale_fill_igv()
 
-
 #####################################################################################################
 all_info_DNA_Seq_PE <- all_info[all_info$rna_dna == "DNA-Seq" & all_info$layout == "PE", ]
 all_info_DNA_Seq_PE$num_reads <- as.numeric(all_info_DNA_Seq_PE$num_reads)
@@ -238,7 +235,6 @@ p_d<-ggplot(data = all_info_DNA_Seq_PE, aes( x = factor(num_reads) , fill = vari
   )+
   labs(title="DNA-Seq Paired Ended",x="Number of reads (in Millions)", y = "Size (in MB)") + 
   scale_fill_igv()
-
 
 #####################################################################################################
 
