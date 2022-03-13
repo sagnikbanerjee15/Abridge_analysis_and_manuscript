@@ -1,0 +1,18 @@
+﻿Organism,Tissue,Layout,Assay Type,Date of publication,Read Length,SRA Accession,SRA Bioproject,Number of reads/pairs,Replicate information,Notes
+Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711353,PRJNA701911,,C_WT_rep1,Control
+Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711354,PRJNA701911,,C_WT_rep2,Control
+Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711355,PRJNA701911,,C_WT_rep3,Control
+Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711356,PRJNA701911,,C_atcyp18-2_rep1,Control
+Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711357,PRJNA701911,,C_atcyp18-2_rep2,Control
+Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711358,PRJNA701911,,C_atcyp18-2_rep3,Control
+Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077404,PRJNA641461,,reca1why1why3 12d seedling 3,
+Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077405,PRJNA641461,,reca1why1why3 12d seedling 2,
+Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077406,PRJNA641461,,reca1why1why3 12d seedling 1,
+Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077407,PRJNA641461,,Col-0 12d seedling 3,
+Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077408,PRJNA641461,,Col-0 12d seedling 2,
+Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12265344,"	PRJNA647212",,atac_col0_seedlings,
+Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12265345,"	PRJNA647212",,atac_col0_seedlings,
+Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12344670,"	PRJNA647212",,atac_bmi1abc_seedlings,
+Arabidopsis thaliana,Seedlings,PE,Bisulfite-Seq,"	2021-03-09",126+126,SRR12207884,"	PRJNA645828",,,
+Arabidopsis thaliana,Seedlings,PE,Bisulfite-Seq,"	2021-03-09",126+126,SRR12207885,"	PRJNA645828",,,
+Arabidopsis thaliana,Seedlings,PE,Bisulfite-Seq,"	2021-03-09",126+126,SRR12207886,"	PRJNA645828",,,

@@ -1,18 +1,16 @@
-﻿Organism,Tissue,Layout,Assay Type,Date of publication,Read Length,SRA Accession,SRA Bioproject,Number of reads/pairs,Replicate information,Notes
-Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711353,PRJNA701911,,C_WT_rep1,Control
-Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711354,PRJNA701911,,C_WT_rep2,Control
-Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711355,PRJNA701911,,C_WT_rep3,Control
-Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711356,PRJNA701911,,C_atcyp18-2_rep1,Control
-Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711357,PRJNA701911,,C_atcyp18-2_rep2,Control
-Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711358,PRJNA701911,,C_atcyp18-2_rep3,Control
-Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077404,PRJNA641461,,reca1why1why3 12d seedling 3,
-Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077405,PRJNA641461,,reca1why1why3 12d seedling 2,
-Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077406,PRJNA641461,,reca1why1why3 12d seedling 1,
-Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077407,PRJNA641461,,Col-0 12d seedling 3,
-Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077408,PRJNA641461,,Col-0 12d seedling 2,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12265344,"	PRJNA647212",,atac_col0_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12265345,"	PRJNA647212",,atac_col0_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12344670,"	PRJNA647212",,atac_bmi1abc_seedlings,
-Arabidopsis thaliana,Seedlings,PE,Bisulfite-Seq,"	2021-03-09",126+126,SRR12207884,"	PRJNA645828",,,
-Arabidopsis thaliana,Seedlings,PE,Bisulfite-Seq,"	2021-03-09",126+126,SRR12207885,"	PRJNA645828",,,
-Arabidopsis thaliana,Seedlings,PE,Bisulfite-Seq,"	2021-03-09",126+126,SRR12207886,"	PRJNA645828",,,
+﻿Organism,Layout,Assay Type,SRA Accession,Genome,Transcriptome
+Arabidopsis thaliana,PE,RNA-Seq,SRR17687262,http://ftp.ensemblgenomes.org/pub/plants/release-52/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz,http://ftp.ensemblgenomes.org/pub/plants/release-52/gff3/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.52.gff3.gz
+Arabidopsis thaliana,PE,DNA-Seq,DRR307350,http://ftp.ensemblgenomes.org/pub/plants/release-52/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz,http://ftp.ensemblgenomes.org/pub/plants/release-52/gff3/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.52.gff3.gz
+Arabidopsis thaliana,PE,ATAC-Seq,SRR13866947,http://ftp.ensemblgenomes.org/pub/plants/release-52/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz,http://ftp.ensemblgenomes.org/pub/plants/release-52/gff3/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.52.gff3.gz
+Homo sapiens,PE,RNA-Seq,SRR17697388,http://ftp.ensembl.org/pub/release-105/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.toplevel.fa.gz,http://ftp.ensembl.org/pub/release-105/gff3/homo_sapiens/Homo_sapiens.GRCh38.105.gff3.gz
+Homo sapiens,PE,DNA-Seq,SRR15558079,http://ftp.ensembl.org/pub/release-105/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.toplevel.fa.gz,http://ftp.ensembl.org/pub/release-105/gff3/homo_sapiens/Homo_sapiens.GRCh38.105.gff3.gz
+Homo sapiens,PE,ATAC-Seq,SRR17066170,http://ftp.ensembl.org/pub/release-105/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.toplevel.fa.gz,http://ftp.ensembl.org/pub/release-105/gff3/homo_sapiens/Homo_sapiens.GRCh38.105.gff3.gz
+Zebrafish,PE,RNA-Seq,SRR17654918,http://ftp.ensembl.org/pub/release-105/fasta/danio_rerio/dna/Danio_rerio.GRCz11.dna.toplevel.fa.gz,http://ftp.ensembl.org/pub/release-105/gff3/danio_rerio/Danio_rerio.GRCz11.105.gff3.gz
+Zebrafish,PE,DNA-Seq,SRR13166696,http://ftp.ensembl.org/pub/release-105/fasta/danio_rerio/dna/Danio_rerio.GRCz11.dna.toplevel.fa.gz,http://ftp.ensembl.org/pub/release-105/gff3/danio_rerio/Danio_rerio.GRCz11.105.gff3.gz
+Zebrafish,PE,ATAC-Seq,SRR10433229,http://ftp.ensembl.org/pub/release-105/fasta/danio_rerio/dna/Danio_rerio.GRCz11.dna.toplevel.fa.gz,http://ftp.ensembl.org/pub/release-105/gff3/danio_rerio/Danio_rerio.GRCz11.105.gff3.gz
+Yeast,PE,RNA-Seq,SRR17458714,http://ftp.ensembl.org/pub/release-105/fasta/saccharomyces_cerevisiae/dna/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz,http://ftp.ensembl.org/pub/release-105/gff3/saccharomyces_cerevisiae/Saccharomyces_cerevisiae.R64-1-1.105.gff3.gz
+Yeast,PE,DNA-Seq,SRR16820878,http://ftp.ensembl.org/pub/release-105/fasta/saccharomyces_cerevisiae/dna/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz,http://ftp.ensembl.org/pub/release-105/gff3/saccharomyces_cerevisiae/Saccharomyces_cerevisiae.R64-1-1.105.gff3.gz
+Yeast,PE,ATAC-Seq,SRR17380546,http://ftp.ensembl.org/pub/release-105/fasta/saccharomyces_cerevisiae/dna/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz,http://ftp.ensembl.org/pub/release-105/gff3/saccharomyces_cerevisiae/Saccharomyces_cerevisiae.R64-1-1.105.gff3.gz
+Zea mays,PE,RNA-Seq,SRR17674776,http://ftp.ensemblgenomes.org/pub/plants/release-52/fasta/zea_mays/dna/Zea_mays.Zm-B73-REFERENCE-NAM-5.0.dna.toplevel.fa.gz,http://ftp.ensemblgenomes.org/pub/plants/release-52/gff3/zea_mays/Zea_mays.Zm-B73-REFERENCE-NAM-5.0.52.gff3.gz
+Zea mays,PE,DNA-Seq,SRR17715769,http://ftp.ensemblgenomes.org/pub/plants/release-52/fasta/zea_mays/dna/Zea_mays.Zm-B73-REFERENCE-NAM-5.0.dna.toplevel.fa.gz,http://ftp.ensemblgenomes.org/pub/plants/release-52/gff3/zea_mays/Zea_mays.Zm-B73-REFERENCE-NAM-5.0.52.gff3.gz
+Zea mays,PE,ATAC-Seq,SRR10873336,http://ftp.ensemblgenomes.org/pub/plants/release-52/fasta/zea_mays/dna/Zea_mays.Zm-B73-REFERENCE-NAM-5.0.dna.toplevel.fa.gz,http://ftp.ensemblgenomes.org/pub/plants/release-52/gff3/zea_mays/Zea_mays.Zm-B73-REFERENCE-NAM-5.0.52.gff3.gz
