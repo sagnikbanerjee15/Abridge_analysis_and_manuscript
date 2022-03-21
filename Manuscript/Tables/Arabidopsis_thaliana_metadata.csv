@@ -1,0 +1,6 @@
+BioProject,SRA Accession,Tissues,Description,Date,Read Length (bp),Ended,RNA Seq,process,Location
+PRJNA556865,SRR9844295,leaf,cDNA;Illumina HiSeq 2000,1/8/20,300,PE,1,1,
+PRJNA556865,SRR9844296,leaf,cDNA;Illumina HiSeq 2000,1/8/20,300,PE,1,1,
+PRJNA556865,SRR9844300,leaf,cDNA;Illumina HiSeq 2000,1/8/20,300,PE,1,1,
+Dummy1,dummy_data1,flower,PCR;Illumina HiSeq 2000,1/23/19,140,SE,1,1,raw_data
+Dummy2,dummy_data2,flower,PCR;Illumina HiSeq 2000,1/23/19,140,SE,1,1,raw_data
