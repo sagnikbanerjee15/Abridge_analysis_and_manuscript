@@ -1,18 +1,13 @@
-﻿Organism,Tissue,Layout,Assay Type,Date of publication,Read Length,SRA Accession,SRA Bioproject,Number of reads/pairs,Replicate information,Notes
-Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711353,PRJNA701911,,C_WT_rep1,Control
-Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711354,PRJNA701911,,C_WT_rep2,Control
-Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711355,PRJNA701911,,C_WT_rep3,Control
-Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711356,PRJNA701911,,C_atcyp18-2_rep1,Control
-Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711357,PRJNA701911,,C_atcyp18-2_rep2,Control
-Arabidopsis thaliana,Rosette leaf,PE,RNA-Seq,"	2021-02-16",151+151,SRR13711358,PRJNA701911,,C_atcyp18-2_rep3,Control
-Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077404,PRJNA641461,,reca1why1why3 12d seedling 3,
-Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077405,PRJNA641461,,reca1why1why3 12d seedling 2,
-Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077406,PRJNA641461,,reca1why1why3 12d seedling 1,
-Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077407,PRJNA641461,,Col-0 12d seedling 3,
-Arabidopsis thaliana,Seedlings,PE,DNA-Seq,"	2020-06-23",150+150,SRR12077408,PRJNA641461,,Col-0 12d seedling 2,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12265344,"	PRJNA647212",,atac_col0_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12265345,"	PRJNA647212",,atac_col0_seedlings,
-Arabidopsis thaliana,Seedlings,PE,ATAC-Seq,"	2020-03-12",150+150,SRR12344670,"	PRJNA647212",,atac_bmi1abc_seedlings,
-Arabidopsis thaliana,Seedlings,PE,Bisulfite-Seq,"	2021-03-09",126+126,SRR12207884,"	PRJNA645828",,,
-Arabidopsis thaliana,Seedlings,PE,Bisulfite-Seq,"	2021-03-09",126+126,SRR12207885,"	PRJNA645828",,,
-Arabidopsis thaliana,Seedlings,PE,Bisulfite-Seq,"	2021-03-09",126+126,SRR12207886,"	PRJNA645828",,,
+﻿Organism,Tissue,Layout,Assay Type,Date of publication,Read Length,Number of spots,SRA Accession,Genome,Transcriptome
+Arabidopsis thaliana,Root,PE,RNA-Seq,2020,150+150,28.8M,SRR16971097,,
+Arabidopsis thaliana,Rosette leaf,PE,DNA-Seq,2021,150+150,45.1M,ERR7052295,,
+Homo sapiens,Eye,PE,RNA-Seq,2021,150+150,29.0M,SRR17267550,,
+Homo sapiens,Blood,PE,DNA-Seq,2021,150+150,405M,SRR17009849,,
+Zea mays,Leaf,PE,RNA-Seq,2021,149+149,22.5M,SRR17110459,,
+Zea mays,Endosperm,PE,DNA-Seq,2021,149+149,53M,SRR15725939,,
+Saccharomyces cerevisiae,Whole,PE,RNA-Seq,2021,150+150,19M,SRR17310290,,
+Saccharomyces cerevisiae,Whole,PE,DNA-Seq,2021,150+150,16.1M,SRR16265710,,
+Caenorhabditis elegans,Whole,PE,RNA-Seq,2021,138+138,24.2M,SRR15508146,,
+Caenorhabditis elegans,Whole,PE,DNA-Seq,2021,151+151,12.7M,SRR17154985,,
+Drosophila melanogaster,Whole,PE,RNA-Seq,2021,150+150,48.8M,SRR17282377,,
+Drosophila melanogaster,Whole,PE,DNA-Seq,2021,151+151,105.1M,ERR5717056,,
