@@ -118,8 +118,7 @@ def main():
 
 
 
-    volumes_list = [f"{'/'.join(options.genome.split('/')[:-1])}:{'/'.join(options.genome.split('/')[:-1])}",
-                    f"{options.output_directory}:{options.output_directory}",
+    volumes_list = [f"{options.output_directory}:{options.output_directory}",
                     f"{options.error_directory}:{options.error_directory}",
                     f"{options.temp_directory}:{options.temp_directory}"
                     ]
