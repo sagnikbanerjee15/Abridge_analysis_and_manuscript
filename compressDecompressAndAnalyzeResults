@@ -100,7 +100,6 @@ def main():
     if options.logfilename == None:
         options.logfilename = f"{options.output_directory}/progress.log"
         
-        
     if options.quiet == False:
         configureLogger( options )
     if options.quiet == False:
