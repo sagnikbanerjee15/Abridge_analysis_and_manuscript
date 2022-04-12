@@ -96,6 +96,8 @@ def configureLogger( options ):
 def main():
     options = parseCommandLineArguments()
     
+    os.system(f"mkdir -p {options.output_directory}")
+    
     if options.logfilename == None:
         options.logfilename = f"{options.output_directory}/progress.log"
         
