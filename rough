@@ -1,0 +1,10 @@
+compressDecompressAndAnalyzeResults \
+--transfer \
+--metadata \
+--output_directory \
+--genome \
+--temp_directory \
+--framework singularity \
+--cpu \
+1> \
+2> 
