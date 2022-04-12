@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#SBATCH -n 40
+#SBATCH -N 1
+#SBATCH --partition=long
+##SBATCH --partition=priority-mem768
+#SBATCH --qos=maizegdb
+#SBATCH --mem=200G
+#SBATCH --time=14-00:00:00
+#SBATCH --job-name="ABRIDGE"
+#SBATCH --mail-user=sagnik@iastate.edu
+#SBATCH --mail-type=BEGIN
+#SBATCH --mail-type=END
+#SBATCH --mail-type=FAIL
+#SBATCH --output=/project/maizegdb/sagnik/ABRIDGE/complete_analysis.output
+#SBATCH --error=/project/maizegdb/sagnik/ABRIDGE/complete_analysis.error
+
+module load singularity
+
+
+ROOT_DIR="/project/maizegdb/sagnik/ABRIDGE/"
+/project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_and_manuscript/compressDecompressAndAnalyzeResults \
+--transfer \
+--metadata ${ROOT_DIR}/ListOfNCBI-SRASamplesForExperimentST.csv \
+--output_directory ${ROOT_DIR} \
+--temp_directory ${ROOT_DIR} \
+--framework singularity \
+--cpu 40 \
+1> /project/maizegdb/sagnik/ABRIDGE/complete_analysis.output \
+2> /project/maizegdb/sagnik/ABRIDGE/complete_analysis.error
