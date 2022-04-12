@@ -97,9 +97,8 @@ def main():
     if options.logfilename == None:
         options.logfilename = f"{options.output_directory}/progress.log"
         
-    if options.quiet == False:
-        configureLogger( options )
-        
+    
+    configureLogger( options )    
     logging.info( "Logger has been configured" )
     ################################################################################################################################################################################################################################################
     # Pull down docker or singularity images
