@@ -15,10 +15,6 @@ import time
 import subprocess
 from pprint import pformat
 
-from scripts.assessMemoryRequirement import *
-from scripts.verifyPositions import *
-from scripts.sortPositionsForRandomAccess import *
-
 
 def parseCommandLineArguments():
     parser = argparse.ArgumentParser( prog = "compressDecompressAndAnalyzeResults", description = "Carry out all the analysis using this script", formatter_class = RawTextHelpFormatter )
