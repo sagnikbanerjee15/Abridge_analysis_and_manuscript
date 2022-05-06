@@ -22,7 +22,7 @@ ROOT_DIR="/project/maizegdb/sagnik/ABRIDGE/"
 /project/maizegdb/sagnik/ABRIDGE/Abridge_analysis_and_manuscript/compressDecompressAndAnalyzeResults \
 --transfer \
 --metadata ${ROOT_DIR}/ListOfNCBI-SRASamplesForExperimentST.csv \
---output_directory ${ROOT_DIR} \
+--output_directory ${ROOT_DIR}/complete_analysis \
 --temp_directory ${ROOT_DIR} \
 --framework singularity \
 --cpu 40 \

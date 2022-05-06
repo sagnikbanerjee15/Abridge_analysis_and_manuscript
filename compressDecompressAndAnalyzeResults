@@ -153,7 +153,8 @@ def main():
     else:
         for software in list_of_softwares_with_versions:
             version = list_of_softwares_with_versions[software]
-            os.system( f"singularity pull {options.output_directory}/singularity_images/{software}:{version} docker://ghcr.io/sagnikbanerjee15/docker_tools_and_pipelines/{software}:{version}" )
+            if os.path.exists(f"{options.output_directory}/singularity_images/{software}:{version}")==False:
+                os.system( f"singularity pull {options.output_directory}/singularity_images/{software}:{version} docker://ghcr.io/sagnikbanerjee15/docker_tools_and_pipelines/{software}:{version}" )
     ################################################################################################################################################################################################################################################
 
 
