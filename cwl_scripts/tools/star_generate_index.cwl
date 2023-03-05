@@ -14,16 +14,19 @@ inputs:
     inputBinding:
       position: 0
       prefix: '--genomeFastaFiles'
+      shellQuote: false
   - id: sjdbGTFfile
     type: File?
     inputBinding:
       position: 0
       prefix: '--sjdbGTFfile'
+      shellQuote: false
   - id: runThreadN
     type: int?
     inputBinding:
       position: 0
       prefix: '--runThreadN'
+      shellQuote: false
     doc: STAR command for generating index
   - id: genomeSAindexNbases
     type: int?
@@ -46,9 +49,11 @@ label: star_index
 arguments:
   - position: 0
     prefix: '--runMode'
+    shellQuote: false
     valueFrom: genomeGenerate
   - position: 0
     prefix: '--genomeDir'
+    shellQuote: false
     valueFrom: star_index
 requirements:
   - class: ShellCommandRequirement

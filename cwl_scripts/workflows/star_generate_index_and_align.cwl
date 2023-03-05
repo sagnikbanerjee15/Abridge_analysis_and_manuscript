@@ -31,8 +31,21 @@ inputs:
     type: int?
     'sbg:x': 0
     'sbg:y': 321
+  - id: SRA_Acession
+    type: string
+    'sbg:x': 18.9453125
+    'sbg:y': 478.5
+  - id: paired
+    type:
+      type: enum
+      symbols:
+        - SE
+        - PE
+      name: paired
+    'sbg:x': 20.9453125
+    'sbg:y': 639.6411743164062
 outputs:
-  - id: unsorted_all_tags_bamfile
+  - id: sorted_all_tags_bamfile
     outputSource:
       - star_align/alignment_file
     type: File
@@ -77,6 +90,10 @@ steps:
         default: 100000
       - id: max_memory
         default: 100
+      - id: SRA_Acession
+        source: SRA_Acession
+      - id: paired
+        source: paired
     out:
       - id: alignment_file
       - id: log

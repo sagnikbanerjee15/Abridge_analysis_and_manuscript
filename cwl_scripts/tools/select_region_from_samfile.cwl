@@ -7,7 +7,7 @@ baseCommand: []
 inputs:
   - id: samfile
     type: File
-  - id: chromosome
+  - id: chromosome1
     type: string?
   - id: from
     type: int?
@@ -20,6 +20,8 @@ inputs:
         - 'yes'
         - 'no'
       name: include_unmapped_reads
+  - id: chromosome12
+    type: string?
 outputs:
   - id: subset_samalignments
     type: File
@@ -32,30 +34,29 @@ arguments:
     shellQuote: false
     valueFrom: |-
       ${
-          
           var cmd_extract_header = "cat " + inputs.samfile.path +" | grep ^@ > headers"
           var outputfilename = ""
-          if(inputs.chromosome !=null)
+          if(inputs.chromosome1 !=null)
           {
               if(inputs.from == null && inputs.to == null)
               {
-                  var cmd_extract_alignments = "cat " + inputs.samfile.path + " | awk '$3=="+ inputs.chromosome +"' > alignments"
-                  outputfilename = inputs.samfile.nameroot + "_" +inputs.chromosome+".sam"
+                  var cmd_extract_alignments = "cat " + inputs.samfile.path + " | awk '$3=="+ inputs.chromosome1 +"' > alignments"
+                  outputfilename = inputs.samfile.nameroot + "_" +inputs.chromosome1+".sam"
               }
               else if(inputs.from == null && inputs.to != null)
               {
-                  var cmd_extract_alignments = "cat " + inputs.samfile.path + " | awk '$3=="+ inputs.chromosome +" && $4<="+inputs.to+"'  > alignments "
-                  outputfilename = inputs.samfile.nameroot + "_" +inputs.chromosome + ":1-"+inputs.to+".sam"
+                  var cmd_extract_alignments = "cat " + inputs.samfile.path + " | awk '$3=="+ inputs.chromosome1 +" && $4<="+inputs.to+"'  > alignments "
+                  outputfilename = inputs.samfile.nameroot + "_" +inputs.chromosome1 + ":1-"+inputs.to+".sam"
               }
               else if(inputs.from != null && inputs.to == null)
               {
-                  var cmd_extract_alignments = "cat " + inputs.samfile.path + " | awk '$3=="+ inputs.chromosome +" && $4>="+inputs.from+"'  > alignments "
-                  outputfilename = inputs.samfile.nameroot + "_" +inputs.chromosome + ":"+inputs.from+"-"+".sam"
+                  var cmd_extract_alignments = "cat " + inputs.samfile.path + " | awk '$3=="+ inputs.chromosome1 +" && $4>="+inputs.from+"'  > alignments "
+                  outputfilename = inputs.samfile.nameroot + "_" +inputs.chromosome1 + ":"+inputs.from+"-"+".sam"
               }
               else if(inputs.from != null && inputs.to != null)
               {
-                  var cmd_extract_alignments = "cat " + inputs.samfile.path + " | awk '$3=="+ inputs.chromosome +" && $4>="+inputs.from+" && $4<="+inputs.to+"' > alignments "
-                  outputfilename = inputs.samfile.nameroot + "_" +inputs.chromosome + ":"+inputs.from+"-"+inputs.to+".sam"
+                  var cmd_extract_alignments = "cat " + inputs.samfile.path + " | awk '$3=="+ inputs.chromosome1 +" && $4>="+inputs.from+" && $4<="+inputs.to+"' > alignments "
+                  outputfilename = inputs.samfile.nameroot + "_" +inputs.chromosome1 + ":"+inputs.from+"-"+inputs.to+".sam"
               }
               
               if(inputs.include_unmapped_reads=="yes")
@@ -66,7 +67,7 @@ arguments:
               else
                   var cmd_merge = "cat headers alignments > "+outputfilename 
           }
-          if(inputs.from == null && inputs.to == null && inputs.chromosome == null)
+          if(inputs.from == null && inputs.to == null && inputs.chromosome1 == null)
           {
               return "cp " + inputs.samfile.path +  " "+ inputs.samfile.nameroot+".sam"
           }

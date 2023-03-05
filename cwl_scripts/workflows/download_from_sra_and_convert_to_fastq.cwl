@@ -13,25 +13,29 @@ inputs:
     type: string
     'sbg:x': 37.7578125
     'sbg:y': 215.5
+  - id: number_of_reads_to_be_selected
+    type: int
+    'sbg:x': -43.640869140625
+    'sbg:y': -81.52608489990234
 outputs:
   - id: pair2_fastq
     outputSource:
-      - sratools_fasterq_dump/pair2_fastq
+      - downsample_fastq/downsampled_fastq
     type: File?
-    'sbg:x': 608.6571655273438
-    'sbg:y': 0
+    'sbg:x': 856
+    'sbg:y': -225
   - id: pair1_fastq
     outputSource:
-      - sratools_fasterq_dump/pair1_fastq
+      - downsample_fastq_1/downsampled_fastq
     type: File?
-    'sbg:x': 608.6571655273438
-    'sbg:y': 107
+    'sbg:x': 894
+    'sbg:y': -46
   - id: merged_fastq
     outputSource:
       - change_read_name_and_merge_from_pe_to_se/merged_fastq
     type: File
-    'sbg:x': 900.0634155273438
-    'sbg:y': 114
+    'sbg:x': 1061
+    'sbg:y': 101
 steps:
   - id: sratools_fasterq_dump
     in:
@@ -50,13 +54,37 @@ steps:
   - id: change_read_name_and_merge_from_pe_to_se
     in:
       - id: fastq_file_pair1
-        source: sratools_fasterq_dump/pair1_fastq
+        source: downsample_fastq_1/downsampled_fastq
       - id: fastq_file_pair2
-        source: sratools_fasterq_dump/pair2_fastq
+        source: downsample_fastq/downsampled_fastq
     out:
       - id: merged_fastq
     run: ../tools/change_read_name_and_merge_from_pe_to_se.cwl
     label: change_read_name_and_merge_from_PE_to_SE
-    'sbg:x': 608.6571655273438
-    'sbg:y': 221
+    'sbg:x': 923
+    'sbg:y': 109
+  - id: downsample_fastq
+    in:
+      - id: fastq_files
+        source: sratools_fasterq_dump/pair2_fastq
+      - id: number_of_reads_to_be_selected
+        source: number_of_reads_to_be_selected
+    out:
+      - id: downsampled_fastq
+    run: ../tools/downsample_fastq.cwl
+    label: downsample_fastq
+    'sbg:x': 584
+    'sbg:y': -206
+  - id: downsample_fastq_1
+    in:
+      - id: fastq_files
+        source: sratools_fasterq_dump/pair1_fastq
+      - id: number_of_reads_to_be_selected
+        source: number_of_reads_to_be_selected
+    out:
+      - id: downsampled_fastq
+    run: ../tools/downsample_fastq.cwl
+    label: downsample_fastq
+    'sbg:x': 645
+    'sbg:y': -33
 requirements: []

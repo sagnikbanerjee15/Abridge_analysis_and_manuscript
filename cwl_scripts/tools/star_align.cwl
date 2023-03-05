@@ -66,6 +66,15 @@ inputs:
   - 'sbg:toolDefaultValue': '1'
     id: max_memory
     type: int?
+  - id: SRA_Acession
+    type: string?
+  - id: paired
+    type:
+      type: enum
+      symbols:
+        - SE
+        - PE
+      name: paired
 outputs:
   - id: alignment_file
     type: File
@@ -86,7 +95,7 @@ arguments:
     shellQuote: false
     valueFrom: |-
       ${
-          return "--outSAMtype BAM Unsorted"
+          return "--outSAMtype BAM SortedByCoordinate"
       }
   - position: 2
     prefix: ''
@@ -94,13 +103,6 @@ arguments:
     valueFrom: |-
       ${
           return "--outSAMunmapped Within"
-      }
-  - position: 4
-    prefix: ''
-    shellQuote: false
-    valueFrom: |-
-      ${
-          return "--outFileNamePrefix " + inputs.raw_input_files.nameroot + "_"
       }
   - position: 7
     prefix: ''
@@ -114,7 +116,15 @@ arguments:
     shellQuote: false
     valueFrom: |-
       ${
-          return "--outSAMattributes All"
+          return "--outSAMattributes NH MD AS"
+      }
+  - position: 9
+    prefix: ''
+    shellQuote: false
+    valueFrom: |-
+      ${
+          return "&& mv Aligned.sortedByCoord.out.bam "+inputs.SRA_Acession+"_"+inputs.paired+".bam && mv Log.final.out "+inputs.SRA_Acession+"_"+inputs.paired+".final.out"
+       
       }
 requirements:
   - class: ShellCommandRequirement

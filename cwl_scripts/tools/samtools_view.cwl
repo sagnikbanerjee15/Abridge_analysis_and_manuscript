@@ -55,6 +55,8 @@ inputs:
       position: 0
       prefix: '-T'
       shellQuote: false
+  - id: rename_string
+    type: string?
 outputs:
   - id: output_bam
     type: File?
@@ -80,7 +82,11 @@ arguments:
         if( inputs.output_format == "SAM"){suffix='.sam'}
         if( inputs.output_format == "BAM"){suffix='.bam'}
         if(inputs.count_only==true ){ suffix=".counts"}
-        return inputs.input_alignment.nameroot + suffix
+        
+        if(inputs.rename_string.length == 0)
+          return inputs.input_alignment.nameroot + suffix
+        else
+          return inputs.input_alignment.nameroot + "_" + inputs.rename_string + suffix
       }
 requirements:
   - class: ShellCommandRequirement

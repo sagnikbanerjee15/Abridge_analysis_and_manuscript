@@ -2,13 +2,16 @@ class: CommandLineTool
 cwlVersion: v1.0
 $namespaces:
   sbg: 'https://www.sevenbridges.com/'
-id: samtools_sort
+id: samtools_merge
 baseCommand:
   - samtools
-  - sort
+  - merge
 inputs:
   - id: input_alignment
-    type: File
+    type:
+      - File
+      - type: array
+        items: File
     inputBinding:
       position: 100
       shellQuote: false
@@ -31,8 +34,6 @@ inputs:
       position: 0
       prefix: '-@'
       shellQuote: false
-  - id: sort_by_name
-    type: boolean?
 outputs:
   - id: output_bam
     type: File?
@@ -54,7 +55,7 @@ outputs:
     type: File?
     outputBinding:
       glob: '*.error'
-label: samtools sort
+label: samtools merge
 arguments:
   - position: 0
     prefix: '-o'
@@ -66,18 +67,8 @@ arguments:
         if( inputs.output_format == "SAM"){suffix='.sam'}
         if( inputs.output_format == "BAM"){suffix='.bam'}
         
-        if (inputs.sort_by_name)
-          return inputs.input_alignment.nameroot + suffix
-        else
-          return inputs.input_alignment.nameroot + suffix
-      }
-  - position: 0
-    prefix: ''
-    shellQuote: false
-    valueFrom: |-
-      ${
-          if(inputs.sort_by_name) {return "-n"}
-          else {return ""}
+
+          return inputs.input_alignment.nameroot + "_merged" + suffix
       }
 requirements:
   - class: ShellCommandRequirement
