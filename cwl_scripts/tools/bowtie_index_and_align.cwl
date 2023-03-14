@@ -83,5 +83,17 @@ requirements:
   - class: DockerRequirement
     dockerPull: 'sagnikbanerjee15/bowtie2:2.4.5'
   - class: InlineJavascriptRequirement
-stdout: bowtie2_align.output
-stderr: bowtie2_align.error
+stdout: |-
+  ${
+      if(inputs.unpaired != null)
+          return inputs.unpaired.nameroot+".output"
+      else
+          return inputs.mate1.nameroot+".output"
+  }
+stderr: |-
+  ${
+      if(inputs.unpaired != null)
+          return inputs.unpaired.nameroot+".error"
+      else
+          return inputs.mate1.nameroot+".error"
+  }

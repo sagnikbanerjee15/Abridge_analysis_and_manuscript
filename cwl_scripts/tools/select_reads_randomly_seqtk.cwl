@@ -17,7 +17,11 @@ inputs:
     inputBinding:
       position: 101
       shellQuote: false
-outputs: []
+outputs:
+  - id: sampled_fastq
+    type: File
+    outputBinding:
+      glob: '*fastq'
 label: select_reads_randomly_seqtk
 arguments:
   - position: 0
@@ -32,3 +36,7 @@ requirements:
   - class: DockerRequirement
     dockerPull: 'sagnikbanerjee15/seqtk:1.3'
   - class: InlineJavascriptRequirement
+stdout: |-
+  ${
+      return inputs.fastq_filename.nameroot + "_sampled.fastq"
+  }

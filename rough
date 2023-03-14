@@ -1,10 +1,106 @@
-compressDecompressAndAnalyzeResults \
---transfer \
---metadata \
---output_directory \
---genome \
---temp_directory \
---framework singularity \
---cpu \
-1> \
-2> 
+
+# Command to check for vulnerabilities
+docker run --rm -v $PWD:/opt ghcr.io/praetorian-inc/noseyparkernoseyparker scan -vvv --datastore /opt /opt --color always --progress always
+
+# Use the c5ad.24xlarge instance type
+
+# Format new disks and mount
+sudo mkfs -t xfs /dev/nvme3n1
+
+mkdir /data
+sudo mount /dev/nvme3n1 /data
+
+chmod -R 777 /data
+
+EC2_storage=/data
+
+# Copy all relevant files and folders to EC2 storage
+mkdir -p ${EC2_storage}/ABRIDGE
+cp -r /home/baners23/work/ABRIDGE/testing/reference ${EC2_storage}/ABRIDGE/testing/
+
+########################################################################################################################
+# CWL commands for RNA-Seq
+CPU=6
+RNA_Seq_sample="SRR23255807"
+EC2_storage=/data
+NUM_READS_TO_BE_SAMPLED=15000000
+
+nohup cwltool \
+--outdir ${EC2_storage}/ABRIDGE/testing/alignments/rna_seq_whole \
+--cachedir ${EC2_storage}/ABRIDGE/testing/alignments/rna_seq_whole_cache \
+/work/ABRIDGE/Abridge_analysis_and_manuscript/cwl_scripts/workflows/rna_seq_download_align_pe_se.cwl \
+--threads ${CPU} \
+--SRA_accession ${RNA_Seq_sample} \
+--genomeSAindexNbases 12 \
+--genomeFastaFiles ${EC2_storage}/ABRIDGE/testing/reference/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
+--number_of_reads_to_be_selected ${NUM_READS_TO_BE_SAMPLED} \
+--sample_or_whole WHOLE \
+1> ${EC2_storage}/ABRIDGE/testing/alignments/rna_seq_whole.output \
+2> ${EC2_storage}/ABRIDGE/testing/alignments/rna_seq_whole.error &
+
+nohup cwltool \
+--outdir ${EC2_storage}/ABRIDGE/testing/alignments/rna_seq_sample \
+--cachedir ${EC2_storage}/ABRIDGE/testing/alignments/rna_seq_sample_cache \
+/work/ABRIDGE/Abridge_analysis_and_manuscript/cwl_scripts/workflows/rna_seq_download_align_pe_se.cwl \
+--threads ${CPU} \
+--SRA_accession ${RNA_Seq_sample} \
+--genomeSAindexNbases 12 \
+--genomeFastaFiles ${EC2_storage}/ABRIDGE/testing/reference/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
+--number_of_reads_to_be_selected ${NUM_READS_TO_BE_SAMPLED} \
+--sample_or_whole SAMPLE \
+1> ${EC2_storage}/ABRIDGE/testing/alignments/rna_seq_sample.output \
+2> ${EC2_storage}/ABRIDGE/testing/alignments/rna_seq_sample.error &
+########################################################################################################################
+
+
+########################################################################################################################
+# CWL commands for DNA-Seq
+DNA_Seq_sample="DRR427726"
+
+nohup cwltool \
+--outdir ${EC2_storage}/ABRIDGE/testing/alignments/dna_seq_whole \
+--cachedir ${EC2_storage}/ABRIDGE/testing/alignments/dna_seq_whole_cache \
+/work/ABRIDGE/Abridge_analysis_and_manuscript/cwl_scripts/workflows/dna_seq_download_align_pe_se.cwl \
+--threads ${CPU} \
+--SRA_accession ${DNA_Seq_sample} \
+--reference ${EC2_storage}/ABRIDGE/testing/reference/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
+--number_of_reads_to_be_selected ${NUM_READS_TO_BE_SAMPLED} \
+--sample_or_whole WHOLE \
+1> ${EC2_storage}/ABRIDGE/testing/alignments/dna_seq_whole.output \
+2> ${EC2_storage}/ABRIDGE/testing/alignments/dna_seq_whole.error &
+
+nohup cwltool \
+--outdir ${EC2_storage}/ABRIDGE/testing/alignments/dna_seq_sample \
+--cachedir ${EC2_storage}/ABRIDGE/testing/alignments/dna_seq_sample_cache \
+/work/ABRIDGE/Abridge_analysis_and_manuscript/cwl_scripts/workflows/dna_seq_download_align_pe_se.cwl \
+--threads ${CPU} \
+--SRA_accession ${DNA_Seq_sample} \
+--reference ${EC2_storage}/ABRIDGE/testing/reference/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
+--number_of_reads_to_be_selected ${NUM_READS_TO_BE_SAMPLED} \
+--sample_or_whole SAMPLE \
+1> ${EC2_storage}/ABRIDGE/testing/alignments/dna_seq_sample.output \
+2> ${EC2_storage}/ABRIDGE/testing/alignments/dna_seq_sample.error &
+########################################################################################################################
+
+
+RNA_Seq_sample="SRR23255807"
+DNA_Seq_sample="DRR427726"
+EC2_storage=/data1
+
+rm -rf \
+${EC2_storage}/ABRIDGE/testing/abrigde/${RNA_Seq_sample}_SE_all_tags_sorted_1_dev_temp  \
+${EC2_storage}/ABRIDGE/testing/abrigde/${RNA_Seq_sample}_SE_all_tags_sorted_1_dev.abridge
+
+nohup abridge \
+--compress \
+--reference ${EC2_storage}/ABRIDGE/testing/reference/Arabidopsis_thaliana.TAIR10.dna_sm.toplevel.fa \
+--outputfilename ${EC2_storage}/ABRIDGE/testing/abridge/${RNA_Seq_sample}_SE_all_tags_sorted_1_dev.abridge \
+--inputalignedfilename ${EC2_storage}/ABRIDGE/testing/alignments/rna_seq_chromosome_all/${RNA_Seq_sample}_SE_all_tags_sorted_1.sam \
+--temp_directory ${EC2_storage}/ABRIDGE/testing/abridge/${RNA_Seq_sample}_SE_all_tags_sorted_1_dev_temp \
+1> ${EC2_storage}/ABRIDGE/testing/abridge/${RNA_Seq_sample}_SE_all_tags_sorted_1_dev.output \
+2> ${EC2_storage}/ABRIDGE/testing/abridge/${RNA_Seq_sample}_SE_all_tags_sorted_1_dev.error &
+
+
+
+
+

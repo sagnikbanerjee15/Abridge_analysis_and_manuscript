@@ -3,9 +3,7 @@ cwlVersion: v1.0
 $namespaces:
   sbg: 'https://www.sevenbridges.com/'
 id: samtools_view
-baseCommand:
-  - samtools
-  - view
+baseCommand: []
 inputs:
   - id: input_alignment
     type: File
@@ -55,6 +53,10 @@ inputs:
       position: 0
       prefix: '-T'
       shellQuote: false
+      valueFrom: |-
+        ${
+            return "reference.fasta"
+        }
   - id: rename_string
     type: string?
 outputs:
@@ -87,6 +89,16 @@ arguments:
           return inputs.input_alignment.nameroot + suffix
         else
           return inputs.input_alignment.nameroot + "_" + inputs.rename_string + suffix
+      }
+  - position: -1
+    prefix: ''
+    shellQuote: false
+    valueFrom: |-
+      ${
+          if(inputs.reference != null)
+              return "ln -s "+inputs.reference.path+ " reference.fasta && samtools view "
+          else
+              return "samtools view"
       }
 requirements:
   - class: ShellCommandRequirement
